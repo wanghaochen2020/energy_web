@@ -1,0 +1,104 @@
+@import '../../../styles/colors.scss';
+
+.menus-wrapper {
+    .menus-box {
+      display: flex;
+      padding: 15px 5px 5px 5px;
+      justify-content: stretch;
+      align-items: flex-start;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+
+    .menus-container {
+      width: 100%;
+      border-radius: 4px;
+
+      .menu-item {
+        padding: 5px 0;
+        .menu-item-name {
+          font-size: 15px;
+          background-color: transparent;
+          padding: 7px 6px 7px 3px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+
+          .menu-icon {
+            margin-right: 2px;
+            width: 20px;
+            text-align: center;
+          }
+
+          .fa-folder-o {
+            color: $gray-2;
+            margin-right: 2px;
+          }
+
+          .fa-sort-desc {
+            position: relative;
+            bottom: 2px;
+          }
+
+          .fa-sort-asc {
+            position: relative;
+            top: 2px;
+          }
+
+          .menu-item-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 120px;
+
+            &:hover {
+              color: #aaa;
+            }
+          }
+
+          .menu-selected a{
+            color: rgb(103, 214, 248)!important;
+          }
+        }
+
+        .sub-items {
+          padding: 8px 0 6px 0;
+          overflow: auto;
+          max-width: 100%;
+          display: block;
+        }
+
+        .sub-menu-item {
+          color: #fff;
+          cursor: pointer;
+
+          a {
+            padding: 10px 10px 10px 25px;
+            display: inline-block;
+            width: 100%;
+            &:hover {
+              background-color: #3887ac;
+            }
+          }
+        }
+
+        .sub-menu-item-selected {
+          background-color: #18668a;
+          color: #4ee9f4;
+          cursor: default;
+          a {
+            color: #4ee9f4;
+            display: inline-block;
+          }
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+}

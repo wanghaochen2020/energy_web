@@ -1,0 +1,109 @@
+{
+    "count": 4,
+    "list": [
+        {
+            "id": "1",
+            "name": "IT staffs",
+            "order": 1,
+            "users": [
+                {
+                    "id": "1",
+                    "name": "Administrator"
+                },
+                {
+                    "id": "3",
+                    "name": "Test"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "2",
+            "name": "Developer",
+            "order": 2,
+            "users": [
+                {
+                    "id": "2",
+                    "name": "Guest"
+                },
+                {
+                    "id": "3",
+                    "name": "Test"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "3",
+            "name": "QA",
+            "order": 3,
+            "users": [
+                {
+                    "id": "3",
+                    "name": "Test"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "4",
+            "name": "Manager",
+            "order": 4,
+            "users": [
+                {
+                    "id": "1",
+                    "name": "Administrator"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "5",
+            "name": "QA group 2",
+            "order": 3,
+            "users": [
+                {
+                    "id": "3",
+                    "name": "Test"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "6",
+            "name": "Manager group 2",
+            "order": 4,
+            "users": [
+                {
+                    "id": "1",
+                    "name": "Administrator"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "7",
+            "name": "QA group 3",
+            "order": 3,
+            "users": [
+                {
+                    "id": "3",
+                    "name": "Test"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        },
+        {
+            "id": "8",
+            "name": "Manager group 3",
+            "order": 4,
+            "users": [
+                {
+                    "id": "1",
+                    "name": "Administrator"
+                }
+            ],
+            "lastUpdate": "2016-12-11 11:12:32"
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+@import '../../styles/colors.scss';
+
+.ctr-button {
+  .control-button {
+    position: relative;
+    display: inline-block;
+    min-width: 50px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 4px 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: $bgGreen;
+    border-color: $bgGreen;
+    border-radius: 3px;
+    color: white;
+    margin: auto 3px;
+    &:hover{
+      background-color: $bgGreenHover;
+      border-color: $bgGreenHover;
+    }
+
+    .icon-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 100;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.8;
+        background-color: transparent;
+        .icon-loading {
+            height: 15px;
+            width: 15px;
+        }
+    }
+  }
+
+  .btn-secondary{
+    color: #000;
+    background-color: #e5e8ea;
+    border-color: #dfdfdf;
+    &:hover {
+      background-color: #fff;
+      border-color: #cfcfd0;
+    }
+  }
+  
+  .btn[disabled] {
+    background-color: $disabledGray!important;
+    border-color: $disabledGray!important;
+  }
+
+  .btn-small {
+    padding: 3px 5px;
+    line-height: 1.2;
+  }
+}
