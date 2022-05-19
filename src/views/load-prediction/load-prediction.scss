@@ -1,10 +1,38 @@
 .load-prediction-view{
-  position: relative;
   width: 100%;
   height: 100%;
-  min-height: 450px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px;
   overflow: auto;
+
+  .top-box, .bottom-box {
+    width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .date-button-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    z-index: 1000;
+  }
+
+  .date-button {
+    display: inline-block;
+    height: 24px;
+    line-height: 22px;
+    border-radius: 12px;
+    padding: 0 10px;
+    border: solid 1px #fff;
+    margin: 0 5px;
+  }
+
+  .date-button-selected {
+    color: rgb(12, 213, 240);
+    border-color: rgb(12, 213, 240);
+  }
 }

@@ -84,6 +84,7 @@
       flex-shrink: 1;
       overflow: auto;
       position: relative;
+      background-color: rgb(5, 6, 19);
     }
 
     .router-view {
@@ -94,6 +95,7 @@
       left: 0;
       background-color: rgb(5, 6, 19);
       color: #fff;
+      overflow: auto;
     }
   }
 }

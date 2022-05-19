@@ -22,8 +22,8 @@ export class SystemBusiness {
           { id: '11', name: '能源站', url: '/system-energy-station' },
           { id: '12', name: '制冷中心', url: '/system-refrigeration-center' },
           { id: '14', name: '二次泵站', url: '/system-second-pump' },
-          { id: '14', name: '太阳能热水', url: '/system-solar-power' },
-          { id: '14', name: '太阳能发电', url: '/system-solar-water-heater' },
+          { id: '14', name: '太阳能热水', url: '/system-solar-water-heater' },
+          { id: '14', name: '太阳能发电', url: '/system-solar-power' },
         ]
       },
       {
