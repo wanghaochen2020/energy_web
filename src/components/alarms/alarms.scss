@@ -27,6 +27,12 @@
     .alarm-status {
       color: #14b2da;
       white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .alarm-status-solved {
+      color: rgb(41, 184, 28);
+      cursor: default;
     }
 
     .yellow-alarm {

@@ -1,5 +1,4 @@
 import React from 'react';
-import * as echarts from 'echarts/lib/echarts';
 import ReactEcharts from 'echarts-for-react';
 import './load-prediction.scss';
 
@@ -27,10 +26,6 @@ export const LoadPrediction = () => {
               color: '#fff'
             }
           },
-          backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-            { offset: 0, color: '#3fc7f3' },
-            { offset: 1, color: '#420f80' },
-          ]),
           xAxis: {
             type: 'category',
             data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
@@ -102,10 +97,6 @@ export const LoadPrediction = () => {
               color: '#fff'
             }
           },
-          backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-            { offset: 0, color: '#3fc7f3' },
-            { offset: 1, color: '#420f80' },
-          ]),
           xAxis: {
             type: 'category',
             data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],

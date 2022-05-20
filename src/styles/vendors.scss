@@ -1,1 +1,9 @@
 @import '../assets/vendors/font-awesome/css/font-awesome.min.css';
+
+.popover-button-wrapper {
+    width: 100%;
+    text-align: center;
+    button {
+        margin: 5px;
+    }
+}
