@@ -1,8 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-energy-station.scss';
 
 export const AnalyseEnergyStation = () => {
+  const [chartButtons, setChartButtons] = useState([]);
+  const [loadRateButtons, setLoadRateButton] = useState([]);
+  const [chartDateButtons, setChartDateButtons] = useState([]);
+
+  useEffect(() => {
+    setChartButtons([
+      { name: '电锅炉', selected: true }, { name: '蓄热水箱' }, { name: '能源站系统' }
+    ]);
+    setLoadRateButton([
+      { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    ]);
+    setChartDateButtons([
+      { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
+    ]);
+  }, []);
+
+  const selectChartButton = (item) => {
+    chartButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setChartButtons([...chartButtons]);
+  }
+
+  const selectLoadRateButton = (item) => {
+    loadRateButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setLoadRateButton([...loadRateButtons]);
+  }
+
+  const selectChartDateButton = (item) => {
+    chartDateButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setChartDateButtons([...chartButtons]);
+  }
 
   return (
     <div className="analyse-energy-station-view">
@@ -10,9 +52,10 @@ export const AnalyseEnergyStation = () => {
         <div className="top-left">
           <div className="chart-wrapper">
             <div className="date-button-wrapper">
-              <span className="date-button date-button-selected">电锅炉</span>
-              <span className="date-button">蓄热水箱</span>
-              <span className="date-button">能源站系统</span>
+              {
+                chartButtons.map((item, index) =>
+                  <span onClick={() => selectChartButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+              }
             </div>
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
@@ -82,10 +125,10 @@ export const AnalyseEnergyStation = () => {
           </div>
           <div className="chart-wrapper load-balance-wrapper">
             <div className="date-button-wrapper">
-              <span className="date-button date-button-selected">日</span>
-              <span className="date-button">周</span>
-              <span className="date-button">月</span>
-              <span className="date-button">季</span>
+              {
+                loadRateButtons.map((item, index) =>
+                  <span onClick={() => selectLoadRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+              }
             </div>
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
@@ -149,30 +192,31 @@ export const AnalyseEnergyStation = () => {
           <div className="top-middle-row">
             <div className="top-info-box">
               <div className="number-value">92%</div>
-              本日锅炉平均热效率
+              今日锅炉平均热效率
             </div>
             <div className="top-info-box">
               <div className="number-value">94%</div>
-              本日蓄热水箱平均热效率
+              今日蓄热水箱平均热效率
             </div>
           </div>
           <div className="top-middle-row">
             <div className="top-info-box">
               <div className="number-value">98%</div>
-              本日系统总效率
+              今日系统总效率
             </div>
             <div className="top-info-box">
               <div className="number-value">50KWH</div>
-              本日减碳排放量
+              今日减碳排放量
             </div>
           </div>
         </div>
         <div className="top-right">
           <div className="chart-wrapper">
-              <div className="date-button-wrapper">
-                <span className="date-button date-button-selected">今日</span>
-                <span className="date-button">近七天</span>
-                <span className="date-button">历史</span>
+            <div className="date-button-wrapper">
+                {
+                  chartDateButtons.map((item, index) =>
+                    <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+                }
               </div>
               <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
                 <ReactEcharts style={{ width: '500px', height: '450px', margin: 'auto' }} option={{

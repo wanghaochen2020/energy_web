@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as echarts from 'echarts/lib/echarts';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoSolarWater } from '../../components/';
 import './system-solar-water-heater.scss';
 
 export const SystemSolarWaterHeater = () => {
+  const [chartDateButtons, setChartDateButton] = useState([
+    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+  ]);
+
+  const selectChartDateButton = (item) => {
+    chartDateButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setChartDateButton([...chartDateButtons]);
+  }
 
   return (
     <div className="system-solar-water-heater-view">
@@ -19,10 +31,10 @@ export const SystemSolarWaterHeater = () => {
         </div>
         <div className="chart-wrapper">
           <div className="date-button-wrapper">
-            <span className="date-button date-button-selected">日</span>
-            <span className="date-button">周</span>
-            <span className="date-button">月</span>
-            <span className="date-button">年</span>
+              {
+                chartDateButtons.map((item, index) =>
+                  <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+              }
           </div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
             <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{

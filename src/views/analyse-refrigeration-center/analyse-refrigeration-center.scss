@@ -1,10 +1,121 @@
 .analyse-refrigeration-center-view{
-  position: relative;
-  width: 100%;
+  min-width: 1400px;
   height: 100%;
-  min-height: 450px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px;
   overflow: auto;
+
+  .top-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    .top-left {
+      width: 450px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .top-right {
+      width: 450px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    .top-middle {
+      display: inline-block;
+      flex-grow: 1;
+      .top-middle-row {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+      }
+
+      .top-info-box {
+        flex-grow: 1;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 8px;
+        border: solid 1px #10235f;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .number-value {
+        font-size: 16px;
+        color: rgb(12, 213, 240);
+        margin-bottom: 10px;
+      }
+    }
+
+    .chart-wrapper {
+      overflow: auto;
+      position: relative;
+    }
+
+    .load-balance-wrapper {
+      margin-top: 15px;
+    }
+
+    .date-button-wrapper {
+      position: absolute;
+      top: 20px;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .date-button {
+      display: inline-block;
+      height: 24px;
+      line-height: 22px;
+      border-radius: 12px;
+      padding: 0 10px;
+      border: solid 1px #fff;
+      margin: 0 5px;
+    }
+
+    .date-button-selected {
+      color: rgb(12, 213, 240);
+      border-color: rgb(12, 213, 240);
+    }
+  }
+
+  .bottom-box {
+    width: 100%;
+    .table-history {
+      width: 100%;
+      border: solid 1px #666;
+      color: #fff;
+      thead {
+        background-color: rgb(22, 170, 170);
+      }
+
+      th, td {
+        text-align: center;
+        padding: 10px 8px;
+      }
+    }
+
+    .row-even {
+      background-color: #19244b;
+    }
+
+    .fa-long-arrow-up, .fa-long-arrow-down {
+      margin-left: 3px;
+    }
+
+    .fa-long-arrow-up {
+      color: rgb(6, 216, 100);
+    }
+
+    .fa-long-arrow-down {
+      color: rgb(201, 70, 30);
+    }
+  }
 }

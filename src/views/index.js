@@ -11,7 +11,7 @@ export * from './analyse-refrigeration-center/analyse-refrigeration-center';
 export * from './analyse-second-pump/analyse-second-pump';
 export * from './analyse-solar-water-heater/analyse-solar-water-heater';
 export * from './load-prediction/load-prediction';
-export * from './system-basic-map/system-basic-map';
+export * from './basic-map/basic-map';
 export * from './system-energy-station/system-energy-station';
 export * from './system-refrigeration-center/system-refrigeration-center';
 export * from './system-second-pump/system-second-pump';

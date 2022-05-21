@@ -1,21 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './load-prediction.scss';
 
 export const LoadPrediction = () => {
+  const [chartButtons, setChartButtons] = useState([
+    { name: 'D1组团', selected: true }, { name: 'D2组团' }, { name: 'D3组团' },
+    { name: 'D4组团' }, { name: 'D5组团' }, { name: 'D6组团' },
+    { name: '公共组团南区' }, { name: '公共组团北区' },
+  ]);
+
+  const selectChartButton = (item) => {
+    chartButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setChartButtons([...chartButtons]);
+  }
 
   return (
     <div className="load-prediction-view">
       <div className="top-box">
         <div className="date-button-wrapper">
-          <span className="date-button date-button-selected">D1组团</span>
-          <span className="date-button">D2组团</span>
-          <span className="date-button">D3组团</span>
-          <span className="date-button">D4组团</span>
-          <span className="date-button">D5组团</span>
-          <span className="date-button">D6组团</span>
-          <span className="date-button">公共组团南区</span>
-          <span className="date-button">公共组团北区</span>
+          {
+            chartButtons.map((item, index) =>
+              <span onClick={() => selectChartButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+          }
         </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           title: {
@@ -87,6 +97,9 @@ export const LoadPrediction = () => {
             show: true,
             top: 10,
             right: 12,
+            textStyle: {
+              color: '#fff'
+            },
             data: ['真实值', '预测值']
           },
           title: {

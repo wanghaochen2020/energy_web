@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
     Home, Login, Master, Password, UserProfile,
-    SystemBasicMap, SystemEnergyStation, SystemRefrigerationCenter, SystemSecondPump, SystemSolarPower, SystemSolarWaterHeater,
+    BasicMap, SystemEnergyStation, SystemRefrigerationCenter, SystemSecondPump, SystemSolarPower, SystemSolarWaterHeater,
     AllocationDay, AllocationResult, AllocationWeek,
     AnalyseEnergyStation, AnalyseRefrigerationCenter, AnalyseSecondPump, AnalyseSolarWaterHeater,
     LoadPrediction
@@ -35,9 +35,9 @@ export const routeNames = {
 export const routes = <BrowserRouter>
     <Routes>
         <Route path="/" element={<Master />}>
-            <Route index element={<SystemBasicMap />} />
+            <Route index element={<BasicMap />} />
             <Route path={routeNames.home} element={<Home />} />
-            <Route path={routeNames.basicMap} element={<SystemBasicMap />} />
+            <Route path={routeNames.basicMap} element={<BasicMap />} />
             <Route path={routeNames.systemEnergyStation} element={<SystemEnergyStation />} />
             <Route path={routeNames.systemRefrigerationCenter} element={<SystemRefrigerationCenter />} />
             <Route path={routeNames.systemSecondPump} element={<SystemSecondPump />} />
