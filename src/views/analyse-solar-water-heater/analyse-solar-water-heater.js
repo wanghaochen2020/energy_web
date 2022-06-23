@@ -82,7 +82,8 @@ export const AnalyseSolarWaterHeater = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',
@@ -136,7 +137,7 @@ export const AnalyseSolarWaterHeater = () => {
         <div className="top-middle">
           <div className="top-middle-row">
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
                   tooltip: {
                     trigger: 'item'
                   },
@@ -160,7 +161,7 @@ export const AnalyseSolarWaterHeater = () => {
               <div className="number-value">今日太能能集热效率: 60%</div>
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
                   tooltip: {
                     trigger: 'item'
                   },
@@ -184,7 +185,7 @@ export const AnalyseSolarWaterHeater = () => {
               <div className="number-value">今日太阳能保证率: 70%</div>
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
                   tooltip: {
                     trigger: 'item'
                   },
@@ -224,7 +225,8 @@ export const AnalyseSolarWaterHeater = () => {
                   left: '15',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 xAxis: {
@@ -301,7 +303,8 @@ export const AnalyseSolarWaterHeater = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',
@@ -367,7 +370,8 @@ export const AnalyseSolarWaterHeater = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',

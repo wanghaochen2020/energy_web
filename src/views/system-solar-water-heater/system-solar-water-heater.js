@@ -43,7 +43,8 @@ export const SystemSolarWaterHeater = () => {
                 left: '15',
                 top: '8',
                 textStyle: {
-                  color: '#fff'
+                  color: '#fff',
+                  fontSize: 15
                 }
               },
               xAxis: {
@@ -106,7 +107,8 @@ export const SystemSolarWaterHeater = () => {
                 left: '15',
                 top: '8',
                 textStyle: {
-                  color: '#fff'
+                  color: '#fff',
+                  fontSize: 15
                 }
               },
               xAxis: {

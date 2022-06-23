@@ -33,7 +33,8 @@ export const LoadPrediction = () => {
             left: '15',
             top: '8',
             textStyle: {
-              color: '#fff'
+              color: '#fff',
+              fontSize: 15
             }
           },
           xAxis: {
@@ -98,7 +99,8 @@ export const LoadPrediction = () => {
             top: 10,
             right: 12,
             textStyle: {
-              color: '#fff'
+              color: '#fff',
+              fontSize: 15
             },
             data: ['真实值', '预测值']
           },
@@ -107,7 +109,8 @@ export const LoadPrediction = () => {
             left: '15',
             top: '8',
             textStyle: {
-              color: '#fff'
+              color: '#fff',
+              fontSize: 15
             }
           },
           xAxis: {

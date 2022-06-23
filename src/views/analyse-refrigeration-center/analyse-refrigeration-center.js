@@ -58,7 +58,8 @@ export const AnalyseRefrigerationCenter = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 xAxis: {
@@ -131,7 +132,8 @@ export const AnalyseRefrigerationCenter = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',
@@ -219,7 +221,8 @@ export const AnalyseRefrigerationCenter = () => {
                   left: '10',
                   top: '0',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 xAxis: {

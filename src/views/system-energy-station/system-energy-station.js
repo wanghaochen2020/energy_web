@@ -10,7 +10,7 @@ export const SystemEnergyStation = () => {
     <div className="system-energy-station-view">
       <div className="operation-summary">
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
               trigger: 'item'
             },
@@ -34,7 +34,7 @@ export const SystemEnergyStation = () => {
           <div className="number-value">设备在线率: 60%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
               trigger: 'item'
             },
@@ -58,7 +58,7 @@ export const SystemEnergyStation = () => {
           <div className="number-value">设备离线率: 40%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
               trigger: 'item'
             },
@@ -82,7 +82,7 @@ export const SystemEnergyStation = () => {
           <div className="number-value">监控正常率: 80%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
               trigger: 'item'
             },
@@ -106,7 +106,7 @@ export const SystemEnergyStation = () => {
           <div className="number-value">监控异常率: 20%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '140px', height: '140px', margin: 'auto' }} option={{
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
               trigger: 'item'
             },
@@ -145,7 +145,8 @@ export const SystemEnergyStation = () => {
                 left: '15',
                 top: '8',
                 textStyle: {
-                  color: '#fff'
+                  color: '#fff',
+                  fontSize: 15
                 }
               },
               // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
@@ -213,7 +214,8 @@ export const SystemEnergyStation = () => {
                 left: '15',
                 top: '8',
                 textStyle: {
-                  color: '#fff'
+                  color: '#fff',
+                  fontSize: 15
                 }
               },
               // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [

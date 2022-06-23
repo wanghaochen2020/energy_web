@@ -47,8 +47,8 @@ export const Master = () => {
       <div className="main-left">
         <Menus />
       </div>
-      <div className="router-view-wrapper">
-        <div className="router-view">
+      <div className="router-view-wrapper" style={{backgroundImage: "url('/assets/images/main_bg.jpg')"}}>
+        <div className="router-view" style={{backgroundImage: "url('/assets/images/main_bg.jpg')"}}>
           <Outlet />
         </div>
       </div>

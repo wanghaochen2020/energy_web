@@ -64,7 +64,8 @@ export const AnalyseEnergyStation = () => {
                   left: '15',
                   top: '8',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 xAxis: {
@@ -137,7 +138,8 @@ export const AnalyseEnergyStation = () => {
                   left: '15',
                   top: '8',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',
@@ -225,7 +227,8 @@ export const AnalyseEnergyStation = () => {
                     left: '15',
                     top: '8',
                     textStyle: {
-                      color: '#fff'
+                      color: '#fff',
+                      fontSize: 15
                     }
                   },
                   xAxis: {
@@ -292,7 +295,8 @@ export const AnalyseEnergyStation = () => {
                   left: '15',
                   top: '8',
                   textStyle: {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 15
                   }
                 },
                 // backgroundColor: '#080a27',
