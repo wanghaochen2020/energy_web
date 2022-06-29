@@ -18,8 +18,8 @@ export const SystemRefrigerationCenter = () => {
           </div>
         </div>
         <div className="chart-wrapper">
-          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
+            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
                 text: '制冷机组耗电量统计',
                 left: '15',

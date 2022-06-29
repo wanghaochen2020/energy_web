@@ -1,8 +1,12 @@
 .com-alarms{
+  height: 240px;
+  overflow: auto;
   .alarm-item {
     margin: 15px 0;
     display: flex;
     align-items: center;
+    font-size: 14px;
+    font-weight: normal;
 
     .alarm-level {
       height: 28px;

@@ -36,8 +36,8 @@ export const SystemSolarWaterHeater = () => {
                   <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
           </div>
-          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
+            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
                 text: '集热量统计',
                 left: '15',
@@ -100,8 +100,8 @@ export const SystemSolarWaterHeater = () => {
           </div>
         </div>
         <div className="chart-wrapper">
-          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+          <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
+            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
                 text: '电热水器耗电量',
                 left: '15',

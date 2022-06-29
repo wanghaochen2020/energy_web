@@ -219,7 +219,7 @@ export const AnalyseSolarWaterHeater = () => {
               }
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
-              <ReactEcharts style={{ width: '500px', height: '450px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
                 title: {
                   text: '今日碳排放量统计',
                   left: '15',
@@ -431,7 +431,7 @@ export const AnalyseSolarWaterHeater = () => {
               }
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
-              <ReactEcharts style={{ width: '500px', height: '450px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
                 tooltip: {
                   trigger: 'item'
                 },

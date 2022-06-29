@@ -10,7 +10,7 @@
   .bottom-box {
     display: flex;
     width: 100%;
-    padding: 10px 0 5px 15px;
+    padding: 10px 0 0 15px;
     border-radius: 4px;
 
     background-color: rgb(6, 8, 26);
@@ -18,11 +18,11 @@
       display: inline-block;
       width: 24%;
       padding: 10px 15px 10px 0;
+      overflow: auto;
 
       .summary-info-title {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: bold;
-        margin-bottom: 15px;
       }
     }
 
@@ -35,6 +35,8 @@
       min-width: 450px;
       width: 24%;
       display: inline-block;
+      height: 285px;
+      overflow: hidden;
     }
   }
 

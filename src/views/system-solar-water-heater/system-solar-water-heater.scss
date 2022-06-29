@@ -19,7 +19,7 @@
       padding: 10px 15px 10px 0;
 
       .summary-info-title {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: bold;
         margin-bottom: 15px;
       }
@@ -35,6 +35,8 @@
       width: 24%;
       display: inline-block;
       position: relative;
+      height: 285px;
+      overflow: hidden;
     }
 
     .date-button-wrapper {

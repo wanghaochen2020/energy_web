@@ -138,8 +138,8 @@ export const SystemEnergyStation = () => {
           </div>
         </div>
         <div className="chart-wrapper">
-          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '400px' }}>
-            <ReactEcharts style={{ width: '100%', height: '400px', margin: 'auto' }} option={{
+          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
+            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
                 text: '蓄热量统计',
                 left: '15',
@@ -207,8 +207,8 @@ export const SystemEnergyStation = () => {
           </div>
         </div>
         <div className="chart-wrapper">
-          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '400px' }}>
-            <ReactEcharts style={{ width: '100%', height: '400px', margin: 'auto' }} option={{
+          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
+            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
                 text: '锅炉耗电量统计',
                 left: '15',
