@@ -146,20 +146,16 @@ export const SystemEnergyStation = () => {
                 top: '8',
                 textStyle: {
                   color: '#fff',
-                  fontSize: 15
+                  fontSize: 14
                 }
               },
-              // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-              //   { offset: 0, color: '#3fc7f3' },
-              //   { offset: 1, color: '#420f80' },
-              // ]),
               xAxis: {
                 type: 'category',
                 data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: 'rgba(255, 255, 255, .4)',
                     width: 1,
                     type: 'solid'
                   }
@@ -171,7 +167,7 @@ export const SystemEnergyStation = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: 'rgba(255, 255, 255, .4)',
                     width: 1,
                     type: 'solid'
                   }
@@ -190,17 +186,18 @@ export const SystemEnergyStation = () => {
                   data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                     230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                   type: 'bar',
-                  barWidth: 10,
+                  barWidth: 8,
                   itemStyle: {
-                    normal: {
-                      // barBorderRadius: [7, 7, 0, 0]
-                    }
-                  },
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#88e4ee' },
-                    { offset: 0.5, color: '#68e2f0' },
-                    { offset: 1, color: '#16b1c3' }
-                  ])
+                    color: {
+                        type: 'linear',
+                        x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [
+                            { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                            { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                        ],
+                    },
+                    borderRadius: [4, 4, 0, 0]
+                  }
                 }
               ]
             }} />
@@ -215,7 +212,7 @@ export const SystemEnergyStation = () => {
                 top: '8',
                 textStyle: {
                   color: '#fff',
-                  fontSize: 15
+                  fontSize: 14
                 }
               },
               // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
@@ -259,17 +256,18 @@ export const SystemEnergyStation = () => {
                   data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                     230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                   type: 'bar',
-                  barWidth: 10,
+                  barWidth: 8,
                   itemStyle: {
-                    normal: {
-                      // barBorderRadius: [7, 7, 0, 0]
-                    }
-                  },
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#88e4ee' },
-                    { offset: 0.5, color: '#68e2f0' },
-                    { offset: 1, color: '#16b1c3' }
-                  ])
+                    color: {
+                        type: 'linear',
+                        x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [
+                            { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                            { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                        ],
+                    },
+                    borderRadius: [4, 4, 0, 0]
+                  }
                 }
               ]
             }} />

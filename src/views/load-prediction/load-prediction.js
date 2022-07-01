@@ -34,7 +34,7 @@ export const LoadPrediction = () => {
             top: '8',
             textStyle: {
               color: '#fff',
-              fontSize: 15
+              fontSize: 14
             }
           },
           xAxis: {
@@ -73,17 +73,24 @@ export const LoadPrediction = () => {
               data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                 230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
               type: 'bar',
-              barWidth: 10,
+              barWidth: 8,
               itemStyle: {
-                normal: {
-                }
+                color: {
+                    type: 'linear',
+                    x: 0, y: 0, x2: 0, y2: 1,
+                    colorStops: [
+                        { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                        { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                    ],
+                },
+                borderRadius: [4, 4, 0, 0]
               }
             },
             {
               data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                 80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
               type: 'line',
-              barWidth: 10,
+              symbolSize: 6,
               itemStyle: {
                 normal: {
                 }
@@ -100,7 +107,7 @@ export const LoadPrediction = () => {
             right: 12,
             textStyle: {
               color: '#fff',
-              fontSize: 15
+              fontSize: 14
             },
             data: ['真实值', '预测值']
           },
@@ -110,7 +117,7 @@ export const LoadPrediction = () => {
             top: '8',
             textStyle: {
               color: '#fff',
-              fontSize: 15
+              fontSize: 14
             }
           },
           xAxis: {
@@ -150,7 +157,7 @@ export const LoadPrediction = () => {
               data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                 230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
               type: 'line',
-              barWidth: 10,
+              symbolSize: 6,
               itemStyle: {
                 normal: {
                 }
@@ -161,7 +168,7 @@ export const LoadPrediction = () => {
               data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                 80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
               type: 'line',
-              barWidth: 10,
+              symbolSize: 6,
               itemStyle: {
                 normal: {
                 }

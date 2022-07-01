@@ -59,7 +59,7 @@ export const AnalyseRefrigerationCenter = () => {
                   top: '0',
                   textStyle: {
                     color: '#fff',
-                    fontSize: 15
+                    fontSize: 14
                   }
                 },
                 xAxis: {
@@ -98,7 +98,7 @@ export const AnalyseRefrigerationCenter = () => {
                     data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                       230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                     type: 'line',
-                    barWidth: 10,
+                    symbolSize: 6,
                     itemStyle: {
                       normal: {
                       }
@@ -108,7 +108,7 @@ export const AnalyseRefrigerationCenter = () => {
                     data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                       80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
                     type: 'line',
-                    barWidth: 10,
+                    symbolSize: 6,
                     itemStyle: {
                       normal: {
                       }
@@ -133,7 +133,7 @@ export const AnalyseRefrigerationCenter = () => {
                   top: '0',
                   textStyle: {
                     color: '#fff',
-                    fontSize: 15
+                    fontSize: 14
                   }
                 },
                 // backgroundColor: '#080a27',
@@ -172,12 +172,18 @@ export const AnalyseRefrigerationCenter = () => {
                   {
                     data: [150, 60, 230, 224, 100, 218, 135, 80],
                     type: 'bar',
-                    barWidth: 10,
+                    barWidth: 8,
                     itemStyle: {
-                      normal: {
-                        barBorderRadius: [5, 5, 0, 0]
-                      }
-                    },
+                      color: {
+                          type: 'linear',
+                          x: 0, y: 0, x2: 0, y2: 1,
+                          colorStops: [
+                              { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                              { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                          ],
+                      },
+                      borderRadius: [4, 4, 0, 0]
+                    }
                   }
                 ]
               }} />
@@ -261,7 +267,7 @@ export const AnalyseRefrigerationCenter = () => {
                     data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                       230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                     type: 'line',
-                    barWidth: 10,
+                    symbolSize: 6,
                     itemStyle: {
                       normal: {
                       }
@@ -271,7 +277,7 @@ export const AnalyseRefrigerationCenter = () => {
                     data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                       80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
                     type: 'line',
-                    barWidth: 10,
+                    symbolSize: 6,
                     itemStyle: {
                       normal: {
                       }

@@ -14,7 +14,7 @@ export const AnalyseSecondPump = () => {
             top: '8',
             textStyle: {
               color: '#fff',
-              fontSize: 15
+              fontSize: 14
             }
           },
           xAxis: {
@@ -53,7 +53,7 @@ export const AnalyseSecondPump = () => {
               data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                 230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
               type: 'line',
-              barWidth: 10,
+              symbolSize: 6,
               itemStyle: {
                 normal: {
                 }
@@ -63,7 +63,7 @@ export const AnalyseSecondPump = () => {
               data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                 80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
               type: 'line',
-              barWidth: 10,
+              symbolSize: 6,
               itemStyle: {
                 normal: {
                 }

@@ -44,7 +44,7 @@ export const SystemSolarWaterHeater = () => {
                 top: '8',
                 textStyle: {
                   color: '#fff',
-                  fontSize: 15
+                  fontSize: 14
                 }
               },
               xAxis: {
@@ -83,17 +83,18 @@ export const SystemSolarWaterHeater = () => {
                   data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                     230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                   type: 'bar',
-                  barWidth: 10,
+                  barWidth: 8,
                   itemStyle: {
-                    normal: {
-                      // barBorderRadius: [7, 7, 0, 0]
-                    }
-                  },
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#88e4ee' },
-                    { offset: 0.5, color: '#68e2f0' },
-                    { offset: 1, color: '#16b1c3' }
-                  ])
+                    color: {
+                        type: 'linear',
+                        x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [
+                            { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                            { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                        ],
+                    },
+                    borderRadius: [4, 4, 0, 0]
+                  }
                 }
               ]
             }} />
@@ -147,17 +148,18 @@ export const SystemSolarWaterHeater = () => {
                   data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                     230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                   type: 'bar',
-                  barWidth: 10,
+                  barWidth: 8,
                   itemStyle: {
-                    normal: {
-                      // barBorderRadius: [7, 7, 0, 0]
-                    }
-                  },
-                  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    { offset: 0, color: '#88e4ee' },
-                    { offset: 0.5, color: '#68e2f0' },
-                    { offset: 1, color: '#16b1c3' }
-                  ])
+                    color: {
+                        type: 'linear',
+                        x: 0, y: 0, x2: 0, y2: 1,
+                        colorStops: [
+                            { offset: 0, color: 'rgba(3, 223, 235, .9)' },
+                            { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                        ],
+                    },
+                    borderRadius: [4, 4, 0, 0]
+                  }
                 }
               ]
             }} />
