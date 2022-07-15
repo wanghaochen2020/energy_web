@@ -132,16 +132,23 @@ export const SystemEnergyStation = () => {
       </div>
       <div className="bottom-box">
         <div className="summary-info">
-          <div className="summary-info-title">今日一览</div>
+          <div className="summary-info-title">
+            <span className="title-icon"></span>
+            今日一览
+          </div>
           <div>
             <ComSummaryInfo />
           </div>
         </div>
         <div className="chart-wrapper">
           <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
+            <div className="chart-block-title">
+              <span className="title-icon"></span>
+              蓄热量统计
+            </div>
             <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
-                text: '蓄热量统计',
+                text: '',
                 left: '15',
                 top: '8',
                 textStyle: {
@@ -205,9 +212,13 @@ export const SystemEnergyStation = () => {
         </div>
         <div className="chart-wrapper">
           <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
+            <div className="chart-block-title">
+              <span className="title-icon"></span>
+              锅炉耗电量统计
+            </div>
             <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
-                text: '锅炉耗电量统计',
+                text: '',
                 left: '15',
                 top: '8',
                 textStyle: {
@@ -274,7 +285,7 @@ export const SystemEnergyStation = () => {
           </div>
         </div>
         <div className="summary-info alarm-wrapper">
-          <div className="summary-info-title">今日告警</div>
+          <div className="summary-info-title"><span className="title-icon"></span>今日告警</div>
           <div>
             <ComAlarms />
           </div>

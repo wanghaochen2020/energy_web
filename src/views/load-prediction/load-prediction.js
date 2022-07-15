@@ -27,9 +27,13 @@ export const LoadPrediction = () => {
               <span onClick={() => selectChartButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
           }
         </div>
+        <div className="chart-block-title" style={{marginLeft: '5%'}}>
+          <span className="title-icon"></span>
+          建筑物逐时负荷统计
+        </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           title: {
-            text: '建筑物逐时负荷统计',
+            text: '',
             left: '15',
             top: '8',
             textStyle: {
@@ -100,6 +104,10 @@ export const LoadPrediction = () => {
         }} />
       </div>
       <div className="bottom-box">
+        <div className="chart-block-title" style={{marginLeft: '5%'}}>
+          <span className="title-icon"></span>
+          负荷真实值与预测值对比
+        </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           legend: {
             show: true,
@@ -112,7 +120,7 @@ export const LoadPrediction = () => {
             data: ['真实值', '预测值']
           },
           title: {
-            text: '负荷真实值与预测值对比',
+            text: '',
             left: '15',
             top: '8',
             textStyle: {

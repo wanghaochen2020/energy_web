@@ -24,7 +24,10 @@ export const SystemSolarWaterHeater = () => {
       </div>
       <div className="bottom-box">
         <div className="summary-info">
-          <div className="summary-info-title">今日一览</div>
+          <div className="summary-info-title">
+            <span className="title-icon"></span>
+            今日一览
+          </div>
           <div>
             <ComSummaryInfoSolarWater />
           </div>
@@ -37,9 +40,13 @@ export const SystemSolarWaterHeater = () => {
               }
           </div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
+            <div className="chart-block-title">
+                <span className="title-icon"></span>
+                集热量统计
+            </div>
             <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
-                text: '集热量统计',
+                text: '',
                 left: '15',
                 top: '8',
                 textStyle: {
@@ -102,9 +109,13 @@ export const SystemSolarWaterHeater = () => {
         </div>
         <div className="chart-wrapper">
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
+            <div className="chart-block-title">
+                <span className="title-icon"></span>
+                电热水器耗电量
+            </div>
             <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
               title: {
-                text: '电热水器耗电量',
+                text: '',
                 left: '15',
                 top: '8',
                 textStyle: {
@@ -166,7 +177,10 @@ export const SystemSolarWaterHeater = () => {
           </div>
         </div>
         <div className="summary-info alarm-wrapper">
-          <div className="summary-info-title">今日告警</div>
+          <div className="summary-info-title">
+            <span className="title-icon"></span>
+            今日告警
+          </div>
           <div>
             <ComAlarms />
           </div>

@@ -7,15 +7,27 @@ export const AnalyseSecondPump = () => {
   return (
     <div className="analyse-second-pump-view">
       <div className="top-box">
+        <div className="chart-block-title">
+          <span className="title-icon"></span>
+          循环泵输热比（EHR）
+        </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           title: {
-            text: '循环泵输热比（EHR）',
+            text: '',
             left: '15',
             top: '8',
             textStyle: {
               color: '#fff',
               fontSize: 14
             }
+          },
+          legend: {
+            show: true,
+            textStyle: {
+              color: '#fff',
+              fontSize: 14
+            },
+            data: ['环路1', '环路2', '环路3', '环路4']
           },
           xAxis: {
             type: 'category',
@@ -50,6 +62,7 @@ export const AnalyseSecondPump = () => {
           },
           series: [
             {
+              name: '环路1',
               data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
                 230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
               type: 'line',
@@ -60,8 +73,33 @@ export const AnalyseSecondPump = () => {
               }
             },
             {
+              name: '环路2',
               data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                 80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
+              type: 'line',
+              symbolSize: 6,
+              itemStyle: {
+                normal: {
+                }
+              }
+            },
+            {
+
+              name: '环路3',
+              data: [25, 130, 57, 120, 110, 70, 65, 130, 120, 80, 104, 120, 138,
+                120, 147, 120, 120, 110, 100, 104, 80, 58, 55],
+              type: 'line',
+              symbolSize: 6,
+              itemStyle: {
+                normal: {
+                }
+              }
+            },
+            {
+
+              name: '环路4',
+              data: [15, 50, 67, 120, 80, 90, 120, 80, 120, 160, 164, 80, 98,
+                130, 27, 110, 160, 120, 110, 104, 150, 108, 65],
               type: 'line',
               symbolSize: 6,
               itemStyle: {

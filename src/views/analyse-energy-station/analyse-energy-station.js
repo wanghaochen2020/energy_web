@@ -58,9 +58,13 @@ export const AnalyseEnergyStation = () => {
               }
             </div>
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+              <div className="chart-block-title">
+                  <span className="title-icon"></span>
+                  电锅炉热效率
+              </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '电锅炉热效率',
+                  text: '',
                   left: '15',
                   top: '8',
                   textStyle: {
@@ -132,9 +136,13 @@ export const AnalyseEnergyStation = () => {
               }
             </div>
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+              <div className="chart-block-title">
+                  <span className="title-icon"></span>
+                  负载率统计
+              </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '负载率统计',
+                  text: '',
                   left: '15',
                   top: '8',
                   textStyle: {
@@ -227,9 +235,13 @@ export const AnalyseEnergyStation = () => {
                 }
               </div>
               <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+                <div className="chart-block-title">
+                    <span className="title-icon"></span>
+                    今日碳排放量统计
+                </div>
                 <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
                   title: {
-                    text: '今日碳排放量统计',
+                    text: '',
                     left: '15',
                     top: '8',
                     textStyle: {
@@ -295,9 +307,13 @@ export const AnalyseEnergyStation = () => {
           </div>
           <div className="chart-wrapper">
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+              <div className="chart-block-title">
+                  <span className="title-icon"></span>
+                  电量类型碳排占比
+              </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '电量类型碳排占比',
+                  text: '',
                   left: '15',
                   top: '8',
                   textStyle: {

@@ -176,3 +176,27 @@
       opacity: 1;
   }
 }
+
+.chart-wrapper {
+  position: relative;
+  .chart-block-title {
+    font-size: 14px;
+    position: absolute;
+    z-index: 100;
+    top: 4px;
+    left: 18px;
+  }
+}
+
+.title-icon {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background-color: rgb(135, 146, 243);
+  margin-right: 6px;
+}
+
+.alarm-wrapper {
+  margin-left: -20px;
+}

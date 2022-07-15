@@ -9,22 +9,23 @@
     font-weight: normal;
 
     .alarm-level {
-      height: 28px;
-      line-height: 28px;
       border-radius: 14px;
       border: solid 1px red;
       color: red;
       text-align: center;
-      padding: 0 15px;
+      padding: 0 10px;
       white-space: nowrap;
-      margin-right: 5px;
+      margin-right: 10px;
+      font-size: 13px;
     }
 
     .alarm-content {
       flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       .alarm-time {
-        display: block;
-        margin-bottom: 5px;
+        margin-right: 10px;
       }
     }
 

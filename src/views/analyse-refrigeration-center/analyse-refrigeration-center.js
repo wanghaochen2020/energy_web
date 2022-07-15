@@ -52,9 +52,13 @@ export const AnalyseRefrigerationCenter = () => {
               }
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
+              <div className="chart-block-title">
+                <span className="title-icon"></span>
+                制冷机组制冷效率
+              </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '制冷机组制冷效率',
+                  text: '',
                   left: '10',
                   top: '0',
                   textStyle: {
@@ -126,9 +130,13 @@ export const AnalyseRefrigerationCenter = () => {
               }
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
+              <div className="chart-block-title">
+                <span className="title-icon"></span>
+                负载率统计
+              </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '负载率统计',
+                  text: '',
                   left: '10',
                   top: '0',
                   textStyle: {
@@ -214,16 +222,20 @@ export const AnalyseRefrigerationCenter = () => {
         </div>
         <div className="top-right">
           <div className="chart-wrapper">
-            <div className="date-button-wrapper">
+            <div className="date-button-wrapper" style={{top: '25px'}}>
               {
                 chartDateButtons.map((item, index) =>
                   <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
+              <div className="chart-block-title">
+                <span className="title-icon"></span>
+                今日碳排放量统计
+              </div>
               <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
                 title: {
-                  text: '今日碳排放量统计',
+                  text: '',
                   left: '10',
                   top: '0',
                   textStyle: {
