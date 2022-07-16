@@ -32,7 +32,8 @@ export const SystemSolarWaterHeater = () => {
             <ComSummaryInfoSolarWater />
           </div>
         </div>
-        <div className="chart-wrapper">
+        <div className="chart-wrapper" style={{marginRight: '-20px'}}>
+          <div className="vertical-separator"></div>
           <div className="date-button-wrapper">
               {
                 chartDateButtons.map((item, index) =>
@@ -108,6 +109,7 @@ export const SystemSolarWaterHeater = () => {
           </div>
         </div>
         <div className="chart-wrapper">
+          <div className="vertical-separator"></div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
             <div className="chart-block-title">
                 <span className="title-icon"></span>
@@ -177,6 +179,7 @@ export const SystemSolarWaterHeater = () => {
           </div>
         </div>
         <div className="summary-info alarm-wrapper">
+          <div className="vertical-separator"></div>
           <div className="summary-info-title">
             <span className="title-icon"></span>
             今日告警

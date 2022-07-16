@@ -21,6 +21,7 @@ export const SystemSecondPump = () => {
           </div>
         </div>
         <div className="chart-wrapper">
+          <div className="vertical-separator"></div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
             <div className="chart-block-title">
                 <span className="title-icon"></span>
@@ -90,6 +91,7 @@ export const SystemSecondPump = () => {
           </div>
         </div>
         <div className="summary-info alarm-wrapper">
+          <div className="vertical-separator"></div>
           <div className="summary-info-title">
             <span className="title-icon"></span>今日告警
           </div>

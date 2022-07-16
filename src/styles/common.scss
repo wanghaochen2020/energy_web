@@ -199,4 +199,16 @@
 
 .alarm-wrapper {
   margin-left: -20px;
+  padding-left: 20px!important;
+  position: relative;
+}
+
+.vertical-separator {
+  position: absolute;
+  top: 50px;
+  bottom: 40px;
+  left: 0;
+  border-left: solid 1px #3d4564;
+  width: 1px;
+  z-index: 100;
 }
