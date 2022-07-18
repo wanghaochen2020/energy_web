@@ -48,6 +48,108 @@ export const AnalyseEnergyStation = () => {
 
   return (
     <div className="analyse-energy-station-view">
+      <div className="top-row">
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 360,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
+                    { value: 80, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#33d7ea' } }
+                  ]
+                }
+              ]
+            }} />
+          <div className="number-value">今日锅炉平均热效率: 62%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 320,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
+                    { value: 60, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#ecf75d' } }
+                  ]
+                }
+              ]
+            }} />
+          <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 270,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
+                    { value: 50, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#45f9b7' } }
+                  ]
+                }
+              ]
+            }} />
+          <div className="number-value">今日系统总效率: 70%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 270,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
+                    { value: 50, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#45f9b7' } }
+                  ]
+                }
+              ]
+            }} />
+          <div className="number-value">今日减碳排放量: 50KWH</div>
+        </div>
+      </div>
       <div className="top-box">
         <div className="top-left">
           <div className="chart-wrapper">
@@ -74,6 +176,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 xAxis: {
                   type: 'category',
+                  name: '时',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   axisLine: {
                     show: true,
@@ -86,6 +189,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: '%',
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -105,8 +209,8 @@ export const AnalyseEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                    data: [50, 60, 30, 24, 90, 18, 35, 80, 47, 60, 60, 50, 60,
+                      30, 24, 80, 38, 35, 80, 47, 60, 60, 80],
                     type: 'line',
                     symbolSize: 6,
                     itemStyle: {
@@ -115,8 +219,8 @@ export const AnalyseEnergyStation = () => {
                     }
                   },
                   {
-                    data: [35, 80, 47, 160, 100, 50, 60,50, 60, 30, 124, 60, 118, 
-                      80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
+                    data: [35, 80, 47, 60, 70, 50, 60,50, 60, 30, 24, 60, 78, 
+                      80, 47, 60, 80, 90, 60, 54, 60, 78, 65],
                     type: 'line',
                     symbolSize: 6,
                     itemStyle: {
@@ -153,7 +257,7 @@ export const AnalyseEnergyStation = () => {
                 // backgroundColor: '#080a27',
                 xAxis: {
                   type: 'category',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8],
+                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -165,6 +269,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: '%',
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -184,7 +289,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80],
+                    data: [50, 60, 30, 24, 60, 48, 80],
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -204,28 +309,6 @@ export const AnalyseEnergyStation = () => {
             </div>
           </div>
         </div>
-        <div className="top-middle">
-          <div className="top-middle-row">
-            <div className="top-info-box">
-              <div className="number-value">92%</div>
-              今日锅炉平均热效率
-            </div>
-            <div className="top-info-box">
-              <div className="number-value">94%</div>
-              今日蓄热水箱平均热效率
-            </div>
-          </div>
-          <div className="top-middle-row">
-            <div className="top-info-box">
-              <div className="number-value">98%</div>
-              今日系统总效率
-            </div>
-            <div className="top-info-box">
-              <div className="number-value">50KWH</div>
-              今日减碳排放量
-            </div>
-          </div>
-        </div>
         <div className="top-right">
           <div className="chart-wrapper">
             <div className="date-button-wrapper">
@@ -239,7 +322,7 @@ export const AnalyseEnergyStation = () => {
                     <span className="title-icon"></span>
                     今日碳排放量统计
                 </div>
-                <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
+                <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                   title: {
                     text: '',
                     left: '15',
@@ -251,6 +334,7 @@ export const AnalyseEnergyStation = () => {
                   },
                   xAxis: {
                     type: 'category',
+                    name: '时',
                     data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                     axisLine: {
                       show: true,
@@ -263,6 +347,7 @@ export const AnalyseEnergyStation = () => {
                   },
                   yAxis: {
                     type: 'value',
+                    name: 'Kg',
                     axisLine: {
                       show: true,
                       lineStyle: {
@@ -335,6 +420,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: '%',
                   axisLine: {
                     show: true,
                     lineStyle: {

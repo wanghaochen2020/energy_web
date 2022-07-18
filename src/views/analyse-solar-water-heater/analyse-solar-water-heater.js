@@ -93,7 +93,7 @@ export const AnalyseSolarWaterHeater = () => {
                 // backgroundColor: '#080a27',
                 xAxis: {
                   type: 'category',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8],
+                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
                   axisLine: {
                     show: true,
                     lineStyle: {

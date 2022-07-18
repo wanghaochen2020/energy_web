@@ -68,6 +68,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 xAxis: {
                   type: 'category',
+                  name: '时',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   axisLine: {
                     show: true,
@@ -80,6 +81,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: '%',
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -99,8 +101,8 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                    data: [50, 60, 30, 24, 60, 58, 35, 80, 47, 60, 80, 50, 60,
+                      30, 24, 50, 48, 55, 80, 47, 60, 80, 90],
                     type: 'line',
                     symbolSize: 6,
                     itemStyle: {
@@ -109,8 +111,8 @@ export const AnalyseRefrigerationCenter = () => {
                     }
                   },
                   {
-                    data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                      80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
+                    data: [35, 80, 47, 60, 80, 50, 60, 50, 60, 30, 54, 60, 68,
+                      80, 47, 60, 70, 80, 30, 64, 80, 58, 35],
                     type: 'line',
                     symbolSize: 6,
                     itemStyle: {
@@ -147,7 +149,7 @@ export const AnalyseRefrigerationCenter = () => {
                 // backgroundColor: '#080a27',
                 xAxis: {
                   type: 'category',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8],
+                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -159,6 +161,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: '%',
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -178,7 +181,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80],
+                    data: [50, 60, 30, 24, 40, 58, 65, 80],
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -245,6 +248,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 xAxis: {
                   type: 'category',
+                  name: '时',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   axisLine: {
                     show: true,
@@ -257,6 +261,7 @@ export const AnalyseRefrigerationCenter = () => {
                 },
                 yAxis: {
                   type: 'value',
+                  name: 'Kg',
                   axisLine: {
                     show: true,
                     lineStyle: {
