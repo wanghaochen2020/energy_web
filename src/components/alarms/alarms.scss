@@ -1,48 +1,40 @@
 .com-alarms{
   height: 240px;
-  overflow: auto;
-  .alarm-item {
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .table-alarms {
+    font-size: 13px;
     font-weight: normal;
+    width: 100%;
+    .alarm-title {
+      border-bottom: solid 1px #3d4564;
+    }
 
-    .alarm-level {
-      border-radius: 14px;
-      border: solid 1px red;
-      color: red;
+    tr {
+      border-bottom: solid 1px #2f3757;
+    }
+
+    td, th {
+      white-space: nowrap;
       text-align: center;
-      padding: 0 10px;
-      white-space: nowrap;
-      margin-right: 10px;
-      font-size: 13px;
+      padding: 8px 2px;
     }
 
-    .alarm-content {
-      flex-grow: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      .alarm-time {
-        margin-right: 10px;
-      }
+    th {
+      padding: 16px 2px 4px 2px;
+      font-weight: normal;
     }
+  }
 
-    .alarm-status {
-      color: #14b2da;
-      white-space: nowrap;
-      cursor: pointer;
-    }
+  .alarm-unresolved {
+    color: red;
+    white-space: nowrap;
+    cursor: pointer;
+  }
 
-    .alarm-status-solved {
-      color: rgb(41, 184, 28);
-      cursor: default;
-    }
-
-    .yellow-alarm {
-      border: solid 1px yellow;
-      color: yellow;
-    }
+  .alarm-resolved {
+    color: #14b2da;
+    white-space: nowrap;
   }
 }
