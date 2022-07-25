@@ -42,6 +42,108 @@ export const AnalyseRefrigerationCenter = () => {
 
   return (
     <div className="analyse-refrigeration-center-view">
+      <div className="operation-summary">
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+            tooltip: {
+              show: false
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['80%', '100%'],
+                startAngle: 360,
+                hoverAnimation: false,
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: [
+                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                  { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                ]
+              }
+            ]
+          }} />
+          <div className="number-value">今日制冷机平均热效率: 92%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+            tooltip: {
+              show: false
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['80%', '100%'],
+                startAngle: 320,
+                hoverAnimation: false,
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: [
+                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                  { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                ]
+              }
+            ]
+          }} />
+          <div className="number-value">今日蓄热水箱平均热效率: 94%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+            tooltip: {
+              show: false
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['80%', '100%'],
+                startAngle: 270,
+                hoverAnimation: false,
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: [
+                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                  { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
+                ]
+              }
+            ]
+          }} />
+          <div className="number-value">今日系统总效率: 98%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+            tooltip: {
+              show: false
+            },
+            series: [
+              {
+                type: 'pie',
+                radius: ['80%', '100%'],
+                startAngle: 320,
+                hoverAnimation: false,
+                labelLine: {
+                  normal: {
+                    show: false
+                  }
+                },
+                data: [
+                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                  { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                ]
+              }
+            ]
+          }} />
+          <div className="number-value">今日碳排放量统计: 50KWH</div>
+        </div>
+      </div>
       <div className="top-box">
         <div className="top-left">
           <div className="chart-wrapper">
@@ -124,7 +226,10 @@ export const AnalyseRefrigerationCenter = () => {
               }} />
             </div>
           </div>
-          <div className="chart-wrapper load-balance-wrapper">
+        </div>
+        <div className="top-middle">
+          
+        <div className="chart-wrapper load-balance-wrapper">
             <div className="date-button-wrapper">
               {
                 loadRateButtons.map((item, index) =>
@@ -198,28 +303,6 @@ export const AnalyseRefrigerationCenter = () => {
                   }
                 ]
               }} />
-            </div>
-          </div>
-        </div>
-        <div className="top-middle">
-          <div className="top-middle-row">
-            <div className="top-info-box">
-              <div className="number-value">92%</div>
-              今日制冷机平均热效率
-            </div>
-            <div className="top-info-box">
-              <div className="number-value">94%</div>
-              今日蓄热水箱平均热效率
-            </div>
-          </div>
-          <div className="top-middle-row">
-            <div className="top-info-box">
-              <div className="number-value">98%</div>
-              今日系统总效率
-            </div>
-            <div className="top-info-box">
-              <div className="number-value">50KWH</div>
-              今日减碳排放量
             </div>
           </div>
         </div>
