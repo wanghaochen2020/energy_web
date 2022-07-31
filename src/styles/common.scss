@@ -243,3 +243,37 @@
     white-space: normal;
   }
 }
+
+.top-row {
+  width: 100%;
+  margin: 20px auto 30px auto;
+  text-align: center;
+  .top-info-box {
+    display: inline-block;
+  }
+
+  .top-info-box {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+    flex-grow: 1;
+    margin: 10px 20px;
+    text-align: center;
+    white-space: normal;
+    position: relative;
+  }
+
+  .number-value {
+    font-size: 13px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 22px;
+    left: 30px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+  }
+}

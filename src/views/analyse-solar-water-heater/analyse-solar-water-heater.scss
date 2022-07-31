@@ -16,82 +16,74 @@
     width: 100%;
     margin-bottom: 10px;
     .top-left {
-      width: 450px;
+      width: 50%;
+      min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
     .top-right {
-      width: 450px;
+      width: 50%;
+      min-width: 450px;
       display: inline-block;
       text-align: right;
-    }
-
-    .top-middle {
-      display: inline-block;
-      flex-grow: 1;
-      .top-middle-row {
-        width: 100%;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-      }
-
-      .top-info-box {
-        width: 140px;
-        height: 140px;
-        flex-grow: 1;
-        margin: 10px;
-        text-align: center;
-        white-space: normal;
-        position: relative;
-      }
-
-      .number-value {
-        font-size: 13px;
-        position: absolute;
-        top: -15px;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        padding: 0 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        white-space: normal;
-      }
     }
 
     .chart-wrapper {
       overflow: auto;
       position: relative;
     }
+  }
 
-    .load-balance-wrapper {
-      margin-top: 15px;
-    }
-
-    .date-button-wrapper {
-      position: absolute;
-      top: 3px;
-      right: 0;
-      z-index: 1000;
-    }
-
-    .date-button {
+  .bottom-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    .bottom-left {
+      width: 33%;
+      min-width: 450px;
       display: inline-block;
-      height: 24px;
-      line-height: 22px;
-      border-radius: 12px;
-      padding: 0 10px;
-      border: solid 1px #fff;
-      margin: 0 5px;
+      text-align: left;
     }
 
-    .date-button-selected {
-      color: rgb(12, 213, 240);
-      border-color: rgb(12, 213, 240);
+    .bottom-middle {
+      width: 33%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    .bottom-right {
+      width: 33%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: right;
     }
   }
+
+  .date-button-wrapper {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .date-button {
+    display: inline-block;
+    height: 24px;
+    line-height: 22px;
+    border-radius: 12px;
+    padding: 0 10px;
+    border: solid 1px #fff;
+    margin: 0 5px;
+  }
+
+  .date-button-selected {
+    color: rgb(12, 213, 240);
+    border-color: rgb(12, 213, 240);
+  }
 }
+

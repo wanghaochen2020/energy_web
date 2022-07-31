@@ -65,4 +65,33 @@ export class ChartService {
       })
     };
   }
+
+  static getCircleOptions(options) {
+    const colors = ['#323891', '#33d7ea'];
+    return {
+      tooltip: {
+        show: false
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: options.radius || ['80%', '100%'],
+          startAngle: options.startAngle || 360,
+          hoverAnimation: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: (options.data || []).map((item, index) =>
+          ({
+            value: item.value, name: index === 0 ? 'full' : 'rate',
+            label: { normal: { show: false } },
+            itemStyle: { color: (options.colors || colors)[index] }
+          })
+          )
+        }
+      ]
+    };
+  }
 }

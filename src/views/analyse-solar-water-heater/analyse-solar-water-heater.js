@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-solar-water-heater.scss';
+import { ChartService } from '../../utils/chart.service';
 
 export const AnalyseSolarWaterHeater = () => {
   const [rateButtons, setRateButtons] = useState([
@@ -66,10 +67,30 @@ export const AnalyseSolarWaterHeater = () => {
 
   return (
     <div className="analyse-solar-water-heater-view">
+      <div className="top-row">
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 80}], startAngle: 240
+          })} />
+          <div className="number-value">今日太阳能集热效率: 60%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
+          })}/>
+          <div className="number-value">今日太阳能保证率: 70%</div>
+        </div>
+        <div className="top-info-box">
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 70}], colors: ['#323891', '#45f9b7'], startAngle: 140
+          })}/>
+          <div className="number-value">今日系统总效率: 70%</div>
+        </div>
+      </div>
       <div className="top-box">
         <div className="top-left">
-          <div className="chart-wrapper load-balance-wrapper">
-            <div className="date-button-wrapper">
+          <div className="chart-wrapper">
+            <div className="date-button-wrapper" style={{top: '5px', right: '50px'}}>
               {
                 rateButtons.map((item, index) =>
                   <span onClick={() => selectRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
@@ -144,85 +165,9 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
           </div>
         </div>
-        <div className="top-middle">
-          <div className="top-middle-row">
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  series: [
-                    {
-                      type: 'pie',
-                      radius: ['80%', '100%'],
-                      startAngle: 360,
-                      labelLine: {
-                        normal: {
-                          show: false
-                        }
-                      },
-                      data: [
-                        { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
-                        { value: 80, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#33d7ea' } }
-                      ]
-                    }
-                  ]
-                }} />
-              <div className="number-value">今日太能能集热效率: 60%</div>
-            </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  series: [
-                    {
-                      type: 'pie',
-                      radius: ['80%', '100%'],
-                      startAngle: 320,
-                      labelLine: {
-                        normal: {
-                          show: false
-                        }
-                      },
-                      data: [
-                        { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
-                        { value: 60, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#ecf75d' } }
-                      ]
-                    }
-                  ]
-                }} />
-              <div className="number-value">今日太阳能保证率: 70%</div>
-            </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  series: [
-                    {
-                      type: 'pie',
-                      radius: ['80%', '100%'],
-                      startAngle: 270,
-                      labelLine: {
-                        normal: {
-                          show: false
-                        }
-                      },
-                      data: [
-                        { value: 100, name: 'full', label: { normal: { show: false }}, itemStyle: { color: '#323891' } },
-                        { value: 50, name: 'rate', label: { normal: { show: false }}, itemStyle: { color: '#45f9b7' } }
-                      ]
-                    }
-                  ]
-                }} />
-              <div className="number-value">今日系统总效率: 70%</div>
-            </div>
-          </div>
-        </div>
         <div className="top-right">
           <div className="chart-wrapper">
-            <div className="date-button-wrapper" style={{top: '25px'}}>
+            <div className="date-button-wrapper" style={{top: '5px', right: '50px'}}>
               {
                 emissionTypeButtons.map((item, index) =>
                   <span onClick={() => selectEmissionTypeButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
@@ -233,7 +178,7 @@ export const AnalyseSolarWaterHeater = () => {
                 <span className="title-icon"></span>
                 今日碳排放量统计
               </div>
-              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
                   text: '',
                   left: '15',
@@ -301,10 +246,10 @@ export const AnalyseSolarWaterHeater = () => {
           </div>
         </div>
       </div>
-      <div className="top-box">
-        <div className="top-left">
+      <div className="bottom-box">
+        <div className="bottom-left">
           <div className="chart-wrapper">
-            <div className="date-button-wrapper">
+            <div className="date-button-wrapper" style={{top: '5px', right: '40px'}}>
               {
                 systemRateButtons.map((item, index) =>
                   <span onClick={() => selectSystemRateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
@@ -379,9 +324,61 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
           </div>
         </div>
-        <div className="top-middle">
+        <div className="bottom-middle">
           <div className="chart-wrapper">
-            <div className="date-button-wrapper">
+            <div className="date-button-wrapper" style={{top: '5px', right: '40px'}}>
+              {
+                chartDateButtons.map((item, index) =>
+                  <span onClick={() => selectChartDateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+              }
+            </div>
+            <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+                tooltip: {
+                  trigger: 'item'
+                },
+                series: [
+                  {
+                    type: 'pie',
+                    startAngle: 90,
+                    selectedMode: 'single',
+                    radius: ['50%', '60%'],
+                    data: [
+                      { value: 100, name: '本期能耗' }
+                    ]
+                  },
+                  {
+                    type: 'pie',
+                    startAngle: 0,
+                    hoverAnimation: false,
+                    radius: ["55%", "70%"],
+                    data: [{
+                      value: 80,
+                      itemStyle: {
+                        normal: {
+                          color: "rgba(1,218,220,0)"
+                        }
+                      }
+                    },
+                    {
+                      value: 30,
+                      name: '同比增长',
+                      itemStyle: {
+                        normal: {
+                          color: "rgba(1,218,220,1)"
+                        }
+                      }
+                    },
+                    ]
+                  }
+                ]
+              }} />
+            </div>
+          </div>
+        </div>
+        <div className="bottom-right">
+          <div className="chart-wrapper">
+            <div className="date-button-wrapper" style={{top: '5px', right: '40px'}}>
               {
                 systemRateButtons2.map((item, index) =>
                   <span onClick={() => selectSystemRateButtons2(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
@@ -450,58 +447,6 @@ export const AnalyseSolarWaterHeater = () => {
                       },
                       borderRadius: [4, 4, 0, 0]
                     }
-                  }
-                ]
-              }} />
-            </div>
-          </div>
-        </div>
-        <div className="top-right">
-          <div className="chart-wrapper">
-            <div className="date-button-wrapper">
-              {
-                chartDateButtons.map((item, index) =>
-                  <span onClick={() => selectChartDateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
-              }
-            </div>
-            <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '450px' }}>
-              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
-                tooltip: {
-                  trigger: 'item'
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    startAngle: 90,
-                    selectedMode: 'single',
-                    radius: ['50%', '60%'],
-                    data: [
-                      { value: 100, name: '本期能耗' }
-                    ]
-                  },
-                  {
-                    type: 'pie',
-                    startAngle: 0,
-                    hoverAnimation: false,
-                    radius: ["55%", "70%"],
-                    data: [{
-                      value: 80,
-                      itemStyle: {
-                        normal: {
-                          color: "rgba(1,218,220,0)"
-                        }
-                      }
-                    },
-                    {
-                      value: 30,
-                      name: '同比增长',
-                      itemStyle: {
-                        normal: {
-                          color: "rgba(1,218,220,1)"
-                        }
-                      }
-                    },
-                    ]
                   }
                 ]
               }} />

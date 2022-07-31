@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-refrigeration-center.scss';
+import { ChartService } from '../../utils/chart.service';
 
 export const AnalyseRefrigerationCenter = () => {
   const [chartButtons, setChartButtons] = useState([
@@ -44,103 +45,27 @@ export const AnalyseRefrigerationCenter = () => {
     <div className="analyse-refrigeration-center-view">
       <div className="operation-summary">
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-            tooltip: {
-              show: false
-            },
-            series: [
-              {
-                type: 'pie',
-                radius: ['80%', '100%'],
-                startAngle: 360,
-                hoverAnimation: false,
-                labelLine: {
-                  normal: {
-                    show: false
-                  }
-                },
-                data: [
-                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                  { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                ]
-              }
-            ]
-          }} />
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 80}], colors: ['#323891', '#33d7ea']
+          })} />
           <div className="number-value">今日制冷机平均热效率: 92%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-            tooltip: {
-              show: false
-            },
-            series: [
-              {
-                type: 'pie',
-                radius: ['80%', '100%'],
-                startAngle: 320,
-                hoverAnimation: false,
-                labelLine: {
-                  normal: {
-                    show: false
-                  }
-                },
-                data: [
-                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                  { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                ]
-              }
-            ]
-          }} />
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 80}], colors: ['#323891', '#ecf75d'], startAngle: 40
+          })} />
           <div className="number-value">今日蓄热水箱平均热效率: 94%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-            tooltip: {
-              show: false
-            },
-            series: [
-              {
-                type: 'pie',
-                radius: ['80%', '100%'],
-                startAngle: 270,
-                hoverAnimation: false,
-                labelLine: {
-                  normal: {
-                    show: false
-                  }
-                },
-                data: [
-                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                  { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
-                ]
-              }
-            ]
-          }} />
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7'], startAngle: 140
+          })} />
           <div className="number-value">今日系统总效率: 98%</div>
         </div>
         <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-            tooltip: {
-              show: false
-            },
-            series: [
-              {
-                type: 'pie',
-                radius: ['80%', '100%'],
-                startAngle: 320,
-                hoverAnimation: false,
-                labelLine: {
-                  normal: {
-                    show: false
-                  }
-                },
-                data: [
-                  { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                  { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                ]
-              }
-            ]
-          }} />
+          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+            data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 240
+          })} />
           <div className="number-value">今日碳排放量统计: 50KWH</div>
         </div>
       </div>
