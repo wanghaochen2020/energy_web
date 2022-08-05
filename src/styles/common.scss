@@ -276,4 +276,25 @@
     justify-content: center;
     white-space: normal;
   }
+
+  .gauge-box {
+    display: inline-block;
+    flex-grow: 1;
+    margin: 0 20px 10px 20px;
+    text-align: center;
+    white-space: normal;
+    position: relative;
+  }
+
+  .gauge-title {
+    text-align: center;
+    position: relative;
+    bottom: 40px;
+    z-index: 100;
+  }
+}
+
+
+.color-red {
+  color: red!important;
 }

@@ -1,0 +1,152 @@
+.green-power-view{
+  min-width: 1400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  overflow: auto;
+
+  .row-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    .row-left {
+      width: 50%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .row-right {
+      width: 50%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .chart-wrapper {
+      overflow: auto;
+      position: relative;
+    }
+  }
+
+  .bottom-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    .bottom-left {
+      width: 33%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .bottom-middle {
+      width: 33%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    .bottom-right {
+      width: 33%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: right;
+    }
+  }
+
+  .date-button-wrapper {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .date-button {
+    display: inline-block;
+    height: 24px;
+    line-height: 22px;
+    border-radius: 12px;
+    padding: 0 10px;
+    border: solid 1px #fff;
+    margin: 0 5px;
+  }
+
+  .date-button-selected {
+    color: rgb(12, 213, 240);
+    border-color: rgb(12, 213, 240);
+  }
+
+  .circle-block-title {
+    margin-bottom: 40px!important;
+    margin-left: 15px!important;
+  }
+
+  .top-row {
+    margin-bottom: 0;
+  }
+
+  .info-row-title {
+    margin-bottom: 80px!important;
+  }
+
+  .info-row {
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fff;
+    font-size: 15px;
+
+    .info-item {
+      display: inline-block;
+      margin: auto 20px;
+    }
+
+    .fa-th, .fa-ravelry {
+      font-size: 20px;
+      color: #37a2da;
+      width: 30px;
+    }
+
+    .fa-ravelry {
+      position: relative;
+      right: 4px;
+    }
+  }
+
+  .chart-info {
+    margin-left: 50px;
+  }
+
+  .value-item {
+    font-weight: bold;
+    margin: auto 2px;
+    color: #67e0e3;
+  }
+
+  .chart-info-row {
+    position: absolute;
+    top: -20px;
+    left: 150px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .chart-desc {
+    text-align: left;
+    position: absolute;
+    left: 43px;
+    top: 35px;
+  }
+}
+

@@ -4,7 +4,7 @@ import {
     BasicMap, SystemEnergyStation, SystemRefrigerationCenter, SystemSecondPump, SystemSolarPower, SystemSolarWaterHeater,
     AllocationDay, AllocationResult, AllocationWeek,
     AnalyseEnergyStation, AnalyseRefrigerationCenter, AnalyseSecondPump, AnalyseSolarWaterHeater,
-    LoadPrediction
+    LoadPrediction, GreenPower
 } from "../views";
 import { NotFound } from "../views/not-found/not-found";
 import { Unauthorized } from "../views/unauthorized/unauthorized";
@@ -29,6 +29,7 @@ export const routeNames = {
     analyseRefrigerationCenter: '/analyse-refrigeration-center',
     analyseSecondPump: '/analyse-second-pump',
     analyseSolarWaterHeater: '/analyse-solar-water-heater',
+    greenPower: '/green-power',
     loadPrediction: '/load-prediction'
 }
 
@@ -53,6 +54,7 @@ export const routes = <BrowserRouter>
             <Route path={routeNames.analyseSolarWaterHeater} element={<AnalyseSolarWaterHeater />} />
             <Route path={routeNames.analyseSecondPump} element={<AnalyseSecondPump />} />
             <Route path={routeNames.loadPrediction} element={<LoadPrediction />} />
+            <Route path={routeNames.greenPower} element={<GreenPower />} />
             <Route path={routeNames.unauthorized} element={<Unauthorized />} />
             <Route path={routeNames.notFound} element={<NotFound />} />
             <Route path={routeNames.password} element={<Password />} />

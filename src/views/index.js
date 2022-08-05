@@ -17,3 +17,4 @@ export * from './system-refrigeration-center/system-refrigeration-center';
 export * from './system-second-pump/system-second-pump';
 export * from './system-solar-power/system-solar-power';
 export * from './system-solar-water-heater/system-solar-water-heater';
+export * from './green-power/green-power';

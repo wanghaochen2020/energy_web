@@ -35,7 +35,7 @@ export class SystemBusiness {
         ]
       },
       { id: '4', name: '负荷预测', url: '/load-prediction', icon: 'fa fa-calendar-check-o', iconColor: '#24829f' },
-      { id: '5', name: '绿电', children: [] },
+      { id: '5', name: '绿电', url: 'green-power', children: [] },
       {
         id: '6', name: '能源调配', children: [
           { id: '11', name: '日调配方案', url: '/allocation-day' },

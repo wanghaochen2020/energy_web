@@ -94,4 +94,82 @@ export class ChartService {
       ]
     };
   }
+
+  static getGaugeOptions(options = {}) {
+    let defaultFormatter = (val) => val;
+    let config = {
+      series: [
+        {
+          type: 'gauge',
+          axisLine: {
+            lineStyle: {
+              width: 10,
+              color: options.lineColor || [
+                [options.value / 100 || 0.7, '#37a2da'],
+                [options.range2 || 1, '#67e0e3']
+                // [1, '#fd666d']
+              ]
+            }
+          },
+          pointer: {
+            itemStyle: {
+              color: 'auto'
+            }
+          },
+          axisTick: {
+            distance: -30,
+            length: 8,
+            lineStyle: {
+              color: '#fff',
+              width: 0
+            }
+          },
+          splitLine: {
+            distance: -30,
+            length: 30,
+            lineStyle: {
+              color: '#fff',
+              width: 0
+            }
+          },
+          axisLabel: {
+            color: 'auto',
+            distance: 18,
+            fontSize: 11,
+            formatter: options.axisLabelFormatter || defaultFormatter
+          },
+          detail: {
+            valueAnimation: true,
+            formatter: '{value}' + (options.unit ? options.unit : ''),
+            color: 'auto',
+            offsetCenter: [0, '30%'],
+            fontSize: 16
+          },
+          data: [
+            {
+              value: options.value || 0
+            }
+          ]
+        }
+      ]
+    }
+
+    if (options.startAngle || options.startAngle === 0) {
+      config.series[0].startAngle = options.startAngle;
+    }
+    if (options.endAngle || options.endAngle === 0) {
+      config.series[0].endAngle = options.endAngle;
+    }
+    if (options.min || options.min === 0) {
+      config.series[0].min = options.min;
+    }
+    if (options.max || options.max === 0) {
+      config.series[0].max = options.max;
+    }
+    if (options.splitNumber) {
+      config.series[0].splitNumber = options.splitNumber;
+    }
+
+    return config;
+  }
 }

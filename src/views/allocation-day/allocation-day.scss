@@ -1,10 +1,163 @@
 .allocation-day-view{
-  position: relative;
-  width: 100%;
+  min-width: 1400px;
   height: 100%;
-  min-height: 450px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px;
   overflow: auto;
+
+  .top-box {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    .top-left {
+      width: 35%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .top-middle {
+      width: 35%;
+      min-width: 400px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .top-right {
+      width: 35%;
+      min-width: 450px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    .chart-wrapper {
+      overflow: auto;
+      position: relative;
+    }
+
+    .load-balance-wrapper {
+      margin-top: 15px;
+    }
+
+    .date-button-wrapper {
+      position: absolute;
+      top: 10px;
+      right: 5px;
+      z-index: 1000;
+    }
+
+    .date-button {
+      display: inline-block;
+      height: 24px;
+      line-height: 22px;
+      border-radius: 12px;
+      padding: 0 10px;
+      border: solid 1px #fff;
+      margin: 0 5px;
+    }
+
+    .date-button-selected {
+      color: rgb(12, 213, 240);
+      border-color: rgb(12, 213, 240);
+    }
+  }
+
+  .bottom-box {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #10164b;
+    .table-history {
+      width: 100%;
+      border: solid 1px #666;
+      color: #fff;
+      thead {
+        background-color: rgb(22, 170, 170);
+      }
+
+      th, td {
+        text-align: center;
+        padding: 10px 8px;
+      }
+    }
+
+    .row-even {
+      background-color: #19244b;
+    }
+
+    .fa-long-arrow-up, .fa-long-arrow-down {
+      margin-left: 3px;
+    }
+
+    .fa-long-arrow-up {
+      color: rgb(6, 216, 100);
+    }
+
+    .fa-long-arrow-down {
+      color: rgb(201, 70, 30);
+    }
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+  }
+
+  .device-status-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .table-status {
+    width: 100%;
+    border-radius: 4px;
+    background-color: #11549b;
+
+    th {
+      font-size: 15px;
+      font-weight: normal;
+      padding-bottom: 15px;
+    }
+
+    td, th {
+      padding: 6px 2px 6px 5px;
+    }
+
+    .table-status-value {
+      padding-left: 0;
+      padding-right: 8px;
+    }
+  }
+
+  .e-price {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  .e-price-item {
+    position: relative;
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    background-color: #11549b;
+    border-radius: 4px;
+    height: 150px;
+
+    div {
+      margin: 10px;
+    }
+  }
+
+  .e-price-desc {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
 }
