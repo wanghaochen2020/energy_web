@@ -62,7 +62,7 @@ export const SystemSolarWaterHeater = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -74,7 +74,7 @@ export const SystemSolarWaterHeater = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -134,7 +134,7 @@ export const SystemSolarWaterHeater = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -146,7 +146,7 @@ export const SystemSolarWaterHeater = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }

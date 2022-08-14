@@ -39,7 +39,7 @@ export const AllocationWeek = () => {
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#666',
+                color: '#6cbcea',
                 width: 1,
                 type: 'solid'
               }
@@ -51,7 +51,7 @@ export const AllocationWeek = () => {
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#666',
+                color: '#6cbcea',
                 width: 1,
                 type: 'solid'
               }
@@ -67,7 +67,12 @@ export const AllocationWeek = () => {
             position: 'right',
             alignTicks: false,
             axisLine: {
-              show: true
+              show: true,
+              lineStyle: {
+                color: '#6cbcea',
+                width: 1,
+                type: 'solid'
+              }
             },
             axisLabel: {
               formatter: '{value} °C'
@@ -142,7 +147,7 @@ export const AllocationWeek = () => {
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#666',
+                color: '#6cbcea',
                 width: 1,
                 type: 'solid'
               }
@@ -154,7 +159,7 @@ export const AllocationWeek = () => {
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#666',
+                color: '#6cbcea',
                 width: 1,
                 type: 'solid'
               }
@@ -170,7 +175,12 @@ export const AllocationWeek = () => {
             position: 'right',
             alignTicks: false,
             axisLine: {
-              show: true
+              show: true,
+              lineStyle: {
+                color: '#6cbcea',
+                width: 1,
+                type: 'solid'
+              }
             },
             axisLabel: {
               formatter: '{value} °C'

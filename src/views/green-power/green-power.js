@@ -179,61 +179,17 @@ export const GreenPower = () => {
                 <span className="info-item chart-info">日最高负荷：<span className="value-item">748</span>万kWh</span>
                 <span className="info-item chart-info">月最高负荷：<span className="value-item">224</span>kW</span>
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', marginTop: '30px' }} option={{
-                title: {
-                  text: '',
-                  left: '15',
-                  top: '0',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                xAxis: {
-                  type: 'category',
+              <ReactEcharts style={{ width: '100%', height: '450px', marginTop: '30px' }} option={
+                ChartService.getLineOptions({
+                  yName: '万kWh',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+                  series: [
+                    {
+                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
+                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100, 147, 260, 200, 100, 147, 260, 150]
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: '万kWh',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100, 147, 260, 200, 100, 147, 260, 150],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
         </div>
@@ -263,11 +219,35 @@ export const GreenPower = () => {
                 xAxis: {
                   type: 'category',
                   boundaryGap: false,
+                  axisLine: {
+                    show: false,
+                    lineStyle: {
+                      color: '#6cbcea',
+                      width: 1,
+                      type: 'solid'
+                    }
+                  },
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
                 },
                 yAxis: {
                   type: 'value',
-                  name: 'kgce/m2'
+                  name: 'kgce/m2',
+                  axisLine: {
+                    show: false,
+                    lineStyle: {
+                      color: '#6cbcea',
+                      width: 1,
+                      type: 'solid'
+                    }
+                  },
+                  splitLine: {
+                    show: true,
+                    lineStyle: {
+                      color: ['#192f44'],
+                      width: 1,
+                      type: 'solid'
+                    }
+                  }
                 },
                 series: [
                   {

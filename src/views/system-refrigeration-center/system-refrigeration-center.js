@@ -44,7 +44,7 @@ export const SystemRefrigerationCenter = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -56,7 +56,7 @@ export const SystemRefrigerationCenter = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }

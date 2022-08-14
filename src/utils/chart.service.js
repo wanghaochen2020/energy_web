@@ -1,4 +1,67 @@
 export class ChartService {
+  static getLineOptions(options) {
+    const colors = ['#20fbe3','#d0ff88', '#b993ff', '#37f137', '#ff93d9', '#81b9fb', '#fdcf44', '#fd6b44'];
+
+    return {
+      legend: options.legend || {},
+      title: {
+        text: '',
+        left: '15',
+        top: '8',
+        textStyle: {
+          color: '#fff',
+          fontSize: 14
+        }
+      },
+      xAxis: {
+        type: 'category',
+        name: options.xName || '',
+        data: options.data || [],
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: '#6cbcea',
+            width: 1,
+            type: 'solid'
+          }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        name: options.yName || '',
+        axisLine: {
+          show: true,
+          lineStyle: {
+            color: '#6cbcea',
+            width: 1,
+            type: 'solid'
+          }
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: ['#192f44'],
+            width: 1,
+            type: 'solid'
+          }
+        }
+      },
+      series: (options.series || []).map((item, index) => {
+        return {
+          name: item.name || '',
+          data: item.data,
+          type: 'line',
+          symbolSize: 6,
+          itemStyle: {
+            normal: {
+              color: item.color || colors[index]
+            }
+          }
+        };
+      })
+    };
+  }
+
   static getBarOptions(options) {
     return {
       title: {
@@ -20,7 +83,7 @@ export class ChartService {
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#666',
+            color: '#6cbcea',
             width: 1,
             type: 'solid'
           }
@@ -28,10 +91,11 @@ export class ChartService {
       },
       yAxis: {
         type: 'value',
+        name: options.yName || '',
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#666',
+            color: '#6cbcea',
             width: 1,
             type: 'solid'
           }

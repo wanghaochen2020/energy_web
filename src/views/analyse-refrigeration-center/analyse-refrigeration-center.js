@@ -83,72 +83,22 @@ export const AnalyseRefrigerationCenter = () => {
                 <span className="title-icon"></span>
                 制冷机组制冷效率
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '10',
-                  top: '0',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                xAxis: {
-                  type: 'category',
-                  name: '时',
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                ChartService.getLineOptions({
+                  xName: '时',
+                  yName: '%',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+                  series: [
+                    {
+                      data: [50, 60, 30, 24, 60, 58, 35, 80, 47, 60, 80, 50, 60,
+                        30, 24, 50, 48, 55, 80, 47, 60, 80, 90]
+                    },
+                    {
+                      data: [35, 80, 47, 60, 80, 50, 60, 50, 60, 30, 54, 60, 68,
+                        80, 47, 60, 70, 80, 30, 64, 80, 58, 35]
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: '%',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [50, 60, 30, 24, 60, 58, 35, 80, 47, 60, 80, 50, 60,
-                      30, 24, 50, 48, 55, 80, 47, 60, 80, 90],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  },
-                  {
-                    data: [35, 80, 47, 60, 80, 50, 60, 50, 60, 30, 54, 60, 68,
-                      80, 47, 60, 70, 80, 30, 64, 80, 58, 35],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
         </div>
@@ -166,68 +116,16 @@ export const AnalyseRefrigerationCenter = () => {
                 <span className="title-icon"></span>
                 负载率统计
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '10',
-                  top: '0',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                // backgroundColor: '#080a27',
-                xAxis: {
-                  type: 'category',
-                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                ChartService.getBarOptions({
+                  yName: '%',
+                  category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                  series: [
+                    {
+                      data: [50, 60, 30, 24, 40, 58, 65, 80]
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: '%',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [50, 60, 30, 24, 40, 58, 65, 80],
-                    type: 'bar',
-                    barWidth: 8,
-                    itemStyle: {
-                      color: {
-                          type: 'linear',
-                          x: 0, y: 0, x2: 0, y2: 1,
-                          colorStops: [
-                              { offset: 0, color: 'rgba(3, 223, 235, .9)' },
-                              { offset: 1, color: 'rgba(3, 223, 235, 0)' }
-                          ],
-                      },
-                      borderRadius: [4, 4, 0, 0]
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
         </div>
@@ -244,72 +142,22 @@ export const AnalyseRefrigerationCenter = () => {
                 <span className="title-icon"></span>
                 今日碳排放量统计
               </div>
-              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '10',
-                  top: '0',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 15
-                  }
-                },
-                xAxis: {
-                  type: 'category',
-                  name: '时',
+              <ReactEcharts style={{ width: '445px', height: '450px', margin: 'auto' }} option={
+                ChartService.getLineOptions({
+                  xName: '时',
+                  yName: 'Kg',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+                  series: [
+                    {
+                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
+                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100]
+                    },
+                    {
+                      data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
+                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: 'Kg',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  },
-                  {
-                    data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                      80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
         </div>

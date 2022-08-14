@@ -169,7 +169,7 @@ export const SystemEnergyStation = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: 'rgba(255, 255, 255, .4)',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -181,7 +181,7 @@ export const SystemEnergyStation = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: 'rgba(255, 255, 255, .4)',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -245,7 +245,7 @@ export const SystemEnergyStation = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }
@@ -257,7 +257,7 @@ export const SystemEnergyStation = () => {
                 axisLine: {
                   show: true,
                   lineStyle: {
-                    color: '#666',
+                    color: '#6cbcea',
                     width: 1,
                     type: 'solid'
                   }

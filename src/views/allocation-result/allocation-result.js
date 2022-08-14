@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './allocation-result.scss';
+import { ChartService } from '../../utils/chart.service';
 
 export const AllocationResult = () => {
   const [chartButtons, setChartButtons] = useState([]);
@@ -73,7 +74,7 @@ export const AllocationResult = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -85,7 +86,7 @@ export const AllocationResult = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -142,68 +143,16 @@ export const AllocationResult = () => {
                   <span className="title-icon"></span>
                   相对于满蓄节约能耗量统计
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '15',
-                  top: '8',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                // backgroundColor: '#080a27',
-                xAxis: {
-                  type: 'category',
-                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                ChartService.getBarOptions({
+                  yName: 'KWH',
+                  category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                  series: [
+                    {
+                      data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: 'KWH',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [1520, 1360, 1230, 1224, 1100, 1218, 1135],
-                    type: 'bar',
-                    barWidth: 8,
-                    itemStyle: {
-                      color: {
-                          type: 'linear',
-                          x: 0, y: 0, x2: 0, y2: 1,
-                          colorStops: [
-                              { offset: 0, color: 'rgba(3, 223, 235, .9)' },
-                              { offset: 1, color: 'rgba(3, 223, 235, 0)' }
-                          ],
-                      },
-                      borderRadius: [4, 4, 0, 0]
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
         </div>
@@ -243,6 +192,14 @@ export const AllocationResult = () => {
                           align: 'center'
                         }
                       }
+                    },
+                    axisLine: {
+                      show: true,
+                      lineStyle: {
+                        color: '#6cbcea',
+                        width: 1,
+                        type: 'solid'
+                      }
                     }
                   },
                   series: [
@@ -278,60 +235,16 @@ export const AllocationResult = () => {
                   <span className="title-icon"></span>
                   相对于满蓄减碳排放
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                  title: {
-                    text: '',
-                    left: '15',
-                    top: '8',
-                    textStyle: {
-                      color: '#fff',
-                      fontSize: 14
-                    }
-                  },
-                  xAxis: {
-                    type: 'category',
-                    data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
-                    axisLine: {
-                      show: true,
-                      lineStyle: {
-                        color: '#666',
-                        width: 1,
-                        type: 'solid'
-                      }
-                    }
-                  },
-                  yAxis: {
-                    type: 'value',
-                    name: 'kg',
-                    axisLine: {
-                      show: true,
-                      lineStyle: {
-                        color: '#666',
-                        width: 1,
-                        type: 'solid'
-                      }
-                    },
-                    splitLine: {
-                      show: true,
-                      lineStyle: {
-                        color: ['#192f44'],
-                        width: 1,
-                        type: 'solid'
-                      }
-                    }
-                  },
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                ChartService.getLineOptions({
+                  yName: 'kg',
+                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
                   series: [
                     {
-                      data: [1520, 1360, 1230, 1224, 1100, 1218, 1135],
-                      type: 'line',
-                      symbolSize: 6,
-                      itemStyle: {
-                        normal: {
-                        }
-                      }
+                      data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]
                     }
                   ]
-                }} />
+                })} />
             </div>
           </div>
         </div>

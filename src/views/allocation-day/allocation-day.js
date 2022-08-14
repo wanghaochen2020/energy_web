@@ -57,83 +57,32 @@ export const AllocationDay = () => {
                   <span className="title-icon"></span>
                   锅炉建议工况和实际工况对比
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                legend: {
-                  show: true,
-                  top: 10,
-                  right: 12,
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                ChartService.getLineOptions({
+                  legend: {
+                    show: true,
+                    top: 10,
+                    right: 12,
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14
+                    },
+                    data: ['建议运行台数', '实际运行台数']
                   },
-                  data: ['建议运行台数', '实际运行台数']
-                },
-                title: {
-                  text: '',
-                  left: '15',
-                  top: '8',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                xAxis: {
-                  type: 'category',
-                  name: '时',
+                  xName: '时',
+                  yName: '台数',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
+                  series: [
+                    {
+                      name: '建议运行台数',
+                      data: [5, 6, 5, 4, 5, 3, 6, 5, 4, 5, 3, 6, 5, 4, 5, 3, 6, 5, 4, 5, 4, 5, 4],
+                    },
+                    {
+                      name: '实际运行台数',
+                      data: [3, 5, 4, 6, 6, 5, 5, 4, 6, 6, 5, 5, 4, 6, 6, 5, 5, 4, 6, 6, 6, 5, 6],
                     }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  max: 10,
-                  name: '台数',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#666',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    name: '建议运行台数',
-                    data: [5, 6, 5, 4, 5, 3, 6, 5, 4, 5, 3, 6, 5, 4, 5, 3, 6, 5, 4, 5, 4, 5, 4],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  },
-                  {
-                    name: '实际运行台数',
-                    data: [3, 5, 4, 6, 6, 5, 5, 4, 6, 6, 5, 5, 4, 6, 6, 5, 5, 4, 6, 6, 6, 5, 6],
-                    type: 'line',
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                })} />
             </div>
           </div>
           <div className="chart-wrapper">
@@ -159,7 +108,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -171,7 +120,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -298,7 +247,7 @@ export const AllocationDay = () => {
                     axisLine: {
                       show: true,
                       lineStyle: {
-                        color: '#666',
+                        color: '#6cbcea',
                         width: 1,
                         type: 'solid'
                       }
@@ -310,7 +259,7 @@ export const AllocationDay = () => {
                     axisLine: {
                       show: true,
                       lineStyle: {
-                        color: '#666',
+                        color: '#6cbcea',
                         width: 1,
                         type: 'solid'
                       }
@@ -376,7 +325,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -388,7 +337,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#666',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
