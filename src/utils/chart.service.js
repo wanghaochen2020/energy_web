@@ -1,6 +1,6 @@
 export class ChartService {
   static getLineOptions(options) {
-    const colors = ['#20fbe3','#d0ff88', '#b993ff', '#37f137', '#ff93d9', '#81b9fb', '#fdcf44', '#fd6b44'];
+    const colors = ['#03e9eb','#aaf62a', '#b993ff', '#37f137', '#ff93d9', '#81b9fb', '#fdcf44', '#fd6b44'];
 
     return {
       legend: options.legend || {},
