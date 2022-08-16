@@ -51,6 +51,7 @@ export class ChartService {
           name: item.name || '',
           data: item.data,
           type: 'line',
+          smooth: true,
           symbolSize: 6,
           itemStyle: {
             normal: {

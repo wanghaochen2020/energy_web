@@ -95,6 +95,7 @@ export const LoadPrediction = () => {
               data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
                 80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {

@@ -8,40 +8,6 @@
   padding: 10px;
   overflow: auto;
 
-  .top-row {
-    width: 100%;
-    margin: 20px auto;
-    text-align: center;
-    .top-info-box {
-      display: inline-block;
-    }
-
-    .top-info-box {
-      display: inline-block;
-      width: 140px;
-      height: 140px;
-      flex-grow: 1;
-      margin: 10px 20px;
-      text-align: center;
-      white-space: normal;
-      position: relative;
-    }
-
-    .number-value {
-      font-size: 13px;
-      margin-bottom: 10px;
-      position: absolute;
-      top: 22px;
-      left: 30px;
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: normal;
-    }
-  }
-
   .top-box {
     display: flex;
     justify-content: space-between;
@@ -50,14 +16,22 @@
     width: 100%;
     margin-bottom: 10px;
     .top-left {
-      width: 50%;
+      flex-grow: 1;
+      width: 40%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
+    .top-middle {
+      flex-grow: 0;
+      padding-top: 200px;
+      white-space: nowrap;
+    }
+
     .top-right {
-      width: 50%;
+      flex-grow: 1;
+      width: 40%;
       min-width: 450px;
       display: inline-block;
       text-align: right;

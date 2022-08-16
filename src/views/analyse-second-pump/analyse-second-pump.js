@@ -67,6 +67,7 @@ export const AnalyseSecondPump = () => {
               data: [50, 60, 30, 24, 100, 18, 35, 80, 47, 60, 60, 50, 60,
                 30, 24, 90, 68, 35, 80, 47, 60, 50, 70],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {
@@ -78,6 +79,7 @@ export const AnalyseSecondPump = () => {
               data: [35, 80, 47, 60, 100, 50, 60, 50, 60, 30, 24, 60, 87,
                 80, 47, 60, 70, 80, 30, 64, 80, 58, 35],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {
@@ -90,6 +92,7 @@ export const AnalyseSecondPump = () => {
               data: [25, 30, 57, 60, 60, 70, 65, 30, 50, 80, 64,80, 58,
                 40, 47, 50, 60, 80, 60, 54, 80, 58, 55],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {
@@ -102,6 +105,7 @@ export const AnalyseSecondPump = () => {
               data: [15, 50, 67, 20, 80, 90, 60, 80, 50, 60, 64, 80, 98,
                 30, 27, 40, 60, 50, 60, 74, 50, 58, 65],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {

@@ -104,6 +104,7 @@ export const AllocationWeek = () => {
               yAxisIndex: 1,
               data: [20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {
@@ -212,6 +213,7 @@ export const AllocationWeek = () => {
               yAxisIndex: 1,
               data: [20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25],
               type: 'line',
+              smooth: true,
               symbolSize: 6,
               itemStyle: {
                 normal: {

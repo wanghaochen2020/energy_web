@@ -4,14 +4,10 @@ import './analyse-energy-station.scss';
 import { ChartService } from '../../utils/chart.service';
 
 export const AnalyseEnergyStation = () => {
-  const [chartButtons, setChartButtons] = useState([]);
   const [loadRateButtons, setLoadRateButton] = useState([]);
   const [chartDateButtons, setChartDateButtons] = useState([]);
 
   useEffect(() => {
-    setChartButtons([
-      { name: '电锅炉', selected: true }, { name: '蓄热水箱' }, { name: '能源站系统' }
-    ]);
     setLoadRateButton([
       { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
     ]);
@@ -19,15 +15,6 @@ export const AnalyseEnergyStation = () => {
       { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
     ]);
   }, []);
-
-  const selectChartButton = (item) => {
-    chartButtons.slice().forEach(button => {
-      button.selected = false;
-    });
-
-    item.selected = true;
-    setChartButtons([...chartButtons]);
-  }
 
   const selectLoadRateButton = (item) => {
     loadRateButtons.slice().forEach(button => {
@@ -44,46 +31,14 @@ export const AnalyseEnergyStation = () => {
     });
 
     item.selected = true;
-    setChartDateButtons([...chartButtons]);
+    setChartDateButtons([...chartDateButtons]);
   }
 
   return (
     <div className="analyse-energy-station-view">
-      <div className="top-row">
-        <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-            data: [{ value: 100 }, { value: 80}], startAngle: 140
-          })} />
-          <div className="number-value">今日锅炉平均热效率: 62%</div>
-        </div>
-        <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-            data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
-          })} />
-          <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
-        </div>
-        <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-            data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7'], startAngle: 240
-          })} />
-          <div className="number-value">今日系统总效率: 70%</div>
-        </div>
-        <div className="top-info-box">
-          <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-            data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7']
-          })} />
-          <div className="number-value">今日减碳排放量: 50KWH</div>
-        </div>
-      </div>
       <div className="top-box">
         <div className="top-left">
           <div className="chart-wrapper">
-            <div className="date-button-wrapper">
-              {
-                chartButtons.map((item, index) =>
-                  <span onClick={() => selectChartButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
-              }
-            </div>
             <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
               <div className="chart-block-title">
                   <span className="title-icon"></span>
@@ -91,17 +46,34 @@ export const AnalyseEnergyStation = () => {
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
+                  legend: {
+                    show: true,
+                    top: 10,
+                    right: 12,
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14
+                    },
+                    data: ['电锅炉', '蓄热水箱', '能源站系统']
+                  },
                   xName: '时',
                   yName: '%',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
+                      name: '电锅炉',
                       data: [50, 60, 30, 24, 90, 18, 35, 80, 47, 60, 60, 50, 60,
                         30, 24, 80, 38, 35, 80, 47, 60, 60, 80]
                     },
                     {
+                      name: '蓄热水箱',
                       data: [35, 80, 47, 60, 70, 50, 60, 50, 60, 30, 24, 60, 78,
                         80, 47, 60, 80, 90, 60, 54, 60, 78, 65]
+                    },
+                    {
+                      name: '能源站系统',
+                      data: [25, 60, 57, 40, 50, 40, 50, 50, 60, 40, 54, 50, 48,
+                        60, 57, 40, 50, 60, 40, 54, 60, 48, 45]
                     }
                   ]
                 })} />
@@ -129,6 +101,37 @@ export const AnalyseEnergyStation = () => {
                     }
                   ]
                 })} />
+            </div>
+          </div>
+        </div>
+        <div className="top-middle">
+          <div className="gauge-row">
+            <div className="top-info-box">
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+                data: [{ value: 100 }, { value: 80}], startAngle: 140
+              })} />
+              <div className="number-value">今日锅炉平均热效率: 62%</div>
+            </div>
+            <div className="top-info-box">
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+                data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
+              })} />
+              <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
+            </div>
+          </div>
+
+          <div className="gauge-row">
+            <div className="top-info-box">
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+                data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7'], startAngle: 240
+              })} />
+              <div className="number-value">今日系统总效率: 70%</div>
+            </div>
+            <div className="top-info-box">
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
+                data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7']
+              })} />
+              <div className="number-value">今日减碳排放量: 50KWH</div>
             </div>
           </div>
         </div>
