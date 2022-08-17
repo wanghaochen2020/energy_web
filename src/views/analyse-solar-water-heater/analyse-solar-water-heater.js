@@ -173,6 +173,10 @@ export const AnalyseSolarWaterHeater = () => {
         </div>
         <div className="bottom-middle">
           <div className="chart-wrapper">
+            <div className="chart-summary">
+              <div>同比增长</div>
+              <div>25%</div>
+              </div>
             <div style={{ margin: 'auto', marginTop: '-30px', textAlign: 'center', width: '100%', height: '450px' }}>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 tooltip: {
@@ -185,12 +189,12 @@ export const AnalyseSolarWaterHeater = () => {
                     selectedMode: 'single',
                     radius: ['50%', '60%'],
                     data: [
-                      { value: 100, name: '本期能耗' }
+                      { value: 100, name: '上期能耗：40000' }
                     ]
                   },
                   {
                     type: 'pie',
-                    startAngle: 0,
+                    startAngle: 45,
                     hoverAnimation: false,
                     radius: ["55%", "70%"],
                     data: [{
@@ -203,7 +207,7 @@ export const AnalyseSolarWaterHeater = () => {
                     },
                     {
                       value: 30,
-                      name: '同比增长',
+                      name: '本期能耗：50000',
                       itemStyle: {
                         normal: {
                           color: "rgba(1,218,220,1)"

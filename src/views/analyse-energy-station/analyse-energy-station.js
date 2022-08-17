@@ -39,12 +39,12 @@ export const AnalyseEnergyStation = () => {
       <div className="top-box">
         <div className="top-left">
           <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '350px'}}>
               <div className="chart-block-title">
                   <span className="title-icon"></span>
                   电锅炉热效率
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   legend: {
                     show: true,
@@ -86,12 +86,12 @@ export const AnalyseEnergyStation = () => {
                   <span onClick={() => selectLoadRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '350px'}}>
               <div className="chart-block-title">
                   <span className="title-icon"></span>
                   负载率统计
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
                   yName: '%',
                   category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
@@ -143,12 +143,12 @@ export const AnalyseEnergyStation = () => {
                     <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
                 }
               </div>
-              <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+              <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '350px'}}>
                 <div className="chart-block-title">
                     <span className="title-icon"></span>
                     今日碳排放量统计
                 </div>
-                <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                   ChartService.getLineOptions({
                     xName: '时',
                     yName: '%',
@@ -167,12 +167,12 @@ export const AnalyseEnergyStation = () => {
               </div>
           </div>
           <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
+            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '350px'}}>
               <div className="chart-block-title">
                   <span className="title-icon"></span>
                   电量类型碳排占比
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={{
                 title: {
                   text: '',
                   left: '15',

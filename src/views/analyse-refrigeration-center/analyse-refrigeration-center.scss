@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  padding-top: 0;
   overflow: auto;
 
   .top-box {
@@ -25,7 +26,7 @@
 
     .top-middle {
       flex-grow: 0;
-      padding-top: 200px;
+      padding-top: 130px;
       white-space: nowrap;
     }
 
@@ -67,6 +68,7 @@
 
   .bottom-box {
     width: 100%;
+    margin-top: -40px;
     .table-history {
       width: 98%;
       margin: 10px auto;

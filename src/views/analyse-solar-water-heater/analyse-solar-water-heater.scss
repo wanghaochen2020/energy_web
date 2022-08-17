@@ -72,21 +72,23 @@
     width: 100%;
     margin-bottom: 10px;
     .bottom-left {
-      width: 33%;
+      width: 40%;
+      flex-grow: 1;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
     .bottom-middle {
-      width: 33%;
-      min-width: 450px;
+      width: 360px;
+      flex-grow: 0;
       display: inline-block;
       text-align: right;
     }
 
     .bottom-right {
-      width: 33%;
+      width: 40%;
+      flex-grow: 1;
       min-width: 450px;
       display: inline-block;
       text-align: right;
@@ -113,6 +115,25 @@
   .date-button-selected {
     color: rgb(12, 213, 240);
     border-color: rgb(12, 213, 240);
+  }
+
+  .chart-summary {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 18px;
+
+    div {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
