@@ -143,7 +143,7 @@ export const AnalyseRefrigerationCenter = () => {
                 <span className="title-icon"></span>
                 今日碳排放量统计
               </div>
-              <ReactEcharts style={{ width: '445px', height: '350px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: '时',
                   yName: 'Kg',

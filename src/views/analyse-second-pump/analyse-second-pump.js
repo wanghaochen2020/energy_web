@@ -71,6 +71,7 @@ export const AnalyseSecondPump = () => {
               symbolSize: 6,
               itemStyle: {
                 normal: {
+                  color: '#03e9eb'
                 }
               }
             },
@@ -83,6 +84,7 @@ export const AnalyseSecondPump = () => {
               symbolSize: 6,
               itemStyle: {
                 normal: {
+                  color: '#fd6b44'
                 }
               }
             },
@@ -96,6 +98,7 @@ export const AnalyseSecondPump = () => {
               symbolSize: 6,
               itemStyle: {
                 normal: {
+                  color: '#b993ff'
                 }
               }
             },
@@ -109,6 +112,7 @@ export const AnalyseSecondPump = () => {
               symbolSize: 6,
               itemStyle: {
                 normal: {
+                  color: '#37f137'
                 }
               }
             }

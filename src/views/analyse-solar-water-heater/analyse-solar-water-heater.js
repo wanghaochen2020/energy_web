@@ -194,7 +194,7 @@ export const AnalyseSolarWaterHeater = () => {
                   },
                   {
                     type: 'pie',
-                    startAngle: 45,
+                    startAngle: 20,
                     hoverAnimation: false,
                     radius: ["55%", "70%"],
                     data: [{
