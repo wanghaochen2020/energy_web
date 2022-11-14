@@ -44,6 +44,7 @@ export const Menus = () => {
 
   return (
     <div className="menus-wrapper">
+      <div className="menu-top"><i className="fa fa-bars"></i></div>
       <div className="menus-box">
         <div className="menus-container">
           {

@@ -13,9 +13,13 @@
     display: flex;
     justify-content: space-between;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 0;
     width: 100%;
     margin-bottom: 10px;
+    .box-wrapper {
+      margin: 0;
+      background: no-repeat;
+    }
     .top-left {
       flex-grow: 1;
       width: 40%;
@@ -75,9 +79,9 @@
     margin-top: -25px;
     background-color: rgb(12, 16, 53, 0.8);
     .table-history {
-      width: 98%;
+      width: 100%;
       margin: 10px auto;
-      border: solid 1px #666;
+      border: solid 1px rgb(21, 16, 65);
       color: #fff;
       thead {
         background-color: #141e57;

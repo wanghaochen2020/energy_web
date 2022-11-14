@@ -1,5 +1,4 @@
 import React from 'react';
-import * as echarts from 'echarts/lib/echarts';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfo } from '../../components/';
 import './system-energy-station.scss';
@@ -9,6 +8,11 @@ export const SystemEnergyStation = () => {
   return (
     <div className="system-energy-station-view">
       <div className="operation-summary">
+        <div className="alarm-info">
+          <div className="alarm-number">85</div>
+          <div className="alarm-label">告警次数</div>
+          <span className="alarm-left-corner"></span>
+        </div>
         <div className="top-info-box">
           <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
             tooltip: {
@@ -136,23 +140,30 @@ export const SystemEnergyStation = () => {
         </div>
       </div>
       <div className="bottom-box">
-        <div className="summary-info">
-          <div className="summary-info-title">
-            <span className="title-icon"></span>
-            今日一览
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{marginTop: '10px', backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">今日一览</span>
           </div>
           <div>
             <ComSummaryInfo />
           </div>
         </div>
-        <div className="chart-wrapper" style={{marginRight: '-20px'}}>
-          <div className="vertical-separator"></div>
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">蓄热量统计</span>
+          </div>
           <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
-            <div className="chart-block-title">
-              <span className="title-icon"></span>
-              蓄热量统计
-            </div>
-            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
+            <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
               title: {
                 text: '',
                 left: '15',
@@ -173,7 +184,13 @@ export const SystemEnergyStation = () => {
                     width: 1,
                     type: 'solid'
                   }
-                }
+                },
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
+                },
               },
               yAxis: {
                 type: 'value',
@@ -186,8 +203,14 @@ export const SystemEnergyStation = () => {
                     type: 'solid'
                   }
                 },
-                splitLine: {
+                axisLabel: {
                   show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
+                },
+                splitLine: {
+                  show: false,
                   lineStyle: {
                     color: ['#192f44'],
                     width: 1,
@@ -217,14 +240,17 @@ export const SystemEnergyStation = () => {
             }} />
           </div>
         </div>
-        <div className="chart-wrapper">
-          <div className="vertical-separator"></div>
-          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
-            <div className="chart-block-title">
-              <span className="title-icon"></span>
-              锅炉耗电量统计
-            </div>
-            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">锅炉耗电量统计</span>
+          </div>
+          <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '300px' }}>
+            <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
               title: {
                 text: '',
                 left: '15',
@@ -249,6 +275,12 @@ export const SystemEnergyStation = () => {
                     width: 1,
                     type: 'solid'
                   }
+                },
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
                 }
               },
               yAxis: {
@@ -262,8 +294,14 @@ export const SystemEnergyStation = () => {
                     type: 'solid'
                   }
                 },
-                splitLine: {
+                axisLabel: {
                   show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
+                },
+                splitLine: {
+                  show: false,
                   lineStyle: {
                     color: ['#192f44'],
                     width: 1,
@@ -293,9 +331,15 @@ export const SystemEnergyStation = () => {
             }} />
           </div>
         </div>
-        <div className="summary-info alarm-wrapper">
-          <div className="vertical-separator"></div>
-          <div className="summary-info-title"><span className="title-icon"></span>今日告警</div>
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">今日告警</span>
+          </div>
           <div>
             <ComAlarms />
           </div>

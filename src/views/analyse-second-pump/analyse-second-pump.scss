@@ -9,17 +9,20 @@
 
   .top-box {
     width: 100%;
+    .box-wrapper {
+      height: 450px;
+      width: 98%;
+      background: none;
+    }
   }
 
   .bottom-box {
-    background-color: #02062b;
     margin-top: 10px;
-    width: 98%;
+    width: 100%;
     padding: 15px;
     border-radius: 4px;
     .table-history {
       width: 100%;
-      border: solid 1px #666;
       color: #fff;
       thead {
         background-color: #141e57;

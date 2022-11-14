@@ -29,11 +29,10 @@ export const Master = () => {
     init();
   }, [init]);
 
-  return <div className="master-box">
+  return <div className="master-box" style={{backgroundImage: "url('/assets/images/top.png'), url('/assets/images/main_bg.png')"}}>
     <div className="navigation">
-      <span className="navigation-left">
-        <i className="fa fa-superpowers"></i>
-        <span className="site-name">{messagesText.siteName}</span>
+      <span className="navigation-title">
+        {messagesText.siteName}
       </span>
       <span className="navigation-right">
         <PopupMenu items={userMenus} position="top-right" customClass="popup-wrapper">
@@ -47,8 +46,8 @@ export const Master = () => {
       <div className="main-left">
         <Menus />
       </div>
-      <div className="router-view-wrapper" style={{backgroundImage: "url('/assets/images/main_bg.jpg')"}}>
-        <div className="router-view" style={{backgroundImage: "url('/assets/images/main_bg.jpg')"}}>
+      <div className="router-view-wrapper">
+        <div className="router-view" >
           <Outlet />
         </div>
       </div>

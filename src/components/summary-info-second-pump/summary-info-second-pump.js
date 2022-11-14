@@ -12,15 +12,21 @@ export const ComSummaryInfoSecondPump = ({ items }) => {
     <div className="com-summary-info">
       <div className="main-info-row">
         <span className="main-info">
-          <span className="main-info-number">65.86</span>
           <span className="main-info-text">
-            总功率 (km)
+            总功率
+          </span>
+          <span className="main-info-number">
+            65.86
+            <span className="number-unit">km</span>
           </span>
         </span>
         <span className="main-info">
-          <span className="main-info-number">65.86</span>
           <span className="main-info-text">
-            总用电能耗累计 (km・h)
+          总用电能耗累计
+          </span>
+          <span className="main-info-number yellow-color">
+            65.86
+            <span className="number-unit">km・h</span>
           </span>
         </span>
       </div>

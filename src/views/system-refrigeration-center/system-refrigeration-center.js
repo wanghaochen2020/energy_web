@@ -1,5 +1,4 @@
 import React from 'react';
-import * as echarts from 'echarts/lib/echarts';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoRefrigeration } from '../../components/';
 import './system-refrigeration-center.scss';
@@ -8,26 +7,38 @@ export const SystemRefrigerationCenter = () => {
 
   return (
     <div className="system-refrigeration-center-view">
-      <div>
+      <div className="operation-summary">
+        <div className="alarm-info">
+          <div className="alarm-number">56</div>
+          <div className="alarm-label">告警次数</div>
+          <span className="alarm-left-corner"></span>
+        </div>
       </div>
       <div className="bottom-box">
-        <div className="summary-info">
-          <div className="summary-info-title">
-            <span className="title-icon"></span>
-            今日一览
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{marginTop: '10px', backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">今日一览</span>
           </div>
           <div>
             <ComSummaryInfoRefrigeration />
           </div>
         </div>
-        <div className="chart-wrapper">
-          <div className="vertical-separator"></div>
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">制冷机组耗电量统计</span>
+          </div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '320px'}}>
-            <div className="chart-block-title">
-                <span className="title-icon"></span>
-                制冷机组耗电量统计
-            </div>
-            <ReactEcharts style={{ width: '100%', height: '320px', margin: 'auto' }} option={{
+            <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
               title: {
                 text: '',
                 left: '15',
@@ -48,7 +59,13 @@ export const SystemRefrigerationCenter = () => {
                     width: 1,
                     type: 'solid'
                   }
-                }
+                },
+                axisLabel: {
+                  show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
+                },
               },
               yAxis: {
                 type: 'value',
@@ -61,8 +78,14 @@ export const SystemRefrigerationCenter = () => {
                     type: 'solid'
                   }
                 },
-                splitLine: {
+                axisLabel: {
                   show: true,
+                  textStyle: {
+                    color: '#ffffff'
+                  }
+                },
+                splitLine: {
+                  show: false,
                   lineStyle: {
                     color: ['#192f44'],
                     width: 1,
@@ -92,11 +115,15 @@ export const SystemRefrigerationCenter = () => {
             }} />
           </div>
         </div>
-        <div className="summary-info alarm-wrapper">
-          <div className="vertical-separator"></div>
-          <div className="summary-info-title">
-            <span className="title-icon"></span>今日告警
-            </div>
+        <div className="box-wrapper">
+          <div className="top-left-corner"></div>
+          <div className="top-right-corner"></div>
+          <div className="bottom-left-corner"></div>
+          <div className="bottom-right-corner"></div>
+          <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+            <span className="box-title-icon">&#9658;</span>
+            <span className="title-text">今日告警</span>
+          </div>
           <div>
             <ComAlarms />
           </div>

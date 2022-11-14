@@ -1,6 +1,14 @@
 @import '../../../styles/colors.scss';
 
 .menus-wrapper {
+    .menu-top {
+      background: #0a1f5a;
+      height: 36px;
+      text-align: center;
+      color: #aaa;
+      line-height: 36px;
+      font-size: 18px;
+    }
     .menus-box {
       display: flex;
       padding: 15px 5px 5px 5px;
@@ -60,9 +68,9 @@
             }
           }
 
-          .menu-selected a{
-            color: rgb(103, 214, 248)!important;
-          }
+          // .menu-selected a{
+          //   color: rgb(103, 214, 248)!important;
+          // }
         }
 
         .sub-items {
@@ -81,17 +89,16 @@
             display: inline-block;
             width: 100%;
             &:hover {
-              background-color: #3887ac;
+              background-color: #083079;
             }
           }
         }
 
         .sub-menu-item-selected {
-          background-color: #18668a;
-          color: #4ee9f4;
+          background-image: linear-gradient(to right, #152261, #041546);
+          border-left: solid 1px #eee;
           cursor: default;
           a {
-            color: #4ee9f4;
             display: inline-block;
           }
         }

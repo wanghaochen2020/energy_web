@@ -43,6 +43,13 @@ export const ComAlarms = ({ items }) => {
       type: '故障',
       time: '2022-07-24',
       status: '已处理'
+    },
+    {
+      order: 6,
+      name: '智能设备6',
+      type: '故障',
+      time: '2022-07-24',
+      status: '已处理'
     }
   ]);
 
@@ -63,12 +70,12 @@ export const ComAlarms = ({ items }) => {
   </tr></thead>
 
   const rows = <tbody>{data.map((item, index) => 
-    <tr key={index}>
+    <tr key={index} className={index%2===0?'row-odd':''}>
       <td>{item.order}</td>
       <td>{item.name}</td>
       <td>{item.type}</td>
       <td>{item.time}</td>
-      {item.status === '已处理' ? <td className="alarm-resolved">{item.status}</td>:
+      {item.status === '已处理' ? <td><span className="alarm-resolved">{item.status}</span></td>:
         <td>
           <Popover
             content={<div className="popover-button-wrapper">

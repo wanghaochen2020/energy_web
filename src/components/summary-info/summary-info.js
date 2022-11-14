@@ -12,15 +12,21 @@ export const ComSummaryInfo = ({ items }) => {
     <div className="com-summary-info">
       <div className="main-info-row">
         <span className="main-info">
-          <span className="main-info-number">65.86</span>
           <span className="main-info-text">
-            热量总功率 (km)
+            热量总功率
+          </span>
+          <span className="main-info-number">
+            65.86
+            <span className="number-unit">km</span>
           </span>
         </span>
         <span className="main-info">
-          <span className="main-info-number">65.86</span>
           <span className="main-info-text">
-            锅炉总功率 (km)
+            锅炉总功率
+          </span>
+          <span className="main-info-number yellow-color">
+            65.86
+            <span className="number-unit">km</span>
           </span>
         </span>
       </div>

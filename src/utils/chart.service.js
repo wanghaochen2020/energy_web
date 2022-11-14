@@ -24,6 +24,12 @@ export class ChartService {
             width: 1,
             type: 'solid'
           }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#ffffff'
+          }
         }
       },
       yAxis: {
@@ -38,11 +44,17 @@ export class ChartService {
           }
         },
         splitLine: {
-          show: true,
+          show: false,
           lineStyle: {
             color: ['#192f44'],
             width: 1,
             type: 'solid'
+          }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#ffffff'
           }
         }
       },
@@ -88,6 +100,12 @@ export class ChartService {
             width: 1,
             type: 'solid'
           }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#ffffff'
+          }
         }
       },
       yAxis: {
@@ -102,11 +120,17 @@ export class ChartService {
           }
         },
         splitLine: {
-          show: true,
+          show: false,
           lineStyle: {
             color: ['#192f44'],
             width: 1,
             type: 'solid'
+          }
+        },
+        axisLabel: {
+          show: true,
+          textStyle: {
+            color: '#ffffff'
           }
         }
       },
