@@ -355,6 +355,7 @@
   right: 30px;
   padding: 10px 25px;
   background-color: #0c1e51;
+  text-align: center;
 
   .alarm-number {
     font-size: 28px;
@@ -406,4 +407,50 @@
   right: 0;
   bottom: 0;
   @extend .corner-bg;
+}
+
+.main-info-row {
+  margin: 15px 0 25px 0;
+  display: flex;
+  justify-content: center;
+
+  .main-info {
+    text-align: center;
+    background-image: linear-gradient(to right, #1b1f34, #1b1f34, #031444);
+    padding-top: 10px;
+    padding-bottom: 5px;
+    width: 45%;
+    margin: 0 5px;
+
+    .main-info-number {
+      display: block;
+      text-align: center;
+      white-space: nowrap;
+      font-size: 26px;
+      line-height: 26px;
+      color: #68a557;
+    }
+
+    .yellow-color {
+      color: #e6ce7a;
+    }
+
+    .number-unit {
+      color: #fff;
+      font-size: 14px;
+      margin-left: 1px;
+    }
+
+    .main-info-text {
+      display: block;
+      text-align: center;
+      font-size: 15px;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .info-number {
+      text-align: right;
+    }
+  }
 }
