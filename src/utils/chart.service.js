@@ -20,7 +20,7 @@ export class ChartService {
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#6cbcea',
+            color: '#fff',
             width: 1,
             type: 'solid'
           }
@@ -38,7 +38,7 @@ export class ChartService {
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#6cbcea',
+            color: '#fff',
             width: 1,
             type: 'solid'
           }
@@ -64,12 +64,13 @@ export class ChartService {
           data: item.data,
           type: 'line',
           smooth: true,
-          symbolSize: 6,
+          symbolSize: item.symbolSize === undefined ? 6 : item.symbolSize,
           itemStyle: {
             normal: {
               color: item.color || colors[index]
             }
-          }
+          },
+          areaStyle: item.areaStyle || undefined
         };
       })
     };

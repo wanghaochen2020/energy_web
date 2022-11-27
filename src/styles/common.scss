@@ -435,6 +435,14 @@
       color: #e6ce7a;
     }
 
+    .red-color {
+      color: #c7244d;
+    }
+
+    .blue-color {
+      color: #28a1da;
+    }
+
     .number-unit {
       color: #fff;
       font-size: 14px;
@@ -453,4 +461,42 @@
       text-align: right;
     }
   }
+}
+
+.row-item-box {
+  border-radius: 4px;
+  text-align: left;
+  background-color: #0b2166;
+  width: calc(50% - 20px);
+  margin: 10px 5px;
+  display: inline-block;
+  .item-text {
+    width: 50%;
+    border-radius: 4px 0 0 4px;
+    text-align: center;
+    background-color: rgb(28, 46, 104);
+    display: inline-block;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  .item-value {
+    text-align: center;
+    width: 49%;
+    display: inline-block;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+}
+
+.text-red {
+  color: #f15b81;
+}
+
+.text-green {
+  color: #2fd846;
+}
+
+.text-yellow {
+  color: #e6ce7a;
 }

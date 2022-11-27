@@ -9,38 +9,38 @@
   padding-top: 0;
   overflow: auto;
 
+  .operation-summary {
+    margin-top: 20px;
+  }
+
   .top-box {
     display: flex;
     justify-content: space-between;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 0;
     width: 100%;
     margin-bottom: 10px;
     .top-left {
-      flex-grow: 1;
-      width: 40%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
-    .top-middle {
-      flex-grow: 0;
-      padding-top: 130px;
-      white-space: nowrap;
-    }
-
     .top-right {
-      flex-grow: 1;
-      width: 40%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: right;
     }
 
-    .chart-wrapper {
-      overflow: auto;
-      position: relative;
+    .box-wrapper {
+      margin: 0;
+      background: no-repeat;
+
+      .title-text {
+        padding-left: 1.5%;
+      }
     }
 
     .date-button-wrapper {
@@ -70,8 +70,8 @@
     width: 100%;
     margin-top: -40px;
     .table-history {
-      width: 98%;
-      margin: 10px auto;
+      width: 100%;
+      margin: 20px auto 10px auto;
       color: #fff;
       thead {
         background-color: #141e57;

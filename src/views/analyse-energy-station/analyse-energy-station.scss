@@ -9,6 +9,10 @@
   padding-top: 0;
   overflow: auto;
 
+  .operation-summary {
+    margin-top: 20px;
+  }
+
   .top-box {
     display: flex;
     justify-content: space-between;
@@ -19,24 +23,20 @@
     .box-wrapper {
       margin: 0;
       background: no-repeat;
+
+      .title-text {
+        padding-left: 1.5%;
+      }
     }
     .top-left {
-      flex-grow: 1;
-      width: 40%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
-    .top-middle {
-      flex-grow: 0;
-      padding-top: 130px;
-      white-space: nowrap;
-    }
-
     .top-right {
-      flex-grow: 1;
-      width: 40%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: right;
@@ -77,11 +77,9 @@
   .bottom-box {
     width: 100%;
     margin-top: -25px;
-    background-color: rgb(12, 16, 53, 0.8);
     .table-history {
       width: 100%;
       margin: 10px auto;
-      border: solid 1px rgb(21, 16, 65);
       color: #fff;
       thead {
         background-color: #141e57;

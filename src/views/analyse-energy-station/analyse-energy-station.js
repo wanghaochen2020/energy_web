@@ -36,9 +36,116 @@ export const AnalyseEnergyStation = () => {
 
   return (
     <div className="analyse-energy-station-view">
+      <div className="operation-summary">
+          <div className="alarm-info">
+            <div className="alarm-number">68</div>
+            <div className="alarm-label">告警次数</div>
+            <span className="alarm-left-corner"></span>
+          </div>
+          <div className="top-info-box">
+            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 360,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                  ]
+                }
+              ]
+            }} />
+            <div className="number-value">今日锅炉平均热效率: 62%</div>
+          </div>
+          <div className="top-info-box">
+            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 320,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                  ]
+                }
+              ]
+            }} />
+            <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
+          </div>
+          <div className="top-info-box">
+            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 270,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
+                  ]
+                }
+              ]
+            }} />
+            <div className="number-value">今日系统总效率: 70%</div>
+          </div>
+          <div className="top-info-box">
+            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+              tooltip: {
+                show: false
+              },
+              series: [
+                {
+                  type: 'pie',
+                  radius: ['80%', '100%'],
+                  startAngle: 360,
+                  hoverAnimation: false,
+                  labelLine: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  data: [
+                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                  ]
+                }
+              ]
+            }} />
+            <div className="number-value">今日减碳排放量: 50KWH</div>
+          </div>
+      </div>
       <div className="top-box">
         <div className="top-left">
-          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -47,7 +154,7 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电锅炉热效率</span>
             </div>
-            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
+            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
               ChartService.getLineOptions({
                 legend: {
                   show: true,
@@ -81,7 +188,7 @@ export const AnalyseEnergyStation = () => {
                 ]
               })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -90,13 +197,13 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">负载率统计</span>
               </div>
-            <div className="date-button-wrapper">
+            <div className="date-button-wrapper" style={{top: '38px'}}>
               {
                 loadRateButtons.map((item, index) =>
                   <span onClick={() => selectLoadRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
-            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
+            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
               ChartService.getBarOptions({
                 yName: '%',
                 category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
@@ -108,39 +215,8 @@ export const AnalyseEnergyStation = () => {
               })} />
           </div>
         </div>
-        <div className="top-middle">
-          <div className="gauge-row">
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 80}], startAngle: 140
-              })} />
-              <div className="number-value">今日锅炉平均热效率: 62%</div>
-            </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
-              })} />
-              <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
-            </div>
-          </div>
-
-          <div className="gauge-row">
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7'], startAngle: 240
-              })} />
-              <div className="number-value">今日系统总效率: 70%</div>
-            </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7']
-              })} />
-              <div className="number-value">今日减碳排放量: 50KWH</div>
-            </div>
-          </div>
-        </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -149,13 +225,13 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">今日碳排放量统计</span>
             </div>
-            <div className="date-button-wrapper">
+            <div className="date-button-wrapper" style={{top: '38px'}}>
                 {
                   chartDateButtons.map((item, index) =>
                     <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
                 }
               </div>
-              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: '时',
                   yName: '%',
@@ -172,7 +248,7 @@ export const AnalyseEnergyStation = () => {
                   ]
                 })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -181,7 +257,7 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={{
+              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
                   text: '',
                   left: '15',

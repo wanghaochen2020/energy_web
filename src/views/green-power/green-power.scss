@@ -16,14 +16,14 @@
     width: 100%;
     margin-bottom: 10px;
     .row-left {
-      width: 50%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
     .row-right {
-      width: 50%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
@@ -92,7 +92,10 @@
   }
 
   .top-row {
-    margin-bottom: 0;
+    margin-top: 35px;
+    .top-info-box {
+      margin-top: 25px;
+    }
   }
 
   .info-row-title {
@@ -136,10 +139,14 @@
 
   .chart-info-row {
     position: absolute;
-    top: -20px;
-    left: 150px;
+    top: 17px;
+    left: 180px;
     text-align: center;
     margin-bottom: 0;
+    .value-item {
+      color: rgb(80, 171, 247);
+      font-size: 20px;
+    }
   }
 
   .chart-desc {
@@ -147,6 +154,47 @@
     position: absolute;
     left: 43px;
     top: 35px;
+  }
+
+  .box-wrapper {
+    margin: 0;
+    background: no-repeat;
+
+    .title-text {
+      padding-left: 1.5%;
+    }
+  }
+
+  .green-info-column {
+    width: 49%;
+    margin-top: 40px;
+    display: inline-block;
+
+    .green-info-column-title {
+      padding-left: 13px;
+    }
+
+    .main-info {
+      padding: 30px 20px;
+      background-image: linear-gradient(to right, #17447c, #173f6e);
+    }
+
+    .main-info-text {
+      margin-bottom: 10px;
+    }
+  }
+
+  .box-chart-info {
+    text-align: center;
+    left: -40px;
+    top: 20px;
+    position: relative;
+
+    .text-red {
+      color: #f60b9c;
+      font-size: 18px;
+      line-height: 18px;
+    }
   }
 }
 

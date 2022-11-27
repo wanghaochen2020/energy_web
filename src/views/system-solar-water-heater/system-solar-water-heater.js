@@ -49,7 +49,7 @@ export const SystemSolarWaterHeater = () => {
             <span className="box-title-icon">&#9658;</span>
             <span className="title-text">集热量统计</span>
           </div>
-          <div className="date-button-wrapper">
+          <div className="date-button-wrapper" style={{top: '38px'}}>
               {
                 chartDateButtons.map((item, index) =>
                   <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)

@@ -16,29 +16,26 @@
     width: 100%;
     margin-bottom: 10px;
     .top-left {
-      width: 35%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
-    .top-middle {
-      width: 35%;
-      min-width: 400px;
-      display: inline-block;
-      text-align: center;
-    }
-
     .top-right {
-      width: 35%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: right;
     }
 
-    .chart-wrapper {
-      overflow: auto;
-      position: relative;
+    .box-wrapper {
+      margin: 0;
+      background: no-repeat;
+
+      .title-text {
+        padding-left: 1.5%;
+      }
     }
 
     .load-balance-wrapper {
@@ -69,15 +66,14 @@
   }
 
   .bottom-box {
-    width: 100%;
+    width: calc(100% - 20px);
     margin-bottom: 20px;
-    background-color: rgb(12, 16, 53, 0.8);
     .table-history {
       width: 100%;
-      border: solid 1px #666;
       color: #fff;
       thead {
         background-color: #141e57;
+        color: rgb(117, 149, 247);
       }
 
       th, td {
@@ -86,8 +82,26 @@
       }
     }
 
+    .text-box-green {
+      display: inline-block;
+      color: rgb(6, 216, 100);
+      border: solid 1px rgb(6, 216, 100);
+      padding: 1px;
+      width: 55px;
+      border-radius: 10px;
+    }
+
+    .text-box-red {
+      display: inline-block;
+      color: rgb(201, 70, 30);
+      border: solid 1px rgb(201, 70, 30);
+      padding: 1px;
+      border-radius: 10px;
+      width: 55px;
+    }
+
     .row-even {
-      background-color: #19244b;
+      background-color: #1a2759;
     }
 
     .fa-long-arrow-up, .fa-long-arrow-down {
@@ -107,10 +121,24 @@
     }
   }
 
+  .device-status-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .device-status-column {
+    display: inline-block;
+    width: 32%;
+    .row-item-box {
+      width: 100%;
+    }
+  }
+
   .device-status-title {
     text-align: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
     font-size: 16px;
+    color: rgb(133, 162, 247);
   }
 
   .table-status {
@@ -136,20 +164,22 @@
 
   .e-price {
     width: 100%;
+    margin-top: 30px;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
   }
 
   .e-price-item {
+    padding: 30px;
+    width: 28%;
     position: relative;
     display: inline-block;
-    width: 30%;
     text-align: center;
-    background-color: #11549b;
+    background-image: linear-gradient(to bottom, #0b366b, #26568d, #0b366b);
     border-radius: 4px;
-    height: 150px;
+    height: 206px;
 
     div {
       margin: 10px;
@@ -158,6 +188,7 @@
 
   .e-price-desc {
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 16px;
+    color: rgb(133, 162, 247);
   }
 }

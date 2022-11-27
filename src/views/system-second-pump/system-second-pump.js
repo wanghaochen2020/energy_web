@@ -35,10 +35,34 @@ export const SystemSecondPump = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text">冷热分水器耗电量统计</span>
+            <span className="title-text">空调热水泵运行状态</span>
           </div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '300px'}}>
-            <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
+            <div className="row-item-box">
+              <div className="item-text">1号泵</div>
+              <div className="item-value text-red">OFF</div>
+            </div>
+            <div className="row-item-box">
+              <div className="item-text">2号泵</div>
+              <div className="item-value text-green">ON</div>
+            </div>
+            <div className="row-item-box">
+              <div className="item-text">3号泵</div>
+              <div className="item-value text-red">OFF</div>
+            </div>
+            <div className="row-item-box">
+              <div className="item-text">4号泵</div>
+              <div className="item-value text-red">OFF</div>
+            </div>
+            <div className="row-item-box">
+              <div className="item-text">5号泵</div>
+              <div className="item-value text-green">ON</div>
+            </div>
+            <div className="row-item-box">
+              <div className="item-text">6号泵</div>
+              <div className="item-value text-green">ON</div>
+            </div>
+            {/* <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
               title: {
                 text: '',
                 left: '15',
@@ -112,7 +136,7 @@ export const SystemSecondPump = () => {
                   }
                 }
               ]
-            }} />
+            }} /> */}
           </div>
         </div>
         <div className="box-wrapper">

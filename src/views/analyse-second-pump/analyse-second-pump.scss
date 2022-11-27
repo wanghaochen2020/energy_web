@@ -9,18 +9,24 @@
 
   .top-box {
     width: 100%;
+    margin-top: 20px;
     .box-wrapper {
       height: 450px;
       width: 98%;
       background: none;
+
+      .title-text {
+        padding-left: 1.5%;
+      }
     }
   }
 
   .bottom-box {
     margin-top: 10px;
+    padding: 10px;
     width: 100%;
-    padding: 15px;
     border-radius: 4px;
+    text-align: center;
     .table-history {
       width: 100%;
       color: #fff;

@@ -51,11 +51,104 @@ export const AllocationDay = () => {
     <div className="allocation-day-view">
       <div className="top-box">
         <div className="top-left">
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  锅炉建议工况和实际工况对比
+          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">错峰用电</span>
+              </div>
+            <div className="e-price">
+              <div className="e-price-item">
+                <div className="e-price-desc">平电价阶段</div>
+                <div>07:00 - 10:00</div>
+                <div>15:00 - 18:00</div>
+                <div>21:00 - 23:00</div>
+              </div>
+              <div className="e-price-item">
+                <div className="e-price-desc">峰电价阶段</div>
+                <div>10:00 - 15:00</div>
+                <div>18:00 - 21:00</div>
+              </div>
+              <div className="e-price-item">
+                <div className="e-price-desc">谷电价阶段</div>
+                <div>23:00 - 07:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="top-right">
+          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">今日设备运行工况</span>
+              </div>
+                <div className="device-status-box">
+                <div className="device-status-column">
+                  <div className="device-status-title">锅炉运行</div>
+                  <div className="row-item-box">
+                    <div className="item-text">1#锅炉</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">2#锅炉</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">3#锅炉</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">4#锅炉</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                </div>
+                <div className="device-status-column">
+                  <div className="device-status-title">供热泵运行</div>
+                  <div className="row-item-box">
+                    <div className="item-text">GRB-1</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">GRB-2</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">GRB-3</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                </div>
+                <div className="device-status-column">
+                  <div className="device-status-title">蓄热水箱</div>
+                  <div className="row-item-box">
+                    <div className="item-text">蓄热水箱-1</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                  <div className="row-item-box">
+                    <div className="item-text">蓄热水箱-2</div>
+                    <div className="item-value text-yellow">2h/天</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div className="top-box">
+        <div className="top-left">
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">锅炉建议工况和实际工况对比</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
@@ -83,13 +176,15 @@ export const AllocationDay = () => {
                     }
                   ]
                 })} />
-            </div>
           </div>
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  锅炉运行工况
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">锅炉运行工况</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
@@ -108,7 +203,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#fff',
                       width: 1,
                       type: 'solid'
                     }
@@ -120,7 +215,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#fff',
                       width: 1,
                       type: 'solid'
                     }
@@ -138,88 +233,33 @@ export const AllocationDay = () => {
                   {
                     data: [25, 20, 30, 24],
                     type: 'bar',
-                    barWidth: 20
+                    barWidth: 8,
+                    itemStyle: {
+                      color: {
+                          type: 'linear',
+                          x: 0, y: 0, x2: 0, y2: 1,
+                          colorStops: [
+                              { offset: 0, color: 'rgba(3, 123, 235, .9)' },
+                              { offset: 1, color: 'rgba(3, 123, 235, 0)' }
+                          ],
+                      },
+                      borderRadius: [4, 4, 0, 0]
+                    }
                   }
                 ]
               }} />
-            </div>
-          </div>
-        </div>
-        <div className="top-middle">
-          <div style={{textAlign: 'center', width: '100%', height: '450px'}}>
-            <div className="device-status-title">错峰用电</div>
-            <div className="e-price">
-              <div className="e-price-item">
-                <div className="e-price-desc">平电价阶段</div>
-                <div>07:00 - 10:00</div>
-                <div>15:00 - 18:00</div>
-                <div>21:00 - 23:00</div>
-              </div>
-              <div className="e-price-item">
-                <div className="e-price-desc">峰电价阶段</div>
-                <div>10:00 - 15:00</div>
-                <div>18:00 - 21:00</div>
-              </div>
-              <div className="e-price-item">
-                <div className="e-price-desc">谷电价阶段</div>
-                <div>23:00 - 07:00</div>
-              </div>
-            </div>
-          </div>
-          <div style={{textAlign: 'center', width: '100%', height: '450px'}}>
-            <div className="device-status-title">今日设备运行工况</div>
-            <table className="table-status">
-              <thead>
-                <tr>
-                  <th colSpan="2">锅炉运行</th>
-                  <th colSpan="2">供热泵运行</th>
-                  <th colSpan="2">蓄热水箱</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1#锅炉</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td>GRB-1</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td>蓄热水箱-1</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                </tr>
-                <tr>
-                  <td>2#锅炉</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td>GRB-2</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td>蓄热水箱-2</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                </tr>
-                <tr>
-                  <td>3#锅炉</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td>GRB-3</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td></td>
-                  <td className="color-red table-status-value"></td>
-                </tr>
-                <tr>
-                  <td>4#锅炉</td>
-                  <td className="color-red table-status-value">2h/天</td>
-                  <td></td>
-                  <td className="color-red table-status-value"></td>
-                  <td></td>
-                  <td className="color-red table-status-value"></td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
         <div className="top-right">
-          <div className="chart-wrapper">
-              <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-                <div className="chart-block-title">
-                    <span className="title-icon"></span>
-                    水箱蓄热逐时建议工况(A/B)
-                </div>
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">水箱蓄热逐时建议工况(A/B)</span>
+              </div>
                 <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                   legend: {
                     show: true,
@@ -247,7 +287,7 @@ export const AllocationDay = () => {
                     axisLine: {
                       show: true,
                       lineStyle: {
-                        color: '#6cbcea',
+                        color: '#fff',
                         width: 1,
                         type: 'solid'
                       }
@@ -259,7 +299,7 @@ export const AllocationDay = () => {
                     axisLine: {
                       show: true,
                       lineStyle: {
-                        color: '#6cbcea',
+                        color: '#fff',
                         width: 1,
                         type: 'solid'
                       }
@@ -280,9 +320,17 @@ export const AllocationDay = () => {
                         230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
                       type: 'bar',
                       symbolSize: 6,
+                      barWidth: 8,
                       itemStyle: {
-                        normal: {
-                        }
+                        color: {
+                            type: 'linear',
+                            x: 0, y: 0, x2: 0, y2: 1,
+                            colorStops: [
+                                { offset: 0, color: 'rgba(3, 223, 135, .9)' },
+                                { offset: 1, color: 'rgba(3, 223, 135, 0)' }
+                            ],
+                        },
+                        borderRadius: [4, 4, 0, 0]
                       }
                     },
                     {
@@ -291,20 +339,30 @@ export const AllocationDay = () => {
                         80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
                       type: 'bar',
                       symbolSize: 6,
+                      barWidth: 8,
                       itemStyle: {
-                        normal: {
-                        }
+                        color: {
+                            type: 'linear',
+                            x: 0, y: 0, x2: 0, y2: 1,
+                            colorStops: [
+                                { offset: 0, color: 'rgba(100, 123, 235, .9)' },
+                                { offset: 1, color: 'rgba(100, 123, 235, 0)' }
+                            ],
+                        },
+                        borderRadius: [4, 4, 0, 0]
                       }
                     }
                   ]
                 }} />
-              </div>
           </div>
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  水箱放热逐时建议工况
+          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">水箱放热逐时建议工况</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 tooltip: {
@@ -325,7 +383,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#fff',
                       width: 1,
                       type: 'solid'
                     }
@@ -337,7 +395,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#fff',
                       width: 1,
                       type: 'solid'
                     }
@@ -394,7 +452,6 @@ export const AllocationDay = () => {
                   }
                 ]
               }} />
-            </div>
           </div>
         </div>
       </div>
@@ -414,39 +471,39 @@ export const AllocationDay = () => {
           <tbody>
             <tr>
               <td>电锅炉边蓄边供</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
             </tr>
             <tr className="row-even">
               <td>蓄热水箱单供</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
             </tr>
             <tr>
               <td>电锅炉单供</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
             </tr>
             <tr className="row-even">
               <td>联合供热</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
             </tr>
           </tbody>
         </table>
@@ -475,76 +532,76 @@ export const AllocationDay = () => {
           </thead>
           <tbody>
             <tr>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
             </tr>
             <tr className="row-even">
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td>开通</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
             </tr>
             <tr>
-              <td>工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
             </tr>
             <tr className="row-even">
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>工作</td>
-              <td>工作</td>
-              <td className="color-red">不工作</td>
-              <td>开通</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td className="color-red">关闭</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
-              <td className="color-red">关闭</td>
-              <td>开通</td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-green">工作</span></td>
+              <td><span className="text-box-red">不工作</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
+              <td><span className="text-box-red">关闭</span></td>
+              <td><span className="text-box-green">开通</span></td>
             </tr>
           </tbody>
         </table>
