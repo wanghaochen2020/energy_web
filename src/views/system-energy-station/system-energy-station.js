@@ -1,13 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfo } from '../../components/';
 import './system-energy-station.scss';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
 
 export const SystemEnergyStation = () => {
+  let [onlineRate, setOnlineRate] = useState(0)
+  let [offlineRate, setOfflineRate] = useState(0)
+  let [boilerPower, setBoilerPower] = useState(0)
+  let [powerConsumptionToday, setPowerConsumptionToday] = useState(0)
+  let [boilerRunningNum, setBoilerRunningNum] = useState(0)
+  let [tankRunningNum, setTankRunningNum] = useState(0)
+  let [heatSupplyToday, setHeatSupplyToday] = useState(0)
+  let [heatStorageAndRelease, setHeatStorageAndRelease] = useState([])
+  let [boilerEnergyCost, setBoilerEnergyCost] = useState([])
+
+  useEffect(()=>{
+    EnergyStation.getTable(PAGEDATA.EnergyOnlineRate).then((res)=>{
+      setOnlineRate((res*100).toFixed(2))
+      setOfflineRate(((1-res)*100).toFixed(2))
+      setOfflineRate(((1-res)*100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerPower).then((res)=> {
+      setBoilerPower(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyPowerConsumptionToday).then((res)=> {
+      setPowerConsumptionToday(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerRunningNum).then((res)=> {
+      setBoilerRunningNum(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyTankRunningNum).then((res)=> {
+      setTankRunningNum(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyHeatSupplyToday).then((res)=> {
+      setHeatSupplyToday((res/1e9).toFixed(2))
+    })
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.EnergyHeatStorageAndRelease, dayStr).then((res)=> {
+      setHeatStorageAndRelease(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerEnergyCost, dayStr).then((res)=> {
+      setBoilerEnergyCost(res)
+    })
+  }, [])
 
   return (
     <div className="system-energy-station-view">
-      <iframe src="https://cos.3dzhanting.cn/3ddemo/20220501-energystationov2/3d-wov-2022111501-sdkext/index.html" className="iframe-style" title="chart"></iframe>
+      <iframe src="http://10.112.154.218:7655" className="iframe-style" title="chart"></iframe>
       <div className="system-energy-station-content">
         <div className="operation-summary">
           <div className="alarm-info">
@@ -32,13 +73,13 @@ export const SystemEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                    { value: 100-onlineRate, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: onlineRate, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">设备在线率: 60%</div>
+            <div className="number-value">设备在线率: {onlineRate}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -57,13 +98,13 @@ export const SystemEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                    { value: 100-offlineRate, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: offlineRate, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">设备离线率: 40%</div>
+            <div className="number-value">设备离线率: {offlineRate}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -152,7 +193,8 @@ export const SystemEnergyStation = () => {
               <span className="title-text">今日一览</span>
             </div>
             <div>
-              <ComSummaryInfo />
+              <ComSummaryInfo items={{boilerPower:boilerPower, powerConsumptionToday:powerConsumptionToday, 
+                boilerRunningNum:boilerRunningNum, tankRunningNum:tankRunningNum, heatSupplyToday:heatSupplyToday}}/>
             </div>
           </div>
           <div className="box-wrapper">
@@ -162,7 +204,7 @@ export const SystemEnergyStation = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">蓄热量统计</span>
+              <span className="title-text">蓄放热量统计</span>
             </div>
             <div style={{ margin: 'auto', textAlign: 'center', width: '100%', height: '320px' }}>
               <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
@@ -222,8 +264,7 @@ export const SystemEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                    data: heatStorageAndRelease,
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -313,8 +354,7 @@ export const SystemEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                      230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                    data: boilerEnergyCost,
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {

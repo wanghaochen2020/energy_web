@@ -61,7 +61,6 @@ export class HttpRequestService {
 
     const promise = new Promise(function (resolve, reject) {
       axios(url, {
-        baseURL: SERVERINFO.serverIP,
         url: url,
         data: method === 'POST' || method === 'PUT' ? params.body : null,
         params: method === 'GET' || method === 'DELETE' ? params.params : null,

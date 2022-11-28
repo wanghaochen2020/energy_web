@@ -16,8 +16,8 @@ export const ComSummaryInfoRefrigeration = ({ items }) => {
             总功率
           </span>
           <span className="main-info-number">
-            65.86
-            <span className="number-unit">km</span>
+            {items.power}
+            <span className="number-unit">kW</span>
           </span>
         </span>
         <span className="main-info">
@@ -25,8 +25,8 @@ export const ComSummaryInfoRefrigeration = ({ items }) => {
           总用电能耗累计
           </span>
           <span className="main-info-number yellow-color">
-            65.86
-            <span className="number-unit">km・h</span>
+            {items.energyCostToday}
+            <span className="number-unit">kW・h</span>
           </span>
         </span>
       </div>
@@ -37,19 +37,19 @@ export const ComSummaryInfoRefrigeration = ({ items }) => {
       </div>
       <div className="row-item">
         <span>制冷机运行台数</span>
-        <span className="info-number">3台</span>
+        <span className="info-number">{items.machineRunningNum}台</span>
       </div>
       <div className="row-item row-odd">
         <span>冷却水供回水温度</span>
-        <span className="info-number">35/30 °C</span>
+        <span className="info-number">{items.coolingWaterOutT}/{items.coolingWaterInT} °C</span>
       </div>
       <div className="row-item">
         <span>冷冻水供回水温度</span>
-        <span className="info-number">8/14 °C</span>
+        <span className="info-number">{items.refrigeratedWaterOutT}/{items.refrigeratedWaterInT} °C</span>
       </div>
       <div className="row-item row-odd">
         <span>制冷机实时功率</span>
-        <span className="info-number">2200kW</span>
+        <span className="info-number">{items.machinePower}kW</span>
       </div>
     </div>
   );

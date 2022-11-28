@@ -1,9 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoRefrigeration } from '../../components/';
 import './system-refrigeration-center.scss';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
 
 export const SystemRefrigerationCenter = () => {
+  let [power, setPower] = useState(0)
+  let [energyCostToday, setEnergyCostToday] = useState(0)
+  let [machineRunningNum, setMachineRunningNum] = useState(0)
+  let [coolingWaterInT, setCoolingWaterInT] = useState(0)
+  let [coolingWaterOutT, setCoolingWaterOutT] = useState(0)
+  let [refrigeratedWaterInT, setRefrigeratedWaterInT] = useState(0)
+  let [refrigeratedWaterOutT, setRefrigeratedWaterOutT] = useState(0)
+  let [machinePower, setMachinePower] = useState(0)
+  let [energyCostDay, setEnergyCostDay] = useState([])
+
+
+  useEffect(() => {
+    EnergyStation.getTable(PAGEDATA.ColdPowerMin).then((res) => {
+      setPower(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdEnergyCostToday).then((res) => {
+      setEnergyCostToday(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdMachineRunningNum).then((res) => {
+      setMachineRunningNum(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterInT).then((res) => {
+      setCoolingWaterInT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterOutT).then((res) => {
+      setCoolingWaterOutT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterInT).then((res) => {
+      setRefrigeratedWaterInT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterOutT).then((res) => {
+      setRefrigeratedWaterOutT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdMachinePowerMin).then((res) => {
+      setMachinePower(res.toFixed(2))
+    })
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.ColdEnergyCostDay, dayStr).then((res)=> {
+      setEnergyCostDay(res)
+    })
+  }, [])
 
   return (
     <div className="system-refrigeration-center-view">
@@ -25,7 +68,8 @@ export const SystemRefrigerationCenter = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoRefrigeration />
+            <ComSummaryInfoRefrigeration items={{power:power, energyCostToday:energyCostToday, machineRunningNum:machineRunningNum, coolingWaterInT:coolingWaterInT,
+              coolingWaterOutT:coolingWaterOutT, refrigeratedWaterInT:refrigeratedWaterInT, refrigeratedWaterOutT:refrigeratedWaterOutT, machinePower:machinePower}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -95,8 +139,7 @@ export const SystemRefrigerationCenter = () => {
               },
               series: [
                 {
-                  data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                  data: energyCostDay,
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {
