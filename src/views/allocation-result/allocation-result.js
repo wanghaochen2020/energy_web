@@ -51,12 +51,15 @@ export const AllocationResult = () => {
     <div className="allocation-result-view">
       <div className="top-box">
         <div className="top-left">
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  过去7天不同方案运行服用对比分析
-              </div>
+          <div className="box-wrapper">
+            <div className="top-left-corner"></div>
+            <div className="top-right-corner"></div>
+            <div className="bottom-left-corner"></div>
+            <div className="bottom-right-corner"></div>
+            <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+              <span className="box-title-icon">&#9658;</span>
+              <span className="title-text">过去7天不同方案运行服用对比分析</span>
+            </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
                   text: '',
@@ -135,15 +138,17 @@ export const AllocationResult = () => {
                   }
                 ]
               }} />
-            </div>
           </div>
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  相对于满蓄节约能耗量统计
+            <div className="box-wrapper">
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">相对于满蓄节约能耗量统计</span>
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '450px' }} option={
                 ChartService.getBarOptions({
                   yName: 'KWH',
                   category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
@@ -153,16 +158,18 @@ export const AllocationResult = () => {
                     }
                   ]
                 })} />
-            </div>
           </div>
         </div>
         <div className="top-right">
-          <div className="chart-wrapper">
-              <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-                <div className="chart-block-title">
-                    <span className="title-icon"></span>
-                    经济效益 - 供暖季累计
-                </div>
+            <div className="box-wrapper">
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">经济效益 - 供暖季累计</span>
+              </div>
                 <div className="history-data-title">历史累计运行费用</div>
                 <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                   tooltip: {
@@ -227,13 +234,15 @@ export const AllocationResult = () => {
                     }
                   ]
                 }} />
-              </div>
-          </div>
-          <div className="chart-wrapper">
-            <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '450px'}}>
-              <div className="chart-block-title">
-                  <span className="title-icon"></span>
-                  相对于满蓄减碳排放
+            </div>
+            <div className="box-wrapper">
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">相对于满蓄减碳排放</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
@@ -245,7 +254,6 @@ export const AllocationResult = () => {
                     }
                   ]
                 })} />
-            </div>
           </div>
         </div>
       </div>

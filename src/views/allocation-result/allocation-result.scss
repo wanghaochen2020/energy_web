@@ -8,6 +8,13 @@
   padding: 10px;
   overflow: auto;
 
+  .box-wrapper {
+    background: none;
+    height: 450px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
   .top-box {
     display: flex;
     justify-content: space-between;
@@ -16,14 +23,14 @@
     width: 100%;
     margin-bottom: 10px;
     .top-left {
-      width: 50%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: left;
     }
 
     .top-right {
-      width: 50%;
+      width: 49%;
       min-width: 450px;
       display: inline-block;
       text-align: right;

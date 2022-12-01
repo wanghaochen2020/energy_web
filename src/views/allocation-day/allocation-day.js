@@ -51,7 +51,7 @@ export const AllocationDay = () => {
     <div className="allocation-day-view">
       <div className="top-box">
         <div className="top-left">
-          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '-10px'}}>
               <div className="top-left-corner"></div>
               <div className="top-right-corner"></div>
               <div className="bottom-left-corner"></div>
@@ -80,7 +80,7 @@ export const AllocationDay = () => {
           </div>
         </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '300px', marginBottom: '-10px'}}>
               <div className="top-left-corner"></div>
               <div className="top-right-corner"></div>
               <div className="bottom-left-corner"></div>

@@ -65,7 +65,7 @@ export const SystemEnergyStation = () => {
             }} />
             <div className="number-value">设备离线率: 40%</div>
           </div>
-          <div className="top-info-box">
+          {/* <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
               tooltip: {
                 show: false
@@ -139,7 +139,7 @@ export const SystemEnergyStation = () => {
               ]
             }} />
             <div className="number-value">正在维护率: 30%</div>
-          </div>
+          </div> */}
         </div>
         <div className="bottom-box">
           <div className="box-wrapper">
