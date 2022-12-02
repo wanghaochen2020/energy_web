@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfo } from '../../components/';
 import './system-energy-station.scss';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemEnergyStation = () => {
   let [onlineRate, setOnlineRate] = useState(0)
@@ -15,6 +16,37 @@ export const SystemEnergyStation = () => {
   let [heatSupplyToday, setHeatSupplyToday] = useState(0)
   let [heatStorageAndRelease, setHeatStorageAndRelease] = useState([])
   let [boilerEnergyCost, setBoilerEnergyCost] = useState([])
+
+  let setIframeReady = useCallback((iframe, fn) => {
+    if (iframe.attachEvent) {
+      iframe.attachEvent("onload", function () {
+          fn && fn(iframe);
+      });
+    } else {
+      iframe.onload = function () {
+          fn && fn(iframe);
+      };
+    }
+  }, [])
+
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('energy_model')
+        if (!iframe || !iframe.contentWindow) return
+        switch(event.data) {
+          case "ok"://加载完成
+            iframe.contentWindow.postMessage('energy_station_init', SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
 
   useEffect(()=>{
     EnergyStation.getTable(PAGEDATA.EnergyOnlineRate).then((res)=>{
@@ -44,11 +76,17 @@ export const SystemEnergyStation = () => {
     EnergyStation.getTable(PAGEDATA.EnergyBoilerEnergyCost, dayStr).then((res)=> {
       setBoilerEnergyCost(res)
     })
-  }, [])
+
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
+
+  }, [messageFunc])
 
   return (
     <div className="system-energy-station-view">
-      <iframe src="http://10.112.154.218:7655" className="iframe-style" title="chart"></iframe>
+      <iframe id="energy_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="system-energy-station-content">
         <div className="operation-summary">
           <div className="alarm-info">
