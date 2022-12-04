@@ -123,7 +123,7 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text" style={{marginLeft: '40px'}}>太阳能集热效率</span>
+              <span className="title-text">太阳能集热效率</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
@@ -151,7 +151,7 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text" style={{marginLeft: '40px'}}>今日碳排放量统计</span>
+              <span className="title-text">今日碳排放量统计</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
@@ -202,7 +202,7 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text" style={{marginLeft: '40px'}}>太阳能保证率</span>
+              <span className="title-text">太阳能保证率</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
@@ -229,7 +229,7 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text" style={{marginLeft: '40px'}}>系统总效率</span>
+              <span className="title-text">系统总效率</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {

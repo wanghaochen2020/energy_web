@@ -13,7 +13,7 @@ export const AllocationWeek = () => {
         <div className="bottom-right-corner"></div>
         <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
           <span className="box-title-icon">&#9658;</span>
-          <span className="title-text" style={{marginLeft: '40px'}}>未来7天再蓄热量</span>
+          <span className="title-text">未来7天再蓄热量</span>
         </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           legend: {
@@ -128,7 +128,7 @@ export const AllocationWeek = () => {
         <div className="bottom-right-corner"></div>
         <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
           <span className="box-title-icon">&#9658;</span>
-          <span className="title-text" style={{marginLeft: '40px'}}>未来7天移峰电量</span>
+          <span className="title-text">未来7天移峰电量</span>
         </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
           legend: {

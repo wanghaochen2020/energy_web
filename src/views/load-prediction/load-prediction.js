@@ -29,7 +29,7 @@ export const LoadPrediction = () => {
         <div className="bottom-right-corner"></div>
         <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
           <span className="box-title-icon">&#9658;</span>
-          <span className="title-text" style={{marginLeft: '40px'}}>建筑物逐时负荷统计</span>
+          <span className="title-text">建筑物逐时负荷统计</span>
         </div>
           <div className="date-button-wrapper" style={{top: '38px'}}>
             {
@@ -119,7 +119,7 @@ export const LoadPrediction = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text" style={{marginLeft: '40px'}}>负荷真实值与预测值对比</span>
+            <span className="title-text" >负荷真实值与预测值对比</span>
           </div>
         <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
           ChartService.getLineOptions({

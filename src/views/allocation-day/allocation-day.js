@@ -1,51 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './allocation-day.scss';
 import { ChartService } from '../../utils/chart.service';
 
 export const AllocationDay = () => {
-  const [chartButtons, setChartButtons] = useState([]);
-  const [loadRateButtons, setLoadRateButton] = useState([]);
-  const [chartDateButtons, setChartDateButtons] = useState([]);
-
-  useEffect(() => {
-    setChartButtons([
-      { name: '电锅炉', selected: true }, { name: '蓄热水箱' }, { name: '能源站系统' }
-    ]);
-    setLoadRateButton([
-      { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
-    ]);
-    setChartDateButtons([
-      { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
-    ]);
-  }, []);
-
-  const selectChartButton = (item) => {
-    chartButtons.slice().forEach(button => {
-      button.selected = false;
-    });
-
-    item.selected = true;
-    setChartButtons([...chartButtons]);
-  }
-
-  const selectLoadRateButton = (item) => {
-    loadRateButtons.slice().forEach(button => {
-      button.selected = false;
-    });
-
-    item.selected = true;
-    setLoadRateButton([...loadRateButtons]);
-  }
-
-  const selectChartDateButton = (item) => {
-    chartDateButtons.slice().forEach(button => {
-      button.selected = false;
-    });
-
-    item.selected = true;
-    setChartDateButtons([...chartButtons]);
-  }
 
   return (
     <div className="allocation-day-view">
@@ -459,7 +417,6 @@ export const AllocationDay = () => {
         <table className="table-history">
           <thead>
             <tr>
-              <th>运行工况</th>
               <th>1#锅炉</th>
               <th>2#锅炉</th>
               <th>3#锅炉</th>
@@ -470,38 +427,10 @@ export const AllocationDay = () => {
           </thead>
           <tbody>
             <tr>
-              <td>电锅炉边蓄边供</td>
               <td><span className="text-box-green">工作</span></td>
               <td><span className="text-box-red">不工作</span></td>
               <td><span className="text-box-red">不工作</span></td>
               <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-            </tr>
-            <tr className="row-even">
-              <td>蓄热水箱单供</td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-            </tr>
-            <tr>
-              <td>电锅炉单供</td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-            </tr>
-            <tr className="row-even">
-              <td>联合供热</td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
               <td><span className="text-box-red">不工作</span></td>
               <td><span className="text-box-red">不工作</span></td>
             </tr>
@@ -544,60 +473,6 @@ export const AllocationDay = () => {
               <td><span className="text-box-green">开通</span></td>
               <td><span className="text-box-green">开通</span></td>
               <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-            </tr>
-            <tr className="row-even">
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-            </tr>
-            <tr>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-            </tr>
-            <tr className="row-even">
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-green">工作</span></td>
-              <td><span className="text-box-red">不工作</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-green">开通</span></td>
-              <td><span className="text-box-red">关闭</span></td>
-              <td><span className="text-box-red">关闭</span></td>
               <td><span className="text-box-red">关闭</span></td>
               <td><span className="text-box-green">开通</span></td>
               <td><span className="text-box-red">关闭</span></td>
