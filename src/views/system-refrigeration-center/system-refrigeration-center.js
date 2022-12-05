@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoRefrigeration } from '../../components/';
 import './system-refrigeration-center.scss';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemRefrigerationCenter = () => {
   let [power, setPower] = useState(0)
@@ -15,7 +16,25 @@ export const SystemRefrigerationCenter = () => {
   let [refrigeratedWaterOutT, setRefrigeratedWaterOutT] = useState(0)
   let [machinePower, setMachinePower] = useState(0)
   let [energyCostDay, setEnergyCostDay] = useState([])
-
+  
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('cold_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"cold_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
 
   useEffect(() => {
     EnergyStation.getTable(PAGEDATA.ColdPowerMin).then((res) => {
@@ -46,10 +65,16 @@ export const SystemRefrigerationCenter = () => {
     EnergyStation.getTable(PAGEDATA.ColdEnergyCostDay, dayStr).then((res)=> {
       setEnergyCostDay(res)
     })
+    
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
   }, [])
 
   return (
     <div className="system-refrigeration-center-view">
+      <iframe id="cold_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">56</div>

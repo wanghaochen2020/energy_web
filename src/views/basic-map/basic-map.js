@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { Alarms } from './alarms/alarms';
 import './basic-map.scss';
 import { ChartService } from '../../utils/chart.service';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const BasicMap = () => {
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('basic_map_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"basic_map_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
 
+  useEffect(() => {
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
+  })
   return (
     <div className="basic-map-view">
-      <iframe src="https://cos.3dzhanting.cn/3ddemo/20220501-energystationov2/3d-wov-2022111501-sdkext/index.html" className="iframe-style" title="chart"></iframe>
+      <iframe id='basic_map_model' src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="top-box">
         <div className="top-left">
           <div className="box-wrapper" style={{ width: '100%', height: '390px' }}>

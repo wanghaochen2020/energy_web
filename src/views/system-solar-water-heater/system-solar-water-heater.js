@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoSolarWater } from '../../components/';
 import './system-solar-water-heater.scss';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemSolarWaterHeater = () => {
   const [chartDateButtons, setChartDateButton] = useState([
@@ -27,6 +28,25 @@ export const SystemSolarWaterHeater = () => {
   let [SolarWaterPumpRunningNum, setSolarWaterPumpRunningNum] = useState(0)
   let [SolarWaterHeatCollectionDay, setSolarWaterHeatCollectionDay] = useState([])
   let [SolarWaterBoilerPowerConsumptionDay, setSolarWaterBoilerPowerConsumptionDay] = useState([])
+  
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('solar_water_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"solar_water_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
 
   useEffect(() => {
     EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionToday).then((res) => {
@@ -54,10 +74,16 @@ export const SystemSolarWaterHeater = () => {
     EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionDay, dayStr).then((res)=> {
       setSolarWaterBoilerPowerConsumptionDay(res)
     })
+    
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
   }, [])
 
   return (
     <div className="system-solar-water-heater-view">
+      <iframe id="solar_water_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">80</div>

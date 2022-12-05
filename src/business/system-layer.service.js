@@ -5,7 +5,7 @@ const opcUrl = 'api/opcdata';
 export class EnergyStation {
   static getDayStr() {
     // let date = new Date();
-    let date = new Date(2022, 10, 13, 14, 59);
+    let date = new Date(2022, 9, 13, 14, 55);
     let seperator1 = "/";
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -22,7 +22,7 @@ export class EnergyStation {
   }
   static getHourStr() {
     // let date = new Date();
-    let date = new Date(2022, 10, 13, 14, 59);
+    let date = new Date(2022, 9, 13, 14, 55);
     let seperator1 = "/";
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -42,7 +42,7 @@ export class EnergyStation {
   }
   static getMin() {
     // let date = new Date();
-    let date = new Date(2022, 10, 13, 14, 59);
+    let date = new Date(2022, 10, 13, 14, 55);
     return date.getMinutes();
   }
   static getTable(name, time) {
