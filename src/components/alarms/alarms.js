@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Popover, Button } from 'antd';
 import './alarms.scss';
@@ -9,49 +9,62 @@ export const ComAlarms = ({ items }) => {
   // }
 
   const [data, setData] = useState([
-    {
-      order: 1,
-      name: '智能设备1',
-      type: '故障',
-      time: '2022-07-24',
-      status: '未处理'
-    },
-    {
-      order: 2,
-      name: '智能设备2',
-      type: '故障',
-      time: '2022-07-24',
-      status: '未处理'
-    },
-    {
-      order: 3,
-      name: '智能设备3',
-      type: '故障',
-      time: '2022-07-24',
-      status: '已处理'
-    },
-    {
-      order: 4,
-      name: '智能设备4',
-      type: '故障',
-      time: '2022-07-24',
-      status: '未处理'
-    },
-    {
-      order: 5,
-      name: '智能设备5',
-      type: '故障',
-      time: '2022-07-24',
-      status: '已处理'
-    },
-    {
-      order: 6,
-      name: '智能设备6',
-      type: '故障',
-      time: '2022-07-24',
-      status: '已处理'
-    }
+    // {
+    //   order: 1,
+    //   name: '智能设备1',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '未处理'
+    // },
+    // {
+    //   order: 2,
+    //   name: '智能设备2',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '未处理'
+    // },
+    // {
+    //   order: 3,
+    //   name: '智能设备3',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '已处理'
+    // },
+    // {
+    //   order: 4,
+    //   name: '智能设备4',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '未处理'
+    // },
+    // {
+    //   order: 5,
+    //   name: '智能设备5',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '已处理'
+    // },
+    // {
+    //   order: 6,
+    //   name: '智能设备6',
+    //   type: '故障',
+    //   time: '2022-07-24',
+    //   status: '已处理'
+    // }
   ]);
+
+  useEffect(() => {
+    if (!items || !items.length) return
+    let newList = []
+    for (let i = 0;i<items.length;i++) {
+      newList[i] = {}
+      newList[i].name = items[i].name
+      newList[i].type = items[i].type
+      newList[i].time = items[i].time
+      newList[i].status = items[i].state === 1 ? "已处理":"未处理"
+    }
+    setData(newList)
+  }, [items])
 
   const setPopoverVisible = (item, val, status) => {
     item.popoverVisible = val;

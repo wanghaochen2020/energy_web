@@ -16,29 +16,87 @@ export const SystemEnergyStation = () => {
   let [heatSupplyToday, setHeatSupplyToday] = useState(0)
   let [heatStorageAndRelease, setHeatStorageAndRelease] = useState([])
   let [boilerEnergyCost, setBoilerEnergyCost] = useState([])
-
-  let setIframeReady = useCallback((iframe, fn) => {
-    if (iframe.attachEvent) {
-      iframe.attachEvent("onload", function () {
-          fn && fn(iframe);
-      });
-    } else {
-      iframe.onload = function () {
-          fn && fn(iframe);
-      };
-    }
-  }, [])
+  let [alarmNum, setAlarmNum] = useState(0)
+  let [alarm, setAlarm] = useState(0)
+  let [boilerOutT1, setBoilerOutT1] = useState(0)
+  let [boilerOutT2, setBoilerOutT2] = useState(0)
+  let [boilerOutT3, setBoilerOutT3] = useState(0)
+  let [boilerOutT4, setBoilerOutT4] = useState(0)
+  let [boilerInT1, setBoilerInT1] = useState(0)
+  let [boilerInT2, setBoilerInT2] = useState(0)
+  let [boilerInT3, setBoilerInT3] = useState(0)
+  let [boilerInT4, setBoilerInT4] = useState(0)
 
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('energy_model')
-        if (!iframe || !iframe.contentWindow) return
-        switch(event.data) {
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
           case "ok"://加载完成
-            iframe.contentWindow.postMessage('energy_station_init', SERVERINFO.modelIP)
+              iframe.contentWindow.postMessage({type:"energy_station_init"}, SERVERINFO.modelIP)
             break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            var data
+            switch(event.data.data) {
+              case "1#电极锅炉":
+                data = {
+                  title:"1#电极锅炉",
+                  title1:"运行功率",
+                  title2:"供水温度",
+                  title3:"回水温度",
+                  title4:"用电量",
+                  data1: "4MW",
+                  data2: boilerOutT1+"℃",
+                  data3: boilerInT1+"℃",
+                  data4: "0KWH",
+                }
+                break
+              case "2#电极锅炉":
+                data = {
+                  title:"2#电极锅炉",
+                  title1:"运行功率",
+                  title2:"供水温度",
+                  title3:"回水温度",
+                  title4:"用电量",
+                  data1: "4MW",
+                  data2: boilerOutT2+"℃",
+                  data3: boilerInT2+"℃",
+                  data4: "0KWH",
+                }
+                break
+              case "3#电极锅炉":
+                data = {
+                  title:"3#电极锅炉",
+                  title1:"运行功率",
+                  title2:"供水温度",
+                  title3:"回水温度",
+                  title4:"用电量",
+                  data1: "4MW",
+                  data2: boilerOutT3+"℃",
+                  data3: boilerInT3+"℃",
+                  data4: "0KWH",
+                }
+                break
+              case "4#电极锅炉":
+                data = {
+                  title:"4#电极锅炉",
+                  title1:"运行功率",
+                  title2:"供水温度",
+                  title3:"回水温度",
+                  title4:"用电量",
+                  data1: "4MW",
+                  data2: boilerOutT4+"℃",
+                  data3: boilerInT4+"℃",
+                  data4: "0KWH",
+                }
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
         }
     } else {
         // The data was NOT sent from your site!
@@ -46,7 +104,7 @@ export const SystemEnergyStation = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, [])
+  }, [boilerOutT1,boilerOutT2,boilerOutT3,boilerOutT4,boilerInT1,boilerInT2,boilerInT3,boilerInT4])
 
   useEffect(()=>{
     EnergyStation.getTable(PAGEDATA.EnergyOnlineRate).then((res)=>{
@@ -69,12 +127,44 @@ export const SystemEnergyStation = () => {
     EnergyStation.getTable(PAGEDATA.EnergyHeatSupplyToday).then((res)=> {
       setHeatSupplyToday((res/1e9).toFixed(2))
     })
+    EnergyStation.getTable(PAGEDATA.EnergyAlarmNumToday).then((res)=> {
+      setAlarmNum(res.toFixed(0))
+    })
     let dayStr = EnergyStation.getDayStr()
+    let hourStr = EnergyStation.getDayStr()
+    let min = EnergyStation.getMin()
     EnergyStation.getTable(PAGEDATA.EnergyHeatStorageAndRelease, dayStr).then((res)=> {
       setHeatStorageAndRelease(res)
     })
     EnergyStation.getTable(PAGEDATA.EnergyBoilerEnergyCost, dayStr).then((res)=> {
       setBoilerEnergyCost(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyAlarmToday, dayStr).then((res) => {
+      setAlarm(res)
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT1, hourStr).then((res)=> {
+      setBoilerInT1(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT2, hourStr).then((res)=> {
+      setBoilerInT2(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT3, hourStr).then((res)=> {
+      setBoilerInT3(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT4, hourStr).then((res)=> {
+      setBoilerInT4(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT1, hourStr).then((res)=> {
+      setBoilerOutT1(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT2, hourStr).then((res)=> {
+      setBoilerOutT2(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT3, hourStr).then((res)=> {
+      setBoilerOutT3(res[min].toFixed(2))
+    })
+    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT4, hourStr).then((res)=> {
+      setBoilerOutT4(res[min].toFixed(2))
     })
 
     window.addEventListener('message', messageFunc)
@@ -90,7 +180,7 @@ export const SystemEnergyStation = () => {
       <div className="system-energy-station-content">
         <div className="operation-summary">
           <div className="alarm-info">
-            <div className="alarm-number">85</div>
+            <div className="alarm-number">{alarmNum}</div>
             <div className="alarm-label">告警次数</div>
             <span className="alarm-left-corner"></span>
           </div>
@@ -144,7 +234,7 @@ export const SystemEnergyStation = () => {
             }} />
             <div className="number-value">设备离线率: {offlineRate}%</div>
           </div>
-          <div className="top-info-box">
+          {/* <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
               tooltip: {
                 show: false
@@ -218,7 +308,7 @@ export const SystemEnergyStation = () => {
               ]
             }} />
             <div className="number-value">正在维护率: 30%</div>
-          </div>
+          </div> */}
         </div>
         <div className="bottom-box">
           <div className="box-wrapper">
@@ -421,7 +511,7 @@ export const SystemEnergyStation = () => {
               <span className="title-text">今日告警</span>
             </div>
             <div>
-              <ComAlarms />
+              <ComAlarms items={alarm}/>
             </div>
           </div>
         </div>
