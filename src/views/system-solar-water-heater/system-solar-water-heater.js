@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoSolarWater } from '../../components/';
 import './system-solar-water-heater.scss';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemSolarWaterHeater = () => {
   const [chartDateButtons, setChartDateButton] = useState([
@@ -17,8 +20,70 @@ export const SystemSolarWaterHeater = () => {
     setChartDateButton([...chartDateButtons]);
   }
 
+  let [power, setPower] = useState(0)
+  let [SolarWaterHeatCollecterInT, setSolarWaterHeatCollecterInT] = useState(0)
+  let [SolarWaterHeatCollecterOutT, setSolarWaterHeatCollecterOutT] = useState(0)
+  let [SolarWaterJRQT, setSolarWaterJRQT] = useState(0)
+  let [SolarWaterHeatCollectionToday, setSolarWaterHeatCollectionToday] = useState(0)
+  let [SolarWaterPumpRunningNum, setSolarWaterPumpRunningNum] = useState(0)
+  let [SolarWaterHeatCollectionDay, setSolarWaterHeatCollectionDay] = useState([])
+  let [SolarWaterBoilerPowerConsumptionDay, setSolarWaterBoilerPowerConsumptionDay] = useState([])
+  
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('solar_water_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"solar_water_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
+
+  useEffect(() => {
+    EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionToday).then((res) => {
+      setPower(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollecterInT).then((res) => {
+      setSolarWaterHeatCollecterInT(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollecterOutT).then((res) => {
+      setSolarWaterHeatCollecterOutT(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterJRQT).then((res) => {
+      setSolarWaterJRQT(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionToday).then((res) => {
+      setSolarWaterHeatCollectionToday(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterPumpRunningNum).then((res) => {
+      setSolarWaterPumpRunningNum(res.toFixed(0))
+    })
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionDay, dayStr).then((res)=> {
+      setSolarWaterHeatCollectionDay(res)
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionDay, dayStr).then((res)=> {
+      setSolarWaterBoilerPowerConsumptionDay(res)
+    })
+    
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
+  }, [])
+
   return (
     <div className="system-solar-water-heater-view">
+      <iframe id="solar_water_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">80</div>
@@ -37,7 +102,8 @@ export const SystemSolarWaterHeater = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoSolarWater />
+            <ComSummaryInfoSolarWater items={{power:power, SolarWaterHeatCollecterInT:SolarWaterHeatCollecterInT, SolarWaterHeatCollecterOutT:SolarWaterHeatCollecterOutT,
+            SolarWaterJRQT:SolarWaterJRQT, SolarWaterHeatCollectionToday:SolarWaterHeatCollectionToday, SolarWaterPumpRunningNum:SolarWaterPumpRunningNum}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -101,8 +167,7 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                  data: SolarWaterHeatCollectionDay,
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {
@@ -128,7 +193,7 @@ export const SystemSolarWaterHeater = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text">冷热分水器耗电量统计</span>
+            <span className="title-text">电加热器耗电量统计</span>
           </div>
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '300px'}}>
             <ReactEcharts style={{ width: '100%', height: '300px', margin: 'auto' }} option={{
@@ -176,8 +241,7 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                  data: SolarWaterBoilerPowerConsumptionDay,
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {

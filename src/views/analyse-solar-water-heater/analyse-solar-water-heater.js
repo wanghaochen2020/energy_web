@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-solar-water-heater.scss';
 import { ChartService } from '../../utils/chart.service';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
 
 export const AnalyseSolarWaterHeater = () => {
   const [rateButtons, setRateButtons] = useState([
@@ -17,6 +19,36 @@ export const AnalyseSolarWaterHeater = () => {
     { name: '本日碳排放量', selected: true }, { name: '近七天碳排放量' }, { name: '历史碳排放量' }
   ]);
 
+  let [SolarWaterHeatEfficiencyDay, setSolarWaterHeatEfficiencyDay] = useState(0)
+  let [AvrgSolarWaterHeatEfficiencyDay, setAvrgSolarWaterHeatEfficiencyDay] = useState(0)
+  let [SolarWaterGuaranteeRateDay, setSolarWaterGuaranteeRateDay] = useState(0)
+  let [AvrgSolarWaterGuaranteeRateDay, setAvrgSolarWaterGuaranteeRateDay] = useState(0)
+
+  useEffect(() => {
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyDay, dayStr).then((res)=> {
+      let avg = 0;
+      for (let i = 0; i < res.length; i++) { 
+        avg += res[i];
+      }
+      if (!(res.length)) {
+        avg /= res.length;
+      }
+      setSolarWaterHeatEfficiencyDay(res)
+      setAvrgSolarWaterHeatEfficiencyDay(avg)
+    })
+    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateDay, dayStr).then((res)=> {
+      let avg = 0;
+      for (let i = 0; i < res.length; i++) { 
+        avg += res[i];
+      }
+      if (!(res.length)) {
+        avg /= res.length;
+      }
+      setSolarWaterGuaranteeRateDay(res)
+      setAvrgSolarWaterGuaranteeRateDay(avg)
+    })
+  }, [])
   const selectRateButton = (item) => {
     rateButtons.slice().forEach(button => {
       button.selected = false;
@@ -97,15 +129,15 @@ export const AnalyseSolarWaterHeater = () => {
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: 80}], startAngle: 240
+              data: [{ value: 100 }, { value: {AvrgSolarWaterHeatEfficiencyDay}}], startAngle: 240
             })} />
-            <div className="number-value">今日太阳能集热效率: 60%</div>
+            <div className="number-value">今日太阳能集热效率: {AvrgSolarWaterHeatEfficiencyDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
+              data: [{ value: 100 }, { value: {AvrgSolarWaterGuaranteeRateDay}}], colors: ['#323891', '#ecf75d'], startAngle: 40
             })}/>
-            <div className="number-value">今日太阳能保证率: 70%</div>
+            <div className="number-value">今日太阳能保证率: {AvrgSolarWaterGuaranteeRateDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
@@ -134,10 +166,10 @@ export const AnalyseSolarWaterHeater = () => {
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
                   yName: '%',
-                  category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                  category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
-                      data: [150, 60, 230, 224, 100, 218, 135, 80]
+                      data: SolarWaterHeatEfficiencyDay
                     }
                   ]
                 })} />
@@ -212,10 +244,10 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
-                  category: [1, 2, 3, 4, 5, 6, 7, 8],
+                  category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
-                      data: [150, 60, 230, 224, 100, 218, 135, 80]
+                      data: SolarWaterGuaranteeRateDay
                     }
                   ]
                 })} />

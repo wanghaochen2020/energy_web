@@ -13,9 +13,20 @@
     width: 100%;
     padding: 10px 0 0 0;
     border-radius: 4px;
+    opacity: 0.8;
 
     .box-wrapper {
       width: calc(33% - 10px);
     }
+  }
+
+  .iframe-style {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 }

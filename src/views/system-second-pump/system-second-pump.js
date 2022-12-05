@@ -1,12 +1,75 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoSecondPump } from '../../components/';
 import './system-second-pump.scss';
+import { PAGEDATA } from '../../constants/pageData';
+import { EnergyStation } from '../../business/system-layer.service';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemSecondPump = () => {
+  let [power, setPower] = useState(0)
+  let [powerToday, setPowerToday] = useState(0)
+  let [PumpRunningState1, setPumpRunningState1] = useState(0)
+  let [PumpRunningState2, setPumpRunningState2] = useState(0)
+  let [PumpRunningState3, setPumpRunningState3] = useState(0)
+  let [PumpRunningState4, setPumpRunningState4] = useState(0)
+  let [PumpRunningState5, setPumpRunningState5] = useState(0)
+  let [PumpRunningState6, setPumpRunningState6] = useState(0)
+
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('pump_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"pump_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
+
+  useEffect(()=>{
+    EnergyStation.getTable(PAGEDATA.PumpPowerMin).then((res) => {
+      setPower(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpPowerToday).then((res) => {
+      setPowerToday(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState1).then((res) => {
+      setPumpRunningState1(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState2).then((res) => {
+      setPumpRunningState2(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState3).then((res) => {
+      setPumpRunningState3(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState4).then((res) => {
+      setPumpRunningState4(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState5).then((res) => {
+      setPumpRunningState5(res.toFixed(0))
+    })
+    EnergyStation.getTable(PAGEDATA.PumpRunningState6).then((res) => {
+      setPumpRunningState6(res.toFixed(0))
+    })
+    
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
+  }, [])
 
   return (
     <div className="system-second-pump-view">
+      <iframe id="pump_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">64</div>
@@ -25,7 +88,7 @@ export const SystemSecondPump = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoSecondPump />
+            <ComSummaryInfoSecondPump items={{power:power,powerToday:powerToday}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -40,27 +103,27 @@ export const SystemSecondPump = () => {
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '300px'}}>
             <div className="row-item-box">
               <div className="item-text">1号泵</div>
-              <div className="item-value text-red">OFF</div>
+              <div className={"item-value text-"+(PumpRunningState1==0?"red":"green")}>{PumpRunningState1==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">2号泵</div>
-              <div className="item-value text-green">ON</div>
+              <div className={"item-value text-"+(PumpRunningState2==0?"red":"green")}>{PumpRunningState2==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">3号泵</div>
-              <div className="item-value text-red">OFF</div>
+              <div className={"item-value text-"+(PumpRunningState3==0?"red":"green")}>{PumpRunningState3==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">4号泵</div>
-              <div className="item-value text-red">OFF</div>
+              <div className={"item-value text-"+(PumpRunningState4==0?"red":"green")}>{PumpRunningState4==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">5号泵</div>
-              <div className="item-value text-green">ON</div>
+              <div className={"item-value text-"+(PumpRunningState5==0?"red":"green")}>{PumpRunningState5==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">6号泵</div>
-              <div className="item-value text-green">ON</div>
+              <div className={"item-value text-"+(PumpRunningState6==0?"red":"green")}>{PumpRunningState6==0?"OFF":"ON"}</div>
             </div>
             {/* <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
               title: {

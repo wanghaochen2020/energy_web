@@ -1,12 +1,80 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoRefrigeration } from '../../components/';
 import './system-refrigeration-center.scss';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
+import { SERVERINFO } from '../../constants/app-info';
 
 export const SystemRefrigerationCenter = () => {
+  let [power, setPower] = useState(0)
+  let [energyCostToday, setEnergyCostToday] = useState(0)
+  let [machineRunningNum, setMachineRunningNum] = useState(0)
+  let [coolingWaterInT, setCoolingWaterInT] = useState(0)
+  let [coolingWaterOutT, setCoolingWaterOutT] = useState(0)
+  let [refrigeratedWaterInT, setRefrigeratedWaterInT] = useState(0)
+  let [refrigeratedWaterOutT, setRefrigeratedWaterOutT] = useState(0)
+  let [machinePower, setMachinePower] = useState(0)
+  let [energyCostDay, setEnergyCostDay] = useState([])
+  
+  let messageFunc = useCallback((event) => {
+    if (event.origin === SERVERINFO.modelIP) {
+        // The data was sent from your site.
+        // Data sent with postMessage is stored in event.data:
+        let iframe = document.getElementById('cold_model')
+        if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
+        switch(event.data.type) {
+          case "ok"://加载完成
+              iframe.contentWindow.postMessage({type:"cold_init"}, SERVERINFO.modelIP)
+            break
+        }
+    } else {
+        // The data was NOT sent from your site!
+        // Be careful! Do not use it. This else branch is
+        // here just for clarity, you usually shouldn't need it.
+        return;
+    }
+  }, [])
+
+  useEffect(() => {
+    EnergyStation.getTable(PAGEDATA.ColdPowerMin).then((res) => {
+      setPower(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdEnergyCostToday).then((res) => {
+      setEnergyCostToday(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdMachineRunningNum).then((res) => {
+      setMachineRunningNum(res.toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterInT).then((res) => {
+      setCoolingWaterInT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterOutT).then((res) => {
+      setCoolingWaterOutT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterInT).then((res) => {
+      setRefrigeratedWaterInT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterOutT).then((res) => {
+      setRefrigeratedWaterOutT((res/100).toFixed(2))
+    })
+    EnergyStation.getTable(PAGEDATA.ColdMachinePowerMin).then((res) => {
+      setMachinePower(res.toFixed(2))
+    })
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.ColdEnergyCostDay, dayStr).then((res)=> {
+      setEnergyCostDay(res)
+    })
+    
+    window.addEventListener('message', messageFunc)
+    return () => {
+      window.removeEventListener('message', messageFunc)
+    }
+  }, [])
 
   return (
     <div className="system-refrigeration-center-view">
+      <iframe id="cold_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">56</div>
@@ -25,7 +93,8 @@ export const SystemRefrigerationCenter = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoRefrigeration />
+            <ComSummaryInfoRefrigeration items={{power:power, energyCostToday:energyCostToday, machineRunningNum:machineRunningNum, coolingWaterInT:coolingWaterInT,
+              coolingWaterOutT:coolingWaterOutT, refrigeratedWaterInT:refrigeratedWaterInT, refrigeratedWaterOutT:refrigeratedWaterOutT, machinePower:machinePower}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -95,8 +164,7 @@ export const SystemRefrigerationCenter = () => {
               },
               series: [
                 {
-                  data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                  data: energyCostDay,
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {

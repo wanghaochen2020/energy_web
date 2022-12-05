@@ -2,10 +2,22 @@ import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-energy-station.scss';
 import { ChartService } from '../../utils/chart.service';
+import { PAGEDATA } from '../../constants/pageData';
+import { EnergyStation } from '../../business/system-layer.service';
 
 export const AnalyseEnergyStation = () => {
   const [loadRateButtons, setLoadRateButton] = useState([]);
   const [chartDateButtons, setChartDateButtons] = useState([]);
+  let [EnergyBoilerEfficiencyDay, setEnergyBoilerEfficiencyDay] = useState([])
+  let [AvrgEnergyBoilerEfficiencyDay, setAvrgEnergyBoilerEfficiencyDay] = useState(0)
+  let [EnergyWatertankEfficiencyDay, setEnergyWatertankEfficiencyDay] = useState([])
+  let [AvrgEnergyWatertankEfficiencyDay, setAvrgEnergyWatertankEfficiencyDay] = useState(0)
+  let [EnergyEfficiencyDay, setEnergyEfficiencyDay] = useState([])
+  let [AvrgEnergyEfficiencyDay, setAvrgEnergyEfficiencyDay] = useState(0)
+  let [EnergyCarbonDay, setEnergyCarbonDay] = useState([])
+  let [EnergyCarbonMonth, setEnergyCarbonMonth] = useState([])
+  let [EnergyCarbonYear, setEnergyCarbonYear] = useState([])
+  let [EnergyBoilerPayloadDay, setEnergyBoilerPayloadDay] = useState([])
 
   useEffect(() => {
     setLoadRateButton([
@@ -14,6 +26,55 @@ export const AnalyseEnergyStation = () => {
     setChartDateButtons([
       { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
     ]);
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerEfficiencyDay, dayStr).then((res)=> {
+      let avg = 0;
+      for (let i = 0; i < res.length; i++) { 
+        avg += res[i]*100;
+        res[i] = (res[i]*100).toFixed(2);
+      }
+      if (!(res.length)) {
+        avg /= res.length;
+      }
+      setEnergyBoilerEfficiencyDay(res);
+      setAvrgEnergyBoilerEfficiencyDay(avg);
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyWatertankEfficiencyDay, dayStr).then((res)=> {
+      let avg = 0;
+      for (let i = 0; i < res.length; i++) { 
+        avg += res[i]*100;
+        res[i] = (res[i]*100).toFixed(2);
+      }
+      if (!(res.length)) {
+        avg /= res.length;
+      }
+      setEnergyWatertankEfficiencyDay(res);
+      setAvrgEnergyWatertankEfficiencyDay(avg);
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyEfficiencyDay, dayStr).then((res)=> {
+      let avg = 0;
+      for (let i = 0; i < res.length; i++) { 
+        avg += res[i]*100;
+        res[i] = (res[i]*100).toFixed(2);
+      }
+      if (!(res.length)) {
+        avg /= res.length;
+      }
+      setEnergyEfficiencyDay(res);
+      setAvrgEnergyEfficiencyDay(avg);
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonDay, dayStr).then((res)=> {
+      setEnergyCarbonDay(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonMonth, dayStr).then((res)=> {
+      setEnergyCarbonMonth(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, dayStr).then((res)=> {
+      setEnergyCarbonYear(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadDay, dayStr).then((res)=> {
+      setEnergyBoilerPayloadDay(res)
+    })
   }, []);
 
   const selectLoadRateButton = (item) => {
@@ -65,7 +126,7 @@ export const AnalyseEnergyStation = () => {
                 }
               ]
             }} />
-            <div className="number-value">今日锅炉平均热效率: 62%</div>
+            <div className="number-value">今日锅炉平均热效率: {AvrgEnergyBoilerEfficiencyDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -85,12 +146,12 @@ export const AnalyseEnergyStation = () => {
                   },
                   data: [
                     { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                    { value: {AvrgEnergyBoilerEfficiencyDay}, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">今日蓄热水箱平均热效率: 70%</div>
+            <div className="number-value">今日蓄热水箱平均热效率: {AvrgEnergyWatertankEfficiencyDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -110,12 +171,12 @@ export const AnalyseEnergyStation = () => {
                   },
                   data: [
                     { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
+                    { value: {AvrgEnergyWatertankEfficiencyDay}, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">今日系统总效率: 70%</div>
+            <div className="number-value">今日系统总效率: {AvrgEnergyEfficiencyDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -135,7 +196,7 @@ export const AnalyseEnergyStation = () => {
                   },
                   data: [
                     { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                    { value: 0, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
                   ]
                 }
               ]
@@ -172,18 +233,15 @@ export const AnalyseEnergyStation = () => {
                 series: [
                   {
                     name: '电锅炉',
-                    data: [50, 60, 30, 24, 90, 18, 35, 80, 47, 60, 60, 50, 60,
-                      30, 24, 80, 38, 35, 80, 47, 60, 60, 80]
+                    data: EnergyBoilerEfficiencyDay
                   },
                   {
                     name: '蓄热水箱',
-                    data: [35, 80, 47, 60, 70, 50, 60, 50, 60, 30, 24, 60, 78,
-                      80, 47, 60, 80, 90, 60, 54, 60, 78, 65]
+                    data: EnergyWatertankEfficiencyDay
                   },
                   {
                     name: '能源站系统',
-                    data: [25, 60, 57, 40, 50, 40, 50, 50, 60, 40, 54, 50, 48,
-                      60, 57, 40, 50, 60, 40, 54, 60, 48, 45]
+                    data: EnergyEfficiencyDay
                   }
                 ]
               })} />
@@ -206,10 +264,11 @@ export const AnalyseEnergyStation = () => {
             <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
               ChartService.getBarOptions({
                 yName: '%',
-                category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                // category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                 series: [
                   {
-                    data: [50, 60, 30, 24, 60, 48, 80]
+                    data: EnergyBoilerPayloadDay
                   }
                 ]
               })} />
@@ -234,17 +293,15 @@ export const AnalyseEnergyStation = () => {
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: '时',
-                  yName: '%',
+                  yName: 'tCO2',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
-                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100]
+                      data: EnergyCarbonDay
                     },
-                    {
-                      data: [35, 80, 47, 160, 100, 50, 60,50, 60, 30, 124, 60, 118, 
-                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
-                    }
+                    // {
+                    //   data: EnergyCarbonDay
+                    // }
                   ]
                 })} />
           </div>

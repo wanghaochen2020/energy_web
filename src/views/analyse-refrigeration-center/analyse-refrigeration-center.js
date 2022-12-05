@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-refrigeration-center.scss';
 import { ChartService } from '../../utils/chart.service';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
 
 export const AnalyseRefrigerationCenter = () => {
   const [loadRateButtons, setLoadRateButton] = useState([
@@ -10,6 +12,21 @@ export const AnalyseRefrigerationCenter = () => {
   const [chartDateButtons, setChartDateButtons] = useState([
     { name: '本日碳排放量', selected: true }, { name: '近七天碳排放量' }, { name: '历史碳排放量' }
   ]);
+
+  let [ColdCarbonDay, setColdCarbonDay] = useState([])
+  let [ColdCarbonToday, setColdCarbonToday] = useState([])
+
+  useEffect(() => {
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.ColdCarbonDay, dayStr).then((res)=> {
+      let sum = 0;
+      for (let i = 0; i < res.length; i++) { 
+        sum += res[i];
+      }
+      setColdCarbonDay(res)
+      setColdCarbonToday(sum)
+    })
+  }, [])
 
   const selectLoadRateButton = (item) => {
     loadRateButtons.slice().forEach(button => {
@@ -59,7 +76,7 @@ export const AnalyseRefrigerationCenter = () => {
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
               data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 240
             })} />
-            <div className="number-value">今日碳排放量统计: 50KWH</div>
+            <div className="number-value">今日碳排放量统计: {ColdCarbonToday}tCO2</div>
           </div>
       </div>
       <div className="top-box">
@@ -153,17 +170,16 @@ export const AnalyseRefrigerationCenter = () => {
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: '时',
-                  yName: 'Kg',
+                  yName: 't',
                   data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
-                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100]
+                      data: ColdCarbonDay
                     },
-                    {
-                      data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
-                    }
+                    // {
+                    //   data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
+                    //     80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
+                    // }
                   ]
                 })} />
           </div>

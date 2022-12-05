@@ -13,20 +13,20 @@ export const ComSummaryInfo = ({ items }) => {
       <div className="main-info-row">
         <span className="main-info">
           <span className="main-info-text">
-            热量总功率
+            锅炉总功率（kW）
           </span>
           <span className="main-info-number">
-            65.86
-            <span className="number-unit">km</span>
+            {items.boilerPower}
+            <span className="number-unit">kW</span>
           </span>
         </span>
         <span className="main-info">
           <span className="main-info-text">
-            锅炉总功率
+            总用电能耗累计（kW·h）
           </span>
           <span className="main-info-number yellow-color">
-            65.86
-            <span className="number-unit">km</span>
+            {items.powerConsumptionToday}
+            <span className="number-unit">kW·h</span>
           </span>
         </span>
       </div>
@@ -37,23 +37,23 @@ export const ComSummaryInfo = ({ items }) => {
       </div>
       <div className="row-item">
         <span>锅炉运行台数</span>
-        <span className="info-number">3台</span>
+        <span className="info-number">{items.boilerRunningNum}台</span>
       </div>
       <div className="row-item row-odd">
         <span>蓄热水箱运行台数</span>
-        <span className="info-number">5台</span>
+        <span className="info-number">{items.tankRunningNum}台</span>
       </div>
-      <div className="row-item">
+      {/* <div className="row-item">
         <span>设备温度</span>
         <span className="info-number">25 °C</span>
       </div>
       <div className="row-item row-odd">
         <span>设备供热量</span>
         <span className="info-number">8 GL</span>
-      </div>
+      </div> */}
       <div className="row-item">
-        <span>总供热量</span>
-        <span className="info-number">200 GL</span>
+        <span>今日总供热量</span>
+        <span className="info-number">{items.heatSupplyToday} GJ</span>
       </div>
     </div>
   );

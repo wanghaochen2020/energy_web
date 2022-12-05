@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-second-pump.scss';
+import { EnergyStation } from '../../business/system-layer.service';
+import { PAGEDATA } from '../../constants/pageData';
 
 export const AnalyseSecondPump = () => {
+  let [PumpEHR1, setPumpEHR1] = useState([])
+  let [PumpEHR2, setPumpEHR2] = useState([])
+
+  useEffect(() => {
+    let dayStr = EnergyStation.getDayStr()
+    EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
+      setPumpEHR1(res)
+    })
+    EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
+      setPumpEHR2(res)
+    })
+  }, [])
 
   return (
     <div className="analyse-second-pump-view">
@@ -69,8 +83,7 @@ export const AnalyseSecondPump = () => {
             series: [
               {
                 name: '环路1',
-                data: [50, 60, 30, 24, 100, 18, 35, 80, 47, 60, 60, 50, 60,
-                  30, 24, 90, 68, 35, 80, 47, 60, 50, 70],
+                data: PumpEHR1,
                 type: 'line',
                 smooth: true,
                 symbolSize: 6,
@@ -82,42 +95,13 @@ export const AnalyseSecondPump = () => {
               },
               {
                 name: '环路2',
-                data: [35, 80, 47, 60, 100, 50, 60, 50, 60, 30, 24, 60, 87,
-                  80, 47, 60, 70, 80, 30, 64, 80, 58, 35],
+                data: PumpEHR2,
                 type: 'line',
                 smooth: true,
                 symbolSize: 6,
                 itemStyle: {
                   normal: {
                     color: '#fd6b44'
-                  }
-                }
-              },
-              {
-
-                name: '环路3',
-                data: [25, 30, 57, 60, 60, 70, 65, 30, 50, 80, 64,80, 58,
-                  40, 47, 50, 60, 80, 60, 54, 80, 58, 55],
-                type: 'line',
-                smooth: true,
-                symbolSize: 6,
-                itemStyle: {
-                  normal: {
-                    color: '#b993ff'
-                  }
-                }
-              },
-              {
-
-                name: '环路4',
-                data: [15, 50, 67, 20, 80, 90, 60, 80, 50, 60, 64, 80, 98,
-                  30, 27, 40, 60, 50, 60, 74, 50, 58, 65],
-                type: 'line',
-                smooth: true,
-                symbolSize: 6,
-                itemStyle: {
-                  normal: {
-                    color: '#37f137'
                   }
                 }
               }
