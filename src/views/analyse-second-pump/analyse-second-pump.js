@@ -28,7 +28,7 @@ export const AnalyseSecondPump = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text" style={{marginLeft: '40px'}}>循环泵输热比（EHR）</span>
+            <span className="title-text">循环泵输热比（EHR）</span>
           </div>
           <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
             title: {

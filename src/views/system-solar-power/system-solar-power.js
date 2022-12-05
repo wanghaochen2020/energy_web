@@ -21,37 +21,8 @@ export const SystemSolarPower = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">当前发电量</span>
+              <span className="title-text">太阳能发电量</span>
             </div>
-            {/* <div className="main-info-row">
-              <span className="main-info">
-                <span className="main-info-text">
-                  当日发电量
-                </span>
-                <span className="main-info-number">
-                  65.86
-                  <span className="number-unit">KWH</span>
-                </span>
-              </span>
-              <span className="main-info">
-                <span className="main-info-text">
-                当月发电量
-                </span>
-                <span className="main-info-number yellow-color">
-                  323
-                  <span className="number-unit">KWH</span>
-                </span>
-              </span>
-              <span className="main-info">
-                <span className="main-info-text">
-                今年发电量
-                </span>
-                <span className="main-info-number">
-                  52232
-                  <span className="number-unit">KWH</span>
-                </span>
-              </span>
-            </div> */}
             <div className="top-info-box">
               <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
                 tooltip: {
@@ -127,17 +98,6 @@ export const SystemSolarPower = () => {
               }} />
               <div className="number-value">去年发电量: 32562KWH</div>
             </div>
-        </div>
-        <div className="operation-summary box-wrapper">
-            <div className="top-left-corner"></div>
-            <div className="top-right-corner"></div>
-            <div className="bottom-left-corner"></div>
-            <div className="bottom-right-corner"></div>
-            <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
-              <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">往期发电量</span>
-            </div>
-
             <div className="top-info-box">
               <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
                 tooltip: {
@@ -223,7 +183,7 @@ export const SystemSolarPower = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text" style={{marginLeft: '40px'}}>今年月发电量</span>
+            <span className="title-text">今年月发电量</span>
           </div>
           <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
             title: {
@@ -298,7 +258,7 @@ export const SystemSolarPower = () => {
           <div className="bottom-right-corner"></div>
           <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
             <span className="box-title-icon">&#9658;</span>
-            <span className="title-text" style={{marginLeft: '40px'}}>当月日发电量</span>
+            <span className="title-text">当月日发电量</span>
           </div>
           <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
             title: {
