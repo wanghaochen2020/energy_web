@@ -22,6 +22,7 @@
       height: 300px;
       width: 100%;
       background: none;
+      margin: 0;
       margin-bottom: 10px;
       display: inline-block;
       .top-info-box {
@@ -32,10 +33,11 @@
 
   .bottom-box {
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
     .box-wrapper {
       height: 450px;
-      width: 100%;
+      width: 49%;
       background: none;
       margin: 0;
       margin-bottom: 10px;

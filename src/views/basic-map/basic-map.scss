@@ -18,7 +18,14 @@
   .operation-summary {
     margin-top: 20px;
     .top-info-box {
-      margin: 10px;
+      margin: -5px 10px;
+      width: 100px;
+      height: 120px;
+    }
+
+    .number-value {
+      top: 10px;
+      left: 10px;
     }
   }
 
@@ -31,25 +38,23 @@
     right: 0;
     bottom: 0;
     left: 0;
-    display: flex;
-    justify-content: space-between;
     padding: 10px;
     z-index: 100;
     overflow: auto;
     .top-left {
-      width: 500px;
-      display: inline-block;
+      width: 400px;
+      float: left;
       text-align: left;
     }
 
     .top-right {
-      width: 500px;
-      display: inline-block;
+      float: right;
+      width: 600px;
       text-align: right;
     }
 
     .box-wrapper {
-      margin: 50px 0 30px 0;
+      margin: 20px 0 0 0;
       background: no-repeat;
       opacity: 0.8;
     }
@@ -63,10 +68,10 @@
   }
 
   .weather-info {
-    width: 120px;
-    height: 150px;
+    width: 110px;
+    height: 120px;
     border-radius: 8px;
-    margin: 10px 20px;
+    margin: 15px 10px 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
