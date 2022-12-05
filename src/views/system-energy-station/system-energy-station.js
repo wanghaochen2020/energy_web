@@ -10,7 +10,7 @@ const basicPump = {
   title1:"运行状态",
   title2:"运行功率",
   title3:"流量",
-  data1:"开启",
+  data1:"关闭",
   data2: "7.5kW",
   data3: "137m³/h",
 }
@@ -54,7 +54,6 @@ export const SystemEnergyStation = () => {
 
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
-        console.log(event)
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('energy_model')
@@ -179,6 +178,42 @@ export const SystemEnergyStation = () => {
                 data.data2 = "15kW"
                 data.data3 = "200m³/h"
                 break
+              case "1#放热循环泵":
+                data = basicPump
+                data.title = "1#放热循环泵"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "2#放热循环泵":
+                data = basicPump
+                data.title = "2#放热循环泵"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "3#放热循环泵":
+                data = basicPump
+                data.title = "3#放热循环泵"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "1#供热水泵":
+                data = basicPump
+                data.title = "1#供热水泵"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
+                break
+              case "2#供热水泵":
+                data = basicPump
+                data.title = "2#供热水泵"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
+                break
+              case "3#供热水泵":
+                data = basicPump
+                data.title = "3#供热水泵"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
+                break
               case "1#水箱":
                 data = basicTank
                 data.title = "1#蓄热水箱"
@@ -229,6 +264,7 @@ export const SystemEnergyStation = () => {
                 break
             }
             iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            break
         }
     } else {
         // The data was NOT sent from your site!

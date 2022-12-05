@@ -6,6 +6,37 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
 
+const basicPump = {
+  title1:"运行状态",
+  title2:"运行功率",
+  title3:"流量",
+  data1:"关闭",
+  data2: "7.5kW",
+  data3: "137m³/h",
+}
+
+const basicColdMachine = {
+  title1:"运行状态",
+  title2:"实时功率",
+  title3:"冷却水进出口温度",
+  title4:"冷冻水进出口温度",
+  title5:"压力",
+  title6:"COP",
+  data1:"关闭",
+  data2: "3000kW",
+  data3: "35/30℃",
+  data4: "7/12℃",
+  data5:"4MPa",
+  data6:"6.43",
+}
+
+const basicValve = {
+  title1:"开启状态",
+  title2:"开启度",
+  data1:"关闭",
+  data2: "0",
+}
+
 export const SystemRefrigerationCenter = () => {
   let [power, setPower] = useState(0)
   let [energyCostToday, setEnergyCostToday] = useState(0)
@@ -26,6 +57,140 @@ export const SystemRefrigerationCenter = () => {
         switch(event.data.type) {
           case "ok"://加载完成
               iframe.contentWindow.postMessage({type:"cold_init"}, SERVERINFO.modelIP)
+            break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            let data = {}
+            switch(event.data.data) {
+              case "1#冷却泵":
+                data = basicPump
+                data.title = "1#冷却泵"
+                break
+              case "2#冷却泵":
+                data = basicPump
+                data.title = "2#冷却泵"
+                break
+              case "3#冷却泵":
+                data = basicPump
+                data.title = "3#冷却泵"
+                break
+              case "4#冷却泵":
+                data = basicPump
+                data.title = "4#冷却泵"
+                break
+              case "5#冷却泵":
+                data = basicPump
+                data.title = "5#冷却泵"
+                break
+              case "1#空调冷水一次泵":
+                data = basicPump
+                data.title = "1#空调冷水一次泵"
+                break
+              case "2#空调冷水一次泵":
+                data = basicPump
+                data.title = "2#空调冷水一次泵"
+                break
+              case "3#空调冷水一次泵":
+                data = basicPump
+                data.title = "3#空调冷水一次泵"
+                break
+              case "4#空调冷水一次泵":
+                data = basicPump
+                data.title = "4#空调冷水一次泵"
+                break
+              case "5#空调冷水一次泵":
+                data = basicPump
+                data.title = "5#空调冷水一次泵"
+                break
+              case "1#空调冷水二次泵":
+                data = basicPump
+                data.title = "1#空调冷水二次泵"
+                break
+              case "2#空调冷水二次泵":
+                data = basicPump
+                data.title = "2#空调冷水二次泵"
+                break
+              case "3#空调冷水二次泵":
+                data = basicPump
+                data.title = "3#空调冷水二次泵"
+                break
+              case "4#空调冷水二次泵":
+                data = basicPump
+                data.title = "4#空调冷水二次泵"
+                break
+              case "5#空调冷水二次泵":
+                data = basicPump
+                data.title = "5#空调冷水二次泵"
+                break
+              case "6#空调冷水二次泵":
+                data = basicPump
+                data.title = "6#空调冷水二次泵"
+                break
+              case "1#离心机":
+                data = basicColdMachine
+                data.title = "1#离心机"
+                break
+              case "2#离心机":
+                data = basicColdMachine
+                data.title = "2#离心机"
+                break
+              case "螺杆机":
+                data = basicColdMachine
+                data.title = "螺杆机"
+                data.data5 = "6.10"
+                break
+              case "V1112":
+                data = basicValve
+                data.title = "阀门V1112"
+                break
+              case "V1114":
+                data = basicValve
+                data.title = "阀门V1114"
+                break
+              case "V1118":
+                data = basicValve
+                data.title = "阀门V1118"
+                break
+              case "V1119":
+                data = basicValve
+                data.title = "阀门V1119"
+                break
+              case "V1120":
+                data = basicValve
+                data.title = "阀门V1120"
+                break
+              case "V1121":
+                data = basicValve
+                data.title = "阀门V1121"
+                break
+              case "V1122":
+                data = basicValve
+                data.title = "阀门V1122"
+                break
+              case "V1123":
+                data = basicValve
+                data.title = "阀门V1123"
+                break
+              case "V1124":
+                data = basicValve
+                data.title = "阀门V1124"
+                break
+              case "V1125":
+                data = basicValve
+                data.title = "阀门V1125"
+                break
+              case "V1132":
+                data = basicValve
+                data.title = "阀门V1132"
+                break
+              case "V1133":
+                data = basicValve
+                data.title = "阀门V1133"
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
             break
         }
     } else {

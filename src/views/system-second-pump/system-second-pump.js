@@ -6,6 +6,15 @@ import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
 import { SERVERINFO } from '../../constants/app-info';
 
+const basicPump = {
+  title1:"运行状态",
+  title2:"运行功率",
+  title3:"流量",
+  data1:"关闭",
+  data2: "7.5kW",
+  data3: "137m³/h",
+}
+
 export const SystemSecondPump = () => {
   let [power, setPower] = useState(0)
   let [powerToday, setPowerToday] = useState(0)
@@ -15,7 +24,7 @@ export const SystemSecondPump = () => {
   let [PumpRunningState4, setPumpRunningState4] = useState(0)
   let [PumpRunningState5, setPumpRunningState5] = useState(0)
   let [PumpRunningState6, setPumpRunningState6] = useState(0)
-
+  
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
         // The data was sent from your site.
@@ -25,6 +34,51 @@ export const SystemSecondPump = () => {
         switch(event.data.type) {
           case "ok"://加载完成
               iframe.contentWindow.postMessage({type:"pump_init"}, SERVERINFO.modelIP)
+            break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            let data = {}
+            switch(event.data.data) {
+              case "1#空调热水二次泵":
+                data = basicPump
+                data.title = "1#空调热水二次泵"
+                data.data2="18.5kW"
+                data.data3="145m³/h"
+                break
+              case "2#空调热水二次泵":
+                data = basicPump
+                data.title = "2#空调热水二次泵"
+                data.data2="18.5kW"
+                data.data3="145m³/h"
+                break
+              case "3#空调热水二次泵":
+                data = basicPump
+                data.title = "3#空调热水二次泵"
+                data.data2="15kW"
+                data.data3="120m³/h"
+                break
+              case "4#空调热水二次泵":
+                data = basicPump
+                data.title = "4#空调热水二次泵"
+                data.data2="15kW"
+                data.data3="120m³/h"
+                break
+              case "5#空调热水二次泵":
+                data = basicPump
+                data.title = "5#空调热水二次泵"
+                data.data2="22kW"
+                data.data3="180m³/h"
+                break
+              case "6#空调热水二次泵":
+                data = basicPump
+                data.title = "6#空调热水二次泵"
+                data.data2="22kW"
+                data.data3="180m³/h"
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
             break
         }
     } else {

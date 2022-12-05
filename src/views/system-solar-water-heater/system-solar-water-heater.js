@@ -39,6 +39,24 @@ export const SystemSolarWaterHeater = () => {
           case "ok"://加载完成
               iframe.contentWindow.postMessage({type:"solar_water_init"}, SERVERINFO.modelIP)
             break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            let data = {}
+            switch(event.data.data) {
+              case "集热器":
+                data = {
+                  title:"太阳能集热器",
+                  title1:"供水温度",
+                  title2:"回水温度",
+                  data1:"57",
+                  data2:"19",
+                }
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            break
         }
     } else {
         // The data was NOT sent from your site!
