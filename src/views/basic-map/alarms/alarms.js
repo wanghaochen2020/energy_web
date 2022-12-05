@@ -29,11 +29,6 @@ export const Alarms = () => {
       order: 5,
       name: '故障情况5',
       status: '严重'
-    },
-    {
-      order: 6,
-      name: '故障情况6',
-      status: '严重'
     }
   ]);
 

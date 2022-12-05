@@ -27,7 +27,7 @@ export const Login = () => {
       if (window.history.state.usr?.redirectUrl) {
         // RouterService.replace(window.history.state.usr.redirectUrl);
       } else {
-        navigate(routeNames.home);
+        navigate(routeNames.basicMap);
       }
     }).catch((err) => {
       setLoading(false);
