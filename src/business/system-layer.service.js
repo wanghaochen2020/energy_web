@@ -2,10 +2,16 @@ import { HttpRequestService } from "./base/http-request.service";
 
 const basicUrl = 'api/basicdata';
 const opcUrl = 'api/opcdata';
+const basicDataSetUrl = 'api/basicdataset'
 export class EnergyStation {
-  static getDayStr() {
+  static getTime() {
     // let date = new Date();
+    // date.setTime(date.getTime()-1000*60)//减一分钟
     let date = new Date(2022, 9, 13, 14, 55);
+    return date;
+  }
+  static getDayStr() {
+    let date = this.getTime();
     let seperator1 = "/";
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -21,8 +27,7 @@ export class EnergyStation {
     return currentdate;
   }
   static getHourStr() {
-    // let date = new Date();
-    let date = new Date(2022, 9, 13, 14, 55);
+    let date = this.getTime();
     let seperator1 = "/";
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -41,8 +46,7 @@ export class EnergyStation {
     return currentdate;
   }
   static getMin() {
-    // let date = new Date();
-    let date = new Date(2022, 10, 13, 14, 55);
+    let date = this.getTime();
     return date.getMinutes();
   }
   static getTable(name, time) {
@@ -70,5 +74,11 @@ export class EnergyStation {
     };
     return HttpRequestService.get(options)
   }
-    
+  static postPageData(body) {
+    const options = {
+      body: body,
+      url:basicDataSetUrl
+    };
+    return HttpRequestService.post(options)
+  }
 }

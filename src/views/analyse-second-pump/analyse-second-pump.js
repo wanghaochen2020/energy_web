@@ -114,7 +114,7 @@ export const AnalyseSecondPump = () => {
           <thead>
             <tr>
               <th>时间</th>
-              <th>能源站耗能（GJ）</th>
+              <th>二次泵站耗能（GJ）</th>
               <th>同比去年同月耗能</th>
               <th>环比上月耗能</th>
               <th>碳排放量（KWH）</th>

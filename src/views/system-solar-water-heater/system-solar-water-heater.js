@@ -50,8 +50,10 @@ export const SystemSolarWaterHeater = () => {
                   title:"太阳能集热器",
                   title1:"供水温度",
                   title2:"回水温度",
+                  title3:"集热量",
                   data1:"57",
                   data2:"19",
+                  data3:"0J",
                 }
                 break
             }

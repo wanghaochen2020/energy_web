@@ -30,7 +30,7 @@ export class HttpRequestService {
     }
     // return this.apiAxios(method, options.url, options);
     // for mock data deployment
-    return this.apiAxios('GET', getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
+    return this.apiAxios(method, getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
   }
 
   static handleRequest(params) {
@@ -62,6 +62,7 @@ export class HttpRequestService {
     const promise = new Promise(function (resolve, reject) {
       axios(url, {
         url: url,
+        method: method,
         data: method === 'POST' || method === 'PUT' ? params.body : null,
         params: method === 'GET' || method === 'DELETE' ? params.params : null,
         withCredentials: false,
