@@ -5,30 +5,50 @@ import { ChartService } from '../../utils/chart.service';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 
+const l = (d, min) => {
+  return d && d[min] ? d[min] : 0;
+}
+
 export const AnalyseRefrigerationCenter = () => {
   const [loadRateButtons, setLoadRateButton] = useState([
-    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
   const [chartDateButtons, setChartDateButtons] = useState([
-    { name: '本日碳排放量', selected: true }, { name: '近七天碳排放量' }, { name: '历史碳排放量' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
 
-  let [ColdCarbonDay, setColdCarbonDay] = useState([])
-  let [ColdCarbonToday, setColdCarbonToday] = useState([])
+  let [ColdCarbonDay, setColdCarbonDay] = useState([]);
+  let [ColdCarbonMonth, setColdCarbonMonth] = useState([]);
+  let [ColdCarbonYear, setColdCarbonYear] = useState([]);
+  let [ColdCarbonLastYear, setColdCarbonLastYear] = useState([]);
+  let [ColdCarbonToday, setColdCarbonToday] = useState([]);
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr()
+    let dayStr = EnergyStation.getDayStr();
+    let monthStr = EnergyStation.getMonthStr();
+    let yearStr = EnergyStation.getYearStr();
+    let lastYearStr = EnergyStation.getLastYearStr();
     EnergyStation.getTable(PAGEDATA.ColdCarbonDay, dayStr).then((res)=> {
       let sum = 0;
       for (let i = 0; i < res.length; i++) { 
         sum += res[i];
       }
-      setColdCarbonDay(res)
-      setColdCarbonToday(sum)
-    })
-  }, [])
+      setColdCarbonDay(res);
+      setColdCarbonToday(sum);
+    });
+    EnergyStation.getTable(PAGEDATA.ColdCarbonMonth, monthStr).then((res)=> {
+      setColdCarbonMonth(res);
+    });
+    EnergyStation.getTable(PAGEDATA.ColdCarbonYear, yearStr).then((res)=> {
+      setColdCarbonYear(res);
+    });
+    EnergyStation.getTable(PAGEDATA.ColdCarbonYear, lastYearStr).then((res)=> {
+      setColdCarbonLastYear(res);
+    });
+  }, []);
 
   const selectLoadRateButton = (item) => {
+    if (item.selected) return;
     loadRateButtons.slice().forEach(button => {
       button.selected = false;
     });
@@ -38,6 +58,7 @@ export const AnalyseRefrigerationCenter = () => {
   }
 
   const selectChartDateButton = (item) => {
+    if (item.selected) return;
     chartDateButtons.slice().forEach(button => {
       button.selected = false;
     });
@@ -46,14 +67,11 @@ export const AnalyseRefrigerationCenter = () => {
     setChartDateButtons([...chartDateButtons]);
   }
 
+  let items = EnergyStation.powerList(ColdCarbonYear, ColdCarbonLastYear)
+
   return (
     <div className="analyse-refrigeration-center-view">
       <div className="operation-summary">
-          <div className="alarm-info">
-            <div className="alarm-number">68</div>
-            <div className="alarm-label">告警次数</div>
-            <span className="alarm-left-corner"></span>
-          </div>
           <div className="top-info-box">
               <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
                 data: [{ value: 100 }, { value: 80}], colors: ['#323891', '#33d7ea']
@@ -159,7 +177,7 @@ export const AnalyseRefrigerationCenter = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">今日碳排放量统计</span>
+              <span className="title-text">碳排放量统计</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px'}}>
               {
@@ -171,15 +189,14 @@ export const AnalyseRefrigerationCenter = () => {
                 ChartService.getLineOptions({
                   xName: '时',
                   yName: 't',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  data: (chartDateButtons[2] && chartDateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                   : ((chartDateButtons[1] && chartDateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                   : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: ColdCarbonDay
-                    },
-                    // {
-                    //   data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                    //     80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
-                    // }
+                      data: (chartDateButtons[2] && chartDateButtons[2].selected) ? ColdCarbonYear
+                       : ((chartDateButtons[1] && chartDateButtons[1].selected) ? ColdCarbonMonth : ColdCarbonDay)
+                    }
                   ]
                 })} />
           </div>
@@ -276,46 +293,15 @@ export const AnalyseRefrigerationCenter = () => {
           <thead>
             <tr>
               <th>时间</th>
-              <th>制冷站耗能（GJ）</th>
+              <th>制冷站耗能（MWH）</th>
               <th>同比去年同月耗能</th>
               <th>环比上月耗能</th>
-              <th>碳排放量（KWH）</th>
+              <th>碳排放量（tCO2）</th>
               <th>环比去年同月碳排放量</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
+            {items}
           </tbody>
         </table>
       </div>

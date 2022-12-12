@@ -5,6 +5,13 @@ import './basic-map.scss';
 import { ChartService } from '../../utils/chart.service';
 import { SERVERINFO } from '../../constants/app-info';
 
+const basicBuild = {
+  title1:"建筑面积",
+  title2:"层数",
+  title3:"走廊温度",
+  title4:"耗热量",
+}
+
 export const BasicMap = () => {
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -15,6 +22,79 @@ export const BasicMap = () => {
         switch(event.data.type) {
           case "ok"://加载完成
               iframe.contentWindow.postMessage({type:"basic_map_init"}, SERVERINFO.modelIP)
+            break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            let data = {}
+            switch(event.data.data) {
+              case "1":
+                data = basicBuild
+                data.title = "运动员组团1"
+                data.data1 = "14620㎡"
+                data.data2 = "4"
+                data.data3 = "19.87℃"
+                data.data4 = "0MWH"
+                break
+              case "2":
+                data = basicBuild
+                data.title = "运动员组团2"
+                data.data1 = "6977㎡"
+                data.data2 = "4"
+                data.data3 = "20.53℃"
+                data.data4 = "0MWH"
+                break
+              case "3":
+                data = basicBuild
+                data.title = "运动员组团3"
+                data.data1 = "12728㎡"
+                data.data2 = "4"
+                data.data3 = "18.91℃"
+                data.data4 = "0MWH"
+                break
+              case "4":
+                data = basicBuild
+                data.title = "运动员组团4"
+                data.data1 = "7898㎡"
+                data.data2 = "5"
+                data.data3 = "17.63℃"
+                data.data4 = "0MWH"
+                break
+              case "5":
+                data = basicBuild
+                data.title = "运动员组团5"
+                data.data1 = "7621㎡"
+                data.data2 = "6"
+                data.data3 = "23.22℃"
+                data.data4 = "0MWH"
+                break
+              case "6":
+                data = basicBuild
+                data.title = "运动员组团6"
+                data.data1 = "8128㎡"
+                data.data2 = "6"
+                data.data3 = "17.63℃"
+                data.data4 = "0MWH"
+                break
+              case "公共组团北区":
+                data = basicBuild
+                data.title = "公共组团北区"
+                data.data1 = "6259㎡"
+                data.data2 = "3"
+                data.data3 = "16.24℃"
+                data.data4 = "0MWH"
+                break
+              case "公共组团南区":
+                data = basicBuild
+                data.title = "公共组团南区"
+                data.data1 = "21095㎡"
+                data.data2 = "6"
+                data.data3 = "18.23℃"
+                data.data4 = "0MWH"
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
             break
         }
     } else {

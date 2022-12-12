@@ -10,7 +10,7 @@ const basicPump = {
   title1:"运行状态",
   title2:"运行功率",
   title3:"流量",
-  data1:"开启",
+  data1:"关闭",
   data2: "7.5kW",
   data3: "137m³/h",
 }
@@ -27,34 +27,32 @@ const basicValve = {
   data2: "0",
 }
 
+const getList = (d, min) => {
+  return d && d[min] ? d[min] : 0;
+}
+
+const system_energy_data = {
+  "basic_data":[
+    PAGEDATA.EnergyOnlineRate, PAGEDATA.EnergyBoilerPower, PAGEDATA.EnergyPowerConsumptionToday, PAGEDATA.EnergyBoilerRunningNum, 
+    PAGEDATA.EnergyTankRunningNum, PAGEDATA.EnergyHeatSupplyToday, PAGEDATA.EnergyAlarmNumToday, PAGEDATA.EnergyBoilerPowerConsumptionToday1,
+    PAGEDATA.EnergyBoilerPowerConsumptionToday2, PAGEDATA.EnergyBoilerPowerConsumptionToday3, PAGEDATA.EnergyBoilerPowerConsumptionToday4
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost,PAGEDATA.EnergyAlarmToday
+  ],
+  "basic_data_list_hour":[],
+  "basic_opc_list":[
+    PAGEDATA.EnergyBoilerInT1,PAGEDATA.EnergyBoilerInT2,PAGEDATA.EnergyBoilerInT3,PAGEDATA.EnergyBoilerInT4,PAGEDATA.EnergyBoilerOutT1,
+    PAGEDATA.EnergyBoilerOutT2,PAGEDATA.EnergyBoilerOutT3,PAGEDATA.EnergyBoilerOutT4,PAGEDATA.EnergyBoilerRun1,PAGEDATA.EnergyBoilerRun2,
+    PAGEDATA.EnergyBoilerRun3,PAGEDATA.EnergyBoilerRun4,PAGEDATA.EnergyTankInT,PAGEDATA.EnergyTankOutT
+  ].concat(PAGEDATA.EnergyPumpState).concat(PAGEDATA.EnergyDVState)
+}
+
 export const SystemEnergyStation = () => {
-  let [onlineRate, setOnlineRate] = useState(0)
-  let [offlineRate, setOfflineRate] = useState(0)
-  let [boilerPower, setBoilerPower] = useState(0)
-  let [powerConsumptionToday, setPowerConsumptionToday] = useState(0)
-  let [boilerRunningNum, setBoilerRunningNum] = useState(0)
-  let [tankRunningNum, setTankRunningNum] = useState(0)
-  let [heatSupplyToday, setHeatSupplyToday] = useState(0)
-  let [heatStorageAndRelease, setHeatStorageAndRelease] = useState([])
-  let [boilerEnergyCost, setBoilerEnergyCost] = useState([])
-  let [alarmNum, setAlarmNum] = useState(0)
-  let [alarm, setAlarm] = useState(0)
-  let [boilerOutT1, setBoilerOutT1] = useState(0)
-  let [boilerOutT2, setBoilerOutT2] = useState(0)
-  let [boilerOutT3, setBoilerOutT3] = useState(0)
-  let [boilerOutT4, setBoilerOutT4] = useState(0)
-  let [boilerInT1, setBoilerInT1] = useState(0)
-  let [boilerInT2, setBoilerInT2] = useState(0)
-  let [boilerInT3, setBoilerInT3] = useState(0)
-  let [boilerInT4, setBoilerInT4] = useState(0)
-  let [boilerRun1, setBoilerRun1] = useState(0)
-  let [boilerRun2, setBoilerRun2] = useState(0)
-  let [boilerRun3, setBoilerRun3] = useState(0)
-  let [boilerRun4, setBoilerRun4] = useState(0)
+  let [pageData, setPageData] = useState({});
 
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
-        console.log(event)
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('energy_model')
@@ -77,11 +75,11 @@ export const SystemEnergyStation = () => {
                   title3:"供水温度",
                   title4:"回水温度",
                   title5:"用电量",
-                  data1:boilerRun1 == 0?"OFF":"ON",
+                  data1: pageData[PAGEDATA.EnergyBoilerRun1] == 0?"关闭" : "开启",
                   data2: "4MW",
-                  data3: boilerOutT1+"℃",
-                  data4: boilerInT1+"℃",
-                  data5: "0KWH",
+                  data3: pageData[PAGEDATA.EnergyBoilerOutT1]+"℃",
+                  data4: pageData[PAGEDATA.EnergyBoilerInT1]+"℃",
+                  data5: pageData[PAGEDATA.EnergyBoilerPowerConsumptionToday1]+"KWH",
                 }
                 break
               case "2#电极锅炉":
@@ -92,11 +90,11 @@ export const SystemEnergyStation = () => {
                   title3:"供水温度",
                   title4:"回水温度",
                   title5:"用电量",
-                  data1:boilerRun2 == 0?"OFF":"ON",
+                  data1:pageData[PAGEDATA.EnergyBoilerRun2] == 0?"关闭" : "开启",
                   data2: "4MW",
-                  data3: boilerOutT2+"℃",
-                  data4: boilerInT2+"℃",
-                  data5: "0KWH",
+                  data3: pageData[PAGEDATA.EnergyBoilerOutT2]+"℃",
+                  data4: pageData[PAGEDATA.EnergyBoilerInT2]+"℃",
+                  data5: pageData[PAGEDATA.EnergyBoilerPowerConsumptionToday2]+"KWH",
                 }
                 break
               case "3#电极锅炉":
@@ -107,11 +105,11 @@ export const SystemEnergyStation = () => {
                   title3:"供水温度",
                   title4:"回水温度",
                   title5:"用电量",
-                  data1:boilerRun3 == 0?"OFF":"ON",
+                  data1:pageData[PAGEDATA.EnergyBoilerRun3] == 0?"关闭" : "开启",
                   data2: "4MW",
-                  data3: boilerOutT3+"℃",
-                  data4: boilerInT3+"℃",
-                  data5: "0KWH",
+                  data3: pageData[PAGEDATA.EnergyBoilerOutT3]+"℃",
+                  data4: pageData[PAGEDATA.EnergyBoilerInT3]+"℃",
+                  data5: pageData[PAGEDATA.EnergyBoilerPowerConsumptionToday3]+"KWH",
                 }
                 break
               case "4#电极锅炉":
@@ -122,113 +120,191 @@ export const SystemEnergyStation = () => {
                   title3:"供水温度",
                   title4:"回水温度",
                   title5:"用电量",
-                  data1:boilerRun4 == 0?"OFF":"ON",
+                  data1:pageData[PAGEDATA.EnergyBoilerRun4] == 0?"关闭" : "开启",
                   data2: "4MW",
-                  data3: boilerOutT4+"℃",
-                  data4: boilerInT4+"℃",
-                  data5: "0KWH",
+                  data3: pageData[PAGEDATA.EnergyBoilerOutT3]+"℃",
+                  data4: pageData[PAGEDATA.EnergyBoilerInT3]+"℃",
+                  data5: pageData[PAGEDATA.EnergyBoilerPowerConsumptionToday4]+"KWH",
                 }
                 break
               case "1#水泵":
                 data = basicPump
                 data.title = "1#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[0]] == 0 ? "关闭" : "开启"
                 break
               case "2#水泵":
                 data = basicPump
                 data.title = "2#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[1]] == 0 ? "关闭" : "开启"
                 break
               case "3#水泵":
                 data = basicPump
                 data.title = "3#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[2]] == 0 ? "关闭" : "开启"
                 break
               case "4#水泵":
                 data = basicPump
                 data.title = "4#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[3]] == 0 ? "关闭" : "开启"
                 break
               case "5#水泵":
                 data = basicPump
                 data.title = "5#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[4]] == 0 ? "关闭" : "开启"
                 break
               case "6#水泵":
                 data = basicPump
                 data.title = "6#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[5]] == 0 ? "关闭" : "开启"
                 break
               case "7#水泵":
                 data = basicPump
                 data.title = "7#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[6]] == 0 ? "关闭" : "开启"
                 break
               case "8#水泵":
                 data = basicPump
                 data.title = "8#锅炉循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[7]] == 0 ? "关闭" : "开启"
                 break
               case "9#水泵":
                 data = basicPump
                 data.title = "1#蓄热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[8]] == 0 ? "关闭" : "开启"
                 data.data2 = "15kW"
                 data.data3 = "200m³/h"
                 break
               case "10#水泵":
                 data = basicPump
                 data.title = "2#蓄热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[9]] == 0 ? "关闭" : "开启"
                 data.data2 = "15kW"
                 data.data3 = "200m³/h"
                 break
               case "11#水泵":
                 data = basicPump
                 data.title = "3#蓄热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[10]] == 0 ? "关闭" : "开启"
                 data.data2 = "15kW"
                 data.data3 = "200m³/h"
+                break
+              case "1#放热循环泵":
+                data = basicPump
+                data.title = "1#放热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[11]] == 0 ? "关闭" : "开启"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "2#放热循环泵":
+                data = basicPump
+                data.title = "2#放热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[12]] == 0 ? "关闭" : "开启"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "3#放热循环泵":
+                data = basicPump
+                data.title = "3#放热循环泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[13]] == 0 ? "关闭" : "开启"
+                data.data2 = "11kW"
+                data.data3 = "147m³/h"
+                break
+              case "1#供热水泵":
+                data = basicPump
+                data.title = "1#供热水泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[14]] == 0 ? "关闭" : "开启"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
+                break
+              case "2#供热水泵":
+                data = basicPump
+                data.title = "2#供热水泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[15]] == 0 ? "关闭" : "开启"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
+                break
+              case "3#供热水泵":
+                data = basicPump
+                data.title = "3#供热水泵"
+                data.data1 = pageData[PAGEDATA.EnergyPumpState[16]] == 0 ? "关闭" : "开启"
+                data.data2 = "22kW"
+                data.data3 = "310m³/h"
                 break
               case "1#水箱":
                 data = basicTank
                 data.title = "1#蓄热水箱"
+                data.data1 = pageData[PAGEDATA.EnergyTankInT] + "℃"
+                data.data2 = pageData[PAGEDATA.EnergyTankOutT] + "℃"
                 break
               case "2#水箱":
                 data = basicTank
                 data.title = "2#蓄热水箱"
+                data.data1 = pageData[PAGEDATA.EnergyTankInT] + "℃"
+                data.data2 = pageData[PAGEDATA.EnergyTankOutT] + "℃"
                 break
               case "DV1":
                 data = basicValve
                 data.title = "阀门DV1"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[0]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[0]] == 0 ? "0" : "1"
                 break
               case "DV2":
                 data = basicValve
                 data.title = "阀门DV2"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[1]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[1]] == 0 ? "0" : "1"
                 break
               case "DV3":
                 data = basicValve
                 data.title = "阀门DV3"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[2]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[2]] == 0 ? "0" : "1"
                 break
               case "DV5":
                 data = basicValve
                 data.title = "阀门DV5"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[3]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[3]] == 0 ? "0" : "1"
                 break
               case "DV7-1":
                 data = basicValve
                 data.title = "阀门DV7-1"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[4]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[4]] == 0 ? "0" : "1"
                 break
               case "DV7-2":
                 data = basicValve
                 data.title = "阀门DV7-2"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[5]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[5]] == 0 ? "0" : "1"
                 break
               case "DV8-1":
                 data = basicValve
                 data.title = "阀门DV8-1"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[6]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[6]] == 0 ? "0" : "1"
                 break
               case "DV8-2":
                 data = basicValve
                 data.title = "阀门DV8-2"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[7]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[7]] == 0 ? "0" : "1"
                 break
               case "DVT-1":
                 data = basicValve
                 data.title = "阀门DVT-1"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[8]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[8]]
                 break
               case "DVT-2":
                 data = basicValve
                 data.title = "阀门DVT-2"
+                data.data1 = pageData[PAGEDATA.EnergyDVState[9]] == 0 ? "关闭" : "打开"
+                data.data2 = pageData[PAGEDATA.EnergyDVState[9]]
                 break
             }
             iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            break
         }
     } else {
         // The data was NOT sent from your site!
@@ -236,83 +312,85 @@ export const SystemEnergyStation = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, [boilerOutT1,boilerOutT2,boilerOutT3,boilerOutT4,boilerInT1,boilerInT2,boilerInT3,boilerInT4,boilerRun1,boilerRun2,boilerRun3,boilerRun4])
+  }, [pageData])
 
   useEffect(()=>{
-    EnergyStation.getTable(PAGEDATA.EnergyOnlineRate).then((res)=>{
-      setOnlineRate((res*100).toFixed(2))
-      setOfflineRate(((1-res)*100).toFixed(2))
-      setOfflineRate(((1-res)*100).toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerPower).then((res)=> {
-      setBoilerPower(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyPowerConsumptionToday).then((res)=> {
-      setPowerConsumptionToday(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerRunningNum).then((res)=> {
-      setBoilerRunningNum(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyTankRunningNum).then((res)=> {
-      setTankRunningNum(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyHeatSupplyToday).then((res)=> {
-      setHeatSupplyToday((res/1e9).toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyAlarmNumToday).then((res)=> {
-      setAlarmNum(res.toFixed(0))
-    })
-    let dayStr = EnergyStation.getDayStr()
-    let hourStr = EnergyStation.getHourStr()
-    let min = EnergyStation.getMin()
-    EnergyStation.getTable(PAGEDATA.EnergyHeatStorageAndRelease, dayStr).then((res)=> {
-      setHeatStorageAndRelease(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerEnergyCost, dayStr).then((res)=> {
-      setBoilerEnergyCost(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyAlarmToday, dayStr).then((res) => {
-      setAlarm(res)
-    })
+    let dayStr = EnergyStation.getDayStr();
+    let hourStr = EnergyStation.getHourStr();
+    let min = EnergyStation.getMin();
 
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT1, hourStr).then((res)=> {
-      res && res[min] && setBoilerInT1(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT2, hourStr).then((res)=> {
-      res && res[min] && setBoilerInT2(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT3, hourStr).then((res)=> {
-      res && res[min] && setBoilerInT3(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerInT4, hourStr).then((res)=> {
-      res && res[min] && setBoilerInT4(res[min].toFixed(2))
-    })
+    EnergyStation.postPageData({
+      data:system_energy_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      res[PAGEDATA.EnergyBoilerPower] = res[PAGEDATA.EnergyBoilerPower].toFixed(2);
+      res[PAGEDATA.EnergyPowerConsumptionToday] = res[PAGEDATA.EnergyPowerConsumptionToday].toFixed(2);
+      res[PAGEDATA.EnergyBoilerRunningNum] = res[PAGEDATA.EnergyBoilerRunningNum].toFixed(0);
+      res[PAGEDATA.EnergyTankRunningNum] = res[PAGEDATA.EnergyTankRunningNum].toFixed(0);
+      res[PAGEDATA.EnergyHeatSupplyToday] = (res[PAGEDATA.EnergyHeatSupplyToday]/1e9).toFixed(2);
+      res[PAGEDATA.EnergyAlarmNumToday] = res[PAGEDATA.EnergyAlarmNumToday].toFixed(0);
 
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT1, hourStr).then((res)=> {
-      res && res[min] && setBoilerOutT1(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT2, hourStr).then((res)=> {
-      res && res[min] && setBoilerOutT2(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT3, hourStr).then((res)=> {
-      res && res[min] && setBoilerOutT3(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerOutT4, hourStr).then((res)=> {
-      res && res[min] && setBoilerOutT4(res[min].toFixed(2))
-    })
+      res[PAGEDATA.EnergyBoilerPowerConsumptionToday1] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday1].toFixed(2);
+      res[PAGEDATA.EnergyBoilerPowerConsumptionToday2] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday2].toFixed(2);
+      res[PAGEDATA.EnergyBoilerPowerConsumptionToday3] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday3].toFixed(2);
+      res[PAGEDATA.EnergyBoilerPowerConsumptionToday4] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday4].toFixed(2);
+        
+      res[PAGEDATA.EnergyBoilerInT1] = getList(res[PAGEDATA.EnergyBoilerInT1], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerInT2] = getList(res[PAGEDATA.EnergyBoilerInT2], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerInT3] = getList(res[PAGEDATA.EnergyBoilerInT3], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerInT4] = getList(res[PAGEDATA.EnergyBoilerInT4], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerOutT1] = getList(res[PAGEDATA.EnergyBoilerOutT1], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerOutT2] = getList(res[PAGEDATA.EnergyBoilerOutT2], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerOutT3] = getList(res[PAGEDATA.EnergyBoilerOutT3], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerOutT4] = getList(res[PAGEDATA.EnergyBoilerOutT4], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerRun1] = getList(res[PAGEDATA.EnergyBoilerRun1], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerRun2] = getList(res[PAGEDATA.EnergyBoilerRun2], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerRun3] = getList(res[PAGEDATA.EnergyBoilerRun3], min).toFixed(2);
+      res[PAGEDATA.EnergyBoilerRun4] = getList(res[PAGEDATA.EnergyBoilerRun4], min).toFixed(2);
+      res[PAGEDATA.EnergyTankInT] = getList(res[PAGEDATA.EnergyTankInT], min).toFixed(2);
+      res[PAGEDATA.EnergyTankOutT] = getList(res[PAGEDATA.EnergyTankOutT], min).toFixed(2);
+      
+      for (let i=0;i<=16;i++) {
+        res[PAGEDATA.EnergyPumpState[i]] = getList(res[PAGEDATA.EnergyPumpState[i]], min);
+      }
 
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerRun1, hourStr).then((res)=> {
-      res && res[min] && setBoilerRun1(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerRun2, hourStr).then((res)=> {
-      res && res[min] && setBoilerRun2(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerRun3, hourStr).then((res)=> {
-      res && res[min] && setBoilerRun3(res[min].toFixed(2))
-    })
-    EnergyStation.getOPC(PAGEDATA.EnergyBoilerRun4, hourStr).then((res)=> {
-      res && res[min] && setBoilerRun4(res[min].toFixed(2))
-    })
+      for (let i=0;i<=9;i++) {
+        res[PAGEDATA.EnergyDVState[i]] = getList(res[PAGEDATA.EnergyDVState[i]], min);
+      }
+      
+      let needChange = false;
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
 
     window.addEventListener('message', messageFunc)
     return () => {
@@ -327,7 +405,7 @@ export const SystemEnergyStation = () => {
       <div className="system-energy-station-content">
         <div className="operation-summary">
           <div className="alarm-info">
-            <div className="alarm-number">{alarmNum}</div>
+            <div className="alarm-number">{pageData[PAGEDATA.EnergyAlarmNumToday]}</div>
             <div className="alarm-label">告警次数</div>
             <span className="alarm-left-corner"></span>
           </div>
@@ -348,13 +426,13 @@ export const SystemEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100-onlineRate, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: onlineRate, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                    { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">设备在线率: {onlineRate}%</div>
+            <div className="number-value">设备在线率: {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
@@ -373,89 +451,14 @@ export const SystemEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100-offlineRate, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: offlineRate, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                    { value: pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
                   ]
                 }
               ]
             }} />
-            <div className="number-value">设备离线率: {offlineRate}%</div>
+            <div className="number-value">设备离线率: {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
           </div>
-          {/* <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 270,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">监控正常率: 80%</div>
-          </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 360,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">监控异常率: 20%</div>
-          </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 320,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">正在维护率: 30%</div>
-          </div> */}
         </div>
         <div className="bottom-box">
           <div className="box-wrapper">
@@ -468,8 +471,9 @@ export const SystemEnergyStation = () => {
               <span className="title-text">今日一览</span>
             </div>
             <div>
-              <ComSummaryInfo items={{boilerPower:boilerPower, powerConsumptionToday:powerConsumptionToday, 
-                boilerRunningNum:boilerRunningNum, tankRunningNum:tankRunningNum, heatSupplyToday:heatSupplyToday}}/>
+              <ComSummaryInfo items={{boilerPower:pageData[PAGEDATA.EnergyBoilerPower], powerConsumptionToday:pageData[PAGEDATA.EnergyPowerConsumptionToday], 
+                boilerRunningNum:pageData[PAGEDATA.EnergyBoilerRunningNum], tankRunningNum:pageData[PAGEDATA.EnergyTankRunningNum], 
+                heatSupplyToday:pageData[PAGEDATA.EnergyHeatSupplyToday]}}/>
             </div>
           </div>
           <div className="box-wrapper">
@@ -539,7 +543,7 @@ export const SystemEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: heatStorageAndRelease,
+                    data: pageData[PAGEDATA.EnergyHeatStorageAndRelease],
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -629,7 +633,7 @@ export const SystemEnergyStation = () => {
                 },
                 series: [
                   {
-                    data: boilerEnergyCost,
+                    data: pageData[PAGEDATA.EnergyBoilerEnergyCost],
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -658,7 +662,7 @@ export const SystemEnergyStation = () => {
               <span className="title-text">今日告警</span>
             </div>
             <div>
-              <ComAlarms items={alarm}/>
+              <ComAlarms items={pageData[PAGEDATA.EnergyAlarmToday]}/>
             </div>
           </div>
         </div>

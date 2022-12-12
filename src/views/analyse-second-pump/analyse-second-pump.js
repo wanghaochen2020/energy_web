@@ -5,18 +5,30 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 
 export const AnalyseSecondPump = () => {
-  let [PumpEHR1, setPumpEHR1] = useState([])
-  let [PumpEHR2, setPumpEHR2] = useState([])
+  let [PumpEHR1, setPumpEHR1] = useState([]);
+  let [PumpEHR2, setPumpEHR2] = useState([]);
+  let [PumpCarbonYear, setPumpCarbonYear] = useState([]);
+  let [PumpCarbonLastYear, setPumpCarbonLastYear] = useState([]);
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr()
+    let dayStr = EnergyStation.getDayStr();
+    let yearStr = EnergyStation.getYearStr();
+    let lastYearStr = EnergyStation.getLastYearStr();
     EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
       setPumpEHR1(res)
     })
     EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
       setPumpEHR2(res)
     })
-  }, [])
+    EnergyStation.getTable(PAGEDATA.PumpCarbonYear, yearStr).then((res)=> {
+      setPumpCarbonYear(res);
+    });
+    EnergyStation.getTable(PAGEDATA.PumpCarbonYear, lastYearStr).then((res)=> {
+      setPumpCarbonLastYear(res);
+    });
+  }, []);
+
+  let items = EnergyStation.powerList(PumpCarbonYear,PumpCarbonLastYear);
 
   return (
     <div className="analyse-second-pump-view">
@@ -114,46 +126,15 @@ export const AnalyseSecondPump = () => {
           <thead>
             <tr>
               <th>时间</th>
-              <th>能源站耗能（GJ）</th>
+              <th>二次泵站耗能（MWH）</th>
               <th>同比去年同月耗能</th>
               <th>环比上月耗能</th>
-              <th>碳排放量（KWH）</th>
+              <th>碳排放量（tCO2）</th>
               <th>环比去年同月碳排放量</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
+            {items}
           </tbody>
         </table>
       </div>

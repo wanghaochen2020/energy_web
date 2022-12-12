@@ -6,6 +6,18 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
 
+const system_solar_water_data = {
+  "basic_data":[
+    PAGEDATA.SolarWaterBoilerPowerConsumptionToday,PAGEDATA.SolarWaterHeatCollecterInT,PAGEDATA.SolarWaterHeatCollecterOutT,PAGEDATA.SolarWaterJRQT,
+    PAGEDATA.SolarWaterHeatCollectionToday,PAGEDATA.SolarWaterPumpRunningNum
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.SolarWaterHeatCollectionDay,PAGEDATA.SolarWaterBoilerPowerConsumptionDay
+  ],
+  "basic_data_list_hour":[],
+  "basic_opc_list":[]
+}; 
+
 export const SystemSolarWaterHeater = () => {
   const [chartDateButtons, setChartDateButton] = useState([
     { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
@@ -20,14 +32,7 @@ export const SystemSolarWaterHeater = () => {
     setChartDateButton([...chartDateButtons]);
   }
 
-  let [power, setPower] = useState(0)
-  let [SolarWaterHeatCollecterInT, setSolarWaterHeatCollecterInT] = useState(0)
-  let [SolarWaterHeatCollecterOutT, setSolarWaterHeatCollecterOutT] = useState(0)
-  let [SolarWaterJRQT, setSolarWaterJRQT] = useState(0)
-  let [SolarWaterHeatCollectionToday, setSolarWaterHeatCollectionToday] = useState(0)
-  let [SolarWaterPumpRunningNum, setSolarWaterPumpRunningNum] = useState(0)
-  let [SolarWaterHeatCollectionDay, setSolarWaterHeatCollectionDay] = useState([])
-  let [SolarWaterBoilerPowerConsumptionDay, setSolarWaterBoilerPowerConsumptionDay] = useState([])
+  let [pageData, setPageData] = useState({});
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -39,6 +44,26 @@ export const SystemSolarWaterHeater = () => {
           case "ok"://加载完成
               iframe.contentWindow.postMessage({type:"solar_water_init"}, SERVERINFO.modelIP)
             break
+          case "device"://请求设备信息
+            if (!event.data.data) {
+              return
+            }
+            let data = {}
+            switch(event.data.data) {
+              case "集热器":
+                data = {
+                  title:"太阳能集热器",
+                  title1:"供水温度",
+                  title2:"回水温度",
+                  title3:"集热量",
+                  data1:"57",
+                  data2:"19",
+                  data3:"0J",
+                }
+                break
+            }
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            break
         }
     } else {
         // The data was NOT sent from your site!
@@ -49,31 +74,52 @@ export const SystemSolarWaterHeater = () => {
   }, [])
 
   useEffect(() => {
-    EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionToday).then((res) => {
-      setPower(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollecterInT).then((res) => {
-      setSolarWaterHeatCollecterInT(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollecterOutT).then((res) => {
-      setSolarWaterHeatCollecterOutT(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterJRQT).then((res) => {
-      setSolarWaterJRQT(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionToday).then((res) => {
-      setSolarWaterHeatCollectionToday(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterPumpRunningNum).then((res) => {
-      setSolarWaterPumpRunningNum(res.toFixed(0))
-    })
-    let dayStr = EnergyStation.getDayStr()
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionDay, dayStr).then((res)=> {
-      setSolarWaterHeatCollectionDay(res)
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterBoilerPowerConsumptionDay, dayStr).then((res)=> {
-      setSolarWaterBoilerPowerConsumptionDay(res)
-    })
+    let dayStr = EnergyStation.getDayStr();
+    let hourStr = EnergyStation.getHourStr();
+    EnergyStation.postPageData({
+      data:system_solar_water_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      let needChange = false;
+      res[PAGEDATA.SolarWaterBoilerPowerConsumptionToday] = res[PAGEDATA.SolarWaterBoilerPowerConsumptionToday].toFixed(2);
+      res[PAGEDATA.SolarWaterHeatCollecterInT] = res[PAGEDATA.SolarWaterHeatCollecterInT].toFixed(2);
+      res[PAGEDATA.SolarWaterHeatCollecterOutT] = res[PAGEDATA.SolarWaterHeatCollecterOutT].toFixed(2);
+      res[PAGEDATA.SolarWaterJRQT] = res[PAGEDATA.SolarWaterJRQT].toFixed(2);
+      res[PAGEDATA.SolarWaterHeatCollectionToday] = res[PAGEDATA.SolarWaterHeatCollectionToday].toFixed(2);
+      res[PAGEDATA.SolarWaterBoilerPowerConsumptionDay] = res[PAGEDATA.SolarWaterBoilerPowerConsumptionDay].toFixed(0);
+
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
     
     window.addEventListener('message', messageFunc)
     return () => {
@@ -86,7 +132,7 @@ export const SystemSolarWaterHeater = () => {
       <iframe id="solar_water_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
-          <div className="alarm-number">80</div>
+          <div className="alarm-number">0</div>
           <div className="alarm-label">告警次数</div>
           <span className="alarm-left-corner"></span>
         </div>
@@ -102,8 +148,10 @@ export const SystemSolarWaterHeater = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoSolarWater items={{power:power, SolarWaterHeatCollecterInT:SolarWaterHeatCollecterInT, SolarWaterHeatCollecterOutT:SolarWaterHeatCollecterOutT,
-            SolarWaterJRQT:SolarWaterJRQT, SolarWaterHeatCollectionToday:SolarWaterHeatCollectionToday, SolarWaterPumpRunningNum:SolarWaterPumpRunningNum}}/>
+            <ComSummaryInfoSolarWater items={{power:pageData[PAGEDATA.SolarWaterBoilerPowerConsumptionToday],
+            SolarWaterHeatCollecterInT:pageData[PAGEDATA.SolarWaterHeatCollecterInT], SolarWaterHeatCollecterOutT:pageData[PAGEDATA.SolarWaterHeatCollecterOutT],
+            SolarWaterJRQT:pageData[PAGEDATA.SolarWaterJRQT], SolarWaterHeatCollectionToday:pageData[PAGEDATA.SolarWaterHeatCollectionToday],
+            SolarWaterPumpRunningNum:pageData[PAGEDATA.SolarWaterPumpRunningNum]}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -167,7 +215,7 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: SolarWaterHeatCollectionDay,
+                  data: pageData[PAGEDATA.SolarWaterHeatCollectionDay],
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {
@@ -241,7 +289,7 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: SolarWaterBoilerPowerConsumptionDay,
+                  data: pageData[PAGEDATA.SolarWaterBoilerPowerConsumptionDay],
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {
