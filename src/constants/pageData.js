@@ -154,6 +154,7 @@ export const PAGEDATA = {
 	PumpEHR2: "pump_EHR2",            //二次泵站环路2每日EHR
 	PumpAlarmToday: "pump_alarm_today",     //二次泵站今日告警
 	PumpAlarmNumToday: "pump_alarm_num_today", //二次泵站今日告警次数
+	PumpCarbonYear: "pump_carbon_year",     //二次泵站每年各月碳排总和
 
 	SolarWaterBoilerPowerConsumptionToday: "solar_water_boiler_power_comsumption_today", //太阳能热水电加热器今日总耗电量
 	SolarWaterHeatCollecterInT: "solar_water_heat_collecter_in_temp",         //太阳能热水集热器进口温度
@@ -168,5 +169,9 @@ export const PAGEDATA = {
 	SolarWaterBoilerPowerConsumptionHour: "solar_water_boiler_power_comsumption_hour",  //太阳能热水电加热器耗电量当小时每分钟
 	SolarWaterBoilerPowerConsumptionDay: "solar_water_boiler_power_comsumption_day",   //太阳能热水电加热器耗电量当日每小时
 	SolarWaterHeatEfficiencyDay: "solar_water_heat_efficiency_day",            //太阳能热水集热效率当日每小时
+	SolarWaterHeatEfficiencyMonth: "solar_water_heat_efficiency_month",          //太阳能热水集热效率每月各天
+	SolarWaterHeatEfficiencyYear: "solar_water_heat_efficiency_year" ,          //太阳能热水集热效率每年各月
 	SolarWaterGuaranteeRateDay: "solar_water_guarantee_rate", //太阳能热水保证率当日每小时
+	SolarWaterGuaranteeRateMonth: "solar_water_guarantee_month",                //太阳能热水保证率每月各天
+	SolarWaterGuaranteeRateYear: "solar_water_guarantee_year",                 //太阳能热水保证率每年各月
 }

@@ -17,16 +17,23 @@ export const AnalyseEnergyStation = () => {
   let [EnergyCarbonDay, setEnergyCarbonDay] = useState([])
   let [EnergyCarbonMonth, setEnergyCarbonMonth] = useState([])
   let [EnergyCarbonYear, setEnergyCarbonYear] = useState([])
+  let [EnergyCarbonLastYear, setEnergyCarbonLastYear] = useState([])
   let [EnergyBoilerPayloadDay, setEnergyBoilerPayloadDay] = useState([])
+  let [EnergyBoilerPayloadMonth, setEnergyBoilerPayloadMonth] = useState([])
+  let [EnergyBoilerPayloadYear, setEnergyBoilerPayloadYear] = useState([])
 
   useEffect(() => {
     setLoadRateButton([
-      { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+      { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
     ]);
     setChartDateButtons([
-      { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
+      { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
     ]);
-    let dayStr = EnergyStation.getDayStr()
+    let dayStr = EnergyStation.getDayStr();
+    let monthStr = EnergyStation.getMonthStr();
+    let yearStr = EnergyStation.getYearStr();
+    let lastYearStr = EnergyStation.getLastYearStr();
+
     EnergyStation.getTable(PAGEDATA.EnergyBoilerEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
@@ -66,43 +73,49 @@ export const AnalyseEnergyStation = () => {
     EnergyStation.getTable(PAGEDATA.EnergyCarbonDay, dayStr).then((res)=> {
       setEnergyCarbonDay(res)
     })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonMonth, dayStr).then((res)=> {
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonMonth, monthStr).then((res)=> {
       setEnergyCarbonMonth(res)
     })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, dayStr).then((res)=> {
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, yearStr).then((res)=> {
       setEnergyCarbonYear(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, lastYearStr).then((res)=> {
+      setEnergyCarbonLastYear(res)
     })
     EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadDay, dayStr).then((res)=> {
       setEnergyBoilerPayloadDay(res)
     })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadMonth, monthStr).then((res)=> {
+      setEnergyBoilerPayloadMonth(res)
+    })
+    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadYear, yearStr).then((res)=> {
+      setEnergyBoilerPayloadYear(res)
+    })
   }, []);
 
   const selectLoadRateButton = (item) => {
+    if (item.selected) return;
     loadRateButtons.slice().forEach(button => {
       button.selected = false;
     });
-
     item.selected = true;
     setLoadRateButton([...loadRateButtons]);
   }
 
   const selectChartDateButton = (item) => {
+    if (item.selected) return;
     chartDateButtons.slice().forEach(button => {
       button.selected = false;
     });
-
     item.selected = true;
     setChartDateButtons([...chartDateButtons]);
   }
 
+  let items = EnergyStation.powerList(EnergyCarbonYear, EnergyCarbonLastYear);
+
   return (
     <div className="analyse-energy-station-view">
       <div className="operation-summary">
-          {/* <div className="alarm-info">
-            <div className="alarm-number">68</div>
-            <div className="alarm-label">告警次数</div>
-            <span className="alarm-left-corner"></span>
-          </div> */}
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
               tooltip: {
@@ -264,11 +277,13 @@ export const AnalyseEnergyStation = () => {
             <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
               ChartService.getBarOptions({
                 yName: '%',
-                // category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
-                category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                category: (loadRateButtons[2] && loadRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                : ((loadRateButtons[1] && loadRateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                 series: [
                   {
-                    data: EnergyBoilerPayloadDay
+                    data: (loadRateButtons[2] && loadRateButtons[2].selected) ? EnergyBoilerPayloadYear
+                    : ((loadRateButtons[1] && loadRateButtons[1].selected) ? EnergyBoilerPayloadMonth : EnergyBoilerPayloadDay)
                   }
                 ]
               })} />
@@ -282,7 +297,7 @@ export const AnalyseEnergyStation = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">今日碳排放量统计</span>
+              <span className="title-text">碳排放量统计</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px'}}>
                 {
@@ -292,16 +307,17 @@ export const AnalyseEnergyStation = () => {
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
-                  xName: '时',
+                  xName: (chartDateButtons[2] && chartDateButtons[2].selected) ? "月"
+                  : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "日" : "时"),
                   yName: 'tCO2',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  data: (chartDateButtons[2] && chartDateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                   : ((chartDateButtons[1] && chartDateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                   : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: EnergyCarbonDay
-                    },
-                    // {
-                    //   data: EnergyCarbonDay
-                    // }
+                      data: (chartDateButtons[2] && chartDateButtons[2].selected) ? EnergyCarbonYear
+                       : ((chartDateButtons[1] && chartDateButtons[1].selected) ? EnergyCarbonMonth : EnergyCarbonDay)
+                    }
                   ]
                 })} />
           </div>
@@ -410,46 +426,15 @@ export const AnalyseEnergyStation = () => {
           <thead>
             <tr>
               <th>时间</th>
-              <th>能源站耗能（GJ）</th>
+              <th>能源站耗能（MWH）</th>
               <th>同比去年同月耗能</th>
               <th>环比上月耗能</th>
-              <th>碳排放量（KWH）</th>
-              <th>环比去年同月碳排放量</th>
+              <th>碳排放量（tCO2）</th>
+              <th>同比去年同月碳排放量</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr>
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
-            <tr className="row-even">
-              <td>2022-04-02 13:22</td>
-              <td>18.23</td>
-              <td>20%<i className="fa fa-long-arrow-up"></i></td>
-              <td>30%<i className="fa fa-long-arrow-down"></i></td>
-              <td>98</td>
-              <td>20%</td>
-            </tr>
+            {items}
           </tbody>
         </table>
       </div>

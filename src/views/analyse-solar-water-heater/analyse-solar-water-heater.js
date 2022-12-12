@@ -7,25 +7,32 @@ import { PAGEDATA } from '../../constants/pageData';
 
 export const AnalyseSolarWaterHeater = () => {
   const [rateButtons, setRateButtons] = useState([
-    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
   const [systemRateButtons, setSystemRateButtons] = useState([
-    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
   const [systemRateButtons2, setSystemRateButtons2] = useState([
-    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
   const [chartDateButtons, setChartDateButtons] = useState([
-    { name: '本日碳排放量', selected: true }, { name: '近七天碳排放量' }, { name: '历史碳排放量' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
 
-  let [SolarWaterHeatEfficiencyDay, setSolarWaterHeatEfficiencyDay] = useState(0)
+  let [SolarWaterHeatEfficiencyDay, setSolarWaterHeatEfficiencyDay] = useState([])
+  let [SolarWaterHeatEfficiencyMonth, setSolarWaterHeatEfficiencyMonth] = useState([])
+  let [SolarWaterHeatEfficiencyYear, setSolarWaterHeatEfficiencyYear] = useState([])
   let [AvrgSolarWaterHeatEfficiencyDay, setAvrgSolarWaterHeatEfficiencyDay] = useState(0)
-  let [SolarWaterGuaranteeRateDay, setSolarWaterGuaranteeRateDay] = useState(0)
+  let [SolarWaterGuaranteeRateDay, setSolarWaterGuaranteeRateDay] = useState([])
+  let [SolarWaterGuaranteeRateMonth, setSolarWaterGuaranteeRateMonth] = useState([])
+  let [SolarWaterGuaranteeRateYear, setSolarWaterGuaranteeRateYear] = useState([])
   let [AvrgSolarWaterGuaranteeRateDay, setAvrgSolarWaterGuaranteeRateDay] = useState(0)
+
+
 
   useEffect(() => {
     let dayStr = EnergyStation.getDayStr()
+    let yearStr = EnergyStation.getYearStr();
     EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
@@ -37,6 +44,12 @@ export const AnalyseSolarWaterHeater = () => {
       setSolarWaterHeatEfficiencyDay(res)
       setAvrgSolarWaterHeatEfficiencyDay(avg)
     })
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyMonth, yearStr).then((res)=> {
+      setSolarWaterHeatEfficiencyMonth(res);
+    });
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyYear, yearStr).then((res)=> {
+      setSolarWaterHeatEfficiencyYear(res);
+    });
     EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateDay, dayStr).then((res)=> {
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
@@ -48,8 +61,15 @@ export const AnalyseSolarWaterHeater = () => {
       setSolarWaterGuaranteeRateDay(res)
       setAvrgSolarWaterGuaranteeRateDay(avg)
     })
+    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateMonth, yearStr).then((res)=> {
+      setSolarWaterGuaranteeRateMonth(res);
+    });
+    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateYear, yearStr).then((res)=> {
+      setSolarWaterGuaranteeRateYear(res);
+    });
   }, [])
   const selectRateButton = (item) => {
+    if (item.selected) return;
     rateButtons.slice().forEach(button => {
       button.selected = false;
     });
@@ -59,6 +79,7 @@ export const AnalyseSolarWaterHeater = () => {
   }
 
   const selectSystemRateButtons = (item) => {
+    if (item.selected) return;
     systemRateButtons.slice().forEach(button => {
       button.selected = false;
     });
@@ -68,6 +89,7 @@ export const AnalyseSolarWaterHeater = () => {
   }
 
   const selectSystemRateButtons2 = (item) => {
+    if (item.selected) return;
     systemRateButtons2.slice().forEach(button => {
       button.selected = false;
     });
@@ -166,10 +188,13 @@ export const AnalyseSolarWaterHeater = () => {
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
                   yName: '%',
-                  category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  category: (rateButtons[2] && rateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                  : ((rateButtons[1] && rateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                  : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: SolarWaterHeatEfficiencyDay
+                      data: (rateButtons[2] && rateButtons[2].selected) ? SolarWaterHeatEfficiencyYear
+                      : ((rateButtons[1] && rateButtons[1].selected) ? SolarWaterHeatEfficiencyMonth : SolarWaterHeatEfficiencyDay)
                     }
                   ]
                 })} />
@@ -244,10 +269,13 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
-                  category: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  category: (systemRateButtons[2] &&systemRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                  : ((systemRateButtons[1] && systemRateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                  : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: SolarWaterGuaranteeRateDay
+                      data: (systemRateButtons[2] && systemRateButtons[2].selected) ? SolarWaterGuaranteeRateYear
+                      : ((systemRateButtons[1] && systemRateButtons[1].selected) ? SolarWaterGuaranteeRateMonth : SolarWaterGuaranteeRateDay)
                     }
                   ]
                 })} />
