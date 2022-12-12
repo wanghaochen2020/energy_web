@@ -38,49 +38,25 @@ const basicValve = {
   data2: "0",
 }
 
-export const SystemRefrigerationCenter = () => {
-  let [power, setPower] = useState(0)
-  let [energyCostToday, setEnergyCostToday] = useState(0)
-  let [machineRunningNum, setMachineRunningNum] = useState(0)
-  let [coolingWaterInT, setCoolingWaterInT] = useState(0)
-  let [coolingWaterOutT, setCoolingWaterOutT] = useState(0)
-  let [refrigeratedWaterInT, setRefrigeratedWaterInT] = useState(0)
-  let [refrigeratedWaterOutT, setRefrigeratedWaterOutT] = useState(0)
-  let [machinePower, setMachinePower] = useState(0)
-  let [energyCostDay, setEnergyCostDay] = useState([])
+const getList = (d, min) => {
+  return d && d[min] ? d[min] : 0;
+}
 
-  let pump = [], setPump = [];
-  for(let i=0;i<=15;i++) {
-    [pump[i], setPump[i]] = useState("0");
-  }
-  
-  let CM = {
-    run:[],
-    power:[],
-    coolInT:[],
-    coolOutT:[],
-    coldInT:[],
-    coldOutT:[],
-    pres:[]
-  };
-  let setCM = {
-    run:[],
-    power:[],
-    coolInT:[],
-    coolOutT:[],
-    coldInT:[],
-    coldOutT:[],
-    pres:[]
-  };
-  for(let i=0;i<=2;i++) {
-    [CM.run[i], setCM.run[i]] = useState(0);
-    [CM.power[i], setCM.power[i]] = useState(0);
-    [CM.coolInT[i], setCM.coolInT[i]] = useState(0);
-    [CM.coolOutT[i], setCM.coolOutT[i]] = useState(0);
-    [CM.coldInT[i], setCM.coldInT[i]] = useState(0);
-    [CM.coldOutT[i], setCM.coldOutT[i]] = useState(0);
-    [CM.pres[i], setCM.pres[i]] = useState(0)
-  }
+const system_cold_data = {
+  "basic_data":[
+    PAGEDATA.ColdPowerMin,PAGEDATA.ColdEnergyCostToday,PAGEDATA.ColdMachineRunningNum,PAGEDATA.ColdCoolingWaterInT,PAGEDATA.ColdCoolingWaterOutT,
+    PAGEDATA.ColdRefrigeratedWaterInT,PAGEDATA.ColdRefrigeratedWaterOutT,PAGEDATA.ColdMachinePowerMin,PAGEDATA.ColdAlarmNumToday
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.ColdEnergyCostDay,PAGEDATA.ColdAlarmToday
+  ],
+  "basic_data_list_hour":[],
+  "basic_opc_list":PAGEDATA.ColdPumpState.concat(PAGEDATA.ColdMachineRun).concat(PAGEDATA.ColdMachinePowerMinList)
+  .concat(PAGEDATA.ColdMachineCoolInT).concat(PAGEDATA.ColdMachineCoolOutT).concat(PAGEDATA.ColdMachinePresure)
+}
+
+export const SystemRefrigerationCenter = () => {
+  let [pageData, setPageData] = useState({});
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -101,109 +77,109 @@ export const SystemRefrigerationCenter = () => {
               case "1#冷却泵":
                 data = basicPump
                 data.title = "1#冷却泵"
-                data.data1 = pump[0] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[0]] == 0 ? "关闭" : "开启"
                 break
               case "2#冷却泵":
                 data = basicPump
                 data.title = "2#冷却泵"
-                data.data1 = pump[1] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[1]] == 0 ? "关闭" : "开启"
                 break
               case "3#冷却泵":
                 data = basicPump
                 data.title = "3#冷却泵"
-                data.data1 = pump[2] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[2]] == 0 ? "关闭" : "开启"
                 break
               case "4#冷却泵":
                 data = basicPump
                 data.title = "4#冷却泵"
-                data.data1 = pump[3] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[3]] == 0 ? "关闭" : "开启"
                 break
               case "5#冷却泵":
                 data = basicPump
                 data.title = "5#冷却泵"
-                data.data1 = pump[4] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[4]] == 0 ? "关闭" : "开启"
                 break
               case "1#空调冷水一次泵":
                 data = basicPump
                 data.title = "1#空调冷水一次泵"
-                data.data1 = pump[5] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[5]] == 0 ? "关闭" : "开启"
                 break
               case "2#空调冷水一次泵":
                 data = basicPump
                 data.title = "2#空调冷水一次泵"
-                data.data1 = pump[6] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[6]] == 0 ? "关闭" : "开启"
                 break
               case "3#空调冷水一次泵":
                 data = basicPump
                 data.title = "3#空调冷水一次泵"
-                data.data1 = pump[7] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[7]] == 0 ? "关闭" : "开启"
                 break
               case "4#空调冷水一次泵":
                 data = basicPump
                 data.title = "4#空调冷水一次泵"
-                data.data1 = pump[8] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[8]] == 0 ? "关闭" : "开启"
                 break
               case "5#空调冷水一次泵":
                 data = basicPump
                 data.title = "5#空调冷水一次泵"
-                data.data1 = pump[9] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[9]] == 0 ? "关闭" : "开启"
                 break
               case "1#空调冷水二次泵":
                 data = basicPump
                 data.title = "1#空调冷水二次泵"
-                data.data1 = pump[10] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[10]] == 0 ? "关闭" : "开启"
                 break
               case "2#空调冷水二次泵":
                 data = basicPump
                 data.title = "2#空调冷水二次泵"
-                data.data1 = pump[11] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[11]] == 0 ? "关闭" : "开启"
                 break
               case "3#空调冷水二次泵":
                 data = basicPump
                 data.title = "3#空调冷水二次泵"
-                data.data1 = pump[12] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[12]] == 0 ? "关闭" : "开启"
                 break
               case "4#空调冷水二次泵":
                 data = basicPump
                 data.title = "4#空调冷水二次泵"
-                data.data1 = pump[13] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[13]] == 0 ? "关闭" : "开启"
                 break
               case "5#空调冷水二次泵":
                 data = basicPump
                 data.title = "5#空调冷水二次泵"
-                data.data1 = pump[14] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[14]] == 0 ? "关闭" : "开启"
                 break
               case "6#空调冷水二次泵":
                 data = basicPump
                 data.title = "6#空调冷水二次泵"
-                data.data1 = pump[15] == 0 ? "关闭" : "开启"
+                data.data1 = pageData[PAGEDATA.ColdPumpState[15]] == 0 ? "关闭" : "开启"
                 break
               case "1#离心机":
                 data = basicColdMachine
                 data.title = "1#离心机"
-                data.data1 = CM.run[0] == 0 ? "关闭" : "开启"
-                data.data2 = CM.power[0] + "KWH"
-                data.data3 = CM.coolInT[0] + "/" + CM.coolOutT[0] + "℃"
-                data.data4 = CM.coldInT[0] + "/" + CM.coldOutT[0] + "℃"
-                data.data5 = CM.pres[0] + "MPa"
+                data.data1 = pageData[PAGEDATA.ColdMachineRun[0]] == 0 ? "关闭" : "开启"
+                data.data2 = pageData[PAGEDATA.ColdMachinePowerMinList[0]] + "KWH"
+                data.data3 = pageData[PAGEDATA.ColdMachineCoolInT[0]] + "/" + pageData[PAGEDATA.ColdMachineCoolOutT[0]] + "℃"
+                data.data4 = pageData[PAGEDATA.ColdMachineColdInT[0]] + "/" + pageData[PAGEDATA.ColdMachineColdOutT[0]] + "℃"
+                data.data5 = pageData[PAGEDATA.ColdMachinePresure[0]] + "MPa"
                 break
               case "2#离心机":
                 data = basicColdMachine
                 data.title = "2#离心机"
-                data.data1 = CM.run[1] == 0 ? "关闭" : "开启"
-                data.data2 = CM.power[1] + "KWH"
-                data.data3 = CM.coolInT[1] + "/" + CM.coolOutT[1] + "℃"
-                data.data4 = CM.coldInT[1] + "/" + CM.coldOutT[1] + "℃"
-                data.data5 = CM.pres[1] + "MPa"
+                data.data1 = pageData[PAGEDATA.ColdMachineRun[1]] == 0 ? "关闭" : "开启"
+                data.data2 = pageData[PAGEDATA.ColdMachinePowerMinList[1]] + "KWH"
+                data.data3 = pageData[PAGEDATA.ColdMachineCoolInT[1]] + "/" + pageData[PAGEDATA.ColdMachineCoolOutT[1]] + "℃"
+                data.data4 = pageData[PAGEDATA.ColdMachineColdInT[1]] + "/" + pageData[PAGEDATA.ColdMachineColdOutT[1]] + "℃"
+                data.data5 = pageData[PAGEDATA.ColdMachinePresure[1]] + "MPa"
                 break
               case "螺杆机":
                 data = basicColdMachine
                 data.title = "螺杆机"
-                data.data1 = CM.run[2] == 0 ? "关闭" : "开启"
-                data.data2 = CM.power[2] + "KWH"
-                data.data3 = CM.coolInT[2] + "/" + CM.coolOutT[2] + "℃"
-                data.data4 = CM.coldInT[2] + "/" + CM.coldOutT[2] + "℃"
-                data.data5 = CM.pres[2] + "MPa"
+                data.data1 = pageData[PAGEDATA.ColdMachineRun[2]] == 0 ? "关闭" : "开启"
+                data.data2 = pageData[PAGEDATA.ColdMachinePowerMinList[2]] + "KWH"
+                data.data3 = pageData[PAGEDATA.ColdMachineCoolInT[2]] + "/" + pageData[PAGEDATA.ColdMachineCoolOutT[2]] + "℃"
+                data.data4 = pageData[PAGEDATA.ColdMachineColdInT[2]] + "/" + pageData[PAGEDATA.ColdMachineColdOutT[2]] + "℃"
+                data.data5 = pageData[PAGEDATA.ColdMachinePresure[2]] + "MPa"
                 data.data6 = "6.10"
                 break
               case "V1112":
@@ -264,73 +240,75 @@ export const SystemRefrigerationCenter = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, CM.power)
+  }, [pageData])
 
   useEffect(() => {
-    console.log("effect")
-    EnergyStation.getTable(PAGEDATA.ColdPowerMin).then((res) => {
-      setPower(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.ColdEnergyCostToday).then((res) => {
-      setEnergyCostToday(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.ColdMachineRunningNum).then((res) => {
-      setMachineRunningNum(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterInT).then((res) => {
-      setCoolingWaterInT((res/100).toFixed(2));
-    });
-    EnergyStation.getTable(PAGEDATA.ColdCoolingWaterOutT).then((res) => {
-      setCoolingWaterOutT((res/100).toFixed(2));
-    });
-    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterInT).then((res) => {
-      setRefrigeratedWaterInT((res/100).toFixed(2));
-    });
-    EnergyStation.getTable(PAGEDATA.ColdRefrigeratedWaterOutT).then((res) => {
-      setRefrigeratedWaterOutT((res/100).toFixed(2));
-    });
-    EnergyStation.getTable(PAGEDATA.ColdMachinePowerMin).then((res) => {
-      setMachinePower(res.toFixed(2));
-    });
     let dayStr = EnergyStation.getDayStr();
     let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
-    EnergyStation.getTable(PAGEDATA.ColdEnergyCostDay, dayStr).then((res)=> {
-      setEnergyCostDay(res);
-    })
+
+    EnergyStation.postPageData({
+      data:system_cold_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      let needChange = false;
+      res[PAGEDATA.ColdAlarmNumToday] = res[PAGEDATA.ColdAlarmNumToday].toFixed(0);
+      res[PAGEDATA.ColdPowerMin] = res[PAGEDATA.ColdPowerMin].toFixed(2);
+      res[PAGEDATA.ColdEnergyCostToday] = res[PAGEDATA.ColdEnergyCostToday].toFixed(2);
+      res[PAGEDATA.ColdMachineRunningNum] = res[PAGEDATA.ColdMachineRunningNum].toFixed(2);
+      res[PAGEDATA.ColdCoolingWaterInT] = (res[PAGEDATA.ColdCoolingWaterInT]/100).toFixed(2);
+      res[PAGEDATA.ColdCoolingWaterOutT] = (res[PAGEDATA.ColdCoolingWaterOutT]/100).toFixed(2);
+      res[PAGEDATA.ColdRefrigeratedWaterInT] = (res[PAGEDATA.ColdRefrigeratedWaterInT]/100).toFixed(2);
+      res[PAGEDATA.ColdRefrigeratedWaterOutT] = (res[PAGEDATA.ColdRefrigeratedWaterOutT]/100).toFixed(2);
+      res[PAGEDATA.ColdMachinePowerMin] = res[PAGEDATA.ColdMachinePowerMin].toFixed(2);
+        
+      for (let i=0;i<=15;i++) {
+        res[PAGEDATA.ColdPumpState[i]] = getList(res[PAGEDATA.ColdPumpState[i]], min);
+      }
+      
+      for (let i=0;i<=2;i++) {
+        res[PAGEDATA.ColdMachineRun[i]] = getList(res[PAGEDATA.ColdMachineRun[i]], min);
+        res[PAGEDATA.ColdMachinePowerMinList[i]] = getList(res[PAGEDATA.ColdMachinePowerMinList[i]], min);
+        res[PAGEDATA.ColdMachineCoolInT[i]] = getList(res[PAGEDATA.ColdMachineCoolInT[i]], min).toFixed(1);
+        res[PAGEDATA.ColdMachineCoolOutT[i]] = getList(res[PAGEDATA.ColdMachineCoolOutT[i]], min).toFixed(1);
+        res[PAGEDATA.ColdMachineColdInT[i]] = getList(res[PAGEDATA.ColdMachineColdInT[i]], min).toFixed(1);
+        res[PAGEDATA.ColdMachineColdOutT[i]] = getList(res[PAGEDATA.ColdMachineColdOutT[i]], min).toFixed(1);
+        res[PAGEDATA.ColdMachinePresure[i]] = getList(res[PAGEDATA.ColdMachinePresure[i]], min).toFixed(1);
+      }
+
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
     
-    for (let i=0;i<=15;i++) {
-      EnergyStation.getOPC(PAGEDATA.ColdPumpState[i], hourStr).then((res)=> {
-        res && res[min] && setPump[i](res[min]);
-      })
-    }
-    for (let i=0;i<=2;i++) {
-      EnergyStation.getOPC(PAGEDATA.ColdMachineRun[i], hourStr).then((res)=> {
-        res && res[min] && setCM.run[i](res[min]);
-      })
-      EnergyStation.getTable(PAGEDATA.ColdMachinePowerMinList[i]).then((res) => {
-        // console.log(res)
-        setCM.power[i](1);
-        // setCM.power[i](res.toFixed(1))
-      })
-      EnergyStation.getOPC(PAGEDATA.ColdMachineCoolInT[i], hourStr).then((res)=> {
-        res && res[min] && setCM.coolInT[i](res[min].toFixed(1));
-      })
-      EnergyStation.getOPC(PAGEDATA.ColdMachineCoolOutT[i], hourStr).then((res)=> {
-        res && res[min] && setCM.coolOutT[i](res[min].toFixed(1));
-      })
-      EnergyStation.getOPC(PAGEDATA.ColdMachineColdInT[i], hourStr).then((res)=> {
-        res && res[min] && setCM.coldInT[i](res[min].toFixed(1));
-      })
-      EnergyStation.getOPC(PAGEDATA.ColdMachineColdOutT[i], hourStr).then((res)=> {
-        res && res[min] && setCM.coldOutT[i](res[min].toFixed(1))
-      })
-      EnergyStation.getOPC(PAGEDATA.ColdMachinePresure[i], hourStr).then((res)=> {
-        res && res[min] && setCM.pres[i](res[min].toFixed(1))
-      })
-    }
-    
-    console.log("effect_end")
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
@@ -342,7 +320,7 @@ export const SystemRefrigerationCenter = () => {
       <iframe id="cold_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
-          <div className="alarm-number">56</div>
+          <div className="alarm-number">{pageData[PAGEDATA.ColdAlarmNumToday]}</div>
           <div className="alarm-label">告警次数</div>
           <span className="alarm-left-corner"></span>
         </div>
@@ -358,8 +336,10 @@ export const SystemRefrigerationCenter = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoRefrigeration items={{power:power, energyCostToday:energyCostToday, machineRunningNum:machineRunningNum, coolingWaterInT:coolingWaterInT,
-              coolingWaterOutT:coolingWaterOutT, refrigeratedWaterInT:refrigeratedWaterInT, refrigeratedWaterOutT:refrigeratedWaterOutT, machinePower:machinePower}}/>
+            <ComSummaryInfoRefrigeration items={{power:pageData[PAGEDATA.ColdPowerMin], energyCostToday:pageData[PAGEDATA.ColdEnergyCostToday], 
+              machineRunningNum:pageData[PAGEDATA.ColdMachineRunningNum], coolingWaterInT:pageData[PAGEDATA.ColdCoolingWaterInT],
+              coolingWaterOutT:pageData[PAGEDATA.ColdCoolingWaterOutT], refrigeratedWaterInT:pageData[PAGEDATA.ColdRefrigeratedWaterInT],
+              refrigeratedWaterOutT:pageData[PAGEDATA.ColdRefrigeratedWaterOutT], machinePower:pageData[PAGEDATA.ColdMachinePowerMin]}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -429,7 +409,7 @@ export const SystemRefrigerationCenter = () => {
               },
               series: [
                 {
-                  data: energyCostDay,
+                  data: pageData[PAGEDATA.ColdEnergyCostDay],
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {
@@ -458,7 +438,7 @@ export const SystemRefrigerationCenter = () => {
             <span className="title-text">今日告警</span>
           </div>
           <div>
-            <ComAlarms />
+            <ComAlarms items={pageData[PAGEDATA.ColdAlarmToday]}/>
           </div>
         </div>
       </div>

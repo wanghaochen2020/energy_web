@@ -15,15 +15,20 @@ const basicPump = {
   data3: "137m³/h",
 }
 
+const system_pump_data = {
+  "basic_data":[
+    PAGEDATA.PumpPowerMin,PAGEDATA.PumpPowerToday,PAGEDATA.PumpRunningState1,PAGEDATA.PumpRunningState2,PAGEDATA.PumpRunningState3,PAGEDATA.PumpRunningState4,
+    PAGEDATA.PumpRunningState5,PAGEDATA.PumpRunningState6,PAGEDATA.PumpAlarmNumToday
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.PumpAlarmToday
+  ],
+  "basic_data_list_hour":[],
+  "basic_opc_list":[]
+}
+
 export const SystemSecondPump = () => {
-  let [power, setPower] = useState(0)
-  let [powerToday, setPowerToday] = useState(0)
-  let [PumpRunningState1, setPumpRunningState1] = useState(0)
-  let [PumpRunningState2, setPumpRunningState2] = useState(0)
-  let [PumpRunningState3, setPumpRunningState3] = useState(0)
-  let [PumpRunningState4, setPumpRunningState4] = useState(0)
-  let [PumpRunningState5, setPumpRunningState5] = useState(0)
-  let [PumpRunningState6, setPumpRunningState6] = useState(0)
+  let [pageData, setPageData] = useState({});
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -44,36 +49,42 @@ export const SystemSecondPump = () => {
               case "1#空调热水二次泵":
                 data = basicPump
                 data.title = "1#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState1] == 0 ? "关闭" : "开启"
                 data.data2="18.5kW"
                 data.data3="145m³/h"
                 break
               case "2#空调热水二次泵":
                 data = basicPump
                 data.title = "2#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState2] == 0 ? "关闭" : "开启"
                 data.data2="18.5kW"
                 data.data3="145m³/h"
                 break
               case "3#空调热水二次泵":
                 data = basicPump
                 data.title = "3#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState3] == 0 ? "关闭" : "开启"
                 data.data2="15kW"
                 data.data3="120m³/h"
                 break
               case "4#空调热水二次泵":
                 data = basicPump
                 data.title = "4#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState4] == 0 ? "关闭" : "开启"
                 data.data2="15kW"
                 data.data3="120m³/h"
                 break
               case "5#空调热水二次泵":
                 data = basicPump
                 data.title = "5#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState5] == 0 ? "关闭" : "开启"
                 data.data2="22kW"
                 data.data3="180m³/h"
                 break
               case "6#空调热水二次泵":
                 data = basicPump
                 data.title = "6#空调热水二次泵"
+                data.data1 = pageData[PAGEDATA.PumpRunningState6] == 0 ? "关闭" : "开启"
                 data.data2="22kW"
                 data.data3="180m³/h"
                 break
@@ -90,31 +101,57 @@ export const SystemSecondPump = () => {
   }, [])
 
   useEffect(()=>{
-    EnergyStation.getTable(PAGEDATA.PumpPowerMin).then((res) => {
-      setPower(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpPowerToday).then((res) => {
-      setPowerToday(res.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState1).then((res) => {
-      setPumpRunningState1(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState2).then((res) => {
-      setPumpRunningState2(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState3).then((res) => {
-      setPumpRunningState3(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState4).then((res) => {
-      setPumpRunningState4(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState5).then((res) => {
-      setPumpRunningState5(res.toFixed(0))
-    })
-    EnergyStation.getTable(PAGEDATA.PumpRunningState6).then((res) => {
-      setPumpRunningState6(res.toFixed(0))
-    })
-    
+    let dayStr = EnergyStation.getDayStr();
+    let hourStr = EnergyStation.getHourStr();
+
+    EnergyStation.postPageData({
+      data:system_pump_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      let needChange = false;
+      res[PAGEDATA.PumpPowerMin] = res[PAGEDATA.PumpPowerMin].toFixed(2);
+      res[PAGEDATA.PumpPowerToday] = res[PAGEDATA.PumpPowerToday].toFixed(2);
+      res[PAGEDATA.PumpRunningState1] = res[PAGEDATA.PumpRunningState1].toFixed(0);
+      res[PAGEDATA.PumpRunningState2] = res[PAGEDATA.PumpRunningState2].toFixed(0);
+      res[PAGEDATA.PumpRunningState3] = res[PAGEDATA.PumpRunningState3].toFixed(0);
+      res[PAGEDATA.PumpRunningState4] = res[PAGEDATA.PumpRunningState4].toFixed(0);
+      res[PAGEDATA.PumpRunningState5] = res[PAGEDATA.PumpRunningState5].toFixed(0);
+      res[PAGEDATA.PumpRunningState6] = res[PAGEDATA.PumpRunningState6].toFixed(0);
+      res[PAGEDATA.PumpAlarmNumToday] = res[PAGEDATA.PumpAlarmNumToday].toFixed(0);
+
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
+
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
@@ -126,7 +163,7 @@ export const SystemSecondPump = () => {
       <iframe id="pump_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
-          <div className="alarm-number">64</div>
+          <div className="alarm-number">{pageData[PAGEDATA.PumpAlarmNumToday]}</div>
           <div className="alarm-label">告警次数</div>
           <span className="alarm-left-corner"></span>
         </div>
@@ -142,7 +179,7 @@ export const SystemSecondPump = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoSecondPump items={{power:power,powerToday:powerToday}}/>
+            <ComSummaryInfoSecondPump items={{power:pageData[PAGEDATA.PumpPowerMin],energyCostToday:pageData[PAGEDATA.PumpPowerToday]}}/>
           </div>
         </div>
         <div className="box-wrapper">
@@ -157,103 +194,28 @@ export const SystemSecondPump = () => {
           <div style={{margin: 'auto', textAlign: 'center', width: '100%', height: '300px'}}>
             <div className="row-item-box">
               <div className="item-text">1号泵</div>
-              <div className={"item-value text-"+(PumpRunningState1==0?"red":"green")}>{PumpRunningState1==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState1]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState1]==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">2号泵</div>
-              <div className={"item-value text-"+(PumpRunningState2==0?"red":"green")}>{PumpRunningState2==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState2]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState2]==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">3号泵</div>
-              <div className={"item-value text-"+(PumpRunningState3==0?"red":"green")}>{PumpRunningState3==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState3]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState3]==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">4号泵</div>
-              <div className={"item-value text-"+(PumpRunningState4==0?"red":"green")}>{PumpRunningState4==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState4]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState4]==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">5号泵</div>
-              <div className={"item-value text-"+(PumpRunningState5==0?"red":"green")}>{PumpRunningState5==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState5]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState5]==0?"OFF":"ON"}</div>
             </div>
             <div className="row-item-box">
               <div className="item-text">6号泵</div>
-              <div className={"item-value text-"+(PumpRunningState6==0?"red":"green")}>{PumpRunningState6==0?"OFF":"ON"}</div>
+              <div className={"item-value text-"+(pageData[PAGEDATA.PumpRunningState6]==0?"red":"green")}>{pageData[PAGEDATA.PumpRunningState6]==0?"OFF":"ON"}</div>
             </div>
-            {/* <ReactEcharts style={{ width: '100%', height: '290px', margin: 'auto' }} option={{
-              title: {
-                text: '',
-                left: '15',
-                top: '8',
-                textStyle: {
-                  color: '#fff',
-                  fontSize: 14
-                }
-              },
-              xAxis: {
-                type: 'category',
-                name: '时',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    color: '#6cbcea',
-                    width: 1,
-                    type: 'solid'
-                  }
-                },
-                axisLabel: {
-                  show: true,
-                  textStyle: {
-                    color: '#ffffff'
-                  }
-                },
-              },
-              yAxis: {
-                type: 'value',
-                name: 'KW',
-                axisLine: {
-                  show: true,
-                  lineStyle: {
-                    color: '#6cbcea',
-                    width: 1,
-                    type: 'solid'
-                  }
-                },
-                axisLabel: {
-                  show: true,
-                  textStyle: {
-                    color: '#ffffff'
-                  }
-                },
-                splitLine: {
-                  show: false,
-                  lineStyle: {
-                    color: ['#192f44'],
-                    width: 1,
-                    type: 'solid'
-                  }
-                }
-              },
-              series: [
-                {
-                  data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
-                  type: 'bar',
-                  barWidth: 8,
-                  itemStyle: {
-                    color: {
-                        type: 'linear',
-                        x: 0, y: 0, x2: 0, y2: 1,
-                        colorStops: [
-                            { offset: 0, color: 'rgba(3, 223, 235, .9)' },
-                            { offset: 1, color: 'rgba(3, 223, 235, 0)' }
-                        ],
-                    },
-                    borderRadius: [4, 4, 0, 0]
-                  }
-                }
-              ]
-            }} /> */}
           </div>
         </div>
         <div className="box-wrapper">
@@ -266,7 +228,7 @@ export const SystemSecondPump = () => {
             <span className="title-text">今日告警</span>
           </div>
           <div>
-            <ComAlarms />
+            <ComAlarms items={pageData[PAGEDATA.PumpAlarmToday]}/>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ export const ComSummaryInfoSecondPump = ({ items }) => {
           总用电能耗累计
           </span>
           <span className="main-info-number yellow-color">
-            {items.powerToday}
+            {items.energyCostToday}
             <span className="number-unit">kW・h</span>
           </span>
         </span>

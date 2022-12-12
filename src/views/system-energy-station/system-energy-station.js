@@ -358,8 +358,38 @@ export const SystemEnergyStation = () => {
       for (let i=0;i<=9;i++) {
         res[PAGEDATA.EnergyDVState[i]] = getList(res[PAGEDATA.EnergyDVState[i]], min);
       }
+      
+      let needChange = false;
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
 
-      setPageData(res);
+      if (needChange) setPageData(res);
     });
 
     window.addEventListener('message', messageFunc)

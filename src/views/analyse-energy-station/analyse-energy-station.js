@@ -98,11 +98,11 @@ export const AnalyseEnergyStation = () => {
   return (
     <div className="analyse-energy-station-view">
       <div className="operation-summary">
-          <div className="alarm-info">
+          {/* <div className="alarm-info">
             <div className="alarm-number">68</div>
             <div className="alarm-label">告警次数</div>
             <span className="alarm-left-corner"></span>
-          </div>
+          </div> */}
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
               tooltip: {
@@ -178,7 +178,7 @@ export const AnalyseEnergyStation = () => {
             }} />
             <div className="number-value">今日系统总效率: {AvrgEnergyEfficiencyDay}%</div>
           </div>
-          <div className="top-info-box">
+          {/* <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
               tooltip: {
                 show: false
@@ -202,7 +202,7 @@ export const AnalyseEnergyStation = () => {
               ]
             }} />
             <div className="number-value">今日减碳排放量: 50KWH</div>
-          </div>
+          </div> */}
       </div>
       <div className="top-box">
         <div className="top-left">
