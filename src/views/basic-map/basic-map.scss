@@ -87,5 +87,30 @@
       font-size: 30px;
     }
   }
+
+  .button-wrapper {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    left: calc(50% - 300px);
+    right: calc(50% - 300px);
+    width: auto;
+    margin: auto;
+    display: inline-block;
+    z-index: 1000;
+    .button-row {
+      text-align: center;
+      .button-item {
+        cursor: pointer;
+        margin: 5px;
+        padding: 2px 4px;
+        border-radius: 4px;
+        text-align: center;
+        display: inline-block;
+        color: #fff;
+        background-color: rgb(13, 100, 172);
+      }
+    }
+  }
 }
 
