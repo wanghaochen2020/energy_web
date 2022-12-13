@@ -1,48 +1,19 @@
 import React, { useState } from 'react';
 import './alarms.scss';
 
-export const Alarms = () => {
-  const [data] = useState([
-    {
-      order: 1,
-      name: '智能设备1',
-      type: '故障',
-      time: '2022-07-24',
-      status: '严重'
-    },
-    {
-      order: 2,
-      name: '故障情况2',
-      status: '严重'
-    },
-    {
-      order: 3,
-      name: '故障情况3',
-      status: '严重'
-    },
-    {
-      order: 4,
-      name: '故障情况4',
-      status: '严重'
-    },
-    {
-      order: 5,
-      name: '故障情况5',
-      status: '严重'
-    }
-  ]);
-
+export const Alarms = (data) => {
+  data = data.data;
   const title = <thead><tr className="alarm-title">
     <th>序号</th>
     <th>事件名称</th>
-    <th>严重状态</th>
+    <th>状态</th>
   </tr></thead>
 
-  const rows = <tbody>{data.map((item, index) => 
+  const rows = <tbody>{data && data.map((item, index) => 
     <tr key={index} className={index%2===0?'row-odd':''}>
-      <td>{item.order}</td>
+      <td>{index}</td>
       <td>{item.name}</td>
-      <td><span className="alarm-unresolved">严重</span></td>
+      <td><span className="alarm-unresolved">{item === 1 ? "已处理":"未处理"}</span></td>
     </tr>
   )}</tbody>;
 

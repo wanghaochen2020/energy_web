@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { Alarms } from './alarms/alarms';
 import './basic-map.scss';
 import { ChartService } from '../../utils/chart.service';
 import { SERVERINFO } from '../../constants/app-info';
+import { PAGEDATA } from '../../constants/pageData';
+import { EnergyStation } from '../../business/system-layer.service';
 
 const basicBuild = {
   title1:"建筑面积",
@@ -12,7 +14,30 @@ const basicBuild = {
   title4:"耗热量",
 }
 
+const basic_map_data = {
+  "basic_data":[
+    PAGEDATA.EnergyOnlineRate
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.EnergyAlarmToday, PAGEDATA.ColdAlarmToday, PAGEDATA.PumpAlarmToday
+  ],
+  "basic_data_list_hour":[],
+  "basic_opc_list":[]
+}
+
+const concatList = (...list) => {
+  let a = [];
+  for(let i=0;i<list.length;i++)
+  {
+    if (list[i] !== undefined) {
+      a = a.concat(list[i]);
+    }
+  }
+  return a;
+}
+
 export const BasicMap = () => {
+  let [pageData, setPageData] = useState({});
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
         // The data was sent from your site.
@@ -106,11 +131,54 @@ export const BasicMap = () => {
   }, [])
 
   useEffect(() => {
+    let dayStr = EnergyStation.getDayStr();
+    let hourStr = EnergyStation.getHourStr();
+
+    EnergyStation.postPageData({
+      data:basic_map_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      let needChange = false;
+      res[PAGEDATA.EnergyAlarmNumToday] = concatList(res[PAGEDATA.EnergyAlarmNumToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
+
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
+
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
     }
-  })
+  }, [messageFunc])
   return (
     <div className="basic-map-view">
       <div className="top-box">
@@ -215,33 +283,15 @@ export const BasicMap = () => {
             <div className="operation-summary">
               <div className="top-info-box">
                 <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 80 }], startAngle: 240
+                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
                 })} />
-                <div className="number-value">设备在线<br /> 80%</div>
+                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
               </div>
               <div className="top-info-box">
                 <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 20 }], colors: ['#323891', '#ecf75d'], startAngle: 40
+                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
                 })} />
-                <div className="number-value">设备离线<br /> 20%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 10 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">正在维护<br />10%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 75 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">监控正常<br />75%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 25 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">监控异常<br />25%</div>
+                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
               </div>
             </div>
           </div>
@@ -257,33 +307,15 @@ export const BasicMap = () => {
             <div className="operation-summary">
               <div className="top-info-box">
                 <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 85 }], startAngle: 240
+                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
                 })} />
-                <div className="number-value">设备在线<br /> 85%</div>
+                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
               </div>
               <div className="top-info-box">
                 <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 15 }], colors: ['#323891', '#ecf75d'], startAngle: 40
+                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
                 })} />
-                <div className="number-value">设备离线<br /> 15%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 12 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">正在维护<br />12%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 70 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">监控正常<br />70%</div>
-              </div>
-              <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 30 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">监控异常<br />30%</div>
+                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
               </div>
             </div>
           </div>
@@ -296,7 +328,7 @@ export const BasicMap = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">事件提醒</span>
             </div>
-            <Alarms />
+            <Alarms data={pageData[PAGEDATA.EnergyAlarmToday]}/>
           </div>
         </div>
       </div>
