@@ -6,13 +6,6 @@ export const SystemSolarPower = () => {
 
   return (
     <div className="system-solar-power-view">
-      <div className="total-wrapper">
-        <div className="alarm-info">
-            <div className="alarm-number">62358</div>
-            <div className="alarm-label">总发电量</div>
-            <span className="alarm-left-corner"></span>
-          </div>
-      </div>
       <div className="top-info-wrapper">
         <div className="operation-summary box-wrapper">
             <div className="top-left-corner"></div>
@@ -22,6 +15,31 @@ export const SystemSolarPower = () => {
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">太阳能发电量</span>
+            </div>
+            <div className="top-info-box">
+              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
+                tooltip: {
+                  show: false
+                },
+                series: [
+                  {
+                    type: 'pie',
+                    radius: ['80%', '100%'],
+                    startAngle: 360,
+                    hoverAnimation: false,
+                    labelLine: {
+                      normal: {
+                        show: false
+                      }
+                    },
+                    data: [
+                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                      { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                    ]
+                  }
+                ]
+              }} />
+              <div className="number-value">总发电量: 62358KWH</div>
             </div>
             <div className="top-info-box">
               <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{

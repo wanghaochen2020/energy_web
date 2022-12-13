@@ -300,6 +300,24 @@ export const BasicMap = () => {
           </div>
         </div>
       </div>
+      <div className="button-wrapper">
+        <div className="button-row">
+          <div className="button-item">组团全貌</div>
+          <div className="button-item">能源站</div>
+          <div className="button-item">二次泵站</div>
+          <div className="button-item">制冷中心</div>
+        </div>
+        <div className="button-row">
+          <div className="button-item">冬奥村</div>
+          <div className="button-item">组团1</div>
+          <div className="button-item">组团2</div>
+          <div className="button-item">组团3</div>
+          <div className="button-item">组团4</div>
+          <div className="button-item">组团5</div>
+          <div className="button-item">公共南</div>
+          <div className="button-item">公共北</div>
+        </div>
+      </div>
     </div>
   );
 }

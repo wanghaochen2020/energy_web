@@ -49,16 +49,15 @@ export const AllocationResult = () => {
 
   return (
     <div className="allocation-result-view">
-      <div className="top-box">
-        <div className="top-left">
-          <div className="box-wrapper">
+      <div className="top-box" style={{paddingRight: '0'}}>
+        <div className="box-wrapper" style={{marginRight: '0'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">过去7天不同方案运行服用对比分析</span>
+              <span className="title-text">过去7天不同方案运行费用对比分析</span>
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
@@ -138,7 +137,10 @@ export const AllocationResult = () => {
                   }
                 ]
               }} />
-          </div>
+        </div>
+      </div>
+      <div className="top-box">
+        <div className="top-left">
             <div className="box-wrapper">
               <div className="top-left-corner"></div>
               <div className="top-right-corner"></div>
@@ -161,80 +163,6 @@ export const AllocationResult = () => {
           </div>
         </div>
         <div className="top-right">
-            <div className="box-wrapper">
-              <div className="top-left-corner"></div>
-              <div className="top-right-corner"></div>
-              <div className="bottom-left-corner"></div>
-              <div className="bottom-right-corner"></div>
-              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
-                <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">经济效益 - 供暖季累计</span>
-              </div>
-                <div className="history-data-title">历史累计运行费用</div>
-                <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                  tooltip: {
-                    trigger: 'axis',
-                    axisPointer: {
-                      type: 'shadow'
-                    }
-                  },
-                  xAxis: {
-                    type: 'value',
-                    splitLine: {
-                      show: false
-                    },
-                    axisLabel: {
-                      formatter: ''
-                    }
-                  },
-                  yAxis: {
-                    type: 'category',
-                    inverse: true,
-                    data: [''],
-                    axisLabel: {
-                      margin: 20,
-                      rich: {
-                        value: {
-                          lineHeight: 30,
-                          align: 'center'
-                        }
-                      }
-                    },
-                    axisLine: {
-                      show: true,
-                      lineStyle: {
-                        color: '#6cbcea',
-                        width: 1,
-                        type: 'solid'
-                      }
-                    }
-                  },
-                  series: [
-                    {
-                      name: 'City Alpha',
-                      type: 'bar',
-                      data: [165],
-                      label: {
-                        show: true,
-                        formatter: '方案一  {c} 元',
-                        fontSize: 16
-                      },
-                      barWidth : 60
-                    },
-                    {
-                      name: 'City Beta',
-                      type: 'bar',
-                      data: [150],
-                      label: {
-                        show: true,
-                        formatter: '方案二  {c} 元',
-                        fontSize: 16
-                      },
-                      barWidth : 60
-                    }
-                  ]
-                }} />
-            </div>
             <div className="box-wrapper">
               <div className="top-left-corner"></div>
               <div className="top-right-corner"></div>
