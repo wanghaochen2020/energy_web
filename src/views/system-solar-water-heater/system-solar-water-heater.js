@@ -20,7 +20,7 @@ const system_solar_water_data = {
 
 export const SystemSolarWaterHeater = () => {
   const [chartDateButtons, setChartDateButton] = useState([
-    { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
+    { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
   ]);
 
   const selectChartDateButton = (item) => {
@@ -33,6 +33,8 @@ export const SystemSolarWaterHeater = () => {
   }
 
   let [pageData, setPageData] = useState({});
+  let [SolarWaterHeatCollectionMonth, setSolarWaterHeatCollectionMonth] = useState([]);
+  let [SolarWaterHeatCollectionYear, setSolarWaterHeatCollectionYear] = useState([]);
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -76,6 +78,15 @@ export const SystemSolarWaterHeater = () => {
   useEffect(() => {
     let dayStr = EnergyStation.getDayStr();
     let hourStr = EnergyStation.getHourStr();
+    let monthStr = EnergyStation.getMonthStr();
+    let yearStr = EnergyStation.getYearStr();
+
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionMonth, monthStr).then((res)=> {
+      setSolarWaterHeatCollectionMonth(res);
+    });
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionYear, yearStr).then((res)=> {
+      setSolarWaterHeatCollectionYear(res);
+    });
     EnergyStation.postPageData({
       data:system_solar_water_data,
       day_str:dayStr,
@@ -87,7 +98,6 @@ export const SystemSolarWaterHeater = () => {
       res[PAGEDATA.SolarWaterHeatCollecterOutT] = res[PAGEDATA.SolarWaterHeatCollecterOutT].toFixed(2);
       res[PAGEDATA.SolarWaterJRQT] = res[PAGEDATA.SolarWaterJRQT].toFixed(2);
       res[PAGEDATA.SolarWaterHeatCollectionToday] = res[PAGEDATA.SolarWaterHeatCollectionToday].toFixed(2);
-      res[PAGEDATA.SolarWaterBoilerPowerConsumptionDay] = res[PAGEDATA.SolarWaterBoilerPowerConsumptionDay].toFixed(0);
 
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {
@@ -182,8 +192,11 @@ export const SystemSolarWaterHeater = () => {
               },
               xAxis: {
                 type: 'category',
-                name: '时',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                name: (chartDateButtons[2] && chartDateButtons[2].selected) ? "月"
+                : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "日" : "时"),
+                data: (chartDateButtons[2] && chartDateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                   : ((chartDateButtons[1] && chartDateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                   : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                 axisLine: {
                   show: true,
                   lineStyle: {
@@ -195,7 +208,7 @@ export const SystemSolarWaterHeater = () => {
               },
               yAxis: {
                 type: 'value',
-                name: 'KW',
+                name: 'J',
                 axisLine: {
                   show: true,
                   lineStyle: {
@@ -215,7 +228,8 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: pageData[PAGEDATA.SolarWaterHeatCollectionDay],
+                  data: (chartDateButtons[2] && chartDateButtons[2].selected) ? SolarWaterHeatCollectionYear
+                  : ((chartDateButtons[1] && chartDateButtons[1].selected) ? SolarWaterHeatCollectionMonth : pageData[PAGEDATA.SolarWaterHeatCollectionDay]),
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {

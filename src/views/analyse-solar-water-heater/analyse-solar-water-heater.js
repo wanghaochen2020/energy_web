@@ -32,6 +32,7 @@ export const AnalyseSolarWaterHeater = () => {
 
   useEffect(() => {
     let dayStr = EnergyStation.getDayStr()
+    let monthStr = EnergyStation.getMonthStr();
     let yearStr = EnergyStation.getYearStr();
     EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
@@ -44,7 +45,7 @@ export const AnalyseSolarWaterHeater = () => {
       setSolarWaterHeatEfficiencyDay(res)
       setAvrgSolarWaterHeatEfficiencyDay(avg)
     })
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyMonth, yearStr).then((res)=> {
+    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyMonth, monthStr).then((res)=> {
       setSolarWaterHeatEfficiencyMonth(res);
     });
     EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyYear, yearStr).then((res)=> {
@@ -61,7 +62,7 @@ export const AnalyseSolarWaterHeater = () => {
       setSolarWaterGuaranteeRateDay(res)
       setAvrgSolarWaterGuaranteeRateDay(avg)
     })
-    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateMonth, yearStr).then((res)=> {
+    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateMonth, monthStr).then((res)=> {
       setSolarWaterGuaranteeRateMonth(res);
     });
     EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateYear, yearStr).then((res)=> {
