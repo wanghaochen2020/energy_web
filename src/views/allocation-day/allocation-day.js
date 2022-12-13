@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './allocation-day.scss';
 import { ChartService } from '../../utils/chart.service';
 
 export const AllocationDay = () => {
+  const [waterHours, setWaterHours] = useState([1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]);
+  const [loadData, setLoadData] = useState([150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150]);
+  const [tempData, setTempData] = useState([35, 20, 17, 16, 20, 30, 20, 30, 20, 30, 24, 23]);
 
   return (
     <div className="allocation-day-view">
@@ -98,6 +101,95 @@ export const AllocationDay = () => {
         </div>
       </div>
       <div className="top-box">
+        <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+              <div className="top-left-corner"></div>
+              <div className="top-right-corner"></div>
+              <div className="bottom-left-corner"></div>
+              <div className="bottom-right-corner"></div>
+              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
+                <span className="box-title-icon">&#9658;</span>
+                <span className="title-text">负荷明细统计</span>
+              </div>
+                <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+                  legend: {
+                    show: true,
+                    top: 10,
+                    right: 12,
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14
+                    },
+                    data: ['电锅炉负荷(除去蓄热部分)', '水箱蓄热负荷kw*h', '水箱放热负荷kw*h']
+                  },
+                  title: {
+                    text: '',
+                    left: '15',
+                    top: '8',
+                    textStyle: {
+                      color: '#fff',
+                      fontSize: 14
+                    }
+                  },
+                  xAxis: {
+                    type: 'category',
+                    name: '时',
+                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                    axisLine: {
+                      show: true,
+                      lineStyle: {
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                      }
+                    }
+                  },
+                  yAxis: {
+                    type: 'value',
+                    name: 'KWH',
+                    axisLine: {
+                      show: true,
+                      lineStyle: {
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                      }
+                    },
+                    splitLine: {
+                      show: false
+                    }
+                  },
+                  series: [
+                    {
+                      name: '电锅炉负荷(除去蓄热部分)',
+                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
+                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+                      type: 'bar',
+                      stack: 'Ad',
+                      symbolSize: 6,
+                      barWidth: 12
+                    },
+                    {
+                      name: '水箱蓄热负荷kw*h',
+                      data: [35, 80, 47, 160, 100, 50, 60,50, 60, 30, 124, 60, 118, 
+                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
+                      type: 'bar',
+                      stack: 'Ad',
+                      symbolSize: 6,
+                      barWidth: 12
+                    },
+                    {
+                      name: '水箱放热负荷kw*h',
+                      data: [45, 60, 47, 160, 60, 50, 60,80, 50, 40, 124, 40, 118, 
+                        80, 47, 130, 100, 80, 120, 124, 100, 108, 35],
+                      type: 'bar',
+                      stack: 'Ad',
+                      barWidth: 12,
+                    }
+                  ]
+                }} />
+          </div>
+      </div>
+      <div className="top-box">
         <div className="top-left">
           <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
               <div className="top-left-corner"></div>
@@ -106,7 +198,7 @@ export const AllocationDay = () => {
               <div className="bottom-right-corner"></div>
               <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
                 <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">锅炉建议工况和实际工况对比</span>
+                <span className="title-text">电锅炉逐时建议工况</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
@@ -135,78 +227,6 @@ export const AllocationDay = () => {
                   ]
                 })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
-              <div className="top-left-corner"></div>
-              <div className="top-right-corner"></div>
-              <div className="bottom-left-corner"></div>
-              <div className="bottom-right-corner"></div>
-              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
-                <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">锅炉运行工况</span>
-              </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '15',
-                  top: '8',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                // backgroundColor: '#080a27',
-                xAxis: {
-                  type: 'category',
-                  data: ['1#锅炉', '2#锅炉', '3#锅炉', '4#锅炉'],
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#fff',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  max: 40,
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#fff',
-                      width: 1,
-                      type: 'solid'
-                    }
-                  },
-                  splitLine: {
-                    show: true,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: [25, 20, 30, 24],
-                    type: 'bar',
-                    barWidth: 8,
-                    itemStyle: {
-                      color: {
-                          type: 'linear',
-                          x: 0, y: 0, x2: 0, y2: 1,
-                          colorStops: [
-                              { offset: 0, color: 'rgba(3, 123, 235, .9)' },
-                              { offset: 1, color: 'rgba(3, 123, 235, 0)' }
-                          ],
-                      },
-                      borderRadius: [4, 4, 0, 0]
-                    }
-                  }
-                ]
-              }} />
-          </div>
         </div>
         <div className="top-right">
           <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
@@ -216,113 +236,19 @@ export const AllocationDay = () => {
               <div className="bottom-right-corner"></div>
               <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
                 <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">水箱蓄热逐时建议工况(A/B)</span>
-              </div>
-                <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                  legend: {
-                    show: true,
-                    top: 10,
-                    right: 12,
-                    textStyle: {
-                      color: '#fff',
-                      fontSize: 14
-                    },
-                    data: ['A', 'B']
-                  },
-                  title: {
-                    text: '',
-                    left: '15',
-                    top: '8',
-                    textStyle: {
-                      color: '#fff',
-                      fontSize: 14
-                    }
-                  },
-                  xAxis: {
-                    type: 'category',
-                    name: '时',
-                    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                    axisLine: {
-                      show: true,
-                      lineStyle: {
-                        color: '#fff',
-                        width: 1,
-                        type: 'solid'
-                      }
-                    }
-                  },
-                  yAxis: {
-                    type: 'value',
-                    name: 'kW',
-                    axisLine: {
-                      show: true,
-                      lineStyle: {
-                        color: '#fff',
-                        width: 1,
-                        type: 'solid'
-                      }
-                    },
-                    splitLine: {
-                      show: true,
-                      lineStyle: {
-                        color: ['#192f44'],
-                        width: 1,
-                        type: 'solid'
-                      }
-                    }
-                  },
-                  series: [
-                    {
-                      name: 'A',
-                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
-                      type: 'bar',
-                      symbolSize: 6,
-                      barWidth: 8,
-                      itemStyle: {
-                        color: {
-                            type: 'linear',
-                            x: 0, y: 0, x2: 0, y2: 1,
-                            colorStops: [
-                                { offset: 0, color: 'rgba(3, 223, 135, .9)' },
-                                { offset: 1, color: 'rgba(3, 223, 135, 0)' }
-                            ],
-                        },
-                        borderRadius: [4, 4, 0, 0]
-                      }
-                    },
-                    {
-                      name: 'B',
-                      data: [35, 80, 47, 160, 100, 50, 60,50, 60, 30, 124, 60, 118, 
-                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35],
-                      type: 'bar',
-                      symbolSize: 6,
-                      barWidth: 8,
-                      itemStyle: {
-                        color: {
-                            type: 'linear',
-                            x: 0, y: 0, x2: 0, y2: 1,
-                            colorStops: [
-                                { offset: 0, color: 'rgba(100, 123, 235, .9)' },
-                                { offset: 1, color: 'rgba(100, 123, 235, 0)' }
-                            ],
-                        },
-                        borderRadius: [4, 4, 0, 0]
-                      }
-                    }
-                  ]
-                }} />
-          </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
-              <div className="top-left-corner"></div>
-              <div className="top-right-corner"></div>
-              <div className="bottom-left-corner"></div>
-              <div className="bottom-right-corner"></div>
-              <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
-                <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">水箱放热逐时建议工况</span>
+                <span className="title-text">蓄热水箱逐时建议工况</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+                legend: {
+                  show: true,
+                  top: 6,
+                  left: 10,
+                  textStyle: {
+                    color: '#fff',
+                    fontSize: 14
+                  },
+                  data: ['负荷量', '温度(°C)']
+                },
                 tooltip: {
                   trigger: 'axis'
                 },
@@ -337,11 +263,11 @@ export const AllocationDay = () => {
                 },
                 xAxis: {
                   type: 'category',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  data: waterHours,
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#fff',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -353,7 +279,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#fff',
+                      color: '#6cbcea',
                       width: 1,
                       type: 'solid'
                     }
@@ -369,7 +295,12 @@ export const AllocationDay = () => {
                   position: 'right',
                   alignTicks: false,
                   axisLine: {
-                    show: true
+                    show: true,
+                    lineStyle: {
+                      color: '#6cbcea',
+                      width: 1,
+                      type: 'solid'
+                    }
                   },
                   axisLabel: {
                     formatter: '{value} °C'
@@ -380,9 +311,8 @@ export const AllocationDay = () => {
                 }],
                 series: [
                   {
-                    name: '移峰电量(KWH)',
-                    data: [150, 260, 200, 150, 170, 230, 224, 100, 150, 260, 200, 150, 170, 230, 224, 100,
-                      150, 260, 200, 150, 170, 230, 224, 200, 230, 224, 200],
+                    name: '负荷量',
+                    data: loadData,
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -390,18 +320,19 @@ export const AllocationDay = () => {
                           type: 'linear',
                           x: 0, y: 0, x2: 0, y2: 1,
                           colorStops: [
-                              { offset: 0, color: 'rgba(3, 223, 235, .9)' },
-                              { offset: 1, color: 'rgba(3, 223, 235, 0)' }
+                              { offset: 0, color: 'rgba(3, 223, 135, .9)' },
+                              { offset: 1, color: 'rgba(3, 223, 135, 0)' }
                           ],
                       },
                       borderRadius: [4, 4, 0, 0]
                     }
                   },
                   {
-                    name: '室外温度(°C)',
+                    name: '温度(°C)',
                     yAxisIndex: 1,
-                    data: [20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25, 20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25, 20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25, 20, 22, 23],
+                    data: tempData,
                     type: 'line',
+                    smooth: true,
                     symbolSize: 6,
                     itemStyle: {
                       normal: {
