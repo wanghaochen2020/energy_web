@@ -226,9 +226,9 @@ export const AnalyseRefrigerationCenter = () => {
                       type: 'pie',
                       radius: '50%',
                       data: [
-                        { value: 1048, name: '1#制冷机组' },
-                        { value: 735, name: '2#制冷机组' },
-                        { value: 580, name: '3#制冷机组' },
+                        { value: 59, name: '火电' },
+                        { value: 37, name: '绿电' },
+                        { value: 4, name: '其它' },
                       ],
                       label: {
                         formatter: '{b}: {c}({d}%)',
