@@ -330,94 +330,35 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
-                title: {
-                  text: '',
-                  left: '15',
-                  top: '8',
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  }
-                },
-                // backgroundColor: '#080a27',
-                xAxis: {
-                  type: 'category',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#6cbcea',
-                      width: 1,
-                      type: 'solid'
-                    }
+            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+                {
+                  tooltip: {
+                    trigger: 'item'
                   },
-                  axisLabel: {
-                    show: true,
+                  legend: {
+                    orient: 'vertical',
+                    left: 'right',
                     textStyle: {
-                      color: '#ffffff'
-                    }
-                  }
-                },
-                yAxis: {
-                  type: 'value',
-                  name: '%',
-                  axisLine: {
-                    show: true,
-                    lineStyle: {
-                      color: '#6cbcea',
-                      width: 1,
-                      type: 'solid'
+                      color: '#fff'
                     }
                   },
-                  splitLine: {
-                    show: false,
-                    lineStyle: {
-                      color: ['#192f44'],
-                      width: 1,
-                      type: 'solid'
+                  series: [
+                    {
+                      type: 'pie',
+                      radius: '50%',
+                      data: [
+                        { value: 59, name: '火电' },
+                        { value: 37, name: '绿电' },
+                        { value: 4, name: '其它' },
+                      ],
+                      label: {
+                        formatter: '{b}: {c}({d}%)',
+                        color: '#fff'
+                      }
                     }
-                  },
-                  axisLabel: {
-                    show: true,
-                    textStyle: {
-                      color: '#ffffff'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    symbolSize: 14,
-                    data: [
-                      [10.0, 8.04],
-                      [8.07, 6.95],
-                      [13.0, 7.58],
-                      [9.05, 8.81],
-                      [11.0, 8.33],
-                      [14.0, 7.66],
-                      [13.4, 6.81],
-                      [10.0, 6.33],
-                      [14.0, 8.96],
-                      [12.5, 6.82],
-                      [9.15, 7.2],
-                      [11.5, 7.2],
-                      [3.03, 4.23],
-                      [12.2, 7.83],
-                      [2.02, 4.47],
-                      [1.05, 3.33],
-                      [4.05, 4.96],
-                      [6.03, 7.24],
-                      [12.0, 6.26],
-                      [12.0, 8.84],
-                      [7.08, 5.82],
-                      [5.02, 5.68]
-                    ],
-                    type: 'scatter',
-                    itemStyle: {
-                      color: '#446eee'
-                    }
-                  }
-                ]
-              }} />
+                  ]
+                }
+              } />
           </div>
         </div>
       </div>
