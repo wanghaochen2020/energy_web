@@ -20,9 +20,8 @@ const system_pump_data = {
     PAGEDATA.PumpPowerMin,PAGEDATA.PumpPowerToday,PAGEDATA.PumpRunningState1,PAGEDATA.PumpRunningState2,PAGEDATA.PumpRunningState3,PAGEDATA.PumpRunningState4,
     PAGEDATA.PumpRunningState5,PAGEDATA.PumpRunningState6,PAGEDATA.PumpAlarmNumToday
   ],
-  "basic_data_list_day":[
-    PAGEDATA.PumpAlarmToday
-  ],
+  "basic_data_list_day":[],
+  "map_data_list_day":[PAGEDATA.PumpAlarmToday],
   "basic_data_list_hour":[],
   "basic_opc_list":[]
 }

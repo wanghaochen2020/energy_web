@@ -40,11 +40,11 @@ export const AnalyseEnergyStation = () => {
         avg += res[i]*100;
         res[i] = (res[i]*100).toFixed(2);
       }
-      if (!(res.length)) {
+      if (res.length != 0) {
         avg /= res.length;
       }
       setEnergyBoilerEfficiencyDay(res);
-      setAvrgEnergyBoilerEfficiencyDay(avg);
+      setAvrgEnergyBoilerEfficiencyDay(avg.toFixed(2));
     })
     EnergyStation.getTable(PAGEDATA.EnergyWatertankEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
@@ -52,11 +52,11 @@ export const AnalyseEnergyStation = () => {
         avg += res[i]*100;
         res[i] = (res[i]*100).toFixed(2);
       }
-      if (!(res.length)) {
+      if (res.length != 0) {
         avg /= res.length;
       }
       setEnergyWatertankEfficiencyDay(res);
-      setAvrgEnergyWatertankEfficiencyDay(avg);
+      setAvrgEnergyWatertankEfficiencyDay(avg.toFixed(2));
     })
     EnergyStation.getTable(PAGEDATA.EnergyEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
@@ -64,11 +64,11 @@ export const AnalyseEnergyStation = () => {
         avg += res[i]*100;
         res[i] = (res[i]*100).toFixed(2);
       }
-      if (!(res.length)) {
+      if (res.length != 0) {
         avg /= res.length;
       }
       setEnergyEfficiencyDay(res);
-      setAvrgEnergyEfficiencyDay(avg);
+      setAvrgEnergyEfficiencyDay(avg.toFixed(2));
     })
     EnergyStation.getTable(PAGEDATA.EnergyCarbonDay, dayStr).then((res)=> {
       setEnergyCarbonDay(res)
@@ -133,8 +133,8 @@ export const AnalyseEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
+                    { value: 100 - AvrgEnergyBoilerEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: AvrgEnergyBoilerEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
                   ]
                 }
               ]
@@ -158,8 +158,8 @@ export const AnalyseEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: {AvrgEnergyBoilerEfficiencyDay}, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
+                    { value: 100 - AvrgEnergyWatertankEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: AvrgEnergyWatertankEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
                   ]
                 }
               ]
@@ -183,8 +183,8 @@ export const AnalyseEnergyStation = () => {
                     }
                   },
                   data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: {AvrgEnergyWatertankEfficiencyDay}, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
+                    { value: 100-AvrgEnergyEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
+                    { value: AvrgEnergyEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
                   ]
                 }
               ]
@@ -242,7 +242,7 @@ export const AnalyseEnergyStation = () => {
                 },
                 xName: '时',
                 yName: '%',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                 series: [
                   {
                     name: '电锅炉',

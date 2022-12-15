@@ -14,7 +14,7 @@ export const AnalyseSecondPump = () => {
     let dayStr = EnergyStation.getDayStr();
     let yearStr = EnergyStation.getYearStr();
     let lastYearStr = EnergyStation.getLastYearStr();
-    EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
+    EnergyStation.getTable(PAGEDATA.PumpEHR1, dayStr).then((res)=> {
       setPumpEHR1(res)
     })
     EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
@@ -58,11 +58,11 @@ export const AnalyseSecondPump = () => {
                 color: '#fff',
                 fontSize: 14
               },
-              data: ['环路1', '环路2', '环路3', '环路4']
+              data: ['环路1', '环路2']
             },
             xAxis: {
               type: 'category',
-              data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+              data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -74,7 +74,7 @@ export const AnalyseSecondPump = () => {
             },
             yAxis: {
               type: 'value',
-              name: '%',
+              name: '',
               axisLine: {
                 show: true,
                 lineStyle: {
