@@ -37,13 +37,14 @@ export const AnalyseSolarWaterHeater = () => {
     EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyDay, dayStr).then((res)=> {
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
-        avg += res[i];
+        avg += res[i]*100;
+        res[i] = (res[i]*100).toFixed(2);
       }
-      if (!(res.length)) {
+      if (res.length != 0) {
         avg /= res.length;
       }
       setSolarWaterHeatEfficiencyDay(res)
-      setAvrgSolarWaterHeatEfficiencyDay(avg)
+      setAvrgSolarWaterHeatEfficiencyDay(avg.toFixed(2))
     })
     EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyMonth, monthStr).then((res)=> {
       setSolarWaterHeatEfficiencyMonth(res);
@@ -54,13 +55,14 @@ export const AnalyseSolarWaterHeater = () => {
     EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateDay, dayStr).then((res)=> {
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
-        avg += res[i];
+        avg += res[i]*100;
+        res[i] = (res[i]*100).toFixed(2);
       }
-      if (!(res.length)) {
+      if (res.length != 0) {
         avg /= res.length;
       }
       setSolarWaterGuaranteeRateDay(res)
-      setAvrgSolarWaterGuaranteeRateDay(avg)
+      setAvrgSolarWaterGuaranteeRateDay(avg.toFixed(2))
     })
     EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateMonth, monthStr).then((res)=> {
       setSolarWaterGuaranteeRateMonth(res);
@@ -97,6 +99,16 @@ export const AnalyseSolarWaterHeater = () => {
 
     item.selected = true;
     setSystemRateButtons2([...systemRateButtons2]);
+  }
+
+  const selectChartDateButtons = (item) => {
+    if (item.selected) return;
+    chartDateButtons.slice().forEach(button => {
+      button.selected = false;
+    });
+
+    item.selected = true;
+    setChartDateButtons([...chartDateButtons]);
   }
 
   return (
@@ -152,13 +164,13 @@ export const AnalyseSolarWaterHeater = () => {
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: {AvrgSolarWaterHeatEfficiencyDay}}], startAngle: 240
+              data: [{ value: 100-AvrgSolarWaterHeatEfficiencyDay }, { value: AvrgSolarWaterHeatEfficiencyDay}], startAngle: 240
             })} />
             <div className="number-value">今日太阳能集热效率: {AvrgSolarWaterHeatEfficiencyDay}%</div>
           </div>
           <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: {AvrgSolarWaterGuaranteeRateDay}}], colors: ['#323891', '#ecf75d'], startAngle: 40
+              data: [{ value: 100-AvrgSolarWaterGuaranteeRateDay }, { value: AvrgSolarWaterGuaranteeRateDay}], colors: ['#323891', '#ecf75d'], startAngle: 40
             })}/>
             <div className="number-value">今日太阳能保证率: {AvrgSolarWaterGuaranteeRateDay}%</div>
           </div>
@@ -214,7 +226,7 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
                 chartDateButtons.map((item, index) =>
-                  <span onClick={() => setChartDateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+                  <span onClick={() => selectChartDateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
@@ -229,7 +241,7 @@ export const AnalyseSolarWaterHeater = () => {
                     },
                     data: ['绿电碳排放量', '原煤碳排放量', '天然气碳排放量']
                   },
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   series: [
                     {
                       name: '绿电碳排放量',
@@ -270,6 +282,7 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
+                  yName: '%',
                   category: (systemRateButtons[2] &&systemRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
                   : ((systemRateButtons[1] && systemRateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
                   : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),

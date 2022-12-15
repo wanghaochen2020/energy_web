@@ -18,7 +18,7 @@ const basic_map_data = {
   "basic_data":[
     PAGEDATA.EnergyOnlineRate
   ],
-  "basic_data_list_day":[
+  "map_data_list_day":[
     PAGEDATA.EnergyAlarmToday, PAGEDATA.ColdAlarmToday, PAGEDATA.PumpAlarmToday
   ],
   "basic_data_list_hour":[],
@@ -29,7 +29,7 @@ const concatList = (...list) => {
   let a = [];
   for(let i=0;i<list.length;i++)
   {
-    if (list[i] !== undefined) {
+    if (list[i] !== undefined && list[i] !== null) {
       a = a.concat(list[i]);
     }
   }
@@ -140,7 +140,8 @@ export const BasicMap = () => {
       hour_str:hourStr
     }).then((res) => {
       let needChange = false;
-      res[PAGEDATA.EnergyAlarmNumToday] = concatList(res[PAGEDATA.EnergyAlarmNumToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
+      res[PAGEDATA.EnergyAlarmToday] = concatList(res[PAGEDATA.EnergyAlarmToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
+      console.log(res[PAGEDATA.EnergyAlarmToday])
 
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {

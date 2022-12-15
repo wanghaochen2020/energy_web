@@ -13,7 +13,7 @@ export const Alarms = (data) => {
     <tr key={index} className={index%2===0?'row-odd':''}>
       <td>{index}</td>
       <td>{item.name}</td>
-      <td><span className="alarm-unresolved">{item === 1 ? "已处理":"未处理"}</span></td>
+      <td><span className={item.state === 1 ? "alarm-resolved" : "alarm-unresolved"}>{item.state === 1 ? "已处理":"未处理"}</span></td>
     </tr>
   )}</tbody>;
 

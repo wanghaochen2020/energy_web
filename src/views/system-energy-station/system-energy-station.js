@@ -38,8 +38,9 @@ const system_energy_data = {
     PAGEDATA.EnergyBoilerPowerConsumptionToday2, PAGEDATA.EnergyBoilerPowerConsumptionToday3, PAGEDATA.EnergyBoilerPowerConsumptionToday4
   ],
   "basic_data_list_day":[
-    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost,PAGEDATA.EnergyAlarmToday
+    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost
   ],
+  "map_data_list_day":[PAGEDATA.EnergyAlarmToday],
   "basic_data_list_hour":[],
   "basic_opc_list":[
     PAGEDATA.EnergyBoilerInT1,PAGEDATA.EnergyBoilerInT2,PAGEDATA.EnergyBoilerInT3,PAGEDATA.EnergyBoilerInT4,PAGEDATA.EnergyBoilerOutT1,
@@ -331,6 +332,8 @@ export const SystemEnergyStation = () => {
       res[PAGEDATA.EnergyHeatSupplyToday] = (res[PAGEDATA.EnergyHeatSupplyToday]/1e9).toFixed(2);
       res[PAGEDATA.EnergyAlarmNumToday] = res[PAGEDATA.EnergyAlarmNumToday].toFixed(0);
 
+      console.log(res[PAGEDATA.EnergyAlarmToday])
+
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday1] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday1].toFixed(2);
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday2] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday2].toFixed(2);
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday3] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday3].toFixed(2);
@@ -499,7 +502,7 @@ export const SystemEnergyStation = () => {
                 xAxis: {
                   type: 'category',
                   name: '时',
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                  data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                   axisLine: {
                     show: true,
                     lineStyle: {

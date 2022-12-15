@@ -48,8 +48,9 @@ const system_cold_data = {
     PAGEDATA.ColdRefrigeratedWaterInT,PAGEDATA.ColdRefrigeratedWaterOutT,PAGEDATA.ColdMachinePowerMin,PAGEDATA.ColdAlarmNumToday
   ],
   "basic_data_list_day":[
-    PAGEDATA.ColdEnergyCostDay,PAGEDATA.ColdAlarmToday
+    PAGEDATA.ColdEnergyCostDay
   ],
+  "map_data_list_day":[PAGEDATA.ColdAlarmToday],
   "basic_data_list_hour":[],
   "basic_opc_list":PAGEDATA.ColdPumpState.concat(PAGEDATA.ColdMachineRun).concat(PAGEDATA.ColdMachinePowerMinList)
   .concat(PAGEDATA.ColdMachineCoolInT).concat(PAGEDATA.ColdMachineCoolOutT).concat(PAGEDATA.ColdMachinePresure)
@@ -365,7 +366,7 @@ export const SystemRefrigerationCenter = () => {
               xAxis: {
                 type: 'category',
                 name: '时',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
                 axisLine: {
                   show: true,
                   lineStyle: {
