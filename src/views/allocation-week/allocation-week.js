@@ -4,7 +4,7 @@ import './allocation-week.scss';
 
 export const AllocationWeek = () => {
   return (
-    <div className="load-prediction-view">
+    <div className="allocation-week-view">
       <div className="top-box">
         <div className="box-wrapper">
         <div className="top-left-corner"></div>
@@ -234,6 +234,128 @@ export const AllocationWeek = () => {
           ]
         }} />
       </div>
+      </div>
+      <div className="bottom-box">
+        <table className="table-history">
+          <thead>
+            <tr>
+              <th>1月2号(谷电价阶段)</th>
+              <th>1月3号(谷电价阶段)</th>
+              <th>1月4号(谷电价阶段)</th>
+              <th>1月5号(谷电价阶段)</th>
+              <th>1月6号(谷电价阶段)</th>
+              <th>1月7号(谷电价阶段)</th>
+              <th>1月8号(谷电价阶段)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <table className="table-history">
+          <thead>
+            <tr>
+              <th>1月2号(峰平电价阶段)</th>
+              <th>1月3号(峰平电价阶段)</th>
+              <th>1月4号(峰平电价阶段)</th>
+              <th>1月5号(峰平电价阶段)</th>
+              <th>1月6号(峰平电价阶段)</th>
+              <th>1月7号(峰平电价阶段)</th>
+              <th>1月8号(峰平电价阶段)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启4台锅炉</span><span>1h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启3台锅炉</span><span>1h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+              <td><span className="label-style">开启2台锅炉</span><span>3h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+              <td><span className="label-style">开启1台锅炉</span><span>2h</span></td>
+            </tr>
+            <tr>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+              <td><span className="label-style">开启0台锅炉</span><span>1h</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

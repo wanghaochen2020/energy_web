@@ -1,8 +1,12 @@
 .com-basic-map-alarms{
   margin: auto 10px;
-  overflow-y: visible;
-  overflow-x: hidden;
+  overflow: auto;
   opacity: 0.8;
+  position: absolute;
+  top: 38px;
+  right: 0;
+  left: 0;
+  bottom: 5px;
 
   .table-alarms {
     font-size: 13px;

@@ -209,57 +209,6 @@ export const AnalyseSolarWaterHeater = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">今日碳排放量统计</span>
-            </div>
-            <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
-              {
-                chartDateButtons.map((item, index) =>
-                  <span onClick={() => setChartDateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
-              }
-            </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
-                ChartService.getLineOptions({
-                  legend: {
-                    show: true,
-                    top: 30,
-                    right: 12,
-                    textStyle: {
-                      color: '#fff',
-                      fontSize: 14
-                    },
-                    data: ['绿电碳排放量', '原煤碳排放量', '天然气碳排放量']
-                  },
-                  data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                  series: [
-                    {
-                      name: '绿电碳排放量',
-                      data: [150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                        230, 224, 100, 218, 135, 80, 147, 260, 200, 100]
-                    },
-                    {
-                      name: '原煤碳排放量',
-                      data: [35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                        80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
-                    },
-                    {
-                      name: '天然气碳排放量',
-                      data: [25, 60, 57, 40, 50, 40, 50, 50, 60, 40, 54, 50, 48,
-                        60, 57, 40, 50, 60, 40, 54, 60, 48, 45]
-                    }
-                  ]
-                })} />
-          </div>
-        </div>
-      </div>
-      <div className="bottom-box">
-        <div className="bottom-left">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
-            <div className="top-left-corner"></div>
-            <div className="top-right-corner"></div>
-            <div className="bottom-left-corner"></div>
-            <div className="bottom-right-corner"></div>
-            <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
-              <span className="box-title-icon">&#9658;</span>
               <span className="title-text">太阳能保证率</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
@@ -282,33 +231,36 @@ export const AnalyseSolarWaterHeater = () => {
                 })} />
           </div>
         </div>
-        <div className="bottom-right">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+      </div>
+      <div className="bottom-box">
+        <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">系统总效率</span>
+              <span className="title-text">集热量</span>
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
-                systemRateButtons2.map((item, index) =>
-                  <span onClick={() => selectSystemRateButtons2(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+                systemRateButtons.map((item, index) =>
+                  <span onClick={() => selectSystemRateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
-                  category: [1, 2, 3, 4, 5, 6, 7, 8],
+                  category: (systemRateButtons[2] &&systemRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                  : ((systemRateButtons[1] && systemRateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                  : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: [150, 60, 230, 224, 100, 218, 135, 80]
+                      data: (systemRateButtons[2] && systemRateButtons[2].selected) ? SolarWaterGuaranteeRateYear
+                      : ((systemRateButtons[1] && systemRateButtons[1].selected) ? SolarWaterGuaranteeRateMonth : SolarWaterGuaranteeRateDay)
                     }
                   ]
                 })} />
           </div>
-        </div>
       </div>
     </div>
   );

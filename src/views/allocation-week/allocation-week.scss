@@ -41,4 +41,37 @@
     color: rgb(12, 213, 240);
     border-color: rgb(12, 213, 240);
   }
+
+  .bottom-box {
+    width: 100%;
+    .table-history {
+      width: 99%;
+      margin: 10px auto;
+      color: #fff;
+      thead {
+        background-color: #141e57;
+      }
+
+      th, td {
+        text-align: center;
+        padding: 10px 8px;
+      }
+
+      td {
+        padding: 4px 0 0 0;
+        text-align: left;
+      }
+
+      .label-style {
+        background-color: #141e57;
+        padding: 5px 20px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+
+    .row-even {
+      background-color: #19244b;
+    }
+  }
 }

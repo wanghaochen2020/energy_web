@@ -97,7 +97,7 @@ export class ChartService {
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#6cbcea',
+            color: '#ffffff',
             width: 1,
             type: 'solid'
           }
@@ -115,7 +115,7 @@ export class ChartService {
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#6cbcea',
+            color: '#ffffff',
             width: 1,
             type: 'solid'
           }

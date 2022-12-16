@@ -57,7 +57,7 @@ export const AllocationResult = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">过去7天不同方案运行费用对比分析</span>
+              <span className="title-text">节约能耗</span>
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
                 title: {
@@ -72,11 +72,11 @@ export const AllocationResult = () => {
                 // backgroundColor: '#080a27',
                 xAxis: {
                   type: 'category',
-                  data: ['2022-08-02', '2022-08-03', '2022-08-04', '2022-08-05', '2022-08-06', '2022-08-07', '2022-08-08'],
+                  data: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#ffffff',
                       width: 1,
                       type: 'solid'
                     }
@@ -84,11 +84,11 @@ export const AllocationResult = () => {
                 },
                 yAxis: {
                   type: 'value',
-                  name: 'KWH',
+                  name: 'kw∙h',
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#ffffff',
                       width: 1,
                       type: 'solid'
                     }
@@ -148,12 +148,12 @@ export const AllocationResult = () => {
               <div className="bottom-right-corner"></div>
               <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
                 <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">相对于满蓄节约能耗量统计</span>
+                <span className="title-text">运行费用</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px' }} option={
                 ChartService.getBarOptions({
-                  yName: 'KWH',
-                  category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                  yName: '费用(元)',
+                  category: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
                   series: [
                     {
                       data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]
@@ -170,12 +170,12 @@ export const AllocationResult = () => {
               <div className="bottom-right-corner"></div>
               <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
                 <span className="box-title-icon">&#9658;</span>
-                <span className="title-text">相对于满蓄减碳排放</span>
+                <span className="title-text">减少碳排放</span>
               </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   yName: 'kg',
-                  data: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
+                  data: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
                   series: [
                     {
                       data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]

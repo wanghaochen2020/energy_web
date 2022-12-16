@@ -37,6 +37,18 @@ const concatList = (...list) => {
 }
 
 export const BasicMap = () => {
+  const buttonMaps = {
+    '冬奥村': [],
+    '组团1': ['建筑'],
+    '组团2': ['建筑'],
+    '组团3': ['建筑'],
+    '组团4': ['建筑'],
+    '组团5': ['建筑'],
+    '组团6': ['建筑', '热水系统'],
+    '公共南': ['建筑', '能源站', '制冷中心', '二次泵站'],
+    '公共北': ['建筑'],
+  };
+  const [selectedButton, setSelectedButton] = useState('');
   let [pageData, setPageData] = useState({});
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
@@ -182,7 +194,7 @@ export const BasicMap = () => {
   return (
     <div className="basic-map-view">
       <div className="top-box">
-        <iframe id='basic_map_model' src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
+        {/* <iframe id='basic_map_model' src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe> */}
         <div className="top-left">
           <div className="box-wrapper" style={{ width: '100%', height: '325px' }}>
             <div className="top-left-corner"></div>
@@ -334,20 +346,13 @@ export const BasicMap = () => {
       </div>
       <div className="button-wrapper">
         <div className="button-row">
-          <div className="button-item">组团全貌</div>
-          <div className="button-item">能源站</div>
-          <div className="button-item">二次泵站</div>
-          <div className="button-item">制冷中心</div>
+          {(buttonMaps[selectedButton] || []).map((str) => <div className="button-item">{str}</div>)}
         </div>
         <div className="button-row">
-          <div className="button-item">冬奥村</div>
-          <div className="button-item">组团1</div>
-          <div className="button-item">组团2</div>
-          <div className="button-item">组团3</div>
-          <div className="button-item">组团4</div>
-          <div className="button-item">组团5</div>
-          <div className="button-item">公共南</div>
-          <div className="button-item">公共北</div>
+          {
+            Object.keys(buttonMaps).map((str) => <div onClick={() => setSelectedButton(str)}
+              className={"button-item" + (str === selectedButton ? ' button-selected' : '')}>{str}</div>)
+          }
         </div>
       </div>
     </div>
