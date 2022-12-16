@@ -58,6 +58,7 @@ export const ComAlarms = ({ items }) => {
     let newList = []
     for (let i = 0;i<items.length;i++) {
       newList[i] = {}
+      newList[i].order = i+1
       newList[i].name = items[i].name
       newList[i].type = items[i].type
       newList[i].time = items[i].time

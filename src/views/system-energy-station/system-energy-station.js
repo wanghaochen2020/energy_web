@@ -38,8 +38,9 @@ const system_energy_data = {
     PAGEDATA.EnergyBoilerPowerConsumptionToday2, PAGEDATA.EnergyBoilerPowerConsumptionToday3, PAGEDATA.EnergyBoilerPowerConsumptionToday4
   ],
   "basic_data_list_day":[
-    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost,PAGEDATA.EnergyAlarmToday
+    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost
   ],
+  "map_data_list_day":[PAGEDATA.EnergyAlarmToday],
   "basic_data_list_hour":[],
   "basic_opc_list":[
     PAGEDATA.EnergyBoilerInT1,PAGEDATA.EnergyBoilerInT2,PAGEDATA.EnergyBoilerInT3,PAGEDATA.EnergyBoilerInT4,PAGEDATA.EnergyBoilerOutT1,
@@ -330,6 +331,8 @@ export const SystemEnergyStation = () => {
       res[PAGEDATA.EnergyTankRunningNum] = res[PAGEDATA.EnergyTankRunningNum].toFixed(0);
       res[PAGEDATA.EnergyHeatSupplyToday] = (res[PAGEDATA.EnergyHeatSupplyToday]/1e9).toFixed(2);
       res[PAGEDATA.EnergyAlarmNumToday] = res[PAGEDATA.EnergyAlarmNumToday].toFixed(0);
+
+      console.log(res[PAGEDATA.EnergyAlarmToday])
 
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday1] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday1].toFixed(2);
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday2] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday2].toFixed(2);

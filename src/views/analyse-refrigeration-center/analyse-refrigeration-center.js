@@ -34,7 +34,7 @@ export const AnalyseRefrigerationCenter = () => {
         sum += res[i];
       }
       setColdCarbonDay(res);
-      setColdCarbonToday(sum);
+      setColdCarbonToday(sum.toFixed(2));
     });
     EnergyStation.getTable(PAGEDATA.ColdCarbonMonth, monthStr).then((res)=> {
       setColdCarbonMonth(res);
@@ -187,7 +187,8 @@ export const AnalyseRefrigerationCenter = () => {
             </div>
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
-                  xName: '时',
+                  xName: (chartDateButtons[2] && chartDateButtons[2].selected) ? "月"
+                  : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "日" : "时"),
                   yName: 't',
                   data: (chartDateButtons[2] && chartDateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
                    : ((chartDateButtons[1] && chartDateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]

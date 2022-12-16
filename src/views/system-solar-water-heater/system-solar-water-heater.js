@@ -208,7 +208,8 @@ export const SystemSolarWaterHeater = () => {
               },
               yAxis: {
                 type: 'value',
-                name: 'J',
+                name: (chartDateButtons[2] && chartDateButtons[2].selected) ? "GJ"
+                : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "GJ" : "KJ"),
                 axisLine: {
                   show: true,
                   lineStyle: {
