@@ -4,9 +4,9 @@ import './allocation-day.scss';
 import { ChartService } from '../../utils/chart.service';
 
 export const AllocationDay = () => {
-  const [waterHours, setWaterHours] = useState([1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]);
-  const [loadData, setLoadData] = useState([150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150]);
-  const [tempData, setTempData] = useState([35, 20, 17, 16, 20, 30, 20, 30, 20, 30, 24, 23]);
+  const [waterHours, setWaterHours] = useState(['23:00', '07:00', '10:00', '15:00', '18:00', '21:00', '23:00']);
+  const [loadData, setLoadData] = useState([150, 0, 230, 0, 0, 0, 0]);
+  const [tempData, setTempData] = useState([0, 20, 0, 16, 20, 30, 20]);
 
   return (
     <div className="allocation-day-view">
@@ -267,10 +267,10 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#ffffff',
                       width: 1,
                       type: 'solid'
-                    }
+                    },
                   }
                 },
                 yAxis: [{
@@ -279,7 +279,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#ffffff',
                       width: 1,
                       type: 'solid'
                     }
@@ -297,7 +297,7 @@ export const AllocationDay = () => {
                   axisLine: {
                     show: true,
                     lineStyle: {
-                      color: '#6cbcea',
+                      color: '#fff',
                       width: 1,
                       type: 'solid'
                     }
@@ -314,30 +314,15 @@ export const AllocationDay = () => {
                     name: '负荷量',
                     data: loadData,
                     type: 'bar',
-                    barWidth: 8,
-                    itemStyle: {
-                      color: {
-                          type: 'linear',
-                          x: 0, y: 0, x2: 0, y2: 1,
-                          colorStops: [
-                              { offset: 0, color: 'rgba(3, 223, 135, .9)' },
-                              { offset: 1, color: 'rgba(3, 223, 135, 0)' }
-                          ],
-                      },
-                      borderRadius: [4, 4, 0, 0]
-                    }
+                    barGap: -1,
+                    barWidth: '60%',
                   },
                   {
                     name: '温度(°C)',
                     yAxisIndex: 1,
                     data: tempData,
-                    type: 'line',
-                    smooth: true,
-                    symbolSize: 6,
-                    itemStyle: {
-                      normal: {
-                      }
-                    }
+                    type: 'bar',
+                    barWidth: '60%',
                   }
                 ]
               }} />
