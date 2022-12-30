@@ -30,15 +30,15 @@ export class HttpRequestService {
     }
     // return this.apiAxios(method, options.url, options);
     // for mock data deployment
-    return this.apiAxios(method, getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
+    return this.apiAxios('get', getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
   }
 
   static handleRequest(params) {
-    // const user = BaseInfoService.getValidUser();
-    // if (!params.skipValidation && !user) {
-    //   this.goToLogin();
-    //   return false;
-    // }
+    const user = BaseInfoService.getValidUser();
+    if (!params.skipValidation && !user) {
+      this.goToLogin();
+      return false;
+    }
     // params.headers = { 
     //   'Content-Type': 'application/json',
     //   language: TextService.getLanguage()?.name,
@@ -92,7 +92,7 @@ export class HttpRequestService {
     }
     HttpRequestService._redirected = true;
     if (window.location.href.toLowerCase().indexOf('login') === -1) {
-      // RouterService.push(RoutesPath.login, { redirectUrl: window.location.href });
+      window.location.href = '/login';
     }
   }
 }
