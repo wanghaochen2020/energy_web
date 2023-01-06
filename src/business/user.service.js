@@ -3,8 +3,8 @@ import { BusinessBaseService } from './base/business-base.service';
 import { BaseInfoService } from './base-info.service';
 import { HttpRequestService } from './base/http-request.service';
 
-const apiBase = 'api/user';
-const getApi = (url) => 'api/user/' + url;
+const apiBase = 'api';
+const getApi = (url) => 'api/' + url;
 const apis = {
   list: getApi('list'),
   login: getApi('login'),
@@ -96,6 +96,7 @@ export class UserBusiness {
     };
     options.skipValidation = true;
     return HttpRequestService.post(options).then((data) => {
+      console.log(data)
       BaseInfoService.setUser(data);
       BaseInfoService.setAuthorization(data.authorizationList);
     });
