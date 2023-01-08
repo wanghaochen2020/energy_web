@@ -28,9 +28,9 @@ export class HttpRequestService {
       return new Promise((resolve, reject) => {
       });
     }
-    // return this.apiAxios(method, options.url, options);
+    return this.apiAxios(method, options.url, options);
     // for mock data deployment
-    return this.apiAxios('get', getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
+    // return this.apiAxios(method, getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
   }
 
   static handleRequest(params) {
@@ -62,6 +62,7 @@ export class HttpRequestService {
     const promise = new Promise(function (resolve, reject) {
       axios(url, {
         url: url,
+        baseURL: SERVERINFO.serverIP,
         method: method,
         data: method === 'POST' || method === 'PUT' ? params.body : null,
         params: method === 'GET' || method === 'DELETE' ? params.params : null,
@@ -69,9 +70,7 @@ export class HttpRequestService {
         headers: params.headers
       }).then((res) => {
         if (res.status === 200) {
-          setTimeout(() => { // for simulation, remove it if call backend service
-            resolve(res.data);
-          }, 200);
+          resolve(res.data);
         } else {
           resolveError(res);
           reject(res.data);
