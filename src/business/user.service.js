@@ -96,9 +96,9 @@ export class UserBusiness {
     };
     options.skipValidation = true;
     return HttpRequestService.post(options).then((data) => {
-      console.log(data)
       BaseInfoService.setUser(data);
       BaseInfoService.setAuthorization(data.authorizationList);
+      return data
     });
   }
 

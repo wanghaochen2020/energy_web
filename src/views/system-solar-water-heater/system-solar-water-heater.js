@@ -130,12 +130,14 @@ export const SystemSolarWaterHeater = () => {
 
       if (needChange) setPageData(res);
     });
-    
+  }, [])
+  
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
     }
-  }, [])
+  }, [messageFunc])
 
   return (
     <div className="system-solar-water-heater-view">

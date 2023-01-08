@@ -22,17 +22,22 @@ export const Login = () => {
 
     setLoading(true);
     setSubmitted(true);
-    UserBusiness.login(userName, password).then(() => {
+    UserBusiness.login(userName, password).then((data) => {
       setLoading(false);
-      if (window.history.state.usr?.redirectUrl) {
-        // RouterService.replace(window.history.state.usr.redirectUrl);
+      if (data.code !== 200) {
+        setSubmitted(false);
+        DialogsService.notify(data.msg || data, 'error');
       } else {
-        navigate(routeNames.basicMap);
+        if (window.history.state?.usr?.redirectUrl) {
+          // RouterService.replace(window.history.state.usr.redirectUrl);
+        } else {
+          navigate(routeNames.basicMap);
+        }
       }
     }).catch((err) => {
       setLoading(false);
       setSubmitted(false);
-      DialogsService.notify(err.message || err, 'error');
+      DialogsService.notify(err.msg || err, 'error');
     });
   }
 

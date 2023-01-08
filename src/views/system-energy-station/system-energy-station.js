@@ -394,12 +394,13 @@ export const SystemEnergyStation = () => {
 
       if (needChange) setPageData(res);
     });
+  }, [])
 
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
     }
-
   }, [messageFunc])
 
   return (

@@ -309,7 +309,9 @@ export const SystemRefrigerationCenter = () => {
 
       if (needChange) setPageData(res);
     });
-    
+  }, [])
+  
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
