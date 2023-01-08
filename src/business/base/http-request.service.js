@@ -70,9 +70,7 @@ export class HttpRequestService {
         headers: params.headers
       }).then((res) => {
         if (res.status === 200) {
-          setTimeout(() => { // for simulation, remove it if call backend service
-            resolve(res.data);
-          }, 200);
+          resolve(res.data);
         } else {
           resolveError(res);
           reject(res.data);
