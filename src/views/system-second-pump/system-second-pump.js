@@ -150,12 +150,14 @@ export const SystemSecondPump = () => {
 
       if (needChange) setPageData(res);
     });
-
+  }, [])
+  
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
     }
-  }, [])
+  }, [messageFunc])
 
   return (
     <div className="system-second-pump-view">
