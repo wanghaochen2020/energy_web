@@ -392,7 +392,8 @@ export const AnalyseRefrigerationCenter = () => {
                     },
                     data: [
                       {
-                        value: ColdCarbonToday
+                        // value: ColdCarbonToday
+                        value: 70
                       }
                     ]
                   }

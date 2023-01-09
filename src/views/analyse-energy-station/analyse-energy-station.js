@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
-import echarts from 'echarts';
 import './analyse-energy-station.scss';
 import { ChartService } from '../../utils/chart.service';
 import { PAGEDATA } from '../../constants/pageData';
