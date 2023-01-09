@@ -72,29 +72,333 @@ export const AnalyseRefrigerationCenter = () => {
   return (
     <div className="analyse-refrigeration-center-view">
       <div className="operation-summary">
-          <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 80}], colors: ['#323891', '#33d7ea']
-              })} />
-              <div className="number-value">今日制冷机平均热效率: 92%</div>
+          <div className="top-info-box" style={{ width: '260px' }}>
+              <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
+                series: [
+                  {
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 100,
+                    itemStyle: {
+                      color: '#03dfeb',
+                      shadowColor: '#03dfeb',
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0
+                    },
+                    progress: {
+                      show: true,
+                      roundCap: true,
+                      width: 10
+                    },
+                    pointer: {
+                      show: false
+                    },
+                    axisLine: {
+                      roundCap: true,
+                      lineStyle: {
+                        width: 10,
+                        color: [[1, '#00378e']]
+                      }
+                    },
+                    axisTick: {
+                      show: false,
+                    },
+                    splitLine: {
+                      length: 1,
+                      lineStyle: {
+                        width: 1,
+                        color: '#03dfeb'
+                      }
+                    },
+                    axisLabel: {
+                      show: false
+                    },
+                    title: {
+                      show: false
+                    },
+                    detail: {
+                      borderRadius: 4,
+                      offsetCenter: [0, '-20%'],
+                      valueAnimation: true,
+                      formatter: function (value) {
+                        return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日制冷机平均热效率}';
+                      },
+                      rich: {
+                        value: {
+                          fontSize: 28,
+                          fontWeight: 'bold',
+                          color: '#03dfeb'
+                        },
+                        unit: {
+                          fontSize: 18,
+                          color: '#03dfeb',
+                          padding: [0, 0, -4, 2]
+                        },
+                        detail: {
+                          fontSize: 12,
+                          color: '#d1d1d1'
+                        }
+                      }
+                    },
+                    data: [
+                      {
+                        value: 92
+                      }
+                    ]
+                  }
+                ]
+              }} />
+              {/* <div className="number-value">今日制冷机平均热效率: 92%</div> */}
           </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: 80}], colors: ['#323891', '#ecf75d'], startAngle: 40
-            })} />
-            <div className="number-value">今日蓄热水箱平均热效率: 94%</div>
+          <div className="top-info-box" style={{ width: '260px' }}>
+              <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
+                series: [
+                  {
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 100,
+                    itemStyle: {
+                      color: '#03dfeb',
+                      shadowColor: '#03dfeb',
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0
+                    },
+                    progress: {
+                      show: true,
+                      roundCap: true,
+                      width: 10
+                    },
+                    pointer: {
+                      show: false
+                    },
+                    axisLine: {
+                      roundCap: true,
+                      lineStyle: {
+                        width: 10,
+                        color: [[1, '#00378e']]
+                      }
+                    },
+                    axisTick: {
+                      show: false,
+                    },
+                    splitLine: {
+                      length: 1,
+                      lineStyle: {
+                        width: 1,
+                        color: '#03dfeb'
+                      }
+                    },
+                    axisLabel: {
+                      show: false
+                    },
+                    title: {
+                      show: false
+                    },
+                    detail: {
+                      borderRadius: 4,
+                      offsetCenter: [0, '-20%'],
+                      valueAnimation: true,
+                      formatter: function (value) {
+                        return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日蓄热水箱平均热效率}';
+                      },
+                      rich: {
+                        value: {
+                          fontSize: 28,
+                          fontWeight: 'bold',
+                          color: '#03dfeb'
+                        },
+                        unit: {
+                          fontSize: 18,
+                          color: '#03dfeb',
+                          padding: [0, 0, -4, 2]
+                        },
+                        detail: {
+                          fontSize: 12,
+                          color: '#d1d1d1'
+                        }
+                      }
+                    },
+                    data: [
+                      {
+                        value: 94
+                      }
+                    ]
+                  }
+                ]
+              }} />
+              {/* <div className="number-value">今日制冷机平均热效率: 92%</div> */}
           </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: 50}], colors: ['#323891', '#45f9b7'], startAngle: 140
-            })} />
-            <div className="number-value">今日系统总效率: 98%</div>
+          <div className="top-info-box" style={{ width: '260px' }}>
+              <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
+                series: [
+                  {
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 100,
+                    itemStyle: {
+                      color: '#03dfeb',
+                      shadowColor: '#03dfeb',
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0
+                    },
+                    progress: {
+                      show: true,
+                      roundCap: true,
+                      width: 10
+                    },
+                    pointer: {
+                      show: false
+                    },
+                    axisLine: {
+                      roundCap: true,
+                      lineStyle: {
+                        width: 10,
+                        color: [[1, '#00378e']]
+                      }
+                    },
+                    axisTick: {
+                      show: false,
+                    },
+                    splitLine: {
+                      length: 1,
+                      lineStyle: {
+                        width: 1,
+                        color: '#03dfeb'
+                      }
+                    },
+                    axisLabel: {
+                      show: false
+                    },
+                    title: {
+                      show: false
+                    },
+                    detail: {
+                      borderRadius: 4,
+                      offsetCenter: [0, '-20%'],
+                      valueAnimation: true,
+                      formatter: function (value) {
+                        return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日系统总效率}';
+                      },
+                      rich: {
+                        value: {
+                          fontSize: 28,
+                          fontWeight: 'bold',
+                          color: '#03dfeb'
+                        },
+                        unit: {
+                          fontSize: 18,
+                          color: '#03dfeb',
+                          padding: [0, 0, -4, 2]
+                        },
+                        detail: {
+                          fontSize: 12,
+                          color: '#d1d1d1'
+                        }
+                      }
+                    },
+                    data: [
+                      {
+                        value: 98
+                      }
+                    ]
+                  }
+                ]
+              }} />
+              {/* <div className="number-value">今日制冷机平均热效率: 92%</div> */}
           </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-              data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 240
-            })} />
-            <div className="number-value">今日碳排放量统计: {ColdCarbonToday}tCO2</div>
+          <div className="top-info-box" style={{ width: '260px' }}>
+              <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
+                series: [
+                  {
+                    type: 'gauge',
+                    startAngle: 180,
+                    endAngle: 0,
+                    min: 0,
+                    max: 100,
+                    splitNumber: 100,
+                    itemStyle: {
+                      color: '#03dfeb',
+                      shadowColor: '#03dfeb',
+                      shadowBlur: 10,
+                      shadowOffsetX: 0,
+                      shadowOffsetY: 0
+                    },
+                    progress: {
+                      show: true,
+                      roundCap: true,
+                      width: 10
+                    },
+                    pointer: {
+                      show: false
+                    },
+                    axisLine: {
+                      roundCap: true,
+                      lineStyle: {
+                        width: 10,
+                        color: [[1, '#00378e']]
+                      }
+                    },
+                    axisTick: {
+                      show: false,
+                    },
+                    splitLine: {
+                      length: 1,
+                      lineStyle: {
+                        width: 1,
+                        color: '#03dfeb'
+                      }
+                    },
+                    axisLabel: {
+                      show: false
+                    },
+                    title: {
+                      show: false
+                    },
+                    detail: {
+                      borderRadius: 4,
+                      offsetCenter: [0, '-20%'],
+                      valueAnimation: true,
+                      formatter: function (value) {
+                        return '{value|' + value.toFixed(0) + '}{unit|tCO2}\n{detail|今日碳排放量统计}';
+                      },
+                      rich: {
+                        value: {
+                          fontSize: 28,
+                          fontWeight: 'bold',
+                          color: '#03dfeb'
+                        },
+                        unit: {
+                          fontSize: 18,
+                          color: '#03dfeb',
+                          padding: [0, 0, -4, 2]
+                        },
+                        detail: {
+                          fontSize: 12,
+                          color: '#d1d1d1'
+                        }
+                      }
+                    },
+                    data: [
+                      {
+                        value: ColdCarbonToday
+                      }
+                    ]
+                  }
+                ]
+              }} />
+              {/* <div className="number-value">今日制冷机平均热效率: 92%</div> */}
           </div>
       </div>
       <div className="top-box">
