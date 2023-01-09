@@ -131,7 +131,8 @@ export const AnalyseEnergyStation = () => {
             option={ChartService.getNewGaugeOptions({ 
               value: AvrgEnergyWatertankEfficiencyDay,
               detail: '今日蓄热水箱平均热效率',
-              numberColor: '#5ee200'
+              numberColor: '#5ee200',
+              itemColor: '#5ee200'
             })} 
           />
         </div>
@@ -141,7 +142,8 @@ export const AnalyseEnergyStation = () => {
             option={ChartService.getNewGaugeOptions({ 
               value: AvrgEnergyEfficiencyDay,
               detail: '今日系统总效率',
-              numberColor: '#f94e00'
+              numberColor: '#f94e00',
+              itemColor: '#f94e00'
             })} 
           />
         </div>
@@ -249,7 +251,7 @@ export const AnalyseEnergyStation = () => {
       </div>
       <div className="top-box">
         <div className="top-left">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -258,16 +260,9 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电锅炉热效率</span>
             </div>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
               ChartService.getLineOptions({
                 legend: {
-                  show: true,
-                  top: 10,
-                  right: 12,
-                  textStyle: {
-                    color: '#fff',
-                    fontSize: 14
-                  },
                   data: ['电锅炉', '蓄热水箱', '能源站系统']
                 },
                 xName: '时',
@@ -289,7 +284,7 @@ export const AnalyseEnergyStation = () => {
                 ]
               })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -304,7 +299,7 @@ export const AnalyseEnergyStation = () => {
                   <span onClick={() => selectLoadRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
               ChartService.getBarOptions({
                 yName: '%',
                 category: (loadRateButtons[2] && loadRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
@@ -320,7 +315,7 @@ export const AnalyseEnergyStation = () => {
           </div>
         </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -335,7 +330,7 @@ export const AnalyseEnergyStation = () => {
                     <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
                 }
               </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: (chartDateButtons[2] && chartDateButtons[2].selected) ? "月"
                   : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "日" : "时"),
@@ -351,7 +346,7 @@ export const AnalyseEnergyStation = () => {
                   ]
                 })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -360,7 +355,7 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-            <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 {
                   tooltip: {
                     trigger: 'item'

@@ -3,7 +3,33 @@ export class ChartService {
     const colors = ['#03e9eb','#aaf62a', '#b993ff', '#37f137', '#ff93d9', '#81b9fb', '#fdcf44', '#fd6b44'];
 
     return {
-      legend: options.legend || {},
+      legend: {
+        show: true,
+        left: 'center',
+        icon: 'circle',
+        itemWidth: 8,
+        itemHeight: 8,
+        itemGap: 30,
+        itemStyle: {
+          shadowColor: 'rgba(255, 255, 255, 1)',
+          shadowBlur: 6, 
+        },
+        padding: [20, 10],
+        textStyle: {
+          color: '#ddd',
+          fontSize: 14,
+          rich: {
+            a: { verticleAlign: 'middle' }
+          }
+        },
+        data: (options.legend && options.legend.data) ? options.legend.data : []
+      },
+      grid: {
+        top: 50,
+        right: 40,
+        left: 50,
+        bottom: 70
+      },
       title: {
         text: '',
         left: '15',
@@ -16,11 +42,14 @@ export class ChartService {
       xAxis: {
         type: 'category',
         name: options.xName || '',
+        nameTextStyle: {
+          color: '#03dfeb'
+        },
         data: options.data || [],
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#fff',
+            color: 'rgba(255, 255, 255, .4)',
             width: 1,
             type: 'solid'
           }
@@ -28,33 +57,34 @@ export class ChartService {
         axisLabel: {
           show: true,
           textStyle: {
-            color: '#ffffff'
+            color: '#ccc'
           }
         }
       },
       yAxis: {
         type: 'value',
         name: options.yName || '',
+        nameTextStyle: {
+          color: '#03dfeb'
+        },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#fff',
+            color: 'rgba(255, 255, 255, .4)',
             width: 1,
             type: 'solid'
           }
         },
         splitLine: {
-          show: false,
           lineStyle: {
-            color: ['#192f44'],
-            width: 1,
-            type: 'solid'
+              type: 'dotted',
+              color: 'rgba(255, 255, 255, .2)'
           }
         },
         axisLabel: {
           show: true,
           textStyle: {
-            color: '#ffffff'
+            color: '#ccc'
           }
         }
       },
@@ -302,7 +332,7 @@ export class ChartService {
             length: 1,
             lineStyle: {
               width: 1,
-              color: '#d1d1d1'
+              color: '#fff'
             }
           },
           axisLabel: {
