@@ -116,258 +116,35 @@ export const AnalyseEnergyStation = () => {
   return (
     <div className="analyse-energy-station-view">
       <div className="operation-summary">
-          <div className="top-info-box" style={{ width: '260px' }}>
-            <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'gauge',
-                  startAngle: 180,
-                  endAngle: 0,
-                  min: 0,
-                  max: 100,
-                  splitNumber: 100,
-                  itemStyle: {
-                    color: '#03dfeb',
-                    shadowColor: '#03dfeb',
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 0
-                  },
-                  progress: {
-                    show: true,
-                    roundCap: true,
-                    width: 10
-                  },
-                  pointer: {
-                    show: false
-                  },
-                  axisLine: {
-                    roundCap: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [[1, '#00378e']]
-                    }
-                  },
-                  axisTick: {
-                    show: false,
-                  },
-                  splitLine: {
-                    length: 1,
-                    lineStyle: {
-                      width: 1,
-                      color: '#03dfeb'
-                    }
-                  },
-                  axisLabel: {
-                    show: false
-                  },
-                  title: {
-                    show: false
-                  },
-                  detail: {
-                    borderRadius: 4,
-                    offsetCenter: [0, '-20%'],
-                    valueAnimation: true,
-                    formatter: function (value) {
-                      return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日锅炉平均热效率}';
-                    },
-                    rich: {
-                      value: {
-                        fontSize: 28,
-                        fontWeight: 'bold',
-                        color: '#03dfeb'
-                      },
-                      unit: {
-                        fontSize: 18,
-                        color: '#03dfeb',
-                        padding: [0, 0, -4, 2]
-                      },
-                      detail: {
-                        fontSize: 12,
-                        color: '#d1d1d1'
-                      }
-                    }
-                  },
-                  data: [
-                    {
-                      value: AvrgEnergyBoilerEfficiencyDay
-                    }
-                  ]
-                }
-              ]
-            }} />
-          </div>
-          <div className="top-info-box" style={{ width: '260px' }}>
-            <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'gauge',
-                  startAngle: 180,
-                  endAngle: 0,
-                  min: 0,
-                  max: 100,
-                  splitNumber: 100,
-                  itemStyle: {
-                    color: '#03dfeb',
-                    shadowColor: '#03dfeb',
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 0
-                  },
-                  progress: {
-                    show: true,
-                    roundCap: true,
-                    width: 10
-                  },
-                  pointer: {
-                    show: false
-                  },
-                  axisLine: {
-                    roundCap: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [[1, '#00378e']]
-                    }
-                  },
-                  axisTick: {
-                    show: false,
-                  },
-                  splitLine: {
-                    length: 1,
-                    lineStyle: {
-                      width: 1,
-                      color: '#03dfeb'
-                    }
-                  },
-                  axisLabel: {
-                    show: false
-                  },
-                  title: {
-                    show: false
-                  },
-                  detail: {
-                    borderRadius: 4,
-                    offsetCenter: [0, '-20%'],
-                    valueAnimation: true,
-                    formatter: function (value) {
-                      return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日蓄热水箱平均热效率}';
-                    },
-                    rich: {
-                      value: {
-                        fontSize: 28,
-                        fontWeight: 'bold',
-                        color: '#5ee200'
-                      },
-                      unit: {
-                        fontSize: 18,
-                        color: '#5ee200',
-                        padding: [0, 0, -4, 2]
-                      },
-                      detail: {
-                        fontSize: 12,
-                        color: '#d1d1d1'
-                      }
-                    }
-                  },
-                  data: [
-                    {
-                      value: AvrgEnergyWatertankEfficiencyDay
-                    }
-                  ]
-                }
-              ]
-            }} />
-          </div>
-          <div className="top-info-box" style={{ width: '260px' }}>
-            <ReactEcharts style={{ width: '260px', height: '260px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'gauge',
-                  startAngle: 180,
-                  endAngle: 0,
-                  min: 0,
-                  max: 100,
-                  splitNumber: 100,
-                  itemStyle: {
-                    color: '#03dfeb',
-                    shadowColor: '#03dfeb',
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 0
-                  },
-                  progress: {
-                    show: true,
-                    roundCap: true,
-                    width: 10
-                  },
-                  pointer: {
-                    show: false
-                  },
-                  axisLine: {
-                    roundCap: true,
-                    lineStyle: {
-                      width: 10,
-                      color: [[1, '#00378e']]
-                    }
-                  },
-                  axisTick: {
-                    show: false,
-                  },
-                  splitLine: {
-                    length: 1,
-                    lineStyle: {
-                      width: 1,
-                      color: '#03dfeb'
-                    }
-                  },
-                  axisLabel: {
-                    show: false
-                  },
-                  title: {
-                    show: false
-                  },
-                  detail: {
-                    borderRadius: 4,
-                    offsetCenter: [0, '-20%'],
-                    valueAnimation: true,
-                    formatter: function (value) {
-                      return '{value|' + value.toFixed(0) + '}{unit|%}\n{detail|今日系统总效率}';
-                    },
-                    rich: {
-                      value: {
-                        fontSize: 28,
-                        fontWeight: 'bold',
-                        color: '#f94e00'
-                      },
-                      unit: {
-                        fontSize: 18,
-                        color: '#f94e00',
-                        padding: [0, 0, -4, 2]
-                      },
-                      detail: {
-                        fontSize: 12,
-                        color: '#d1d1d1'
-                      }
-                    }
-                  },
-                  data: [
-                    {
-                      value: AvrgEnergyEfficiencyDay
-                    }
-                  ]
-                }
-              ]
-            }} />
-          </div>
+        <div className="top-info-box" style={{ width: '260px' }}>
+          <ReactEcharts
+            style={{ width: '260px', height: '260px', margin: 'auto' }}
+            option={ChartService.getNewGaugeOptions({ 
+              value: AvrgEnergyBoilerEfficiencyDay,
+              detail: '今日锅炉平均热效率'
+            })} 
+          />
+        </div>
+        <div className="top-info-box" style={{ width: '260px' }}>
+          <ReactEcharts
+            style={{ width: '260px', height: '260px', margin: 'auto' }}
+            option={ChartService.getNewGaugeOptions({ 
+              value: AvrgEnergyWatertankEfficiencyDay,
+              detail: '今日蓄热水箱平均热效率',
+              numberColor: '#5ee200'
+            })} 
+          />
+        </div>
+        <div className="top-info-box" style={{ width: '260px' }}>
+          <ReactEcharts
+            style={{ width: '260px', height: '260px', margin: 'auto' }}
+            option={ChartService.getNewGaugeOptions({ 
+              value: AvrgEnergyEfficiencyDay,
+              detail: '今日系统总效率',
+              numberColor: '#f94e00'
+            })} 
+          />
+        </div>
 
           {/* <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{

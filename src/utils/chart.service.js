@@ -262,4 +262,88 @@ export class ChartService {
 
     return config;
   }
+
+  static getNewGaugeOptions(options = {}) {
+    let config = {
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          splitNumber: 100,
+          itemStyle: {
+            color: options.itemColor || '#03dfeb',
+            shadowColor: options.itemColor || '#03dfeb',
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0
+          },
+          progress: {
+            show: true,
+            roundCap: true,
+            width: 10
+          },
+          pointer: {
+            show: false
+          },
+          axisLine: {
+            roundCap: true,
+            lineStyle: {
+              width: 10,
+              color: options.lineColor || [[1, '#00378e']]
+            }
+          },
+          axisTick: {
+            show: false,
+          },
+          splitLine: {
+            length: 1,
+            lineStyle: {
+              width: 1,
+              color: '#d1d1d1'
+            }
+          },
+          axisLabel: {
+            show: false
+          },
+          title: {
+            show: false
+          },
+          detail: {
+            borderRadius: 4,
+            offsetCenter: [0, '-20%'],
+            valueAnimation: true,
+            formatter: function (value) {
+              return '{value|' + value.toFixed(0) + '}{unit|' + (options.unit || '%') + '}\n{detail|' + (options.detail || '') + '}';
+            },
+            rich: {
+              value: {
+                fontSize: 28,
+                fontWeight: 'bold',
+                color: options.numberColor || '#03dfeb'
+              },
+              unit: {
+                fontSize: 18,
+                color: options.numberColor || '#03dfeb',
+                padding: [0, 0, -4, 2]
+              },
+              detail: {
+                fontSize: 12,
+                color: options.detailColor || '#d1d1d1'
+              }
+            }
+          },
+          data: [
+            {
+              value: options.value || 0
+            }
+          ]
+        }
+      ]
+    }
+
+    return config;
+  }
 }
