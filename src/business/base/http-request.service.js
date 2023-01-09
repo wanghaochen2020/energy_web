@@ -28,6 +28,12 @@ export class HttpRequestService {
       return new Promise((resolve, reject) => {
       });
     }
+    const user = BaseInfoService.getValidUser();
+    if (user?.token) {
+      options || (options = {});
+      options.headers || (options.headers = {});
+      options.headers.Authorization || (options.headers.Authorization = "Bearer " + user.token);
+    }
     return this.apiAxios(method, options.url, options);
     // for mock data deployment
     // return this.apiAxios(method, getMockDataUrl(options.url, TextService.getLanguage()?.name), options);
@@ -76,6 +82,8 @@ export class HttpRequestService {
           reject(res.data);
         }
       }).catch((err) => {
+        console.log("aaa")
+        console.log(err)
         if (!resolveError(err)) {
           reject((err.response && err.response.data) ? err.response.data : err.response);
         }
