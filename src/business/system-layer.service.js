@@ -117,7 +117,7 @@ export class EnergyStation {
     for(let i=0;i<=time.getMonth();i++) {
       let d1 = bi(l(thisYear, i),l(lastYear,i));
       let d2 = bi(l(thisYear,i),i === 0 ? l(lastYear,11) : l(thisYear,i-1));
-      items[i] = (<tr className={i&1?"row-even":""}>
+      items[i] = (<tr className={i&1?"row-even":"row-odd"}>
         <td>{EnergyStation.getMonthStr("-", i+1)}</td>
         <td>{(l(thisYear,i)/0.604).toFixed(1)}</td>
         <td>{(d1*100).toFixed(0)+"%"}<i className={"fa fa-long-arrow-"+(d1>=0?"up":"down")}></i></td>
