@@ -226,6 +226,82 @@ export class ChartService {
     };
   }
 
+  static getPieOptions(options) {
+    const colors = ['#323891', options.itemColor || '#03dfeb'];
+    return {
+      title: {
+        text: '{value|' + (options.title || '') + '}\n' + '{unit|' + (options.unit || '') + '}',
+        show: true,
+        zlevel: 0,
+        top: 38,
+        left: 'center',
+        textStyle: {
+          color: options.titleColor || '#03dfeb',
+          textShadowColor: options.titleColor || '#03dfeb',
+          textShadowBlur: 6,
+          rich: {
+            value: {
+              fontSize: 28,
+              fontWeight: 'bold',
+              lineHeight: 34,
+            },
+            unit: {
+              fontSize: 12,
+              lineHeight: 12,
+            },
+          },
+        },
+        subtext: options.subTitle,
+        subtextStyle: {
+          color: '#ddd',
+          lineHeight: 20,
+        }
+      },
+      tooltip: {
+        show: false
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: options.radius || ['85%', '95%'],
+          startAngle: options.startAngle || 360,
+          hoverAnimation: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: (options.data || []).map((item, index) => ({
+            value: item.value, name: index === 0 ? 'full' : 'rate',
+            label: { normal: { show: false } },
+            itemStyle: {
+              color: (options.colors || colors)[index],
+              shadowColor: index !== 0 ? (options.colors || colors)[index] : 'transparent',
+              shadowBlur: 6
+            }
+          }))
+        },
+        {
+          type: 'pie',
+          radius: ['72%', '75%'],
+          hoverAnimation: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            {
+              value: 100,
+              label: { normal: { show: false } },
+              itemStyle: { color: '#3e46b1' }
+            }
+          ]
+        }
+      ]
+    };
+  }
+
   static getGaugeOptions(options = {}) {
     let defaultFormatter = (val) => val;
     let config = {
