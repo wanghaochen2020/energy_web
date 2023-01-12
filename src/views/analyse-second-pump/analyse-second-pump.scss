@@ -12,8 +12,8 @@
     margin-top: 20px;
     .box-wrapper {
       height: 450px;
-      width: 98%;
-      background: none;
+      width: calc(100% - 16px);
+      background-color: rgba($color: #000000, $alpha: 0.2);
     }
   }
 
@@ -27,7 +27,7 @@
       width: 100%;
       color: #fff;
       thead {
-        background-color: #141e57;
+        background-color: rgba(0, 0, 0, 0.4);
       }
 
       th, td {
@@ -37,7 +37,12 @@
     }
 
     .row-even {
-      background-color: #19244b;
+      // background-color: #19244b;
+      background-color: #051b3c;
+    }
+
+    .row-odd {
+      background-color: #042960;
     }
 
     .fa-long-arrow-up, .fa-long-arrow-down {

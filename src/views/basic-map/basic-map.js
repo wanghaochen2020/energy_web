@@ -234,7 +234,7 @@ export const BasicMap = () => {
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '100%', height: '280px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '320px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -245,46 +245,104 @@ export const BasicMap = () => {
             </div>
             <div className="operation-summary">
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 80 }], startAngle: 240
-                })} />
-                <div className="number-value">D1组团 <br />80%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 20 }, { value: 80 }],
+                    startAngle: 90,
+                    title: '80',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D1组团'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 60 }], colors: ['#323891', '#ecf75d'], startAngle: 40
-                })} />
-                <div className="number-value">D2组团 <br />60%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 40 }, { value: 60 }],
+                    startAngle: 90,
+                    title: '60',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D2组团',
+                    titleColor: '#5ee200',
+                    itemColor: '#5ee200'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 90 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">D3组团 <br />90%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 10 }, { value: 90 }],
+                    startAngle: 90,
+                    title: '90',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D3组团',
+                    titleColor: '#f94e00',
+                    itemColor: '#f94e00'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 70 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">D4组团 <br />70%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 30 }, { value: 70 }],
+                    startAngle: 90,
+                    title: '70',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D4组团',
+                    titleColor: '#9029d9',
+                    itemColor: '#9029d9'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 80 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">D5组团 <br />80%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 20 }, { value: 80 }],
+                    startAngle: 90,
+                    title: '80',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D5组团',
+                    titleColor: '#f6e828',
+                    itemColor: '#f6e828'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100 }, { value: 50 }], colors: ['#323891', '#45f9b7'], startAngle: 140
-                })} />
-                <div className="number-value">D6组团 <br />50%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 50 }, { value: 50 }],
+                    startAngle: 90,
+                    title: '50',
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: 'D6组团',
+                    titleColor: '#f79c11',
+                    itemColor: '#f79c11'
+                  })}
+                />
               </div>
             </div>
           </div>
         </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{ width: '100%', height: '170px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '190px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -295,20 +353,42 @@ export const BasicMap = () => {
             </div>
             <div className="operation-summary">
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
-                })} />
-                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备在线'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
-                })} />
-                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备离线'
+                  })}
+                />
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '100%', height: '170px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '190px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -319,16 +399,38 @@ export const BasicMap = () => {
             </div>
             <div className="operation-summary">
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
-                })} />
-                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备在线'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
-                })} />
-                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备离线'
+                  })}
+                />
               </div>
             </div>
           </div>

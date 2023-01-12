@@ -77,8 +77,8 @@ export class ChartService {
         },
         splitLine: {
           lineStyle: {
-              type: 'dotted',
-              color: 'rgba(255, 255, 255, .2)'
+            type: 'dotted',
+            color: 'rgba(255, 255, 255, .2)'
           }
         },
         axisLabel: {
@@ -117,17 +117,27 @@ export class ChartService {
           fontSize: 14
         }
       },
+      grid: {
+        top: 50,
+        right: 40,
+        left: 50,
+        bottom: 70
+      },
       // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
       //   { offset: 0, color: '#3fc7f3' },
       //   { offset: 1, color: '#420f80' },
       // ]),
       xAxis: {
         type: 'category',
+        name: options.xName || '',
+        nameTextStyle: {
+          color: '#03dfeb'
+        },
         data: options.category,
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#ffffff',
+            color: 'rgba(255, 255, 255, .4)',
             width: 1,
             type: 'solid'
           }
@@ -135,33 +145,34 @@ export class ChartService {
         axisLabel: {
           show: true,
           textStyle: {
-            color: '#ffffff'
+            color: '#ccc'
           }
         }
       },
       yAxis: {
         type: 'value',
         name: options.yName || '',
+        nameTextStyle: {
+          color: '#03dfeb'
+        },
         axisLine: {
           show: true,
           lineStyle: {
-            color: '#ffffff',
+            color: 'rgba(255, 255, 255, .4)',
             width: 1,
             type: 'solid'
           }
         },
         splitLine: {
-          show: false,
           lineStyle: {
-            color: ['#192f44'],
-            width: 1,
-            type: 'solid'
+            type: 'dotted',
+            color: 'rgba(255, 255, 255, .2)'
           }
         },
         axisLabel: {
           show: true,
           textStyle: {
-            color: '#ffffff'
+            color: '#ccc'
           }
         }
       },
@@ -169,7 +180,7 @@ export class ChartService {
         return {
           data: item.data,
           type: 'bar',
-          barWidth: 8,
+          barWidth: 10,
           itemStyle: {
             color: {
               type: 'linear',
@@ -210,6 +221,82 @@ export class ChartService {
             itemStyle: { color: (options.colors || colors)[index] }
           })
           )
+        }
+      ]
+    };
+  }
+
+  static getPieOptions(options) {
+    const colors = ['#323891', options.itemColor || '#03dfeb'];
+    return {
+      title: {
+        text: '{value|' + (options.title || '') + '}' + (options.unwrap ? '' : '\n') + '{unit|' + (options.unit || '') + '}',
+        show: true,
+        zlevel: 0,
+        top: options.titleTop || 38,
+        left: 'center',
+        textStyle: {
+          color: options.titleColor || '#03dfeb',
+          textShadowColor: options.titleColor || '#03dfeb',
+          textShadowBlur: 6,
+          rich: {
+            value: {
+              fontSize: 28,
+              fontWeight: 'bold',
+              lineHeight: 34,
+            },
+            unit: {
+              fontSize: 12,
+              lineHeight: 12,
+            },
+          },
+        },
+        subtext: options.subTitle,
+        subtextStyle: {
+          color: '#ddd',
+          lineHeight: 20,
+        }
+      },
+      tooltip: {
+        show: false
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: options.radius || ['85%', '95%'],
+          startAngle: options.startAngle || 360,
+          hoverAnimation: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: (options.data || []).map((item, index) => ({
+            value: item.value, name: index === 0 ? 'full' : 'rate',
+            label: { normal: { show: false } },
+            itemStyle: {
+              color: (options.colors || colors)[index],
+              shadowColor: index !== 0 ? (options.colors || colors)[index] : 'transparent',
+              shadowBlur: 6
+            }
+          }))
+        },
+        {
+          type: 'pie',
+          radius: ['72%', '75%'],
+          hoverAnimation: false,
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data: [
+            {
+              value: 100,
+              label: { normal: { show: false } },
+              itemStyle: { color: '#3e46b1' }
+            }
+          ]
         }
       ]
     };

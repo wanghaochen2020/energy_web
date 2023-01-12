@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './analyse-second-pump.scss';
+import { ChartService } from '../../utils/chart.service';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 
@@ -33,7 +34,7 @@ export const AnalyseSecondPump = () => {
   return (
     <div className="analyse-second-pump-view">
       <div className="top-box">
-        <div className="box-wrapper">
+        <div className="box-wrapper" style={{height: '350px'}}>
           <div className="top-left-corner"></div>
           <div className="top-right-corner"></div>
           <div className="bottom-left-corner"></div>
@@ -42,7 +43,28 @@ export const AnalyseSecondPump = () => {
             <span className="box-title-icon">&#9658;</span>
             <span className="title-text">循环泵输热比（EHR）</span>
           </div>
-          <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
+          <ReactEcharts
+            style={{ width: '100%', height: '350px', margin: 'auto' }}
+            option={ChartService.getLineOptions({
+              legend: {
+                data: ['环路1', '环路2']
+              },
+              xName: '时',
+              yName: '%',
+              data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+              series: [
+                {
+                  name: '环路1',
+                  data: PumpEHR1
+                },
+                {
+                  name: '环路2',
+                  data: PumpEHR2
+                }
+              ]
+            })}
+          />
+          {/* <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={{
             title: {
               text: '',
               left: '15',
@@ -118,7 +140,7 @@ export const AnalyseSecondPump = () => {
                 }
               }
             ]
-          }} />
+          }} /> */}
         </div>
       </div>
       <div className="bottom-box">

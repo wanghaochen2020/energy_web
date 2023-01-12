@@ -112,7 +112,7 @@ export const AnalyseRefrigerationCenter = () => {
       </div>
       <div className="top-box">
         <div className="top-left">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -121,7 +121,7 @@ export const AnalyseRefrigerationCenter = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">制冷机组制冷效率</span>
             </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   legend: {
                     show: true,
@@ -155,7 +155,7 @@ export const AnalyseRefrigerationCenter = () => {
                   ]
                 })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -170,7 +170,7 @@ export const AnalyseRefrigerationCenter = () => {
                   <span onClick={() => selectLoadRateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
                   yName: '%',
                   category: ['7/12', '7/13', '7/14', '7/15', '7/16', '7/17', '7/18'],
@@ -183,7 +183,7 @@ export const AnalyseRefrigerationCenter = () => {
           </div>
         </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -198,7 +198,7 @@ export const AnalyseRefrigerationCenter = () => {
                   <span onClick={() => selectChartDateButton(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   xName: (chartDateButtons[2] && chartDateButtons[2].selected) ? "月"
                   : ((chartDateButtons[1] && chartDateButtons[1].selected) ? "日" : "时"),
@@ -214,7 +214,7 @@ export const AnalyseRefrigerationCenter = () => {
                   ]
                 })} />
           </div>
-          <div className="box-wrapper" style={{width: '100%', height: '450px', marginBottom: '10px'}}>
+          <div className="box-wrapper" style={{width: '100%', height: '350px', marginBottom: '10px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -223,7 +223,7 @@ export const AnalyseRefrigerationCenter = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-              <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
+              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 {
                   tooltip: {
                     trigger: 'item'

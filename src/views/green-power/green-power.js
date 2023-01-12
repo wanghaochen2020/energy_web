@@ -78,26 +78,48 @@ export const GreenPower = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">能源概况</span>
             </div>
-          <div className="top-row">
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 80}], startAngle: 240
-              })} />
-              <div className="number-value">年发电量: 2140万kWh</div>
+            <div className="top-row">
+              <div className="top-info-box">
+                <ReactEcharts
+                  style={{ width: '150px', height: '150px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 20 }, { value: 60 }],
+                    startAngle: 90,
+                    title: '2140',
+                    unit: '万kWh',
+                    subTitle: '年发电量'
+                  })}
+                />
+              </div>
+              <div className="top-info-box">
+                <ReactEcharts
+                  style={{ width: '150px', height: '150px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 20 }, { value: 60 }],
+                    startAngle: 90,
+                    title: '240',
+                    unit: '万kWh',
+                    subTitle: '月发电量',
+                    titleColor: '#5ee200',
+                    itemColor: '#5ee200'
+                  })}
+                />
+              </div>
+              <div className="top-info-box">
+                <ReactEcharts
+                  style={{ width: '150px', height: '150px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [{ value: 20 }, { value: 60 }],
+                    startAngle: 90,
+                    title: '861',
+                    unit: '万kWh',
+                    subTitle: '日发电量',
+                    titleColor: '#f94e00',
+                    itemColor: '#f94e00'
+                  })}
+                />
+              </div>
             </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
-              })}/>
-              <div className="number-value">月发电量: 240万kWh</div>
-            </div>
-            <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 70}], colors: ['#323891', '#45f9b7'], startAngle: 140
-              })}/>
-              <div className="number-value">日发电量: 8万kWh</div>
-            </div>
-          </div>
           </div>
         </div>
         <div className="row-right">
@@ -112,22 +134,40 @@ export const GreenPower = () => {
             </div>
           <div className="top-row">
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 80}], startAngle: 240
-              })} />
-              <div className="number-value">二氧化碳减排量: 1250吨</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 100 }],
+                  startAngle: 90,
+                  title: '1250',
+                  unit: '吨',
+                  subTitle: 'CO2减排量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 60}], colors: ['#323891', '#ecf75d'], startAngle: 40
-              })}/>
-              <div className="number-value">等效植树: 4280棵</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 30 }, { value: 60 }],
+                  startAngle: 90,
+                  title: '4280',
+                  unit: '棵',
+                  subTitle: '等效植树'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                data: [{ value: 100 }, { value: 70}], colors: ['#323891', '#45f9b7'], startAngle: 140
-              })}/>
-              <div className="number-value">碳配额使用率: 40%</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 42 }, { value: 58 }],
+                  startAngle: 90,
+                  title: '58',
+                  unit: '%',
+                  subTitle: '碳配额使用率'
+                })}
+              />
             </div>
           </div>
           </div>
