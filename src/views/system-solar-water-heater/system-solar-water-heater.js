@@ -37,14 +37,14 @@ export const SystemSolarWaterHeater = () => {
   let [SolarWaterHeatCollectionYear, setSolarWaterHeatCollectionYear] = useState([]);
   
   let messageFunc = useCallback((event) => {
-    if (event.origin === SERVERINFO.modelIP) {
+    if (event.origin === SERVERINFO.model4IP) {
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('solar_water_model')
         if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
         switch(event.data.type) {
           case "ok"://加载完成
-              iframe.contentWindow.postMessage({type:"solar_water_init"}, SERVERINFO.modelIP)
+              iframe.contentWindow.postMessage({type:"solar_water_init"}, "*")
             break
           case "device"://请求设备信息
             if (!event.data.data) {
@@ -64,7 +64,7 @@ export const SystemSolarWaterHeater = () => {
                 }
                 break
             }
-            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.model4IP)
             break
         }
     } else {
@@ -141,7 +141,7 @@ export const SystemSolarWaterHeater = () => {
 
   return (
     <div className="system-solar-water-heater-view">
-      <iframe id="solar_water_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
+      <iframe id="solar_water_model" src={SERVERINFO.model4IP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">0</div>
