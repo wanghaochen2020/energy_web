@@ -82,8 +82,6 @@ export class HttpRequestService {
           reject(res.data);
         }
       }).catch((err) => {
-        console.log("aaa")
-        console.log(err)
         if (!resolveError(err)) {
           reject((err.response && err.response.data) ? err.response.data : err.response);
         }

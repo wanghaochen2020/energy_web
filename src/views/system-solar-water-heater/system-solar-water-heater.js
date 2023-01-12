@@ -141,7 +141,7 @@ export const SystemSolarWaterHeater = () => {
 
   return (
     <div className="system-solar-water-heater-view">
-      <iframe id="solar_water_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
+      <iframe id="solar_water_model" src={SERVERINFO.model4IP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">0</div>

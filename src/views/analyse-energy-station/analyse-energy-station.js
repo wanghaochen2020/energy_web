@@ -35,6 +35,7 @@ export const AnalyseEnergyStation = () => {
     let lastYearStr = EnergyStation.getLastYearStr();
 
     EnergyStation.getTable(PAGEDATA.EnergyBoilerEfficiencyDay, dayStr).then((res)=> {
+      console.log(res)
       let avg = 0;
       for (let i = 0; i < res.length; i++) { 
         avg += res[i]*100;
