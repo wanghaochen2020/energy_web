@@ -114,7 +114,7 @@ export const AnalyseSolarWaterHeater = () => {
   return (
     <div className="analyse-solar-water-heater-view">
       <div className="operation-summary">
-          <div className="right-info-box">
+          {/* <div className="right-info-box">
               <div className="chart-summary">
                 <div>同比增长</div>
                 <div>25%</div>
@@ -161,7 +161,7 @@ export const AnalyseSolarWaterHeater = () => {
                   ]
                 }} />
               </div>
-          </div>
+          </div> */}
           
           <div className="top-info-box" style={{ width: '260px' }}>
             <ReactEcharts
@@ -190,6 +190,18 @@ export const AnalyseSolarWaterHeater = () => {
               })} 
             />
           </div>
+          <div className="top-info-box" style={{ width: '260px' }}>
+            <ReactEcharts
+              style={{ width: '260px', height: '260px', margin: 'auto' }}
+              option={ChartService.getNewGaugeOptions({ 
+                value: 25,
+                detail: '同比增长',
+                numberColor: '#f94e00',
+                itemColor: '#f94e00'
+              })} 
+            />
+          </div>
+
           {/* <div className="top-info-box">
             <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={ChartService.getCircleOptions({
               data: [{ value: 100-AvrgSolarWaterHeatEfficiencyDay }, { value: AvrgSolarWaterHeatEfficiencyDay}], startAngle: 240
