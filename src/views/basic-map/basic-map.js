@@ -342,7 +342,7 @@ export const BasicMap = () => {
           </div>
         </div>
         <div className="top-right">
-          <div className="box-wrapper" style={{ width: '100%', height: '170px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '190px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -353,20 +353,42 @@ export const BasicMap = () => {
             </div>
             <div className="operation-summary">
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
-                })} />
-                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备在线'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
-                })} />
-                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备离线'
+                  })}
+                />
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '100%', height: '170px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '190px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -377,16 +399,38 @@ export const BasicMap = () => {
             </div>
             <div className="operation-summary">
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: pageData[PAGEDATA.EnergyOnlineRate]*100 }], startAngle: 240
-                })} />
-                <div className="number-value">设备在线<br /> {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备在线'
+                  })}
+                />
               </div>
               <div className="top-info-box">
-                <ReactEcharts style={{ width: '100px', height: '100px', margin: 'auto' }} option={ChartService.getCircleOptions({
-                  data: [{ value: pageData[PAGEDATA.EnergyOnlineRate]*100 }, { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100 }], colors: ['#323891', '#ecf75d'], startAngle: 40
-                })} />
-                <div className="number-value">设备离线<br /> {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                <ReactEcharts
+                  style={{ width: '120px', height: '120px', margin: 'auto' }}
+                  option={ChartService.getPieOptions({
+                    data: [
+                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    ],
+                    startAngle: 90,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    unit: '%',
+                    unwrap: true,
+                    titleTop: 30,
+                    subTitle: '设备离线'
+                  })}
+                />
               </div>
             </div>
           </div>
