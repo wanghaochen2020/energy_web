@@ -30,14 +30,14 @@ export const SystemSecondPump = () => {
   let [pageData, setPageData] = useState({});
   
   let messageFunc = useCallback((event) => {
-    if (event.origin === SERVERINFO.modelIP) {
+    if (event.origin === SERVERINFO.model3IP) {
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('pump_model')
         if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
         switch(event.data.type) {
           case "ok"://加载完成
-              iframe.contentWindow.postMessage({type:"pump_init"}, SERVERINFO.modelIP)
+              iframe.contentWindow.postMessage({type:"pump_init"}, "*")
             break
           case "device"://请求设备信息
             if (!event.data.data) {
@@ -88,7 +88,7 @@ export const SystemSecondPump = () => {
                 data.data3="180m³/h"
                 break
             }
-            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.model3IP)
             break
         }
     } else {
@@ -161,7 +161,7 @@ export const SystemSecondPump = () => {
 
   return (
     <div className="system-second-pump-view">
-      <iframe id="pump_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
+      <iframe id="pump_model" src={SERVERINFO.model3IP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="operation-summary">
         <div className="alarm-info">
           <div className="alarm-number">{pageData[PAGEDATA.PumpAlarmNumToday]}</div>
