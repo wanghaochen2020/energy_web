@@ -230,10 +230,10 @@ export class ChartService {
     const colors = ['#323891', options.itemColor || '#03dfeb'];
     return {
       title: {
-        text: '{value|' + (options.title || '') + '}\n' + '{unit|' + (options.unit || '') + '}',
+        text: '{value|' + (options.title || '') + '}' + (options.unwrap ? '' : '\n') + '{unit|' + (options.unit || '') + '}',
         show: true,
         zlevel: 0,
-        top: 38,
+        top: options.titleTop || 38,
         left: 'center',
         textStyle: {
           color: options.titleColor || '#03dfeb',
