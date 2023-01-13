@@ -449,7 +449,7 @@ export const BasicMap = () => {
       </div>
       <div className="button-wrapper">
         <div className="button-row">
-          {(buttonMaps[selectedButton] || []).map((str) => <div className="button-item">{str}</div>)}
+          {(buttonMaps[selectedButton] || []).map((str) => <div className="button-item else">{str}</div>)}
         </div>
         <div className="button-row">
           {

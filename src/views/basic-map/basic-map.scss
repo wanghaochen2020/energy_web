@@ -102,17 +102,31 @@
       text-align: center;
       .button-item {
         cursor: pointer;
-        margin: 5px;
-        padding: 2px 4px;
-        border-radius: 4px;
+        margin: 6px;
+        padding: 4px 8px;
+        border-radius: 10px;
         text-align: center;
         display: inline-block;
-        color: #fff;
-        background-color: rgb(13, 100, 172);
+        color: #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.4);
+        transition: all .3s;
+        box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+
+        &.else {
+          color: #aaa;
+          border: 1px solid rgba(6, 6, 104, 0.8);
+          background-color: rgba(4, 0, 60, 0.8);
+        }
       }
 
       .button-selected {
-        border: solid 1px #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        background-color: rgba(49, 61, 155, 0.4);
+        color: #03dfeb;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 6px rgba(#03dfeb, 0.6);
       }
     }
   }
