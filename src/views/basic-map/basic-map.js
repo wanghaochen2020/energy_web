@@ -434,7 +434,7 @@ export const BasicMap = () => {
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '60%', height: '255px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '255px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
