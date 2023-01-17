@@ -414,36 +414,39 @@ export const SystemEnergyStation = () => {
             <div className="alarm-label">告警次数</div>
             <span className="alarm-left-corner"></span>
           </div>
-          <div className="top-info-box">
-            <ReactEcharts
-              style={{ width: '150px', height: '150px', margin: 'auto' }}
-              option={ChartService.getPieOptions({
-                data: [
-                  { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                  { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
-                ],
-                startAngle: 90,
-                title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
-                unit: '%',
-                subTitle: '设备在线率'
-              })}
-            />
+          <div className="top-info">
+            <div className="top-info-box">
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [
+                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                  ],
+                  startAngle: 90,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  unit: '%',
+                  subTitle: '设备在线率'
+                })}
+              />
+            </div>
+            <div className="top-info-box">
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [
+                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                  ],
+                  startAngle: 90,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  unit: '%',
+                  subTitle: '设备离线率'
+                })}
+              />
+            </div>
           </div>
-          <div className="top-info-box">
-            <ReactEcharts
-              style={{ width: '150px', height: '150px', margin: 'auto' }}
-              option={ChartService.getPieOptions({
-                data: [
-                  { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                  { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
-                ],
-                startAngle: 90,
-                title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
-                unit: '%',
-                subTitle: '设备离线率'
-              })}
-            />
-          </div>
+          
         </div>
         <div className="bottom-box">
           <div className="box-wrapper">
