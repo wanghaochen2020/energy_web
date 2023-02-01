@@ -48,7 +48,7 @@ export const BasicMap = () => {
     '公共南': ['建筑', '能源站', '制冷中心', '二次泵站'],
     '公共北': ['建筑'],
   };
-  const [selectedButton, setSelectedButton] = useState('');
+  const [selectedButton, setSelectedButton] = useState('冬奥村');
   let [pageData, setPageData] = useState({});
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
