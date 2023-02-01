@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
+import { ChartService } from '../../utils/chart.service';
 import './system-solar-power.scss';
 
 export const SystemSolarPower = () => {
@@ -17,179 +18,88 @@ export const SystemSolarPower = () => {
               <span className="title-text">太阳能发电量</span>
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 360,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">总发电量: 62358KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 0 }, { value: 100 }],
+                  startAngle: 90,
+                  title: '62358',
+                  unit: 'KWH',
+                  subTitle: '总发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 360,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">当日发电量: 16KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 10 }],
+                  startAngle: 90,
+                  title: '16',
+                  unit: 'KWH',
+                  subTitle: '当日发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 320,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">当月发电量: 323KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 30 }],
+                  startAngle: 90,
+                  title: '323',
+                  unit: 'KWH',
+                  subTitle: '当月发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 270,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">去年发电量: 32562KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 80 }],
+                  startAngle: 90,
+                  title: '32562',
+                  unit: 'KWH',
+                  subTitle: '去年发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 360,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 80, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">昨日发电量: 15KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 8 }],
+                  startAngle: 90,
+                  title: '15',
+                  unit: 'KWH',
+                  subTitle: '昨日发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 320,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 60, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">上月发电量: 232KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 25 }],
+                  startAngle: 90,
+                  title: '232',
+                  unit: 'KWH',
+                  subTitle: '上月发电量'
+                })}
+              />
             </div>
             <div className="top-info-box">
-              <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-                tooltip: {
-                  show: false
-                },
-                series: [
-                  {
-                    type: 'pie',
-                    radius: ['80%', '100%'],
-                    startAngle: 270,
-                    hoverAnimation: false,
-                    labelLine: {
-                      normal: {
-                        show: false
-                      }
-                    },
-                    data: [
-                      { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                      { value: 50, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
-                    ]
-                  }
-                ]
-              }} />
-              <div className="number-value">去年发电量: 26392KWH</div>
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
+                  data: [{ value: 20 }, { value: 70 }],
+                  startAngle: 90,
+                  title: '26392',
+                  unit: 'KWH',
+                  subTitle: '去年发电量'
+                })}
+              />
             </div>
         </div>
       </div>

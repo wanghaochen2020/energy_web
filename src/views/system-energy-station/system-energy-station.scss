@@ -4,6 +4,15 @@
   min-width: 1600px;
   position: relative;
 
+  .top-info {
+    position: absolute;
+    right: 180px;
+    top: 0;
+  }
+  .alarm-info {
+    top: 65px;
+  }
+
   .iframe-style {
     position: absolute;
     width: 100%;

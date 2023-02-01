@@ -3,6 +3,7 @@ import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfo } from '../../components/';
 import './system-energy-station.scss';
 import { EnergyStation } from '../../business/system-layer.service';
+import { ChartService } from '../../utils/chart.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
 
@@ -411,56 +412,39 @@ export const SystemEnergyStation = () => {
             <div className="alarm-label">告警次数</div>
             <span className="alarm-left-corner"></span>
           </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 360,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
+          <div className="top-info">
+            <div className="top-info-box">
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
                   data: [
-                    { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">设备在线率: {(pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
-          </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 320,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
+                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                  ],
+                  startAngle: 90,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  unit: '%',
+                  subTitle: '设备在线率'
+                })}
+              />
+            </div>
+            <div className="top-info-box">
+              <ReactEcharts
+                style={{ width: '150px', height: '150px', margin: 'auto' }}
+                option={ChartService.getPieOptions({
                   data: [
-                    { value: pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 100-pageData[PAGEDATA.EnergyOnlineRate]*100, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">设备离线率: {(100-pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(2)}%</div>
+                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                  ],
+                  startAngle: 90,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  unit: '%',
+                  subTitle: '设备离线率'
+                })}
+              />
+            </div>
           </div>
+          
         </div>
         <div className="bottom-box">
           <div className="box-wrapper">

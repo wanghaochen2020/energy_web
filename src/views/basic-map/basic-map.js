@@ -447,7 +447,7 @@ export const BasicMap = () => {
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '60%', height: '255px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '255px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -462,7 +462,7 @@ export const BasicMap = () => {
       </div>
       <div className="button-wrapper">
         <div className="button-row">
-          {((buttonMaps[selectedButton]) || []).map((str) => <div className="button-item" onClick={() => floorsFunc(-1, str)}>{str[1]}</div>)}
+          {((buttonMaps[selectedButton]) || []).map((str) => <div className="button-item else" onClick={() => floorsFunc(-1, str)}>{str[1]}</div>)}
         </div>
         <div className="button-row">
           {
