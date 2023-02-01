@@ -49,7 +49,7 @@ const buttonMaps = {
 };
 
 export const BasicMap = () => {
-  const [selectedButton, setSelectedButton] = useState('');
+  const [selectedButton, setSelectedButton] = useState('冬奥村');
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   let [pageData, setPageData] = useState({});
 
