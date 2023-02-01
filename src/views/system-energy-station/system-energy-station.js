@@ -54,14 +54,14 @@ export const SystemEnergyStation = () => {
   let [pageData, setPageData] = useState({});
 
   let messageFunc = useCallback((event) => {
-    if (event.origin === SERVERINFO.modelIP) {
+    if (event.origin === SERVERINFO.model1IP) {
         // The data was sent from your site.
         // Data sent with postMessage is stored in event.data:
         let iframe = document.getElementById('energy_model')
         if (!iframe || !iframe.contentWindow || !event || !event.data || !event.data.type) return
         switch(event.data.type) {
           case "ok"://加载完成
-              iframe.contentWindow.postMessage({type:"energy_station_init"}, SERVERINFO.modelIP)
+              iframe.contentWindow.postMessage({type:"energy_station_init"}, "*")
             break
           case "device"://请求设备信息
             if (!event.data.data) {
@@ -305,7 +305,7 @@ export const SystemEnergyStation = () => {
                 data.data2 = pageData[PAGEDATA.EnergyDVState[9]]
                 break
             }
-            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
+            iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.model1IP)
             break
         }
     } else {
@@ -332,8 +332,6 @@ export const SystemEnergyStation = () => {
       res[PAGEDATA.EnergyTankRunningNum] = res[PAGEDATA.EnergyTankRunningNum].toFixed(0);
       res[PAGEDATA.EnergyHeatSupplyToday] = (res[PAGEDATA.EnergyHeatSupplyToday]/1e9).toFixed(2);
       res[PAGEDATA.EnergyAlarmNumToday] = res[PAGEDATA.EnergyAlarmNumToday].toFixed(0);
-
-      console.log(res[PAGEDATA.EnergyAlarmToday])
 
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday1] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday1].toFixed(2);
       res[PAGEDATA.EnergyBoilerPowerConsumptionToday2] = res[PAGEDATA.EnergyBoilerPowerConsumptionToday2].toFixed(2);
@@ -406,7 +404,7 @@ export const SystemEnergyStation = () => {
 
   return (
     <div className="system-energy-station-view">
-      <iframe id="energy_model" src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
+      <iframe id="energy_model" src={SERVERINFO.model1IP} className="iframe-style" title="chart" frameBorder="no"></iframe>
       <div className="system-energy-station-content">
         <div className="operation-summary">
           <div className="alarm-info">
