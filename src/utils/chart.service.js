@@ -302,6 +302,112 @@ export class ChartService {
     };
   }
 
+  static getNewPieOptions(options) {
+    return {
+      title: {
+        text: options.title || '0',
+        subtext: options.subTitle || '总数',
+        left: 'center',
+        top: 'middle',
+        textStyle: {
+          color: '#03dfeb',
+          fontSize: 26,
+          fontWeight: 'normal'
+        },
+        subtextStyle: {
+          color: '#ccc',
+          fontSize: 14,
+        }
+      },
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        show: true,
+        left: 'center',
+        top: 10,
+        icon: 'circle',
+        orient: 'horizontal',
+        itemWidth: 8,
+        itemHeight: 8,
+        textStyle: {
+          color: '#ccc',
+          fontSize: 12,
+          rich: {
+            a: { verticleAlign: 'middle' }
+          }
+        }
+      },
+      color: [
+        {
+          type: 'linear',
+          x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: '#03dfeb' },
+            { offset: 0.5, color: '#03dfeb' },
+            { offset: 1, color: 'orange' }
+          ]
+        },
+        {
+          type: 'linear',
+          x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: 'red' },
+            { offset: 0.5, color: 'orange' },
+            { offset: 1, color: 'orange' }
+          ]
+        },
+        {
+          type: 'linear',
+          x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: '#03dfeb' },
+            { offset: 0.5, color: 'red' },
+            { offset: 1, color: 'red' }
+          ]
+        }
+      ],
+      series: [
+        {
+          name: options.name || '',
+          type: 'pie',
+          radius: ['45%', '70%'],
+          top: 26,
+          label: {
+            show: true,
+            color: '#fff',
+            formatter: '{b}: {c|{c}}  {d|[{d}%]}',
+            fontSize: 12,
+            rich: {
+              b: {
+                color: '#03dfeb'
+              },
+              c: {
+                color: '#03dfeb',
+                fontSize: 20,
+                textShadowColor: '#03dfeb',
+                textShadowBlur: 4,
+              },
+              d: {
+                color: '#03dfeb',
+                fontSize: 10,
+                opacity: 0.8
+              }
+            }
+          },
+          data: options.data || [],
+          itemStyle: {
+            borderRadius: 4,
+            borderColor: 'rgba(255, 255, 255, .4)',
+            borderWidth: 2,
+            shadowColor: '#03dfeb',
+            shadowBlur: 4
+          },
+        }
+      ]
+    }
+  }
+
   static getGaugeOptions(options = {}) {
     let defaultFormatter = (val) => val;
     let config = {
