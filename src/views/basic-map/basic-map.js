@@ -198,8 +198,6 @@ export const BasicMap = () => {
       }
 
       if (needChange) setPageData(res);
-
-      console.log(res[PAGEDATA.EnergyOnlineRate])
     });
 
     window.addEventListener('message', messageFunc)
