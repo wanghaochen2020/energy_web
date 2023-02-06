@@ -418,11 +418,11 @@ export const SystemEnergyStation = () => {
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
                   data: [
-                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
                   ],
                   startAngle: 90,
-                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                   unit: '%',
                   subTitle: '设备在线率'
                 })}
@@ -433,11 +433,11 @@ export const SystemEnergyStation = () => {
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
                   data: [
-                    { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                    { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 }
                   ],
                   startAngle: 90,
-                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                  title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (100 - pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                   unit: '%',
                   subTitle: '设备离线率'
                 })}

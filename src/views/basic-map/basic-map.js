@@ -198,6 +198,8 @@ export const BasicMap = () => {
       }
 
       if (needChange) setPageData(res);
+
+      console.log(res[PAGEDATA.EnergyOnlineRate])
     });
 
     window.addEventListener('message', messageFunc)
@@ -370,11 +372,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -387,11 +389,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (100 - pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -416,11 +418,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -433,11 +435,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (100 - pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
