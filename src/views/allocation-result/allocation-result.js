@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './allocation-result.scss';
 import { ChartService } from '../../utils/chart.service';
+import { Allocation } from '../../business/allocation';
 
 export const AllocationResult = () => {
   const [chartButtons, setChartButtons] = useState([]);
   const [loadRateButtons, setLoadRateButton] = useState([]);
   const [chartDateButtons, setChartDateButtons] = useState([]);
+
+  const [energySaving, setEnergySaving] = useState([]);
+  const [runningCost, setRunningCost] = useState([]);
+  const [carbonEmission, setCarbonEmission] = useState([]);
 
   useEffect(() => {
     setChartButtons([
@@ -18,6 +23,18 @@ export const AllocationResult = () => {
     setChartDateButtons([
       { name: '今日', selected: true }, { name: '近七天' }, { name: '历史' }
     ]);
+
+    Allocation.getEnergySaving().then((res)=> {
+      setEnergySaving(res.data)
+    });
+    Allocation.getRunningCost().then((res)=> {
+      setRunningCost(res.data)
+    });
+    Allocation.getCarbonEmission().then((res)=> {
+      setCarbonEmission(res.data)
+    });
+
+
   }, []);
 
   const selectChartButton = (item) => {
@@ -104,7 +121,7 @@ export const AllocationResult = () => {
                 },
                 series: [
                   {
-                    data: [1520, 1360, 1230, 1224, 1100, 1218, 1135],
+                    data: energySaving,
                     type: 'bar',
                     barWidth: 8,
                     itemStyle: {
@@ -114,22 +131,6 @@ export const AllocationResult = () => {
                           colorStops: [
                               { offset: 0, color: 'rgba(3, 223, 235, .9)' },
                               { offset: 1, color: 'rgba(3, 223, 235, 0)' }
-                          ],
-                      },
-                      borderRadius: [4, 4, 0, 0]
-                    }
-                  },
-                  {
-                    data: [1220, 1160, 1030, 1124, 800, 1018, 935],
-                    type: 'bar',
-                    barWidth: 8,
-                    itemStyle: {
-                      color: {
-                          type: 'linear',
-                          x: 0, y: 0, x2: 0, y2: 1,
-                          colorStops: [
-                              { offset: 0, color: 'rgba(85, 225, 95, .9)' },
-                              { offset: 1, color: 'rgba(85, 225, 95, 0)' }
                           ],
                       },
                       borderRadius: [4, 4, 0, 0]
@@ -156,7 +157,7 @@ export const AllocationResult = () => {
                   category: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
                   series: [
                     {
-                      data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]
+                      data: runningCost
                     }
                   ]
                 })} />
@@ -178,7 +179,7 @@ export const AllocationResult = () => {
                   data: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
                   series: [
                     {
-                      data: [1520, 1360, 1230, 1224, 1100, 1218, 1135]
+                      data: carbonEmission
                     }
                   ]
                 })} />
