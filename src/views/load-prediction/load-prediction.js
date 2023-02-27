@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './load-prediction.scss';
 import { ChartService } from '../../utils/chart.service';
@@ -54,6 +54,20 @@ export const LoadPrediction = () => {
 
     setChartButtons2([...chartButtons2]);
   }
+
+  useEffect(() => {
+    LoadPredict.getLoadStatistic('D1组团').then((res)=> {
+      setX1(res.x轴)
+      setRealLoad1(res.负荷量)
+      setTemp(res.温度)
+    });
+
+    LoadPredict.getComparison('D1组团').then((res)=> {
+      setX2(res.x轴)
+      setRealLoad2(res.真实值)
+      setPredictLoad(res.预测值)
+    });
+  }, []);
 
   return (
     <div className="load-prediction-view">
