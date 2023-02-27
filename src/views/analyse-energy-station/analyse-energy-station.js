@@ -148,107 +148,6 @@ export const AnalyseEnergyStation = () => {
             })} 
           />
         </div>
-
-          {/* <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 360,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100 - AvrgEnergyBoilerEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: AvrgEnergyBoilerEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">今日锅炉平均热效率: {AvrgEnergyBoilerEfficiencyDay}%</div>
-          </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 320,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100 - AvrgEnergyWatertankEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: AvrgEnergyWatertankEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#ecf75d' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">今日蓄热水箱平均热效率: {AvrgEnergyWatertankEfficiencyDay}%</div>
-          </div>
-          <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 270,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100-AvrgEnergyEfficiencyDay, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: AvrgEnergyEfficiencyDay, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#45f9b7' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">今日系统总效率: {AvrgEnergyEfficiencyDay}%</div>
-          </div> */}
-          {/* <div className="top-info-box">
-            <ReactEcharts style={{ width: '120px', height: '120px', margin: 'auto' }} option={{
-              tooltip: {
-                show: false
-              },
-              series: [
-                {
-                  type: 'pie',
-                  radius: ['80%', '100%'],
-                  startAngle: 360,
-                  hoverAnimation: false,
-                  labelLine: {
-                    normal: {
-                      show: false
-                    }
-                  },
-                  data: [
-                    { value: 100, name: 'full', label: { normal: { show: false } }, itemStyle: { color: '#323891' } },
-                    { value: 0, name: 'rate', label: { normal: { show: false } }, itemStyle: { color: '#33d7ea' } }
-                  ]
-                }
-              ]
-            }} />
-            <div className="number-value">今日减碳排放量: 50KWH</div>
-          </div> */}
       </div>
       <div className="top-box">
         <div className="top-left">
@@ -356,35 +255,21 @@ export const AnalyseEnergyStation = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-            <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
-                {
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  legend: {
-                    orient: 'vertical',
-                    left: 'right',
-                    textStyle: {
-                      color: '#fff'
-                    }
-                  },
-                  series: [
-                    {
-                      type: 'pie',
-                      radius: '50%',
-                      data: [
-                        { value: 59, name: '火电' },
-                        { value: 37, name: '绿电' },
-                        { value: 4, name: '其它' },
-                      ],
-                      label: {
-                        formatter: '{b}: {c}({d}%)',
-                        color: '#fff'
-                      }
-                    }
+            <ReactEcharts
+              style={{ width: '100%', height: '320px', margin: 'auto' }}
+              option={
+                ChartService.getNewPieOptions({
+                  title: '10000',
+                  subTitle: '总数',
+                  name: '电量类型碳排占比',
+                  data: [
+                    { value: 59, name: '火电' },
+                    { value: 37, name: '绿电' },
+                    { value: 40, name: '其它' },
                   ]
-                }
-              } />
+                })
+              }
+            />
           </div>
         </div>
       </div>

@@ -49,14 +49,14 @@
 
     .top-right {
       float: right;
-      width: 400px;
+      width: 440px;
       text-align: right;
     }
 
     .box-wrapper {
       margin: 20px 0 0 0;
-      background: no-repeat;
-      opacity: 0.8;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      color: #fff;
     }
   }
 
@@ -92,8 +92,8 @@
     position: absolute;
     bottom: 20px;
     text-align: center;
-    left: calc(50% - 300px);
-    right: calc(50% - 300px);
+    left: 300px;
+    right: 300px;
     width: auto;
     margin: auto;
     display: inline-block;

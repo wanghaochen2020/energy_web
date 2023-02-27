@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Routes, Route } from "react-router-dom";
 import {
     Login, Master, Password, UserProfile,
     BasicMap, SystemEnergyStation, SystemRefrigerationCenter, SystemSecondPump, SystemSolarPower, SystemSolarWaterHeater,
@@ -33,7 +33,7 @@ export const routeNames = {
     loadPrediction: '/load-prediction'
 }
 
-export const routes = <BrowserRouter>
+export const routes = <HashRouter>
     <Routes>
         <Route path="/" element={<Master />}>
             <Route index element={<BasicMap />} />
@@ -64,4 +64,4 @@ export const routes = <BrowserRouter>
         <Route element={<Login />}></Route>
         <Route path={routeNames.login} element={<Login />}></Route>
     </Routes>
-</BrowserRouter>;
+</HashRouter>;

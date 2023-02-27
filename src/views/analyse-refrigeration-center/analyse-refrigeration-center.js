@@ -223,35 +223,21 @@ export const AnalyseRefrigerationCenter = () => {
               <span className="box-title-icon">&#9658;</span>
               <span className="title-text">电量类型碳排占比</span>
             </div>
-              <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
-                {
-                  tooltip: {
-                    trigger: 'item'
-                  },
-                  legend: {
-                    orient: 'vertical',
-                    left: 'right',
-                    textStyle: {
-                      color: '#fff'
-                    }
-                  },
-                  series: [
-                    {
-                      type: 'pie',
-                      radius: '50%',
-                      data: [
-                        { value: 59, name: '火电' },
-                        { value: 37, name: '绿电' },
-                        { value: 4, name: '其它' },
-                      ],
-                      label: {
-                        formatter: '{b}: {c}({d}%)',
-                        color: '#fff'
-                      }
-                    }
+            <ReactEcharts
+              style={{ width: '100%', height: '320px', margin: 'auto' }}
+              option={
+                ChartService.getNewPieOptions({
+                  title: '10000',
+                  subTitle: '总数',
+                  name: '电量类型碳排占比',
+                  data: [
+                    { value: 59, name: '火电' },
+                    { value: 37, name: '绿电' },
+                    { value: 40, name: '其它' },
                   ]
-                }
-              } />
+                })
+              }
+            />
           </div>
         </div>
       </div>

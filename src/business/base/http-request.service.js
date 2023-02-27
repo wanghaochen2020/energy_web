@@ -97,7 +97,7 @@ export class HttpRequestService {
     }
     HttpRequestService._redirected = true;
     if (window.location.href.toLowerCase().indexOf('login') === -1) {
-      window.location.href = '/login';
+      window.location.href = '/#/login';
     }
   }
 }

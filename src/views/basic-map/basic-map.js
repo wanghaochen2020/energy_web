@@ -37,21 +37,34 @@ const concatList = (...list) => {
   return a;
 }
 
+const buttonMaps = {
+  '冬奥村': [],
+  '组团1': [[0,'建筑']],
+  '组团2': [[0,'建筑']],
+  '组团3': [[0,'建筑']],
+  '组团4': [[0,'建筑']],
+  '组团5': [[0,'建筑']],
+  '组团6': [[1,'建筑'], [2,'热水系统']],
+  '公共南': [[1,'建筑'], [3,'能源站'], [4,'制冷中心'], [2,'二次泵站']],
+  '公共北': [[0,'建筑']],
+};
 
 export const BasicMap = () => {
-  const buttonMaps = {
-    '冬奥村': [],
-    '组团1': ['建筑'],
-    '组团2': ['建筑'],
-    '组团3': ['建筑'],
-    '组团4': ['建筑'],
-    '组团5': ['建筑'],
-    '组团6': ['建筑', '热水系统'],
-    '公共南': ['建筑', '能源站', '制冷中心', '二次泵站'],
-    '公共北': ['建筑'],
-  };
-  const [selectedButton, setSelectedButton] = useState('');
+  const [selectedButton, setSelectedButton] = useState('冬奥村');
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   let [pageData, setPageData] = useState({});
+
+  let floorsFunc = useCallback((index, str) => {
+    let iframe = document.getElementById('basic_map_model')
+    if (index === -1) {
+      iframe.contentWindow.postMessage({type:"floors_fun", i1:selectedButtonIndex, i2:str[0]}, SERVERINFO.modelIP)
+    } else {
+      iframe.contentWindow.postMessage({type:"floors_fun", i1:index, i2:-1}, SERVERINFO.modelIP)
+      setSelectedButton(str);
+      setSelectedButtonIndex(index);
+    }
+  }, [selectedButton, selectedButtonIndex])
+
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.modelIP) {
         // The data was sent from your site.
@@ -166,7 +179,6 @@ export const BasicMap = () => {
     }).then((res) => {
       let needChange = false;
       res[PAGEDATA.EnergyAlarmToday] = concatList(res[PAGEDATA.EnergyAlarmToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
-      console.log(res[PAGEDATA.EnergyAlarmToday])
 
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {
@@ -208,7 +220,7 @@ export const BasicMap = () => {
   return (
     <div className="basic-map-view">
       <div className="top-box">
-        {/* <iframe id='basic_map_model' src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe> */}
+        <iframe id='basic_map_model' src={SERVERINFO.modelIP} className="iframe-style" title="chart" frameBorder="no"></iframe>
         <div className="top-left">
           <div className="box-wrapper" style={{ width: '100%', height: '325px' }}>
             <div className="top-left-corner"></div>
@@ -370,11 +382,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -387,11 +399,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (100 - pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -416,11 +428,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -433,11 +445,11 @@ export const BasicMap = () => {
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
                     data: [
-                      { value: 100-(isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100) },
-                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 }
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100 },
+                      { value: isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : 100 - pageData[PAGEDATA.EnergyOnlineRate]*100 }
                     ],
                     startAngle: 90,
-                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]*100) ? 0 : pageData[PAGEDATA.EnergyOnlineRate]*100}`,
+                    title: `${isNaN(pageData[PAGEDATA.EnergyOnlineRate]) ? 0 : (100 - pageData[PAGEDATA.EnergyOnlineRate]*100).toFixed(1)}`,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -447,7 +459,7 @@ export const BasicMap = () => {
               </div>
             </div>
           </div>
-          <div className="box-wrapper" style={{ width: '60%', height: '255px' }}>
+          <div className="box-wrapper" style={{ width: '100%', height: '255px' }}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
             <div className="bottom-left-corner"></div>
@@ -462,11 +474,11 @@ export const BasicMap = () => {
       </div>
       <div className="button-wrapper">
         <div className="button-row">
-          {(buttonMaps[selectedButton] || []).map((str) => <div className="button-item else">{str}</div>)}
+          {((buttonMaps[selectedButton]) || []).map((str) => <div className="button-item else" onClick={() => floorsFunc(-1, str)}>{str[1]}</div>)}
         </div>
         <div className="button-row">
           {
-            Object.keys(buttonMaps).map((str) => <div onClick={() => setSelectedButton(str)}
+            Object.keys(buttonMaps).map((str, key) => <div onClick={() => {floorsFunc(key, str)}}
               className={"button-item" + (str === selectedButton ? ' button-selected' : '')}>{str}</div>)
           }
         </div>
