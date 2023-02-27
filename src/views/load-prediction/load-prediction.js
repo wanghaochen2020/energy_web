@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './load-prediction.scss';
 import { ChartService } from '../../utils/chart.service';
+import { LoadPredict } from '../../business/loadPredict';
 
 export const LoadPrediction = () => {
   const [chartButtons, setChartButtons] = useState([
@@ -14,6 +15,12 @@ export const LoadPrediction = () => {
     { name: 'D4组团' }, { name: 'D5组团' }, { name: 'D6组团' },
     { name: '公共组团南区' }, { name: '公共组团北区' },
   ]);
+  const [realLoad1, setRealLoad1] = useState([]);
+  const [x1, setX1] = useState([]);
+  const [temp, setTemp] = useState([]);
+  const [realLoad2, setRealLoad2] = useState([]);
+  const [x2, setX2] = useState([]);
+  const [predictLoad, setPredictLoad] = useState([]);
 
   const selectChartButton = (item) => {
     chartButtons.slice().forEach(button => {
@@ -21,6 +28,14 @@ export const LoadPrediction = () => {
     });
 
     item.selected = true;
+    //console.log(item.name)
+    //LoadPredict.getLoadStatistic(item.name)
+    LoadPredict.getLoadStatistic(item.name).then((res)=> {
+      setX1(res.x轴)
+      setRealLoad1(res.负荷量)
+      setTemp(res.温度)
+    });
+
     setChartButtons([...chartButtons]);
   }
 
@@ -30,6 +45,13 @@ export const LoadPrediction = () => {
     });
 
     item.selected = true;
+
+    LoadPredict.getComparison(item.name).then((res)=> {
+      setX2(res.x轴)
+      setRealLoad2(res.真实值)
+      setPredictLoad(res.预测值)
+    });
+
     setChartButtons2([...chartButtons2]);
   }
 
@@ -76,7 +98,7 @@ export const LoadPrediction = () => {
           },
           xAxis: {
             type: 'category',
-            data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+            data: x1,
             axisLine: {
               show: true,
               lineStyle: {
@@ -125,8 +147,7 @@ export const LoadPrediction = () => {
           series: [
             {
               name: '负荷量',
-              data: [130, 150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                230, 224, 100, 218, 135, 80, 147, 260, 200, 100],
+              data: realLoad1,
               type: 'bar',
               barWidth: 8,
               itemStyle: {
@@ -144,8 +165,7 @@ export const LoadPrediction = () => {
             {
               name: '温度(°C)',
               yAxisIndex: 1,
-              data: [55, 35, 20, 17, 16, 20, 30, 20, 30, 20, 30, 24, 23, 18,
-                30, 27, 16, 10, 10, 13, 24, 10, 18, 35],
+              data: temp,
               type: 'line',
               smooth: true,
               symbolSize: 6,
@@ -186,17 +206,15 @@ export const LoadPrediction = () => {
                 },
                 data: ['真实值', '预测值']
               },
-              data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+              data: x2,
               series: [
                 {
                   name: '真实值',
-                  data: [135, 150, 60, 230, 224, 100, 218, 135, 80, 147, 260, 200, 150, 60,
-                    230, 224, 100, 218, 135, 80, 147, 260, 200, 100]
+                  data: realLoad2
                 },
                 {
                   name: '预测值',
-                  data: [150, 35, 80, 47, 160, 100, 50, 60, 50, 60, 30, 124, 60, 118,
-                    80, 47, 160, 100, 100, 130, 124, 100, 118, 35]
+                  data: predictLoad
                 }
               ]
             })} />
