@@ -6,6 +6,7 @@ import { ChartService } from '../../utils/chart.service';
 import { SERVERINFO } from '../../constants/app-info';
 import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
+import {MainPage } from '../../business/mainPage';
 
 const basicBuild = {
   title1:"建筑面积",
@@ -156,9 +157,20 @@ export const BasicMap = () => {
     }
   }, [])
 
+  const [atmosphere, setAtmosphere] = useState([]);
+  const [kekong, setKekong] = useState([]);
+
+
   useEffect(() => {
     let dayStr = EnergyStation.getDayStr();
     let hourStr = EnergyStation.getHourStr();
+
+    MainPage.getAtmosphere().then((res)=> {
+      setAtmosphere(res.data)
+    });
+    MainPage.getKekong().then((res)=> {
+      setKekong(res.data)
+    });
 
     EnergyStation.postPageData({
       data:basic_map_data,
@@ -222,27 +234,27 @@ export const BasicMap = () => {
             <div className="weather-info-wrapper">
               <div className="weather-info">
                 <span className="fa fa-thermometer"></span>
-                <div className="number-text">23°C</div>
+                <div className="number-text">{atmosphere[0]}°C</div>
                 <div className="unit-text">大气温度</div>
               </div>
               <div className="weather-info">
                 <span className="fa fa-tint"></span>
-                <div className="number-text">30%</div>
+                <div className="number-text">{atmosphere[1]}%</div>
                 <div className="unit-text">大气湿度</div>
               </div>
               <div className="weather-info">
                 <span className="fa fa-sun-o"></span>
-                <div className="number-text">450w/m2</div>
+                <div className="number-text">{atmosphere[2]}w/m2</div>
                 <div className="unit-text">太阳能总辐射</div>
               </div>
               <div className="weather-info">
                 <span className="fa fa-ravelry"></span>
-                <div className="number-text">2.4m/s</div>
+                <div className="number-text">{atmosphere[3]}m/s</div>
                 <div className="unit-text">风速</div>
               </div>
               <div className="weather-info">
                 <span className="fa fa-compress"></span>
-                <div className="number-text">920hpa</div>
+                <div className="number-text">{atmosphere[4]}hpa</div>
                 <div className="unit-text">大气压力</div>
               </div>
             </div>
@@ -261,7 +273,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 20 }, { value: 80 }],
+                    data: [{ value: 100-kekong[0] }, { value: kekong[0] }],
                     startAngle: 90,
                     title: '80',
                     unit: '%',
@@ -275,7 +287,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 40 }, { value: 60 }],
+                    data: [{ value: 100-kekong[1] }, { value: kekong[1] }],
                     startAngle: 90,
                     title: '60',
                     unit: '%',
@@ -291,7 +303,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 10 }, { value: 90 }],
+                    data: [{ value: 100-kekong[2] }, { value: kekong[2] }],
                     startAngle: 90,
                     title: '90',
                     unit: '%',
@@ -307,7 +319,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 30 }, { value: 70 }],
+                    data: [{ value: 100-kekong[3] }, { value: kekong[3] }],
                     startAngle: 90,
                     title: '70',
                     unit: '%',
@@ -323,7 +335,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 20 }, { value: 80 }],
+                    data: [{ value: 100-kekong[4] }, { value: kekong[4] }],
                     startAngle: 90,
                     title: '80',
                     unit: '%',
@@ -339,7 +351,7 @@ export const BasicMap = () => {
                 <ReactEcharts
                   style={{ width: '120px', height: '120px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 50 }, { value: 50 }],
+                    data: [{ value: 100-kekong[5] }, { value: kekong[5] }],
                     startAngle: 90,
                     title: '50',
                     unit: '%',
