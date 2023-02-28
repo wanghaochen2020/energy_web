@@ -92,7 +92,7 @@ export class HttpRequestService {
   }
 
   static goToLogin() {
-    if (HttpRequestService._redirected) {
+    if (window.location.href.indexOf("/login") > -1) {
       return;
     }
     HttpRequestService._redirected = true;

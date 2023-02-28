@@ -482,6 +482,9 @@ export const SystemEnergyStation = () => {
                     fontSize: 14
                   }
                 },
+                grid: {
+                  left: '55px',
+                },
                 xAxis: {
                   type: 'category',
                   name: '时',
@@ -567,6 +570,9 @@ export const SystemEnergyStation = () => {
                     color: '#fff',
                     fontSize: 14
                   }
+                },
+                grid: {
+                  left: '55px',
                 },
                 // backgroundColor: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
                 //   { offset: 0, color: '#3fc7f3' },
