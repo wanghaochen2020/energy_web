@@ -22,7 +22,8 @@ export class ChartService {
             a: { verticleAlign: 'middle' }
           }
         },
-        data: (options.legend && options.legend.data) ? options.legend.data : []
+        data: (options.legend && options.legend.data) ? options.legend.data : [],
+        ...options.legend
       },
       grid: {
         top: 50,
