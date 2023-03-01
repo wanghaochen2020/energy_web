@@ -6,6 +6,7 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { ChartService } from '../../utils/chart.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
+import { MainPage } from '../../business/mainPage';
 
 const basicPump = {
   title1:"运行状态",
@@ -51,7 +52,8 @@ const system_energy_data = {
 }
 
 export const SystemEnergyStation = () => {
-  let [pageData, setPageData] = useState({});
+  const [pageData, setPageData] = useState({});
+  const [atmosphere, setAtmosphere] = useState([]);
 
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.model1IP) {
@@ -124,8 +126,8 @@ export const SystemEnergyStation = () => {
                   title5:"用电量",
                   data1:pageData[PAGEDATA.EnergyBoilerRun4] == 0?"关闭" : "开启",
                   data2: "4MW",
-                  data3: pageData[PAGEDATA.EnergyBoilerOutT3]+"℃",
-                  data4: pageData[PAGEDATA.EnergyBoilerInT3]+"℃",
+                  data3: pageData[PAGEDATA.EnergyBoilerOutT4]+"℃",
+                  data4: pageData[PAGEDATA.EnergyBoilerInT4]+"℃",
                   data5: pageData[PAGEDATA.EnergyBoilerPowerConsumptionToday4]+"KWH",
                 }
                 break
@@ -393,6 +395,10 @@ export const SystemEnergyStation = () => {
 
       if (needChange) setPageData(res);
     });
+
+    MainPage.getAtmosphere().then((res)=> {
+      setAtmosphere(res.data)
+    });
   }, [])
 
   useEffect(() => {
@@ -457,7 +463,7 @@ export const SystemEnergyStation = () => {
               <span className="title-text">今日一览</span>
             </div>
             <div>
-              <ComSummaryInfo items={{boilerPower:pageData[PAGEDATA.EnergyBoilerPower], powerConsumptionToday:pageData[PAGEDATA.EnergyPowerConsumptionToday], 
+              <ComSummaryInfo items={{outTemp:atmosphere[0], boilerPower:pageData[PAGEDATA.EnergyBoilerPower], powerConsumptionToday:pageData[PAGEDATA.EnergyPowerConsumptionToday], 
                 boilerRunningNum:pageData[PAGEDATA.EnergyBoilerRunningNum], tankRunningNum:pageData[PAGEDATA.EnergyTankRunningNum], 
                 heatSupplyToday:pageData[PAGEDATA.EnergyHeatSupplyToday]}}/>
             </div>
