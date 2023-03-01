@@ -33,7 +33,7 @@ export const ComSummaryInfo = ({ items }) => {
 
       <div className="row-item row-odd">
         <span>室外温度</span>
-        <span className="info-number">10 °C</span>
+        <span className="info-number">{items.outTemp} °C</span>
       </div>
       <div className="row-item">
         <span>锅炉运行台数</span>
