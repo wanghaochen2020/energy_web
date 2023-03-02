@@ -297,19 +297,19 @@ export const AnalyseSolarWaterHeater = () => {
             </div>
             <div className="date-button-wrapper" style={{top: '38px', right: '20px'}}>
               {
-                systemRateButtons.map((item, index) =>
-                  <span onClick={() => selectSystemRateButtons(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
+                systemRateButtons2.map((item, index) =>
+                  <span onClick={() => selectSystemRateButtons2(item)} key={index} className={"date-button" + (item.selected? " date-button-selected" : "")}>{item.name}</span>)
               }
             </div>
               <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
                 ChartService.getBarOptions({
-                  category: (systemRateButtons[2] &&systemRateButtons[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
-                  : ((systemRateButtons[1] && systemRateButtons[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+                  category: (systemRateButtons2[2] &&systemRateButtons2[2].selected) ? [1, 2, 3, 4, 5, 6, 7 ,8, 9, 10, 11, 12]
+                  : ((systemRateButtons2[1] && systemRateButtons2[1].selected) ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
                   : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]),
                   series: [
                     {
-                      data: (systemRateButtons[2] && systemRateButtons[2].selected) ? SolarWaterGuaranteeRateYear
-                      : ((systemRateButtons[1] && systemRateButtons[1].selected) ? SolarWaterGuaranteeRateMonth : SolarWaterGuaranteeRateDay)
+                      data: (systemRateButtons2[2] && systemRateButtons2[2].selected) ? SolarWaterGuaranteeRateYear
+                      : ((systemRateButtons2[1] && systemRateButtons2[1].selected) ? SolarWaterGuaranteeRateMonth : SolarWaterGuaranteeRateDay)
                     }
                   ]
                 })} />
