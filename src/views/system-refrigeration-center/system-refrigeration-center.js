@@ -53,7 +53,8 @@ const system_cold_data = {
   "map_data_list_day":[PAGEDATA.ColdAlarmToday],
   "basic_data_list_hour":[],
   "basic_opc_list":PAGEDATA.ColdPumpState.concat(PAGEDATA.ColdMachineRun).concat(PAGEDATA.ColdMachinePowerMinList)
-  .concat(PAGEDATA.ColdMachineCoolInT).concat(PAGEDATA.ColdMachineCoolOutT).concat(PAGEDATA.ColdMachinePresure)
+  .concat(PAGEDATA.ColdMachineCoolInT).concat(PAGEDATA.ColdMachineCoolOutT).concat(PAGEDATA.ColdMachineColdInT)
+  .concat(PAGEDATA.ColdMachineColdOutT).concat(PAGEDATA.ColdMachinePresure)
 }
 
 export const SystemRefrigerationCenter = () => {
@@ -267,14 +268,14 @@ export const SystemRefrigerationCenter = () => {
       for (let i=0;i<=15;i++) {
         res[PAGEDATA.ColdPumpState[i]] = getList(res[PAGEDATA.ColdPumpState[i]], min);
       }
-      
+
       for (let i=0;i<=2;i++) {
         res[PAGEDATA.ColdMachineRun[i]] = getList(res[PAGEDATA.ColdMachineRun[i]], min);
         res[PAGEDATA.ColdMachinePowerMinList[i]] = getList(res[PAGEDATA.ColdMachinePowerMinList[i]], min);
-        res[PAGEDATA.ColdMachineCoolInT[i]] = getList(res[PAGEDATA.ColdMachineCoolInT[i]], min).toFixed(1);
-        res[PAGEDATA.ColdMachineCoolOutT[i]] = getList(res[PAGEDATA.ColdMachineCoolOutT[i]], min).toFixed(1);
-        res[PAGEDATA.ColdMachineColdInT[i]] = getList(res[PAGEDATA.ColdMachineColdInT[i]], min).toFixed(1);
-        res[PAGEDATA.ColdMachineColdOutT[i]] = getList(res[PAGEDATA.ColdMachineColdOutT[i]], min).toFixed(1);
+        res[PAGEDATA.ColdMachineCoolInT[i]] = (getList(res[PAGEDATA.ColdMachineCoolInT[i]], min)/100).toFixed(1);
+        res[PAGEDATA.ColdMachineCoolOutT[i]] = (getList(res[PAGEDATA.ColdMachineCoolOutT[i]], min)/100).toFixed(1);
+        res[PAGEDATA.ColdMachineColdInT[i]] = (getList(res[PAGEDATA.ColdMachineColdInT[i]], min)/100).toFixed(1);
+        res[PAGEDATA.ColdMachineColdOutT[i]] = (getList(res[PAGEDATA.ColdMachineColdOutT[i]], min)/100).toFixed(1);
         res[PAGEDATA.ColdMachinePresure[i]] = getList(res[PAGEDATA.ColdMachinePresure[i]], min).toFixed(1);
       }
 

@@ -6,21 +6,29 @@ import { Allocation } from '../../business/allocation';
 export const AllocationWeek = () => {
   const [heatStorageWeek, setHeatStorageWeek] = useState([]);
   const [electricityWeek, setElectricityWeek] = useState([]);
+  const [temp, setTemp] = useState([]);
+  const [xAxis, setXAxis] = useState([]);
+  const [title, setTitle] = useState([]);
   const [configWeekVally, setConfigWeekVally] = useState([[],[],[],[],[],[],[]]);
   const [configWeekOther, setConfigWeekOther] = useState([[],[],[],[],[],[],[]]);
 
   useEffect(() => {
       Allocation.getHeatStorageWeek().then((res)=> {
         setHeatStorageWeek(res.再蓄热量)
+        setTemp(res.室外温度)
+        setXAxis(res.x轴)
       });
 
       Allocation.getElectricityWeek().then((res)=> {
         setElectricityWeek(res.移峰电量)
+        setTemp(res.室外温度)
+        setXAxis(res.x轴)
       });
 
       Allocation.getConfigWeek().then((res)=> {
         setConfigWeekVally(res.谷电价)
         setConfigWeekOther(res.峰平电价)
+        setTitle(res.x轴)
       });
   }, []);
 
@@ -62,7 +70,7 @@ export const AllocationWeek = () => {
           },
           xAxis: {
             type: 'category',
-            data: ['2022-08-02', '2022-08-03', '2022-08-04', '2022-08-05', '2022-08-06', '2022-08-07', '2022-08-08'],
+            data: xAxis,
             axisLine: {
               show: true,
               lineStyle: {
@@ -129,7 +137,7 @@ export const AllocationWeek = () => {
             {
               name: '室外温度(°C)',
               yAxisIndex: 1,
-              data: [20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25],
+              data: temp,
               type: 'line',
               smooth: true,
               symbolSize: 6,
@@ -177,7 +185,7 @@ export const AllocationWeek = () => {
           },
           xAxis: {
             type: 'category',
-            data: ['2022-08-02', '2022-08-03', '2022-08-04', '2022-08-05', '2022-08-06', '2022-08-07', '2022-08-08'],
+            data: xAxis,
             axisLine: {
               show: true,
               lineStyle: {
@@ -244,7 +252,7 @@ export const AllocationWeek = () => {
             {
               name: '室外温度(°C)',
               yAxisIndex: 1,
-              data: [20.4, 22.5, 18.9, 15, 28.3, 29.2, 30, 25],
+              data: temp,
               type: 'line',
               smooth: true,
               symbolSize: 6,
@@ -261,13 +269,13 @@ export const AllocationWeek = () => {
         <table className="table-history">
           <thead>
             <tr>
-              <th>1月2号(谷电价阶段)</th>
-              <th>1月3号(谷电价阶段)</th>
-              <th>1月4号(谷电价阶段)</th>
-              <th>1月5号(谷电价阶段)</th>
-              <th>1月6号(谷电价阶段)</th>
-              <th>1月7号(谷电价阶段)</th>
-              <th>1月8号(谷电价阶段)</th>
+              <th>{title[0]}(谷电价阶段)</th>
+              <th>{title[1]}(谷电价阶段)</th>
+              <th>{title[2]}(谷电价阶段)</th>
+              <th>{title[3]}(谷电价阶段)</th>
+              <th>{title[4]}(谷电价阶段)</th>
+              <th>{title[5]}(谷电价阶段)</th>
+              <th>{title[6]}(谷电价阶段)</th>
             </tr>
           </thead>
           <tbody>
@@ -321,13 +329,13 @@ export const AllocationWeek = () => {
         <table className="table-history">
           <thead>
             <tr>
-              <th>1月2号(峰平电价阶段)</th>
-              <th>1月3号(峰平电价阶段)</th>
-              <th>1月4号(峰平电价阶段)</th>
-              <th>1月5号(峰平电价阶段)</th>
-              <th>1月6号(峰平电价阶段)</th>
-              <th>1月7号(峰平电价阶段)</th>
-              <th>1月8号(峰平电价阶段)</th>
+              <th>{title[0]}(峰平电价阶段)</th>
+              <th>{title[1]}(峰平电价阶段)</th>
+              <th>{title[2]}(峰平电价阶段)</th>
+              <th>{title[3]}(峰平电价阶段)</th>
+              <th>{title[4]}(峰平电价阶段)</th>
+              <th>{title[5]}(峰平电价阶段)</th>
+              <th>{title[6]}(峰平电价阶段)</th>
             </tr>
           </thead>
           <tbody>

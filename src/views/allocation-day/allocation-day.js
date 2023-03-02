@@ -345,7 +345,7 @@ export const AllocationDay = () => {
                 {
                   type: 'value',
                   name: '°C',
-                  max: 40,
+                  max: 100,
                   position: 'right',
                   alignTicks: false,
                   axisLine: {

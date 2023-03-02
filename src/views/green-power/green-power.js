@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import './green-power.scss';
 import { ChartService } from '../../utils/chart.service';
+import {MainPage } from '../../business/mainPage';
 
 export const GreenPower = () => {
   const [rateButtons, setRateButtons] = useState([
@@ -64,6 +65,14 @@ export const GreenPower = () => {
     item.selected = true;
     setChartDateButtons([...chartDateButtons]);
   }
+
+  const [atmosphere, setAtmosphere] = useState([]);
+  useEffect(() => {
+    MainPage.getAtmosphere().then((res)=> {
+      setAtmosphere(res.data)
+    });
+  }, []);
+
 
   return (
     <div className="green-power-view">

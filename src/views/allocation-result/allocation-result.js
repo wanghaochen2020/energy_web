@@ -13,6 +13,10 @@ export const AllocationResult = () => {
   const [runningCost, setRunningCost] = useState([]);
   const [carbonEmission, setCarbonEmission] = useState([]);
 
+  const [x1, setX1] = useState([]);
+  const [x2, setX2] = useState([]);
+  const [x3, setX3] = useState([]);
+
   useEffect(() => {
     setChartButtons([
       { name: '电锅炉', selected: true }, { name: '蓄热水箱' }, { name: '能源站系统' }
@@ -26,12 +30,15 @@ export const AllocationResult = () => {
 
     Allocation.getEnergySaving().then((res)=> {
       setEnergySaving(res.data)
+      setX1(res.x轴)
     });
     Allocation.getRunningCost().then((res)=> {
       setRunningCost(res.data)
+      setX2(res.x轴)
     });
     Allocation.getCarbonEmission().then((res)=> {
       setCarbonEmission(res.data)
+      setX3(res.x轴)
     });
 
 
@@ -89,7 +96,7 @@ export const AllocationResult = () => {
                 // backgroundColor: '#080a27',
                 xAxis: {
                   type: 'category',
-                  data: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
+                  data: x1,
                   axisLine: {
                     show: true,
                     lineStyle: {
@@ -154,7 +161,7 @@ export const AllocationResult = () => {
               <ReactEcharts style={{ width: '100%', height: '450px' }} option={
                 ChartService.getBarOptions({
                   yName: '费用(元)',
-                  category: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
+                  category: x2,
                   series: [
                     {
                       data: runningCost
@@ -176,7 +183,7 @@ export const AllocationResult = () => {
               <ReactEcharts style={{ width: '100%', height: '450px', margin: 'auto' }} option={
                 ChartService.getLineOptions({
                   yName: 'kg',
-                  data: ['08-02', '08-03', '08-04', '08-05', '08-06', '08-07', '08-08'],
+                  data: x3,
                   series: [
                     {
                       data: carbonEmission
