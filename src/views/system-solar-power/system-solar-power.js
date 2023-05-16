@@ -2,9 +2,76 @@ import React from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ChartService } from '../../utils/chart.service';
 import './system-solar-power.scss';
+import { PAGEDATA } from '../../constants/pageData';
+import { EnergyStation } from '../../business/system-layer.service';
+
+const system_solar_power_data = {
+  "basic_data":[
+    PAGEDATA.SolarElecGenToday
+  ],
+  "basic_data_list_day":[
+    PAGEDATA.SolarElecGenMonth, PAGEDATA.SolarElecGenYear
+  ],
+  "map_data_list_day":[],
+  "basic_data_list_hour":[],
+  "basic_opc_list":[
+    PAGEDATA.SolarElecGenYesterday, PAGEDATA.SolarElecGenTotal
+  ]
+}
+
+const getList = (d, min) => {
+  return d && d[min] ? d[min] : 0;
+}
 
 export const SystemSolarPower = () => {
+  const [pageData, setPageData] = useState({});
+  useEffect(()=>{
+    let dayStr = EnergyStation.getDayStr();
+    let hourStr = EnergyStation.getHourStr();
+    let min = EnergyStation.getMin();
 
+    EnergyStation.postPageData({
+      data:system_solar_power_data,
+      day_str:dayStr,
+      hour_str:hourStr
+    }).then((res) => {
+      res[PAGEDATA.SolarElecGenToday] = res[PAGEDATA.SolarElecGenToday].toFixed(2);
+      res[PAGEDATA.SolarElecGenYesterday] = getList(res[PAGEDATA.SolarElecGenYesterday], 0).toFixed(2);
+      res[PAGEDATA.SolarElecGenTotal] = getList(res[PAGEDATA.SolarElecGenTotal], min).toFixed(2);
+      
+      let needChange = false;
+      for (const key in res) {
+        if (Object.hasOwnProperty.call(res, key)) {
+          const ele1 = res[key];
+          const ele2 = pageData[key];
+          if (ele2 === undefined) {
+            needChange = true;
+            break;
+          }
+          if (Array.isArray(ele1)) {
+            if (!Array.isArray(ele2) || ele1.length != ele2.length) {
+              needChange = true;
+              break;
+            }
+            for (let i = 0;i<ele1.length;i++) {
+              if (ele1[i] != ele2[i]) {
+                needChange = true;
+                break;
+              }
+            }
+            if (needChange) break;
+          } else {
+            if (ele1 !== ele2) {
+              needChange = true;
+              break;
+            }
+          }
+        }
+      }
+
+      if (needChange) setPageData(res);
+    });
+  }, [])
   return (
     <div className="system-solar-power-view">
       <div className="top-info-wrapper">
@@ -23,8 +90,8 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 0 }, { value: 100 }],
                   startAngle: 90,
-                  title: '62358',
-                  unit: 'KWH',
+                  title: pageData[PAGEDATA.SolarElecGenTotal],
+                  unit: 'MWH',
                   subTitle: '总发电量'
                 })}
               />
@@ -35,8 +102,8 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 10 }],
                   startAngle: 90,
-                  title: '16',
-                  unit: 'KWH',
+                  title: pageData[PAGEDATA.SolarElecGenToday],
+                  unit: 'MWH',
                   subTitle: '当日发电量'
                 })}
               />
@@ -48,7 +115,7 @@ export const SystemSolarPower = () => {
                   data: [{ value: 20 }, { value: 30 }],
                   startAngle: 90,
                   title: '323',
-                  unit: 'KWH',
+                  unit: 'MWH',
                   subTitle: '当月发电量'
                 })}
               />
@@ -60,7 +127,7 @@ export const SystemSolarPower = () => {
                   data: [{ value: 20 }, { value: 80 }],
                   startAngle: 90,
                   title: '32562',
-                  unit: 'KWH',
+                  unit: 'MWH',
                   subTitle: '去年发电量'
                 })}
               />
@@ -71,8 +138,8 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 8 }],
                   startAngle: 90,
-                  title: '15',
-                  unit: 'KWH',
+                  title: pageData[PAGEDATA.SolarElecGenYesterday],
+                  unit: 'MWH',
                   subTitle: '昨日发电量'
                 })}
               />
@@ -84,23 +151,23 @@ export const SystemSolarPower = () => {
                   data: [{ value: 20 }, { value: 25 }],
                   startAngle: 90,
                   title: '232',
-                  unit: 'KWH',
+                  unit: 'MWH',
                   subTitle: '上月发电量'
                 })}
               />
             </div>
-            <div className="top-info-box">
+            {/* <div className="top-info-box">
               <ReactEcharts
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 70 }],
                   startAngle: 90,
                   title: '26392',
-                  unit: 'KWH',
+                  unit: 'MWH',
                   subTitle: '去年发电量'
                 })}
               />
-            </div>
+            </div> */}
         </div>
       </div>
       <div className="bottom-box">
