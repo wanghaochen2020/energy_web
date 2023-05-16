@@ -110,7 +110,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团4"
                 data.data1 = "7898㎡"
                 data.data2 = "5"
-                data.data3 = "17.63℃"
+                data.data3 = "无数据"
                 data.data4 = "0MWH"
                 break
               case "5":
@@ -126,7 +126,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团6"
                 data.data1 = "8128㎡"
                 data.data2 = "6"
-                data.data3 = "17.63℃"
+                data.data3 = "无数据"
                 data.data4 = "0MWH"
                 break
               case "公共组团北区":
