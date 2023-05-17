@@ -94,7 +94,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团1"
                 data.data1 = "14620㎡"
                 data.data2 = "4"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[0]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[0]].toFixed(1) + "℃"
                 data.data4 = haoReLiang[0] + "MWH"
                 break
               case "2":
@@ -102,7 +102,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团2"
                 data.data1 = "6977㎡"
                 data.data2 = "4"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[1]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[1]].toFixed(1) + "℃"
                 data.data4 = haoReLiang[1] + "MWH"
                 break
               case "3":
@@ -110,7 +110,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团3"
                 data.data1 = "12728㎡"
                 data.data2 = "4"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[2]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[2]].toFixed(1) + "℃"
                 data.data4 = haoReLiang[2] + "MWH"
                 break
               case "4":
@@ -126,7 +126,7 @@ export const BasicMap = () => {
                 data.title = "运动员组团5"
                 data.data1 = "7621㎡"
                 data.data2 = "6"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[4]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[4]].toFixed(1) + "℃"
                 data.data4 = haoReLiang[4] + "MWH"
                 break
               case "6":
@@ -142,7 +142,7 @@ export const BasicMap = () => {
                 data.title = "公共组团南区"
                 data.data1 = "21095㎡"
                 data.data2 = "6"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[6]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[6]].toFixed(1) + "℃"
                 data.data4 = haoReLiang[6] + "MWH"
                 break
               case "公共组团北区":
@@ -150,7 +150,7 @@ export const BasicMap = () => {
                 data.title = "公共组团北区"
                 data.data1 = "6259㎡"
                 data.data2 = "3"
-                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[7]] + "℃"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[7]].toFixed(1) + "℃"
                 data.data4 = "无数据"
                 break
             }
@@ -163,7 +163,7 @@ export const BasicMap = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, [])
+  }, [pageData])
 
   const [atmosphere, setAtmosphere] = useState([]);
   const [kekong, setKekong] = useState([]);
@@ -186,7 +186,6 @@ export const BasicMap = () => {
       hour_str:hourStr
     }).then((res) => {
       let needChange = false;
-      res[PAGEDATA.EnergyAlarmToday] = concatList(res[PAGEDATA.EnergyAlarmToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
 
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {
@@ -219,7 +218,9 @@ export const BasicMap = () => {
 
       if (needChange) setPageData(res);
     });
+  }, [])
 
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
