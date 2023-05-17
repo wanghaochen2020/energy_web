@@ -79,8 +79,8 @@ export const BasicMap = () => {
             if (!event.data.data) {
               return
             }
-            haoReLiang = []
-            for (let i = 0; i<GroupHeatConsumptionHour.length; i++) {
+            let haoReLiang = []
+            for (let i = 0; i<PAGEDATA.GroupHeatConsumptionHour.length; i++) {
               haoReLiang[i] = 0;
               for (let j = 0; j<pageData[PAGEDATA.GroupHeatConsumptionHour[i]].length; j++) {
                 haoReLiang[i] += pageData[PAGEDATA.GroupHeatConsumptionHour[i]][j];

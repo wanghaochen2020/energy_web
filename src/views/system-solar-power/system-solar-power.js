@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { ChartService } from '../../utils/chart.service';
 import './system-solar-power.scss';
