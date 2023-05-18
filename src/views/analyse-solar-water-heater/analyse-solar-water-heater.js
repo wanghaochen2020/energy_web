@@ -185,7 +185,7 @@ export const AnalyseSolarWaterHeater = () => {
             <ReactEcharts
               style={{ width: '260px', height: '260px', margin: 'auto' }}
               option={ChartService.getNewGaugeOptions({ 
-                value: 70,
+                value: AvrgSolarWaterHeatEfficiencyDay,
                 detail: '今日系统总效率'
               })} 
             />
@@ -194,7 +194,7 @@ export const AnalyseSolarWaterHeater = () => {
             <ReactEcharts
               style={{ width: '260px', height: '260px', margin: 'auto' }}
               option={ChartService.getNewGaugeOptions({ 
-                value: 25,
+                value: 0,
                 detail: '同比增长',
                 numberColor: '#f94e00',
                 itemColor: '#f94e00'

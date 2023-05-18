@@ -49,9 +49,9 @@ export const SystemSolarPower = () => {
       res[PAGEDATA.SolarElecGenToday] = res[PAGEDATA.SolarElecGenToday].toFixed(2);
       res[PAGEDATA.SolarElecGenYesterday] = getList(res[PAGEDATA.SolarElecGenYesterday], 0).toFixed(2);
       res[PAGEDATA.SolarElecGenTotal] = getList(res[PAGEDATA.SolarElecGenTotal], min).toFixed(2);
-      setMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 1))
+      setMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 1).toFixed(2))
       if (month >= 2) {
-        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 2))
+        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 2).toFixed(2))
       }
       
       let needChange = false;
@@ -91,7 +91,7 @@ export const SystemSolarPower = () => {
       yearStr:EnergyStation.getLastYearStr()
     }).then((res) => {
       if (month === 1) {
-        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear], 11));
+        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear], 11).toFixed(2));
       }
       let ans = 0;
       if (res[PAGEDATA.SolarElecGenYear]) {
@@ -99,7 +99,7 @@ export const SystemSolarPower = () => {
           ans += i;
         }
       }
-      setLastYear(i);
+      setLastYear(ans.toFixed(2));
     });
   }, [])
   return (
