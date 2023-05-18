@@ -1,4 +1,21 @@
 export const PAGEDATA = {
+	GroupHallwayTemp:["group_hallway_temp1", //1组团走廊温度
+	"group_hallway_temp2",      //2组团走廊温度
+	"group_hallway_temp3",      //3组团走廊温度
+	"group_hallway_temp4",      //4组团走廊温度
+	"group_hallway_temp5",      //5组团走廊温度
+	"group_hallway_temp6",      //6组团走廊温度
+	"group_hallway_temp_pub_s", //公共组团南区走廊温度
+	"group_hallway_temp_pub_n"],//公共组团北区走廊温度
+
+	GroupHeatConsumptionHour: ["group_heat_consumption_hour_1",     //1组团耗热量当小时每分钟
+	"group_heat_consumption_hour_2",     //2组团耗热量当小时每分钟
+	"group_heat_consumption_hour_3",     //3组团耗热量当小时每分钟
+	"group_heat_consumption_hour_4",     //4组团耗热量当小时每分钟
+	"group_heat_consumption_hour_5",     //5组团耗热量当小时每分钟
+	"group_heat_consumption_hour_6",     //6组团耗热量当小时每分钟
+	"group_heat_consumption_hour_pub_s"], //公共组团南区耗热量当小时每分钟
+
     EnergyOnlineRate: "energy_online_rate",              //能源站设备在线率
 	EnergyBoilerPower: "energy_boiler_power",          //能源站锅炉功率
 	EnergyPowerConsumptionToday: "energy_power_consumption_today",  //能源站今日总耗能
@@ -174,4 +191,10 @@ export const PAGEDATA = {
 	SolarWaterGuaranteeRateDay: "solar_water_guarantee_rate", //太阳能热水保证率当日每小时
 	SolarWaterGuaranteeRateMonth: "solar_water_guarantee_month",                //太阳能热水保证率每月各天
 	SolarWaterGuaranteeRateYear: "solar_water_guarantee_year",                 //太阳能热水保证率每年各月
+
+	SolarElecGenToday: "solar_elec_gen_today", //太阳能发电今日
+	SolarElecGenMonth: "solar_elec_gen_month", //太阳能发电当月每日
+	SolarElecGenYear: "solar_elec_gen_year",  //太阳能发电当年每月
+	SolarElecGenYesterday: "ZLZ.%E6%98%A8%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F1", //昨日发电量
+	SolarElecGenTotal: "ZLZ.%E6%80%BB%E5%8F%91%E7%94%B5%E9%87%8F1", //总发电量
 }
