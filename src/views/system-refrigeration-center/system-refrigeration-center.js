@@ -6,6 +6,7 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
 import { TimePicker } from 'antd';
+import { MainPage } from '../../business/mainPage';
 
 const basicPump = {
   title1:"运行状态",
@@ -59,6 +60,7 @@ const system_cold_data = {
 
 export const SystemRefrigerationCenter = () => {
   let [pageData, setPageData] = useState({});
+  const [atmosphere, setAtmosphere] = useState([]);
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.model2IP) {
@@ -249,6 +251,10 @@ export const SystemRefrigerationCenter = () => {
     let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
 
+    MainPage.getAtmosphere().then((res)=> {
+      setAtmosphere(res.data)
+    });
+
     EnergyStation.postPageData({
       data:system_cold_data,
       day_str:dayStr,
@@ -340,7 +346,7 @@ export const SystemRefrigerationCenter = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoRefrigeration items={{power:pageData[PAGEDATA.ColdPowerMin], energyCostToday:pageData[PAGEDATA.ColdEnergyCostToday], 
+            <ComSummaryInfoRefrigeration items={{outTemp:atmosphere[0], power:pageData[PAGEDATA.ColdPowerMin], energyCostToday:pageData[PAGEDATA.ColdEnergyCostToday], 
               machineRunningNum:pageData[PAGEDATA.ColdMachineRunningNum], coolingWaterInT:pageData[PAGEDATA.ColdCoolingWaterInT],
               coolingWaterOutT:pageData[PAGEDATA.ColdCoolingWaterOutT], refrigeratedWaterInT:pageData[PAGEDATA.ColdRefrigeratedWaterInT],
               refrigeratedWaterOutT:pageData[PAGEDATA.ColdRefrigeratedWaterOutT], machinePower:pageData[PAGEDATA.ColdMachinePowerMin]}}/>

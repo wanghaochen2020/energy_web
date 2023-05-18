@@ -9,9 +9,13 @@ const system_solar_power_data = {
   "basic_data":[
     PAGEDATA.SolarElecGenToday
   ],
-  "basic_data_list_day":[
-    PAGEDATA.SolarElecGenMonth, PAGEDATA.SolarElecGenYear
+  "basic_data_list_year":[
+    PAGEDATA.SolarElecGenYear
   ],
+  "basic_data_list_month":[
+    PAGEDATA.SolarElecGenMonth
+  ],
+  "basic_data_list_day":[],
   "map_data_list_day":[],
   "basic_data_list_hour":[],
   "basic_opc_list":[
@@ -25,19 +29,30 @@ const getList = (d, min) => {
 
 export const SystemSolarPower = () => {
   const [pageData, setPageData] = useState({});
+  const [lastMonth, setLastMonth] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [lastYear, setLastYear] = useState(0);
   useEffect(()=>{
     let dayStr = EnergyStation.getDayStr();
     let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
-
+    let month = EnergyStation.getMonth();
+    let monthStr = EnergyStation.getMonthStr();
+    let yearStr = EnergyStation.getYearStr();
     EnergyStation.postPageData({
       data:system_solar_power_data,
+      year_str:yearStr,
+      month_str:monthStr,
       day_str:dayStr,
-      hour_str:hourStr
+      hour_str:hourStr,
     }).then((res) => {
       res[PAGEDATA.SolarElecGenToday] = res[PAGEDATA.SolarElecGenToday].toFixed(2);
       res[PAGEDATA.SolarElecGenYesterday] = getList(res[PAGEDATA.SolarElecGenYesterday], 0).toFixed(2);
       res[PAGEDATA.SolarElecGenTotal] = getList(res[PAGEDATA.SolarElecGenTotal], min).toFixed(2);
+      setMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 1))
+      if (month >= 2) {
+        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 2))
+      }
       
       let needChange = false;
       for (const key in res) {
@@ -70,6 +85,21 @@ export const SystemSolarPower = () => {
       }
 
       if (needChange) setPageData(res);
+    });
+    EnergyStation.postPageData({
+      data:{"basic_data_list_year":[PAGEDATA.SolarElecGenYear]},
+      yearStr:EnergyStation.getLastYearStr()
+    }).then((res) => {
+      if (month === 1) {
+        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear], 11));
+      }
+      let ans = 0;
+      if (res[PAGEDATA.SolarElecGenYear]) {
+        for (let i of res[PAGEDATA.SolarElecGenYear]) {
+          ans += i;
+        }
+      }
+      setLastYear(i);
     });
   }, [])
   return (
@@ -114,7 +144,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 30 }],
                   startAngle: 90,
-                  title: '323',
+                  title: month,
                   unit: 'MWH',
                   subTitle: '当月发电量'
                 })}
@@ -126,7 +156,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 80 }],
                   startAngle: 90,
-                  title: '32562',
+                  title: lastYear,
                   unit: 'MWH',
                   subTitle: '去年发电量'
                 })}
@@ -150,7 +180,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 25 }],
                   startAngle: 90,
-                  title: '232',
+                  title: lastMonth,
                   unit: 'MWH',
                   subTitle: '上月发电量'
                 })}
@@ -233,7 +263,7 @@ export const SystemSolarPower = () => {
             series: [
               {
                 name: '',
-                data: [50, 60, 30, 24, 18, 35, 80, 47, 60, 60, 50, 60],
+                data: pageData[PAGEDATA.SolarElecGenYear],
                 type: 'line',
                 smooth: true,
                 symbolSize: 6,
@@ -276,7 +306,7 @@ export const SystemSolarPower = () => {
             xAxis: {
               type: 'category',
               data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                20, 21, 22, 23, 25, 26, 27, 28, 29, 30],
+                20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31],
               axisLine: {
                 show: true,
                 lineStyle: {
@@ -309,8 +339,7 @@ export const SystemSolarPower = () => {
             series: [
               {
                 name: '',
-                data: [35, 80, 47, 60, 100, 50, 60, 50, 60, 30, 24, 60, 87,
-                  80, 47, 60, 70, 80, 30, 64, 80, 58, 35, 80, 30, 64, 80, 58, 35],
+                data: pageData[PAGEDATA.SolarElecGenMonth],
                 type: 'line',
                 smooth: true,
                 symbolSize: 6,
