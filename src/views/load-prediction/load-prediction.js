@@ -107,10 +107,6 @@ export const LoadPrediction = () => {
           </div>
           <div className="date-button-wrapper" style={{ top: '38px' }}>
             {
-              chartDateButtons.map((item, index) =>
-                <span onClick={() => selectDateChartButtons(item)} key={index} className={"date-button" + (item.selected ? " date-button-selected" : "")}>{item.name}</span>)
-            }
-            {
               chartButtons.map((item, index) =>
                 <span onClick={() => selectChartButton(item)} key={index} className={"date-button" + (item.selected ? " date-button-selected" : "")}>{item.name}</span>)
             }
@@ -231,10 +227,6 @@ export const LoadPrediction = () => {
             <span className="title-text" >负荷真实值与预测值对比</span>
           </div>
           <div className="date-button-wrapper" style={{ top: '38px' }}>
-            {
-              chartDateButtons2.map((item, index) =>
-                <span onClick={() => selectDateChartButtons2(item)} key={index} className={"date-button" + (item.selected ? " date-button-selected" : "")}>{item.name}</span>)
-            }
             {
               chartButtons2.map((item, index) =>
                 <span onClick={() => selectChartButton2(item)} key={index} className={"date-button" + (item.selected ? " date-button-selected" : "")}>{item.name}</span>)

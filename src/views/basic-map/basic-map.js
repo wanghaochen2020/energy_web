@@ -275,7 +275,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[0] }, { value: kekong[0] }],
                     startAngle: 90,
-                    title: '80',
+                    title: kekong[0] ,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -289,7 +289,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[1] }, { value: kekong[1] }],
                     startAngle: 90,
-                    title: '60',
+                    title: kekong[1],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -305,7 +305,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[2] }, { value: kekong[2] }],
                     startAngle: 90,
-                    title: '90',
+                    title: kekong[2],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -321,7 +321,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[3] }, { value: kekong[3] }],
                     startAngle: 90,
-                    title: '70',
+                    title: kekong[3],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -337,7 +337,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[4] }, { value: kekong[4] }],
                     startAngle: 90,
-                    title: '80',
+                    title: kekong[4],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -353,7 +353,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[5] }, { value: kekong[5] }],
                     startAngle: 90,
-                    title: '50',
+                    title: kekong[5],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
