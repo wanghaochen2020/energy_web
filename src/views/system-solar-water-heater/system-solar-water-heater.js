@@ -58,9 +58,9 @@ export const SystemSolarWaterHeater = () => {
                   title1:"供水温度",
                   title2:"回水温度",
                   title3:"集热量",
-                  data1:"57",
-                  data2:"19",
-                  data3:"0J",
+                  data1:pageData[PAGEDATA.SolarWaterHeatCollecterInT],
+                  data2:pageData[PAGEDATA.SolarWaterHeatCollecterOutT],
+                  data3:pageData[PAGEDATA.SolarWaterHeatCollectionToday]+"J",
                 }
                 break
             }

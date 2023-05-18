@@ -156,6 +156,11 @@ export const PAGEDATA = {
 		"ZLZ.Z_L_%E5%86%B7%E5%87%9D%E5%99%A8%E5%86%B7%E5%AA%92%E5%8E%8B%E5%8A%9B"
 	],
 
+	ColdEfficientDay: "cold_efficient_day", //制冷机组效率
+	ColdPayLoadDay: "cold_payload_day", //制冷机组负载率
+	ColdPayLoadMonth: "cold_payload_month", //制冷机组负载率
+	ColdPayLoadYear: "cold_payload_year", //制冷机组负载率
+
 	PumpPowerMin: "pump_power_min",       //二次泵站功率
 	PumpPowerToday: "pump_power_today",     //二次泵站今日能耗
 	PumpEnergyCostDay: "pump_energy_cost_day", //二次泵站每日各小时能耗

@@ -9,15 +9,21 @@ const l = (d, min) => {
 }
 export class EnergyStation {
   static getTime() {
-    // let date = new Date();
-    // date.setTime(date.getTime()-1000*60)//减一分钟
-    let date = new Date(2022, 9, 13, 14, 55);
+    let date = new Date();
+    date.setTime(date.getTime()-11000*60)//减十一分钟
+    // let date = new Date(2022, 9, 13, 14, 55);
     return date;
   }
   static getLastYearStr() {
     let date = this.getTime();
     let year = date.getFullYear();
     let currentdate = (year-1).toString();
+    return currentdate;
+  }
+  static getLastYearStr() {
+    let date = this.getTime();
+    let year = date.getFullYear()-1;
+    let currentdate = year.toString();
     return currentdate;
   }
   static getYearStr() {
@@ -71,6 +77,9 @@ export class EnergyStation {
     }
     let currentdate = year + seperator1 + month + seperator1 + strDate + " " + strHour;
     return currentdate;
+  }
+  static getMonth() {
+    return this.getTime().getMonth() + 1;
   }
   static getMin() {
     let date = this.getTime();

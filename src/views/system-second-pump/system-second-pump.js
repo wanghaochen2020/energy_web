@@ -5,6 +5,7 @@ import './system-second-pump.scss';
 import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
 import { SERVERINFO } from '../../constants/app-info';
+import { MainPage } from '../../business/mainPage';
 
 const basicPump = {
   title1:"运行状态",
@@ -28,6 +29,7 @@ const system_pump_data = {
 
 export const SystemSecondPump = () => {
   let [pageData, setPageData] = useState({});
+  const [atmosphere, setAtmosphere] = useState([]);
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.model3IP) {
@@ -102,6 +104,10 @@ export const SystemSecondPump = () => {
   useEffect(()=>{
     let dayStr = EnergyStation.getDayStr();
     let hourStr = EnergyStation.getHourStr();
+
+    MainPage.getAtmosphere().then((res)=> {
+      setAtmosphere(res.data)
+    });
 
     EnergyStation.postPageData({
       data:system_pump_data,
@@ -180,7 +186,7 @@ export const SystemSecondPump = () => {
             <span className="title-text">今日一览</span>
           </div>
           <div>
-            <ComSummaryInfoSecondPump items={{power:pageData[PAGEDATA.PumpPowerMin],energyCostToday:pageData[PAGEDATA.PumpPowerToday]}}/>
+            <ComSummaryInfoSecondPump items={{outTemp:atmosphere[0], power:pageData[PAGEDATA.PumpPowerMin],energyCostToday:pageData[PAGEDATA.PumpPowerToday]}}/>
           </div>
         </div>
         <div className="box-wrapper">
