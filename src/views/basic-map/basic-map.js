@@ -6,7 +6,7 @@ import { ChartService } from '../../utils/chart.service';
 import { SERVERINFO } from '../../constants/app-info';
 import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
-import {MainPage } from '../../business/mainPage';
+import { MainPage } from '../../business/mainPage';
 
 const basicBuild = {
   title1:"建筑面积",
@@ -18,11 +18,11 @@ const basicBuild = {
 const basic_map_data = {
   "basic_data":[
     PAGEDATA.EnergyOnlineRate
-  ],
+  ].concat(PAGEDATA.GroupHallwayTemp),
   "map_data_list_day":[
     PAGEDATA.EnergyAlarmToday, PAGEDATA.ColdAlarmToday, PAGEDATA.PumpAlarmToday
   ],
-  "basic_data_list_hour":[],
+  "basic_data_list_hour":[].concat(PAGEDATA.GroupHeatConsumptionHour),
   "basic_opc_list":[]
 }
 
@@ -79,6 +79,14 @@ export const BasicMap = () => {
             if (!event.data.data) {
               return
             }
+            let haoReLiang = []
+            for (let i = 0; i<PAGEDATA.GroupHeatConsumptionHour.length; i++) {
+              haoReLiang[i] = 0;
+              for (let j = 0; j<pageData[PAGEDATA.GroupHeatConsumptionHour[i]].length; j++) {
+                haoReLiang[i] += pageData[PAGEDATA.GroupHeatConsumptionHour[i]][j];
+              }
+              haoReLiang[i] /= 3.6e9;
+            }
             let data = {}
             switch(event.data.data) {
               case "1":
@@ -86,64 +94,64 @@ export const BasicMap = () => {
                 data.title = "运动员组团1"
                 data.data1 = "14620㎡"
                 data.data2 = "4"
-                data.data3 = "19.87℃"
-                data.data4 = "0MWH"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[0]].toFixed(1) + "℃"
+                data.data4 = haoReLiang[0] + "MWH"
                 break
               case "2":
                 data = basicBuild
                 data.title = "运动员组团2"
                 data.data1 = "6977㎡"
                 data.data2 = "4"
-                data.data3 = "20.53℃"
-                data.data4 = "0MWH"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[1]].toFixed(1) + "℃"
+                data.data4 = haoReLiang[1] + "MWH"
                 break
               case "3":
                 data = basicBuild
                 data.title = "运动员组团3"
                 data.data1 = "12728㎡"
                 data.data2 = "4"
-                data.data3 = "18.91℃"
-                data.data4 = "0MWH"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[2]].toFixed(1) + "℃"
+                data.data4 = haoReLiang[2] + "MWH"
                 break
               case "4":
                 data = basicBuild
                 data.title = "运动员组团4"
                 data.data1 = "7898㎡"
                 data.data2 = "5"
-                data.data3 = "17.63℃"
-                data.data4 = "0MWH"
+                data.data3 = "无数据"
+                data.data4 = haoReLiang[3] + "MWH"
                 break
               case "5":
                 data = basicBuild
                 data.title = "运动员组团5"
                 data.data1 = "7621㎡"
                 data.data2 = "6"
-                data.data3 = "23.22℃"
-                data.data4 = "0MWH"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[4]].toFixed(1) + "℃"
+                data.data4 = haoReLiang[4] + "MWH"
                 break
               case "6":
                 data = basicBuild
                 data.title = "运动员组团6"
                 data.data1 = "8128㎡"
                 data.data2 = "6"
-                data.data3 = "17.63℃"
-                data.data4 = "0MWH"
-                break
-              case "公共组团北区":
-                data = basicBuild
-                data.title = "公共组团北区"
-                data.data1 = "6259㎡"
-                data.data2 = "3"
-                data.data3 = "16.24℃"
-                data.data4 = "0MWH"
+                data.data3 = "无数据"
+                data.data4 = haoReLiang[5] + "MWH"
                 break
               case "公共组团南区":
                 data = basicBuild
                 data.title = "公共组团南区"
                 data.data1 = "21095㎡"
                 data.data2 = "6"
-                data.data3 = "18.23℃"
-                data.data4 = "0MWH"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[6]].toFixed(1) + "℃"
+                data.data4 = haoReLiang[6] + "MWH"
+                break
+              case "公共组团北区":
+                data = basicBuild
+                data.title = "公共组团北区"
+                data.data1 = "6259㎡"
+                data.data2 = "3"
+                data.data3 = pageData[PAGEDATA.GroupHallwayTemp[7]].toFixed(1) + "℃"
+                data.data4 = "无数据"
                 break
             }
             iframe.contentWindow.postMessage({type:"window_update",data:data}, SERVERINFO.modelIP)
@@ -155,7 +163,7 @@ export const BasicMap = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, [])
+  }, [pageData])
 
   const [atmosphere, setAtmosphere] = useState([]);
   const [kekong, setKekong] = useState([]);
@@ -178,7 +186,6 @@ export const BasicMap = () => {
       hour_str:hourStr
     }).then((res) => {
       let needChange = false;
-      res[PAGEDATA.EnergyAlarmToday] = concatList(res[PAGEDATA.EnergyAlarmToday], res[PAGEDATA.ColdAlarmToday], res[PAGEDATA.PumpAlarmToday]);
 
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {
@@ -211,7 +218,9 @@ export const BasicMap = () => {
 
       if (needChange) setPageData(res);
     });
+  }, [])
 
+  useEffect(() => {
     window.addEventListener('message', messageFunc)
     return () => {
       window.removeEventListener('message', messageFunc)
@@ -275,7 +284,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[0] }, { value: kekong[0] }],
                     startAngle: 90,
-                    title: '80',
+                    title: kekong[0] ,
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -289,7 +298,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[1] }, { value: kekong[1] }],
                     startAngle: 90,
-                    title: '60',
+                    title: kekong[1],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -305,7 +314,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[2] }, { value: kekong[2] }],
                     startAngle: 90,
-                    title: '90',
+                    title: kekong[2],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -321,7 +330,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[3] }, { value: kekong[3] }],
                     startAngle: 90,
-                    title: '70',
+                    title: kekong[3],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -337,7 +346,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[4] }, { value: kekong[4] }],
                     startAngle: 90,
-                    title: '80',
+                    title: kekong[4],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,
@@ -353,7 +362,7 @@ export const BasicMap = () => {
                   option={ChartService.getPieOptions({
                     data: [{ value: 100-kekong[5] }, { value: kekong[5] }],
                     startAngle: 90,
-                    title: '50',
+                    title: kekong[5],
                     unit: '%',
                     unwrap: true,
                     titleTop: 30,

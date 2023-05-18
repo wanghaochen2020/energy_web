@@ -73,7 +73,7 @@ export const SystemSolarWaterHeater = () => {
         // here just for clarity, you usually shouldn't need it.
         return;
     }
-  }, [])
+  }, [pageData])
 
   useEffect(() => {
     let dayStr = EnergyStation.getDayStr();
