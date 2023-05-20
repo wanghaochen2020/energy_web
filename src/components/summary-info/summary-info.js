@@ -22,7 +22,7 @@ export const ComSummaryInfo = ({ items }) => {
         </span>
         <span className="main-info">
           <span className="main-info-text">
-            总用电能耗累计（kW·h）
+            锅炉用电能耗累计（kW·h）
           </span>
           <span className="main-info-number yellow-color">
             {items.powerConsumptionToday}
