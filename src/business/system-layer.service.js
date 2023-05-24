@@ -2,7 +2,8 @@ import { HttpRequestService } from "./base/http-request.service";
 
 const basicUrl = 'api/basicdata';
 const opcUrl = 'api/opcdata';
-const basicDataSetUrl = 'api/basicdataset'
+const basicDataSetUrl = 'api/basicdataset';
+const pageUrl = 'api/pagedata';
 
 const l = (d, min) => {
   return d && d[min] ? d[min] : 0;
@@ -116,6 +117,15 @@ export class EnergyStation {
       url:basicDataSetUrl
     };
     return HttpRequestService.post(options)
+  }
+  static getPageData(page) {
+    const options = {
+      params: {
+        page: page,
+      },
+      url: pageUrl
+    };
+    return HttpRequestService.get(options);
   }
   static powerList(thisYear, lastYear) {
     let items = [];
