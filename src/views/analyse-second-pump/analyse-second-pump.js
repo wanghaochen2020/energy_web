@@ -12,20 +12,12 @@ export const AnalyseSecondPump = () => {
   let [PumpCarbonLastYear, setPumpCarbonLastYear] = useState([]);
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr();
-    let yearStr = EnergyStation.getYearStr();
-    let lastYearStr = EnergyStation.getLastYearStr();
-    EnergyStation.getTable(PAGEDATA.PumpEHR1, dayStr).then((res)=> {
-      setPumpEHR1(res)
-    })
-    EnergyStation.getTable(PAGEDATA.PumpEHR2, dayStr).then((res)=> {
-      setPumpEHR2(res)
-    })
-    EnergyStation.getTable(PAGEDATA.PumpCarbonYear, yearStr).then((res)=> {
-      setPumpCarbonYear(res);
-    });
-    EnergyStation.getTable(PAGEDATA.PumpCarbonYear, lastYearStr).then((res)=> {
-      setPumpCarbonLastYear(res);
+    EnergyStation.getPageData(PAGEDATA.Pages.AnalysePump).then((res) => {
+      res = JSON.parse(res);
+      setPumpEHR1(res[PAGEDATA.PumpEHR1]);
+      setPumpEHR2(res[PAGEDATA.PumpEHR2]);
+      setPumpCarbonYear(res[PAGEDATA.PumpCarbonYear]);
+      setPumpCarbonLastYear(res[PAGEDATA.PumpCarbonLastYear]);
     });
   }, []);
 

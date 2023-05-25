@@ -15,17 +15,6 @@ const basicBuild = {
   title4:"耗热量",
 }
 
-const basic_map_data = {
-  "basic_data":[
-    PAGEDATA.EnergyOnlineRate
-  ].concat(PAGEDATA.GroupHallwayTemp),
-  "map_data_list_day":[
-    PAGEDATA.EnergyAlarmToday, PAGEDATA.ColdAlarmToday, PAGEDATA.PumpAlarmToday
-  ],
-  "basic_data_list_hour":[].concat(PAGEDATA.GroupHeatConsumptionHour),
-  "basic_opc_list":[]
-}
-
 const concatList = (...list) => {
   let a = [];
   for(let i=0;i<list.length;i++)
@@ -170,9 +159,6 @@ export const BasicMap = () => {
 
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
-
     MainPage.getAtmosphere().then((res)=> {
       setAtmosphere(res.data)
     });
@@ -180,11 +166,8 @@ export const BasicMap = () => {
       setKekong(res.data)
     });
 
-    EnergyStation.postPageData({
-      data:basic_map_data,
-      day_str:dayStr,
-      hour_str:hourStr
-    }).then((res) => {
+    EnergyStation.getPageData(PAGEDATA.Pages.BasicMap).then((res) => {
+      res = JSON.parse(res);
       let needChange = false;
 
       for (const key in res) {

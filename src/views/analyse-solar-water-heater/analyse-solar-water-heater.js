@@ -28,47 +28,39 @@ export const AnalyseSolarWaterHeater = () => {
   let [SolarWaterGuaranteeRateYear, setSolarWaterGuaranteeRateYear] = useState([])
   let [AvrgSolarWaterGuaranteeRateDay, setAvrgSolarWaterGuaranteeRateDay] = useState(0)
 
-
-
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr()
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyDay, dayStr).then((res)=> {
+    EnergyStation.getPageData(PAGEDATA.Pages.AnalyseSolarWater).then((res) => {
+      res = JSON.parse(res);
+      
       let avg = 0;
-      for (let i = 0; i < res.length; i++) { 
-        avg += res[i]*100;
-        res[i] = (res[i]*100).toFixed(2);
+      let list = res[PAGEDATA.SolarWaterHeatEfficiencyDay];
+      for (let i = 0; i < list.length; i++) { 
+        avg += list[i]*100;
+        list[i] = (list[i]*100).toFixed(2);
       }
-      if (res.length != 0) {
-        avg /= res.length;
+      if (list.length != 0) {
+        avg /= list.length;
       }
-      setSolarWaterHeatEfficiencyDay(res)
-      setAvrgSolarWaterHeatEfficiencyDay(avg.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyMonth, monthStr).then((res)=> {
-      setSolarWaterHeatEfficiencyMonth(res);
-    });
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatEfficiencyYear, yearStr).then((res)=> {
-      setSolarWaterHeatEfficiencyYear(res);
-    });
-    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateDay, dayStr).then((res)=> {
-      let avg = 0;
-      for (let i = 0; i < res.length; i++) { 
-        avg += res[i]*100;
-        res[i] = (res[i]*100).toFixed(2);
+      setSolarWaterHeatEfficiencyDay(list);
+      setAvrgSolarWaterHeatEfficiencyDay(avg.toFixed(2));
+      
+      setSolarWaterHeatEfficiencyMonth(res[PAGEDATA.SolarWaterHeatEfficiencyMonth]);
+      setSolarWaterHeatEfficiencyYear(res[PAGEDATA.SolarWaterHeatEfficiencyYear]);
+
+      avg = 0;
+      list = res[PAGEDATA.SolarWaterGuaranteeRateDay];
+      for (let i = 0; i < list.length; i++) { 
+        avg += list[i]*100;
+        list[i] = (list[i]*100).toFixed(2);
       }
-      if (res.length != 0) {
-        avg /= res.length;
+      if (list.length != 0) {
+        avg /= list.length;
       }
-      setSolarWaterGuaranteeRateDay(res)
-      setAvrgSolarWaterGuaranteeRateDay(avg.toFixed(2))
-    })
-    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateMonth, monthStr).then((res)=> {
-      setSolarWaterGuaranteeRateMonth(res);
-    });
-    EnergyStation.getTable(PAGEDATA.SolarWaterGuaranteeRateYear, yearStr).then((res)=> {
-      setSolarWaterGuaranteeRateYear(res);
+      setSolarWaterGuaranteeRateDay(list);
+      setAvrgSolarWaterGuaranteeRateDay(avg.toFixed(2));
+
+      setSolarWaterGuaranteeRateMonth(res[PAGEDATA.SolarWaterGuaranteeRateMonth]);
+      setSolarWaterGuaranteeRateYear(res[PAGEDATA.SolarWaterGuaranteeRateYear]);
     });
   }, [])
   const selectRateButton = (item) => {
