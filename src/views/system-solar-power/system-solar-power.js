@@ -5,27 +5,6 @@ import './system-solar-power.scss';
 import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
 
-const system_solar_power_data = {
-  "basic_data":[],
-  "basic_data_list_year":[
-    PAGEDATA.SolarElecGenYear
-  ],
-  "basic_data_list_month":[
-    PAGEDATA.SolarElecGenMonth
-  ],
-  "basic_data_list_day":[],
-  "map_data_list_day":[],
-  "basic_data_list_hour":[],
-  "basic_opc_list":[
-    PAGEDATA.SolarElecGenTotal1, PAGEDATA.SolarElecGenTotal2, 
-    PAGEDATA.SolarElecGenToday1, PAGEDATA.SolarElecGenToday2,
-    PAGEDATA.SolarElecGenThisMonth1, PAGEDATA.SolarElecGenThisMonth2, //当月发电量
-    PAGEDATA.SolarElecGenLastYear1, PAGEDATA.SolarElecGenLastYear2, //去年发电量
-    PAGEDATA.SolarElecGenYesterday1, PAGEDATA.SolarElecGenYesterday2, //昨日发电量
-    PAGEDATA.SolarElecGenLastMonth1, PAGEDATA.SolarElecGenLastMonth2
-  ]
-}
-
 const getList = (d, min) => {
   return d && d[min] ? d[min] : 0;
 }
@@ -39,18 +18,9 @@ export const SystemSolarPower = () => {
   const [yesterday, setYesterday] = useState(0);
   const [lastMonth, setLastMonth] = useState(0);
   useEffect(()=>{
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-    EnergyStation.postPageData({
-      data:system_solar_power_data,
-      year_str:yearStr,
-      month_str:monthStr,
-      day_str:dayStr,
-      hour_str:hourStr,
-    }).then((res) => {
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemSolarElec).then((res) => {
+      res = JSON.parse(res)
       setTotal((getList(res[PAGEDATA.SolarElecGenTotal1], min) + getList(res[PAGEDATA.SolarElecGenTotal2], min)).toFixed(0))
       setToday((getList(res[PAGEDATA.SolarElecGenToday1], min) + getList(res[PAGEDATA.SolarElecGenToday2], min)).toFixed(0))
       setThisMonth((getList(res[PAGEDATA.SolarElecGenThisMonth1], min) + getList(res[PAGEDATA.SolarElecGenThisMonth2], min)).toFixed(0))

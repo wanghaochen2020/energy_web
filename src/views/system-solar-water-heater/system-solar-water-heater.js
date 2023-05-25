@@ -6,18 +6,6 @@ import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
 
-const system_solar_water_data = {
-  "basic_data":[
-    PAGEDATA.SolarWaterBoilerPowerConsumptionToday,PAGEDATA.SolarWaterHeatCollecterInT,PAGEDATA.SolarWaterHeatCollecterOutT,PAGEDATA.SolarWaterJRQT,
-    PAGEDATA.SolarWaterHeatCollectionToday,PAGEDATA.SolarWaterPumpRunningNum
-  ],
-  "basic_data_list_day":[
-    PAGEDATA.SolarWaterHeatCollectionDay,PAGEDATA.SolarWaterBoilerPowerConsumptionDay
-  ],
-  "basic_data_list_hour":[],
-  "basic_opc_list":[]
-}; 
-
 export const SystemSolarWaterHeater = () => {
   const [chartDateButtons, setChartDateButton] = useState([
     { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
@@ -33,8 +21,6 @@ export const SystemSolarWaterHeater = () => {
   }
 
   let [pageData, setPageData] = useState({});
-  let [SolarWaterHeatCollectionMonth, setSolarWaterHeatCollectionMonth] = useState([]);
-  let [SolarWaterHeatCollectionYear, setSolarWaterHeatCollectionYear] = useState([]);
   
   let messageFunc = useCallback((event) => {
     if (event.origin === SERVERINFO.model4IP) {
@@ -76,22 +62,8 @@ export const SystemSolarWaterHeater = () => {
   }, [pageData])
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionMonth, monthStr).then((res)=> {
-      setSolarWaterHeatCollectionMonth(res);
-    });
-    EnergyStation.getTable(PAGEDATA.SolarWaterHeatCollectionYear, yearStr).then((res)=> {
-      setSolarWaterHeatCollectionYear(res);
-    });
-    EnergyStation.postPageData({
-      data:system_solar_water_data,
-      day_str:dayStr,
-      hour_str:hourStr
-    }).then((res) => {
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemSolarWater).then((res) => {
+      res = JSON.parse(res)
       let needChange = false;
       res[PAGEDATA.SolarWaterBoilerPowerConsumptionToday] = res[PAGEDATA.SolarWaterBoilerPowerConsumptionToday].toFixed(2);
       res[PAGEDATA.SolarWaterHeatCollecterInT] = res[PAGEDATA.SolarWaterHeatCollecterInT].toFixed(2);
@@ -231,8 +203,8 @@ export const SystemSolarWaterHeater = () => {
               },
               series: [
                 {
-                  data: (chartDateButtons[2] && chartDateButtons[2].selected) ? SolarWaterHeatCollectionYear
-                  : ((chartDateButtons[1] && chartDateButtons[1].selected) ? SolarWaterHeatCollectionMonth : pageData[PAGEDATA.SolarWaterHeatCollectionDay]),
+                  data: (chartDateButtons[2] && chartDateButtons[2].selected) ? pageData[PAGEDATA.SolarWaterHeatCollectionYear]
+                  : ((chartDateButtons[1] && chartDateButtons[1].selected) ? pageData[PAGEDATA.SolarWaterHeatCollectionMonth] : pageData[PAGEDATA.SolarWaterHeatCollectionDay]),
                   type: 'bar',
                   barWidth: 8,
                   itemStyle: {

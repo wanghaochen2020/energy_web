@@ -5,7 +5,6 @@ import './system-refrigeration-center.scss';
 import { EnergyStation } from '../../business/system-layer.service';
 import { PAGEDATA } from '../../constants/pageData';
 import { SERVERINFO } from '../../constants/app-info';
-import { TimePicker } from 'antd';
 import { MainPage } from '../../business/mainPage';
 
 const basicPump = {
@@ -41,21 +40,6 @@ const basicValve = {
 
 const getList = (d, min) => {
   return d && d[min] ? d[min] : 0;
-}
-
-const system_cold_data = {
-  "basic_data":[
-    PAGEDATA.ColdPowerMin,PAGEDATA.ColdEnergyCostToday,PAGEDATA.ColdMachineRunningNum,PAGEDATA.ColdCoolingWaterInT,PAGEDATA.ColdCoolingWaterOutT,
-    PAGEDATA.ColdRefrigeratedWaterInT,PAGEDATA.ColdRefrigeratedWaterOutT,PAGEDATA.ColdMachinePowerMin,PAGEDATA.ColdAlarmNumToday
-  ],
-  "basic_data_list_day":[
-    PAGEDATA.ColdEnergyCostDay
-  ],
-  "map_data_list_day":[PAGEDATA.ColdAlarmToday],
-  "basic_data_list_hour":[],
-  "basic_opc_list":PAGEDATA.ColdPumpState.concat(PAGEDATA.ColdMachineRun).concat(PAGEDATA.ColdMachinePowerMinList)
-  .concat(PAGEDATA.ColdMachineCoolInT).concat(PAGEDATA.ColdMachineCoolOutT).concat(PAGEDATA.ColdMachineColdInT)
-  .concat(PAGEDATA.ColdMachineColdOutT).concat(PAGEDATA.ColdMachinePresure)
 }
 
 export const SystemRefrigerationCenter = () => {
@@ -247,20 +231,14 @@ export const SystemRefrigerationCenter = () => {
   }, [pageData])
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
 
     MainPage.getAtmosphere().then((res)=> {
       setAtmosphere(res.data)
     });
 
-    EnergyStation.postPageData({
-      data:system_cold_data,
-      day_str:dayStr,
-      hour_str:hourStr
-    }).then((res) => {
-      let needChange = false;
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemRefrigerationCenter).then((res) => {
+      res = JSON.parse(res)
       res[PAGEDATA.ColdAlarmNumToday] = res[PAGEDATA.ColdAlarmNumToday].toFixed(0);
       res[PAGEDATA.ColdPowerMin] = res[PAGEDATA.ColdPowerMin].toFixed(2);
       res[PAGEDATA.ColdEnergyCostToday] = res[PAGEDATA.ColdEnergyCostToday].toFixed(2);
@@ -285,6 +263,7 @@ export const SystemRefrigerationCenter = () => {
         res[PAGEDATA.ColdMachinePresure[i]] = getList(res[PAGEDATA.ColdMachinePresure[i]], min).toFixed(1);
       }
 
+      let needChange = false;
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {
           const ele1 = res[key];
