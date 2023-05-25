@@ -1,6 +1,10 @@
 export const PAGEDATA = {
 	Pages: {
-		SystemEnergy: "sys_ener"
+		SystemEnergy: "sys_ener",
+		SystemRefrigerationCenter: "sys_ref",
+		SystemPump: "sys_pump",
+		SystemSolarWater: "sys_sw",
+		SystemSolarElec: "sys_se",
 	},
 	GroupHallwayTemp:["group_hallway_temp1", //1组团走廊温度
 	"group_hallway_temp2",      //2组团走廊温度
