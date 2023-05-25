@@ -1,10 +1,15 @@
 export const PAGEDATA = {
 	Pages: {
+		BasicMap: "bas_map",
 		SystemEnergy: "sys_ener",
 		SystemRefrigerationCenter: "sys_ref",
 		SystemPump: "sys_pump",
 		SystemSolarWater: "sys_sw",
 		SystemSolarElec: "sys_se",
+		AnalyseEnergy: "ana_ener",
+		AnalyseRefrigerationCenter: "ana_ref",
+		AnalysePump: "ana_pump",
+		AnalyseSolarWater: "ana_sw",
 	},
 	GroupHallwayTemp:["group_hallway_temp1", //1组团走廊温度
 	"group_hallway_temp2",      //2组团走廊温度
@@ -37,6 +42,7 @@ export const PAGEDATA = {
 	EnergyCarbonDay: "energy_carbon_day",               //能源站每日各小时碳排
 	EnergyCarbonMonth: "energy_carbon_month",             //能源站每月各天碳排总和
 	EnergyCarbonYear: "energy_carbon_year",              //能源站每年各月碳排总和
+	EnergyCarbonLastYear: "energy_carbon_last_year",              //能源站每年各月碳排总和
 	EnergyBoilerPayloadDay: "energy_boiler_payload_day",       //能源站每日各小时锅炉负载
 	EnergyBoilerPayloadMonth: "energy_boiler_payload_month",     //能源站每月各天平均锅炉负载
 	EnergyBoilerPayloadYear: "energy_boiler_payload_year",      //能源站每年各月平均锅炉负载
@@ -105,6 +111,7 @@ export const PAGEDATA = {
 	ColdCarbonDay: "cold_carbon_day",              //制冷中心每日各小时碳排
 	ColdCarbonMonth: "cold_carbon_month",            //制冷中心每月各天碳排总和
 	ColdCarbonYear: "cold_carbon_year",             //制冷中心每年各月碳排总和
+	ColdCarbonLastYear: "cold_carbon_last_year",             //制冷中心每年各月碳排总和
 	ColdAlarmToday: "cold_alarm_today",             //制冷中心今日告警
 	ColdAlarmNumToday: "cold_alarm_num_today",         //制冷中心今日告警次数
 
@@ -184,6 +191,7 @@ export const PAGEDATA = {
 	PumpAlarmToday: "pump_alarm_today",     //二次泵站今日告警
 	PumpAlarmNumToday: "pump_alarm_num_today", //二次泵站今日告警次数
 	PumpCarbonYear: "pump_carbon_year",     //二次泵站每年各月碳排总和
+	PumpCarbonLastYear: "pump_carbon_last_year",     //二次泵站每年各月碳排总和
 
 	SolarWaterBoilerPowerConsumptionToday: "solar_water_boiler_power_comsumption_today", //太阳能热水电加热器今日总耗电量
 	SolarWaterHeatCollecterInT: "solar_water_heat_collecter_in_temp",         //太阳能热水集热器进口温度
