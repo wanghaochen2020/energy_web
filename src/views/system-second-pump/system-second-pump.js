@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import ReactEcharts from 'echarts-for-react';
 import { ComAlarms, ComSummaryInfoSecondPump } from '../../components/';
 import './system-second-pump.scss';
 import { PAGEDATA } from '../../constants/pageData';
@@ -14,17 +13,6 @@ const basicPump = {
   data1:"关闭",
   data2: "7.5kW",
   data3: "137m³/h",
-}
-
-const system_pump_data = {
-  "basic_data":[
-    PAGEDATA.PumpPowerMin,PAGEDATA.PumpPowerToday,PAGEDATA.PumpRunningState1,PAGEDATA.PumpRunningState2,PAGEDATA.PumpRunningState3,PAGEDATA.PumpRunningState4,
-    PAGEDATA.PumpRunningState5,PAGEDATA.PumpRunningState6,PAGEDATA.PumpAlarmNumToday
-  ],
-  "basic_data_list_day":[],
-  "map_data_list_day":[PAGEDATA.PumpAlarmToday],
-  "basic_data_list_hour":[],
-  "basic_opc_list":[]
 }
 
 export const SystemSecondPump = () => {
@@ -102,18 +90,12 @@ export const SystemSecondPump = () => {
   }, [pageData])
 
   useEffect(()=>{
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
-
     MainPage.getAtmosphere().then((res)=> {
       setAtmosphere(res.data)
     });
 
-    EnergyStation.postPageData({
-      data:system_pump_data,
-      day_str:dayStr,
-      hour_str:hourStr
-    }).then((res) => {
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemPump).then((res) => {
+      res = JSON.parse(res)
       let needChange = false;
       res[PAGEDATA.PumpPowerMin] = res[PAGEDATA.PumpPowerMin].toFixed(2);
       res[PAGEDATA.PumpPowerToday] = res[PAGEDATA.PumpPowerToday].toFixed(2);

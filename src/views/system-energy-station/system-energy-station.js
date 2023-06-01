@@ -33,24 +33,6 @@ const getList = (d, min) => {
   return d && d[min] ? d[min] : 0;
 }
 
-const system_energy_data = {
-  "basic_data":[
-    PAGEDATA.EnergyOnlineRate, PAGEDATA.EnergyBoilerPower, PAGEDATA.EnergyPowerConsumptionToday, PAGEDATA.EnergyBoilerRunningNum, 
-    PAGEDATA.EnergyTankRunningNum, PAGEDATA.EnergyHeatSupplyToday, PAGEDATA.EnergyAlarmNumToday, PAGEDATA.EnergyBoilerPowerConsumptionToday1,
-    PAGEDATA.EnergyBoilerPowerConsumptionToday2, PAGEDATA.EnergyBoilerPowerConsumptionToday3, PAGEDATA.EnergyBoilerPowerConsumptionToday4
-  ],
-  "basic_data_list_day":[
-    PAGEDATA.EnergyHeatStorageAndRelease,PAGEDATA.EnergyBoilerEnergyCost
-  ],
-  "map_data_list_day":[PAGEDATA.EnergyAlarmToday],
-  "basic_data_list_hour":[],
-  "basic_opc_list":[
-    PAGEDATA.EnergyBoilerInT1,PAGEDATA.EnergyBoilerInT2,PAGEDATA.EnergyBoilerInT3,PAGEDATA.EnergyBoilerInT4,PAGEDATA.EnergyBoilerOutT1,
-    PAGEDATA.EnergyBoilerOutT2,PAGEDATA.EnergyBoilerOutT3,PAGEDATA.EnergyBoilerOutT4,PAGEDATA.EnergyBoilerRun1,PAGEDATA.EnergyBoilerRun2,
-    PAGEDATA.EnergyBoilerRun3,PAGEDATA.EnergyBoilerRun4,PAGEDATA.EnergyTankInT,PAGEDATA.EnergyTankOutT
-  ].concat(PAGEDATA.EnergyPumpState).concat(PAGEDATA.EnergyDVState)
-}
-
 export const SystemEnergyStation = () => {
   const [pageData, setPageData] = useState({});
   const [atmosphere, setAtmosphere] = useState([]);
@@ -319,15 +301,10 @@ export const SystemEnergyStation = () => {
   }, [pageData])
 
   useEffect(()=>{
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
 
-    EnergyStation.postPageData({
-      data:system_energy_data,
-      day_str:dayStr,
-      hour_str:hourStr
-    }).then((res) => {
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemEnergy).then((res) => {
+      res = JSON.parse(res)
       res[PAGEDATA.EnergyBoilerPower] = res[PAGEDATA.EnergyBoilerPower].toFixed(2);
       res[PAGEDATA.EnergyPowerConsumptionToday] = res[PAGEDATA.EnergyPowerConsumptionToday].toFixed(2);
       res[PAGEDATA.EnergyBoilerRunningNum] = res[PAGEDATA.EnergyBoilerRunningNum].toFixed(0);
@@ -361,6 +338,12 @@ export const SystemEnergyStation = () => {
 
       for (let i=0;i<=9;i++) {
         res[PAGEDATA.EnergyDVState[i]] = getList(res[PAGEDATA.EnergyDVState[i]], min);
+      }
+
+      if (res[PAGEDATA.EnergyHeatStorageAndRelease]) {
+        for (let i in res[PAGEDATA.EnergyHeatStorageAndRelease]) {
+          res[PAGEDATA.EnergyHeatStorageAndRelease][i] = res[PAGEDATA.EnergyHeatStorageAndRelease][i]/3.6e6;
+        }
       }
       
       let needChange = false;
@@ -512,7 +495,7 @@ export const SystemEnergyStation = () => {
                 },
                 yAxis: {
                   type: 'value',
-                  name: 'KW',
+                  name: 'KWH',
                   axisLine: {
                     show: true,
                     lineStyle: {

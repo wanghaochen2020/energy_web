@@ -1,4 +1,16 @@
 export const PAGEDATA = {
+	Pages: {
+		BasicMap: "bas_map",
+		SystemEnergy: "sys_ener",
+		SystemRefrigerationCenter: "sys_ref",
+		SystemPump: "sys_pump",
+		SystemSolarWater: "sys_sw",
+		SystemSolarElec: "sys_se",
+		AnalyseEnergy: "ana_ener",
+		AnalyseRefrigerationCenter: "ana_ref",
+		AnalysePump: "ana_pump",
+		AnalyseSolarWater: "ana_sw",
+	},
 	GroupHallwayTemp:["group_hallway_temp1", //1组团走廊温度
 	"group_hallway_temp2",      //2组团走廊温度
 	"group_hallway_temp3",      //3组团走廊温度
@@ -30,6 +42,7 @@ export const PAGEDATA = {
 	EnergyCarbonDay: "energy_carbon_day",               //能源站每日各小时碳排
 	EnergyCarbonMonth: "energy_carbon_month",             //能源站每月各天碳排总和
 	EnergyCarbonYear: "energy_carbon_year",              //能源站每年各月碳排总和
+	EnergyCarbonLastYear: "energy_carbon_last_year",              //能源站每年各月碳排总和
 	EnergyBoilerPayloadDay: "energy_boiler_payload_day",       //能源站每日各小时锅炉负载
 	EnergyBoilerPayloadMonth: "energy_boiler_payload_month",     //能源站每月各天平均锅炉负载
 	EnergyBoilerPayloadYear: "energy_boiler_payload_year",      //能源站每年各月平均锅炉负载
@@ -98,6 +111,7 @@ export const PAGEDATA = {
 	ColdCarbonDay: "cold_carbon_day",              //制冷中心每日各小时碳排
 	ColdCarbonMonth: "cold_carbon_month",            //制冷中心每月各天碳排总和
 	ColdCarbonYear: "cold_carbon_year",             //制冷中心每年各月碳排总和
+	ColdCarbonLastYear: "cold_carbon_last_year",             //制冷中心每年各月碳排总和
 	ColdAlarmToday: "cold_alarm_today",             //制冷中心今日告警
 	ColdAlarmNumToday: "cold_alarm_num_today",         //制冷中心今日告警次数
 
@@ -177,6 +191,7 @@ export const PAGEDATA = {
 	PumpAlarmToday: "pump_alarm_today",     //二次泵站今日告警
 	PumpAlarmNumToday: "pump_alarm_num_today", //二次泵站今日告警次数
 	PumpCarbonYear: "pump_carbon_year",     //二次泵站每年各月碳排总和
+	PumpCarbonLastYear: "pump_carbon_last_year",     //二次泵站每年各月碳排总和
 
 	SolarWaterBoilerPowerConsumptionToday: "solar_water_boiler_power_comsumption_today", //太阳能热水电加热器今日总耗电量
 	SolarWaterHeatCollecterInT: "solar_water_heat_collecter_in_temp",         //太阳能热水集热器进口温度
@@ -197,9 +212,18 @@ export const PAGEDATA = {
 	SolarWaterGuaranteeRateMonth: "solar_water_guarantee_month",                //太阳能热水保证率每月各天
 	SolarWaterGuaranteeRateYear: "solar_water_guarantee_year",                 //太阳能热水保证率每年各月
 
-	SolarElecGenToday: "solar_elec_gen_today", //太阳能发电今日
 	SolarElecGenMonth: "solar_elec_gen_month", //太阳能发电当月每日
 	SolarElecGenYear: "solar_elec_gen_year",  //太阳能发电当年每月
-	SolarElecGenYesterday: "ZLZ.%E6%98%A8%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F1", //昨日发电量
-	SolarElecGenTotal: "ZLZ.%E6%80%BB%E5%8F%91%E7%94%B5%E9%87%8F1", //总发电量
+	SolarElecGenTotal1: "ZLZ.%E6%80%BB%E5%8F%91%E7%94%B5%E9%87%8F1", //总发电量
+	SolarElecGenTotal2: "ZLZ.%E6%80%BB%E5%8F%91%E7%94%B5%E9%87%8F", //总发电量
+	SolarElecGenToday1: "ZLZ.%E5%BD%93%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F1", //当日发电量
+	SolarElecGenToday2: "ZLZ.%E5%BD%93%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F", //当日发电量
+	SolarElecGenThisMonth1: "ZLZ.%E5%BD%93%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F1", //当月发电量
+	SolarElecGenThisMonth2: "ZLZ.%E5%BD%93%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F", //当月发电量
+	SolarElecGenLastYear1: "ZLZ.%E5%8E%BB%E5%B9%B4%E5%8F%91%E7%94%B5%E9%87%8F1", //去年发电量
+	SolarElecGenLastYear2: "ZLZ.%E5%8E%BB%E5%B9%B4%E5%8F%91%E7%94%B5%E9%87%8F", //去年发电量
+	SolarElecGenYesterday1: "ZLZ.%E6%98%A8%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F1", //昨日发电量
+	SolarElecGenYesterday2: "ZLZ.%E6%98%A8%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F", //昨日发电量
+	SolarElecGenLastMonth1: "ZLZ.%E4%B8%8A%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F1", //上月发电量
+	SolarElecGenLastMonth2: "ZLZ.%E4%B8%8A%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F", //上月发电量
 }

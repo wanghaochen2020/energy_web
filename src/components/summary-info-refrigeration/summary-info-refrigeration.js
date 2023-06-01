@@ -22,7 +22,7 @@ export const ComSummaryInfoRefrigeration = ({ items }) => {
         </span>
         <span className="main-info">
           <span className="main-info-text">
-          总用电能耗累计
+          冷机用电能耗累计
           </span>
           <span className="main-info-number yellow-color">
             {items.energyCostToday}

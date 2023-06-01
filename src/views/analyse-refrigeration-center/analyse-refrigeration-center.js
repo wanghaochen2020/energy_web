@@ -28,38 +28,24 @@ export const AnalyseRefrigerationCenter = () => {
   let [ColdPayLoadYear, setColdPayLoadYear] = useState([]);
 
   useEffect(() => {
-    let dayStr = EnergyStation.getDayStr();
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-    let lastYearStr = EnergyStation.getLastYearStr();
-    EnergyStation.getTable(PAGEDATA.ColdEfficientDay, dayStr).then((res)=> {
-      setColdEfficientDay(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdPayLoadDay, dayStr).then((res)=> {
-      setColdPayLoadDay(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdPayLoadMonth, dayStr).then((res)=> {
-      setColdPayLoadMonth(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdPayLoadYear, dayStr).then((res)=> {
-      setColdPayLoadYear(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdCarbonDay, dayStr).then((res)=> {
+    EnergyStation.getPageData(PAGEDATA.Pages.AnalyseRefrigerationCenter).then((res) => {
+      res = JSON.parse(res);
+      setColdEfficientDay(res[PAGEDATA.ColdEfficientDay]);
+      setColdPayLoadDay(res[PAGEDATA.ColdPayLoadDay]);
+      setColdPayLoadMonth(res[PAGEDATA.ColdPayLoadMonth]);
+      setColdPayLoadYear(res[PAGEDATA.ColdPayLoadYear]);
+
+      let list = res[PAGEDATA.ColdCarbonDay];
       let sum = 0;
-      for (let i = 0; i < res.length; i++) { 
-        sum += res[i];
+      for (let i = 0; i < list.length; i++) { 
+        sum += list[i];
       }
-      setColdCarbonDay(res);
+      setColdCarbonDay(list);
       setColdCarbonToday(sum.toFixed(2));
-    });
-    EnergyStation.getTable(PAGEDATA.ColdCarbonMonth, monthStr).then((res)=> {
-      setColdCarbonMonth(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdCarbonYear, yearStr).then((res)=> {
-      setColdCarbonYear(res);
-    });
-    EnergyStation.getTable(PAGEDATA.ColdCarbonYear, lastYearStr).then((res)=> {
-      setColdCarbonLastYear(res);
+
+      setColdCarbonMonth(res[PAGEDATA.ColdCarbonMonth]);
+      setColdCarbonYear(res[PAGEDATA.ColdCarbonYear]);
+      setColdCarbonLastYear(res[PAGEDATA.ColdCarbonLastYear]);
     });
   }, []);
 

@@ -10,8 +10,6 @@ export const AnalyseEnergyStation = () => {
   const [chartDateButtons, setChartDateButtons] = useState([]);
   let [EnergyBoilerEfficiencyDay, setEnergyBoilerEfficiencyDay] = useState([])
   let [AvrgEnergyBoilerEfficiencyDay, setAvrgEnergyBoilerEfficiencyDay] = useState(0)
-  let [EnergyWatertankEfficiencyDay, setEnergyWatertankEfficiencyDay] = useState([])
-  let [AvrgEnergyWatertankEfficiencyDay, setAvrgEnergyWatertankEfficiencyDay] = useState(0)
   let [EnergyEfficiencyDay, setEnergyEfficiencyDay] = useState([])
   let [AvrgEnergyEfficiencyDay, setAvrgEnergyEfficiencyDay] = useState(0)
   let [EnergyCarbonDay, setEnergyCarbonDay] = useState([])
@@ -29,69 +27,42 @@ export const AnalyseEnergyStation = () => {
     setChartDateButtons([
       { name: '日', selected: true }, { name: '月', selected: false }, { name: '年', selected: false }
     ]);
-    let dayStr = EnergyStation.getDayStr();
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-    let lastYearStr = EnergyStation.getLastYearStr();
 
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerEfficiencyDay, dayStr).then((res)=> {
-      console.log(res)
+    EnergyStation.getPageData(PAGEDATA.Pages.AnalyseEnergy).then((res) => {
+      res = JSON.parse(res);
+
       let avg = 0;
-      for (let i = 0; i < res.length; i++) { 
-        avg += res[i]*100;
-        res[i] = (res[i]*100).toFixed(2);
+      let list = res[PAGEDATA.EnergyBoilerEfficiencyDay]
+      for (let i = 0; i < list.length; i++) { 
+        avg += list[i]*100;
+        list[i] = (list[i]*100).toFixed(2);
       }
-      if (res.length != 0) {
-        avg /= res.length;
+      if (list.length != 0) {
+        avg /= list.length;
       }
-      setEnergyBoilerEfficiencyDay(res);
+      setEnergyBoilerEfficiencyDay(list);
       setAvrgEnergyBoilerEfficiencyDay(avg.toFixed(2));
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyWatertankEfficiencyDay, dayStr).then((res)=> {
-      let avg = 0;
-      for (let i = 0; i < res.length; i++) { 
-        avg += res[i]*100;
-        res[i] = (res[i]*100).toFixed(2);
+      
+      avg = 0;
+      list = res[PAGEDATA.EnergyEfficiencyDay];
+      for (let i = 0; i < list.length; i++) { 
+        avg += list[i]*100;
+        list[i] = (list[i]*100).toFixed(2);
       }
-      if (res.length != 0) {
-        avg /= res.length;
+      if (list.length != 0) {
+        avg /= list.length;
       }
-      setEnergyWatertankEfficiencyDay(res);
-      setAvrgEnergyWatertankEfficiencyDay(avg.toFixed(2));
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyEfficiencyDay, dayStr).then((res)=> {
-      let avg = 0;
-      for (let i = 0; i < res.length; i++) { 
-        avg += res[i]*100;
-        res[i] = (res[i]*100).toFixed(2);
-      }
-      if (res.length != 0) {
-        avg /= res.length;
-      }
-      setEnergyEfficiencyDay(res);
+      setEnergyEfficiencyDay(list);
       setAvrgEnergyEfficiencyDay(avg.toFixed(2));
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonDay, dayStr).then((res)=> {
-      setEnergyCarbonDay(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonMonth, monthStr).then((res)=> {
-      setEnergyCarbonMonth(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, yearStr).then((res)=> {
-      setEnergyCarbonYear(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyCarbonYear, lastYearStr).then((res)=> {
-      setEnergyCarbonLastYear(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadDay, dayStr).then((res)=> {
-      setEnergyBoilerPayloadDay(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadMonth, monthStr).then((res)=> {
-      setEnergyBoilerPayloadMonth(res)
-    })
-    EnergyStation.getTable(PAGEDATA.EnergyBoilerPayloadYear, yearStr).then((res)=> {
-      setEnergyBoilerPayloadYear(res)
-    })
+
+      setEnergyCarbonDay(res[PAGEDATA.EnergyCarbonDay]);
+      setEnergyCarbonMonth(res[PAGEDATA.EnergyCarbonMonth]);
+      setEnergyCarbonYear(res[PAGEDATA.EnergyCarbonYear]);
+      setEnergyCarbonLastYear(res[PAGEDATA.EnergyCarbonLastYear]);
+      setEnergyBoilerPayloadDay(res[PAGEDATA.EnergyBoilerPayloadDay]);
+      setEnergyBoilerPayloadMonth(res[PAGEDATA.EnergyBoilerPayloadMonth]);
+      setEnergyBoilerPayloadYear(res[PAGEDATA.EnergyBoilerPayloadYear]);
+    });
   }, []);
 
   const selectLoadRateButton = (item) => {
@@ -126,7 +97,7 @@ export const AnalyseEnergyStation = () => {
             })} 
           />
         </div>
-        <div className="top-info-box" style={{ width: '260px' }}>
+        {/* <div className="top-info-box" style={{ width: '260px' }}>
           <ReactEcharts
             style={{ width: '260px', height: '260px', margin: 'auto' }}
             option={ChartService.getNewGaugeOptions({ 
@@ -136,7 +107,7 @@ export const AnalyseEnergyStation = () => {
               itemColor: '#5ee200'
             })} 
           />
-        </div>
+        </div> */}
         <div className="top-info-box" style={{ width: '260px' }}>
           <ReactEcharts
             style={{ width: '260px', height: '260px', margin: 'auto' }}
@@ -163,7 +134,8 @@ export const AnalyseEnergyStation = () => {
             <ReactEcharts style={{ width: '100%', height: '350px', margin: 'auto' }} option={
               ChartService.getLineOptions({
                 legend: {
-                  data: ['电锅炉', '蓄热水箱', '能源站系统']
+                  // data: ['电锅炉', '蓄热水箱', '能源站系统']
+                  data: ['电锅炉', '能源站系统']
                 },
                 xName: '时',
                 yName: '%',
@@ -173,10 +145,10 @@ export const AnalyseEnergyStation = () => {
                     name: '电锅炉',
                     data: EnergyBoilerEfficiencyDay
                   },
-                  {
-                    name: '蓄热水箱',
-                    data: EnergyWatertankEfficiencyDay
-                  },
+                  // {
+                  //   name: '蓄热水箱',
+                  //   data: EnergyWatertankEfficiencyDay
+                  // },
                   {
                     name: '能源站系统',
                     data: EnergyEfficiencyDay

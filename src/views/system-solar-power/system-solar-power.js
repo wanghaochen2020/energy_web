@@ -5,54 +5,28 @@ import './system-solar-power.scss';
 import { PAGEDATA } from '../../constants/pageData';
 import { EnergyStation } from '../../business/system-layer.service';
 
-const system_solar_power_data = {
-  "basic_data":[
-    PAGEDATA.SolarElecGenToday
-  ],
-  "basic_data_list_year":[
-    PAGEDATA.SolarElecGenYear
-  ],
-  "basic_data_list_month":[
-    PAGEDATA.SolarElecGenMonth
-  ],
-  "basic_data_list_day":[],
-  "map_data_list_day":[],
-  "basic_data_list_hour":[],
-  "basic_opc_list":[
-    PAGEDATA.SolarElecGenYesterday, PAGEDATA.SolarElecGenTotal
-  ]
-}
-
 const getList = (d, min) => {
   return d && d[min] ? d[min] : 0;
 }
 
 export const SystemSolarPower = () => {
   const [pageData, setPageData] = useState({});
-  const [lastMonth, setLastMonth] = useState(0);
-  const [month, setMonth] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [today, setToday] = useState(0);
+  const [thisMonth, setThisMonth] = useState(0);
   const [lastYear, setLastYear] = useState(0);
+  const [yesterday, setYesterday] = useState(0);
+  const [lastMonth, setLastMonth] = useState(0);
   useEffect(()=>{
-    let dayStr = EnergyStation.getDayStr();
-    let hourStr = EnergyStation.getHourStr();
     let min = EnergyStation.getMin();
-    let month = EnergyStation.getMonth();
-    let monthStr = EnergyStation.getMonthStr();
-    let yearStr = EnergyStation.getYearStr();
-    EnergyStation.postPageData({
-      data:system_solar_power_data,
-      year_str:yearStr,
-      month_str:monthStr,
-      day_str:dayStr,
-      hour_str:hourStr,
-    }).then((res) => {
-      res[PAGEDATA.SolarElecGenToday] = res[PAGEDATA.SolarElecGenToday].toFixed(2);
-      res[PAGEDATA.SolarElecGenYesterday] = getList(res[PAGEDATA.SolarElecGenYesterday], 0).toFixed(2);
-      res[PAGEDATA.SolarElecGenTotal] = getList(res[PAGEDATA.SolarElecGenTotal], min).toFixed(2);
-      setMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 1).toFixed(2))
-      if (month >= 2) {
-        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear],month - 2).toFixed(2))
-      }
+    EnergyStation.getPageData(PAGEDATA.Pages.SystemSolarElec).then((res) => {
+      res = JSON.parse(res)
+      setTotal((getList(res[PAGEDATA.SolarElecGenTotal1], min) + getList(res[PAGEDATA.SolarElecGenTotal2], min)).toFixed(0))
+      setToday((getList(res[PAGEDATA.SolarElecGenToday1], min) + getList(res[PAGEDATA.SolarElecGenToday2], min)).toFixed(0))
+      setThisMonth((getList(res[PAGEDATA.SolarElecGenThisMonth1], min) + getList(res[PAGEDATA.SolarElecGenThisMonth2], min)).toFixed(0))
+      setLastYear((getList(res[PAGEDATA.SolarElecGenLastYear1], 0) + getList(res[PAGEDATA.SolarElecGenLastYear2], 0)).toFixed(0))
+      setYesterday((getList(res[PAGEDATA.SolarElecGenYesterday1], 0) + getList(res[PAGEDATA.SolarElecGenYesterday2], 0)).toFixed(0))
+      setLastMonth((getList(res[PAGEDATA.SolarElecGenLastMonth1], 0) + getList(res[PAGEDATA.SolarElecGenLastMonth2], 0)).toFixed(0))
       
       let needChange = false;
       for (const key in res) {
@@ -86,21 +60,6 @@ export const SystemSolarPower = () => {
 
       if (needChange) setPageData(res);
     });
-    EnergyStation.postPageData({
-      data:{"basic_data_list_year":[PAGEDATA.SolarElecGenYear]},
-      yearStr:EnergyStation.getLastYearStr()
-    }).then((res) => {
-      if (month === 1) {
-        setLastMonth(getList(res[PAGEDATA.SolarElecGenYear], 11).toFixed(2));
-      }
-      let ans = 0;
-      if (res[PAGEDATA.SolarElecGenYear]) {
-        for (let i of res[PAGEDATA.SolarElecGenYear]) {
-          ans += i;
-        }
-      }
-      setLastYear(ans.toFixed(2));
-    });
   }, [])
   return (
     <div className="system-solar-power-view">
@@ -120,7 +79,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 0 }, { value: 100 }],
                   startAngle: 90,
-                  title: pageData[PAGEDATA.SolarElecGenTotal],
+                  title: total,
                   unit: 'MWH',
                   subTitle: '总发电量'
                 })}
@@ -132,7 +91,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 10 }],
                   startAngle: 90,
-                  title: pageData[PAGEDATA.SolarElecGenToday],
+                  title: today,
                   unit: 'MWH',
                   subTitle: '当日发电量'
                 })}
@@ -144,7 +103,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 30 }],
                   startAngle: 90,
-                  title: month,
+                  title: thisMonth,
                   unit: 'MWH',
                   subTitle: '当月发电量'
                 })}
@@ -168,7 +127,7 @@ export const SystemSolarPower = () => {
                 option={ChartService.getPieOptions({
                   data: [{ value: 20 }, { value: 8 }],
                   startAngle: 90,
-                  title: pageData[PAGEDATA.SolarElecGenYesterday],
+                  title: yesterday,
                   unit: 'MWH',
                   subTitle: '昨日发电量'
                 })}
