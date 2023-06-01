@@ -85,18 +85,18 @@ export const GreenPower = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">能源概况</span>
+              <span className="title-text">装机容量</span>
             </div>
             <div className="top-row">
               <div className="top-info-box">
                 <ReactEcharts
                   style={{ width: '150px', height: '150px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 20 }, { value: 60 }],
+                    data: [{ value: 69 }, { value: 31 }],
                     startAngle: 90,
-                    title: '2140',
-                    unit: '万kWh',
-                    subTitle: '年发电量'
+                    title: '180',
+                    unit: 'MW',
+                    subTitle: '官厅风电场'
                   })}
                 />
               </div>
@@ -104,11 +104,11 @@ export const GreenPower = () => {
                 <ReactEcharts
                   style={{ width: '150px', height: '150px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 20 }, { value: 60 }],
+                    data: [{ value: 12 }, { value: 88 }],
                     startAngle: 90,
-                    title: '240',
-                    unit: '万kWh',
-                    subTitle: '月发电量',
+                    title: '31',
+                    unit: 'MW',
+                    subTitle: '延庆光伏',
                     titleColor: '#5ee200',
                     itemColor: '#5ee200'
                   })}
@@ -118,11 +118,11 @@ export const GreenPower = () => {
                 <ReactEcharts
                   style={{ width: '150px', height: '150px', margin: 'auto' }}
                   option={ChartService.getPieOptions({
-                    data: [{ value: 20 }, { value: 60 }],
+                    data: [{ value: 19 }, { value: 81 }],
                     startAngle: 90,
-                    title: '861',
-                    unit: '万kWh',
-                    subTitle: '日发电量',
+                    title: '50',
+                    unit: 'MW',
+                    subTitle: '淮南风电场',
                     titleColor: '#f94e00',
                     itemColor: '#f94e00'
                   })}
@@ -139,18 +139,18 @@ export const GreenPower = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">能效概况</span>
+              <span className="title-text">年发电量</span>
             </div>
           <div className="top-row">
             <div className="top-info-box">
               <ReactEcharts
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
-                  data: [{ value: 20 }, { value: 100 }],
+                  data: [{ value: 69 }, { value: 31 }],
                   startAngle: 90,
-                  title: '1250',
-                  unit: '吨',
-                  subTitle: 'CO2减排量'
+                  title: '36000',
+                  unit: '万kWh',
+                  subTitle: '官厅风电厂'
                 })}
               />
             </div>
@@ -158,11 +158,11 @@ export const GreenPower = () => {
               <ReactEcharts
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
-                  data: [{ value: 30 }, { value: 60 }],
+                  data: [{ value: 7 }, { value: 93 }],
                   startAngle: 90,
-                  title: '4280',
-                  unit: '棵',
-                  subTitle: '等效植树'
+                  title: '4030',
+                  unit: '万kWh',
+                  subTitle: '延庆光伏'
                 })}
               />
             </div>
@@ -170,11 +170,11 @@ export const GreenPower = () => {
               <ReactEcharts
                 style={{ width: '150px', height: '150px', margin: 'auto' }}
                 option={ChartService.getPieOptions({
-                  data: [{ value: 42 }, { value: 58 }],
+                  data: [{ value: 24 }, { value: 76 }],
                   startAngle: 90,
-                  title: '58',
-                  unit: '%',
-                  subTitle: '碳配额使用率'
+                  title: '12500',
+                  unit: '万kWh',
+                  subTitle: '淮南风电场'
                 })}
               />
             </div>
@@ -195,47 +195,47 @@ export const GreenPower = () => {
             </div>
             <div>
             <div className="green-info-column">
-              <div className="green-info-column-title">风力发电</div>
+              <div className="green-info-column-title">光伏发电1</div>
               <div className="main-info-row">
                 <span className="main-info">
                   <span className="main-info-text">
-                  装机容量
+                  当年发电量
                   </span>
                   <span className="main-info-number red-color">
-                    98.86
-                    <span className="number-unit">MW</span>
+                    26334
+                    <span className="number-unit">MWh</span>
                   </span>
                 </span>
                 <span className="main-info">
                   <span className="main-info-text">
-                  数量
+                  去年发电量
                   </span>
                   <span className="main-info-number blue-color">
-                    582
-                    <span className="number-unit">个</span>
+                    49726
+                    <span className="number-unit">MWh</span>
                   </span>
                 </span>
               </div>
             </div>
             <div className="green-info-column">
-              <div className="green-info-column-title">光伏发电</div>
+              <div className="green-info-column-title">光伏发电2</div>
               <div className="main-info-row">
                 <span className="main-info">
                   <span className="main-info-text">
-                  装机容量
+                  当年发电量
                   </span>
                   <span className="main-info-number">
-                    85.64
-                    <span className="number-unit">MW</span>
+                    32991
+                    <span className="number-unit">MWh</span>
                   </span>
                 </span>
                 <span className="main-info">
                   <span className="main-info-text">
-                  数量
+                  去年发电量
                   </span>
                   <span className="main-info-number yellow-color">
-                    362
-                    <span className="number-unit">个</span>
+                    57636
+                    <span className="number-unit">MWh</span>
                   </span>
                 </span>
               </div>
@@ -251,26 +251,26 @@ export const GreenPower = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">低碳环保</span>
+              <span className="title-text">绿电概况</span>
             </div>
           <div className="top-row">
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
-                value: 80
+                value: 55
               })} />
-              <div className="gauge-title">绿电指数: 80</div>
+              <div className="gauge-title">年发电量: 59330 MWh</div>
             </div>
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
-                value: 90
+                value: 4
               })} />
-              <div className="gauge-title">降碳指数: 90</div>
+              <div className="gauge-title">月发电量: 652 MWH</div>
             </div>
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
-                value: 65
+                value: 171
               })} />
-              <div className="gauge-title">能效指数: 65</div>
+              <div className="gauge-title">日发电量: 653 MWH</div>
             </div>
           </div>
           </div>
