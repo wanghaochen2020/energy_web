@@ -3,9 +3,15 @@ import ReactEcharts from 'echarts-for-react';
 import './green-power.scss';
 import { ChartService } from '../../utils/chart.service';
 import {MainPage } from '../../business/mainPage';
+import { PAGEDATA } from '../../constants/pageData';
+import { EnergyStation } from '../../business/system-layer.service';
+
+const getList = (d, min) => {
+  return d && d[min] ? d[min] : 0;
+}
 
 export const GreenPower = () => {
-  const [rateButtons, setRateButtons] = useState([
+  /*const [rateButtons, setRateButtons] = useState([
     { name: '日', selected: true }, { name: '周' }, { name: '月' }, { name: '季' }
   ]);
   const [emissionTypeButtons, setEmissionTypeButtons] = useState([
@@ -71,7 +77,30 @@ export const GreenPower = () => {
     MainPage.getAtmosphere().then((res)=> {
       setAtmosphere(res.data)
     });
-  }, []);
+  }, []);*/
+  const [powerThisYear1, setPowerThisYear1] = useState(0);
+  const [powerThisYear2, setPowerThisYear2] = useState(0);
+  const [powerLastYear1, setPowerLastYear1] = useState(0);
+  const [powerLastYear2, setPowerLastYear2] = useState(0);
+  const [cost, setCost] = useState(0);
+  const [powerThisMonth, setPowerThisMonth] = useState(0);
+  const [carbonThisMonth, setCarbonThisMonth] = useState(0);
+
+  useEffect(() => {
+    let min = EnergyStation.getMin();
+    EnergyStation.getPageData(PAGEDATA.Pages.GreenPower).then((res) => {
+      res = JSON.parse(res);
+      
+      setPowerThisYear1(getList(res[PAGEDATA.SolarElecGenThisYear1], min));
+      setPowerThisYear2(getList(res[PAGEDATA.SolarElecGenThisYear2], min));
+      setPowerLastYear1(getList(res[PAGEDATA.SolarElecGenLastYear1], min));
+      setPowerLastYear2(getList(res[PAGEDATA.SolarElecGenLastYear2], min));
+      setCost(res[PAGEDATA.TotalPowerThisMonth].toFixed(2));
+      let p = getList(res[PAGEDATA.SolarElecGenThisMonth1], min) + getList(res[PAGEDATA.SolarElecGenThisMonth2], min);
+      setPowerThisMonth(p.toFixed(0));
+      setCarbonThisMonth((p * 0.604).toFixed(0));
+    });
+  }, [])
 
 
   return (
@@ -202,7 +231,7 @@ export const GreenPower = () => {
                   当年发电量
                   </span>
                   <span className="main-info-number red-color">
-                    26334
+                    {powerThisYear1}
                     <span className="number-unit">MWh</span>
                   </span>
                 </span>
@@ -211,7 +240,7 @@ export const GreenPower = () => {
                   去年发电量
                   </span>
                   <span className="main-info-number blue-color">
-                    49726
+                    {powerLastYear1}
                     <span className="number-unit">MWh</span>
                   </span>
                 </span>
@@ -225,7 +254,7 @@ export const GreenPower = () => {
                   当年发电量
                   </span>
                   <span className="main-info-number">
-                    32991
+                    {powerThisYear2}
                     <span className="number-unit">MWh</span>
                   </span>
                 </span>
@@ -234,7 +263,7 @@ export const GreenPower = () => {
                   去年发电量
                   </span>
                   <span className="main-info-number yellow-color">
-                    57636
+                    {powerLastYear2}
                     <span className="number-unit">MWh</span>
                   </span>
                 </span>
@@ -251,33 +280,33 @@ export const GreenPower = () => {
             <div className="bottom-right-corner"></div>
             <div className="box-title-wrapper" style={{backgroundImage: "url('/assets/images/titleBg.png')"}}>
               <span className="box-title-icon">&#9658;</span>
-              <span className="title-text">绿电概况</span>
+              <span className="title-text">本月负荷概况</span>
             </div>
           <div className="top-row">
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
                 value: 55
               })} />
-              <div className="gauge-title">年发电量: 59330 MWh</div>
+              <div className="gauge-title">冬奥村负荷: {cost} MWh</div>
             </div>
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
                 value: 4
               })} />
-              <div className="gauge-title">月发电量: 652 MWH</div>
+              <div className="gauge-title">光伏发电量: {powerThisMonth} MWH</div>
             </div>
             <div className="gauge-box">
               <ReactEcharts style={{ width: '180px', height: '180px', margin: 'auto' }} option={ChartService.getGaugeOptions({
                 value: 171
               })} />
-              <div className="gauge-title">日发电量: 653 MWH</div>
+              <div className="gauge-title">减碳量: {carbonThisMonth} 吨</div>
             </div>
           </div>
           </div>
         </div>
       </div>
-      <div className="row-box">
-        <div className="row-left">
+      <div className="row-box" style={{height: '400px'}}>
+        {/* <div className="row-left">
           <div className="box-wrapper" style={{width: '100%', height: '400px'}}>
             <div className="top-left-corner"></div>
             <div className="top-right-corner"></div>
@@ -400,7 +429,7 @@ export const GreenPower = () => {
                 ]
               }} />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
