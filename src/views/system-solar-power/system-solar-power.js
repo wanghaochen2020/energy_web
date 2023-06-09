@@ -22,12 +22,17 @@ export const SystemSolarPower = () => {
     EnergyStation.getPageData(PAGEDATA.Pages.SystemSolarElec).then((res) => {
       res = JSON.parse(res)
       setTotal((getList(res[PAGEDATA.SolarElecGenTotal1], min) + getList(res[PAGEDATA.SolarElecGenTotal2], min)).toFixed(0))
-      setToday((getList(res[PAGEDATA.SolarElecGenToday1], min) + getList(res[PAGEDATA.SolarElecGenToday2], min)).toFixed(0))
+      setToday((getList(res[PAGEDATA.SolarElecGenToday1], min)/10 + getList(res[PAGEDATA.SolarElecGenToday2], min)/10).toFixed(0))
       setThisMonth((getList(res[PAGEDATA.SolarElecGenThisMonth1], min) + getList(res[PAGEDATA.SolarElecGenThisMonth2], min)).toFixed(0))
-      setLastYear((getList(res[PAGEDATA.SolarElecGenLastYear1], 0) + getList(res[PAGEDATA.SolarElecGenLastYear2], 0)).toFixed(0))
-      setYesterday((getList(res[PAGEDATA.SolarElecGenYesterday1], 0) + getList(res[PAGEDATA.SolarElecGenYesterday2], 0)).toFixed(0))
-      setLastMonth((getList(res[PAGEDATA.SolarElecGenLastMonth1], 0) + getList(res[PAGEDATA.SolarElecGenLastMonth2], 0)).toFixed(0))
+      setLastYear((getList(res[PAGEDATA.SolarElecGenLastYear1], min) + getList(res[PAGEDATA.SolarElecGenLastYear2], min)).toFixed(0))
+      setYesterday((getList(res[PAGEDATA.SolarElecGenYesterday1], min)/10 + getList(res[PAGEDATA.SolarElecGenYesterday2], min)/10).toFixed(0))
+      setLastMonth((getList(res[PAGEDATA.SolarElecGenLastMonth1], min) + getList(res[PAGEDATA.SolarElecGenLastMonth2], min)).toFixed(0))
       
+      let list = res[PAGEDATA.SolarElecGenMonth];
+      for (let i = 0; i < list.length; i++) { 
+        list[i] /= 10;
+      }
+
       let needChange = false;
       for (const key in res) {
         if (Object.hasOwnProperty.call(res, key)) {

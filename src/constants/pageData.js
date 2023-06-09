@@ -10,6 +10,7 @@ export const PAGEDATA = {
 		AnalyseRefrigerationCenter: "ana_ref",
 		AnalysePump: "ana_pump",
 		AnalyseSolarWater: "ana_sw",
+		GreenPower: "green_pw",
 	},
 	GroupHallwayTemp:["group_hallway_temp1", //1组团走廊温度
 	"group_hallway_temp2",      //2组团走廊温度
@@ -226,4 +227,8 @@ export const PAGEDATA = {
 	SolarElecGenYesterday2: "ZLZ.%E6%98%A8%E6%97%A5%E5%8F%91%E7%94%B5%E9%87%8F", //昨日发电量
 	SolarElecGenLastMonth1: "ZLZ.%E4%B8%8A%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F1", //上月发电量
 	SolarElecGenLastMonth2: "ZLZ.%E4%B8%8A%E6%9C%88%E5%8F%91%E7%94%B5%E9%87%8F", //上月发电量
+	SolarElecGenThisYear1:"ZLZ.%E4%BB%8A%E5%B9%B4%E5%8F%91%E7%94%B5%E9%87%8F1",//今年发电量
+	SolarElecGenThisYear2:"ZLZ.%E4%BB%8A%E5%B9%B4%E5%8F%91%E7%94%B5%E9%87%8F",//今年发电量
+
+	TotalPowerThisMonth:"total_power_this_month",//能源站、制冷站、二次泵站能耗本月之和
 }
